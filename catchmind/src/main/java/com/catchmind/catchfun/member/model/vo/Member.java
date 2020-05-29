@@ -30,21 +30,17 @@ public class Member {
 	
 	private String userNo;
 	private String userId;
+	private int userType;
 	private String userPwd;
-	private String userType;
-	private String userNick;
 	private String userName;
-	private String userBirth;
 	private String email;
 	private String phone;
-	private String enterDate;
+	private Date enrollDate;
 	private String address;
 	private String addressNum;
 	private int point;
-	private String gender;
-	private String age;
-	private Date enrollDate;
 	private String status;
+	private String reason;
 	
 	
 	
