@@ -88,10 +88,10 @@ span.uname {float: right; padding-top: 16px;}
           <div id="content">
           <div class="container" >
             <label for="uname"><b>아이디</b></label>
-            <input type="text" placeholder="Enter Username" id="userId" name="id" required>
+            <input type="text" placeholder="Enter Username" id="userId" name="userId" required>
 
             <label for="psw"><b>비밀번호</b></label>
-            <input type="password" placeholder="Enter Password" id="userPwd" name="pwd" required>
+            <input type="password" placeholder="Enter Password" id="userPwd" name="userPwd" required>
 
             <div class="container" style="background-color:#f1f1f1">
                 <label>
