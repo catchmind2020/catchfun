@@ -213,7 +213,7 @@
 		
 		<!-- 로그인 전 -->
 		<div class="header login">
-			 <a href="login.me">로그인 ｜</a>
+			 <a href="loginGo.me">로그인 ｜</a>
 		     <a href="enrollForm.me">회원가입</a>
 		</div> 
 		
