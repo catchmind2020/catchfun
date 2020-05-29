@@ -30,15 +30,22 @@ public class Member {
 	
 	private String userId;
 	private String userPwd;
+	private String userType;
+	private String userNick;
 	private String userName;
+	private String userBirth;
 	private String email;
+	private String phone;
+	private String enterDate;
+	private String address;
+	private String addressNum;
+	private int point;
 	private String gender;
 	private String age;
-	private String phone;
-	private String address;
 	private Date enrollDate;
-	private Date modifyDate;
 	private String status;
+	
+	
 	
 	//private String uId;
 	// getuId()  setuId()
