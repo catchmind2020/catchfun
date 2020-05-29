@@ -78,7 +78,8 @@
 </head>
 <body>
     
-    <jsp:include page=""/>
+    
+     <jsp:include page="../common/menubar.jsp" />
 
     <div class="content">
         <br><br>
@@ -134,7 +135,6 @@
     </div>
 
    
-    <jsp:include page=""/>
-    
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -351,8 +351,8 @@ input {
 				</script>
 			</div>
 		</div>
-		<div id="footer"></div>
 
 	</div>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
