@@ -189,7 +189,7 @@
 
 /* 로그인 부분*/
 .login { position: relative; display: table-cell; font-size: 15px;
-	color: gray; padding-left: 200px; padding-right: 0px; }
+	color: gray; padding-left: 190px; padding-right: 0px; }
 .header>img{margin-bottom:7px;}
 .loginnext{bottom:-6px;}
 </style>
