@@ -381,7 +381,6 @@ li {
 										<td style="text-align: left;"><input type="text"
 											id="userid" placeholder="kkk@naver.com" disabled></td>
 										<td style="width: 280px;"></td>
-
 									</tr>
 							</thead>
 							<tbody>
@@ -394,14 +393,14 @@ li {
 								</tr>
 								<tr>
 									<td style="font-size: 20px;">비 밀 번 호</td>
-									<td style="text-align: left;"><input type="number"
+									<td style="text-align: left;"><input type="password"
 										id="password" placeholder=" 비밀번호는 6~16자 영문 대소문자, 숫자, 특수문자"></td>
 									<td
 										style="font-size: 15px; color: rgb(131, 2, 2); text-align: left;"></td>
 								</tr>
 								<tr>
 									<td style="font-size: 20px;">비밀번호확인</td>
-									<td style="text-align: left;"><input type="number"
+									<td style="text-align: left;"><input type="password"
 										id="password" placeholder="비밀번호 확인"></td>
 									<td
 										style="font-size: 15px; color: rgb(131, 2, 2); text-align: left;"></td>
