@@ -196,7 +196,7 @@ img {
 				<!-- The slideshow -->
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="resources/images/mainimage01.jpg" width="1200px"
+						<img src="resources/images/mainimage03.jpg" width="1200px"
 							height="400px">
 					</div>
 					<div class="carousel-item">
@@ -204,7 +204,7 @@ img {
 							height="400px">
 					</div>
 					<div class="carousel-item">
-						<img src="resources/images/mainimage03.jpg" width="1200px"
+						<img src="resources/images/mainimage01.jpg" width="1200px"
 							height="400px">
 					</div>
 				</div>
