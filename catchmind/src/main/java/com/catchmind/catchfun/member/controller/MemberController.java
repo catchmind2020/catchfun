@@ -354,10 +354,12 @@ public class MemberController {
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
+			System.out.println("성공성공");
 			mv.setViewName("redirect:/");
 		}else {
 			//mv.addObject("msg", "로그인 실패!!");
 			//mv.setViewName("common/errorPage");
+			System.out.println("실패실패");
 			mv.addObject("msg", "로그인실패!!").setViewName("common/errorPage");
 		}
 		
