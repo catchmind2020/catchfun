@@ -8,6 +8,16 @@
 <title>CATCHFUN</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 
 /* 메뉴바 영역 */
@@ -202,7 +212,10 @@
 		
 		
 		<!-- 로그인 전 -->
-		<div class="header login">로그인｜회원가입</div> 
+		<div class="header login">
+			 <a href="login.me">로그인 ｜</a>
+		     <a href="enrollForm.me">회원가입</a>
+		</div> 
 		
 		<!-- 로그인 후 -->
 <!-- 	<div class="header login  header-img loginnext">

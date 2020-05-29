@@ -19,8 +19,9 @@ public class MemberController {
 	@Autowired // DI
 	private MemberService mService;
 	
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	// 암호화
+//	@Autowired
+//	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	
 	/*
@@ -191,6 +192,8 @@ public class MemberController {
 	 *    Model은 응답 데이터를 담는 공간이라고 한다면
 	 *    View는 뷰에 대한 정보를 담는 공간
 	 */
+	// 암호화
+	/*
 	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
 		
@@ -210,7 +213,7 @@ public class MemberController {
 		
 		return mv;
 	}
-	
+	*/
 	
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
@@ -223,12 +226,12 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+	/*
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, Model model, HttpSession session) {
 		
 		//System.out.println(m);
 		
-		/*
 		 * 1. 한글이 깨짐 -> web.xml에 인코딩 필터 달기
 		 * 2. 나이값 같은 값을 입력하지 않으면 빈문자열로 값이 넘어가는데 int형 값을 주입할 수 없는 400에러발생
 		 *    --> Member 클래스에 age 필드의 자료형을 String으로 바꿈
@@ -249,6 +252,8 @@ public class MemberController {
 		//System.out.println("암호화전 : " + m.getUserPwd());
 		
 		// 암호화작업
+	// 암호화
+		/*
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		//System.out.println("암호화후 : " + encPwd);
 		
@@ -268,6 +273,9 @@ public class MemberController {
 		}
 		
 	}
+	*/
+	
+	
 	
 	
 	@RequestMapping("myPage.me")
@@ -327,6 +335,88 @@ public class MemberController {
 		}
 		
 	}
+	
+	
+	
+	
+//	아이유 시작
+	
+	@RequestMapping("login.me")
+	public String login() {
+		return "member/login";
+	}
+	
+	@RequestMapping("mypage.me")
+	public String mypage() {
+		return "member/mypage";
+	}
+	
+	@RequestMapping("idFindSuccess.me")
+	public String idFindSuccess() {
+		return "member/idFindSuccess";
+	}
+	
+	@RequestMapping("memberEnrollForm.me")
+	public String memberEnrollForm() {
+		return "member/memberEnrollForm";
+	}
+	
+	@RequestMapping("idpwdFind.me")
+	public String idpwdFind() {
+		return "member/idpwdFind";
+	}
+
+	@RequestMapping("passwordChange.me")
+	public String passwordChange() {
+		return "member/passwordChange";
+	}
+	
+	@RequestMapping("pointList.me")
+	public String pointList() {
+		return "member/pointList";
+	}
+	
+	@RequestMapping("sellerMessageAnswer.me")
+	public String sellerMessageAnswer() {
+		return "member/sellerMessageAnswer";
+	}
+	
+	@RequestMapping("sellerMessageRest.me")
+	public String sellerMessageRest() {
+		return "member/sellerMessageRest";
+	}
+	
+	@RequestMapping("message_rest.me")
+	public String message_rest() {
+		return "member/message_rest";
+	}
+	
+	@RequestMapping("message_view.me")
+	public String message_view() {
+		return "member/message_view";
+	}
+	
+	@RequestMapping("membership_delete.me")
+	public String membership_delete() {
+		return "member/membership_delete";
+	}
+	
+	@RequestMapping("mypageModify.me")
+	public String mypageModify() {
+		return "member/mypageModify";
+	}
+	
+	@RequestMapping("sellerMessageView.me")
+	public String sellerMessageView() {
+		return "member/sellerMessageView";
+	}
+	
+
+	
+	
+	
+	
+// 아이유 끝
 	
 }
 
