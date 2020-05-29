@@ -5,17 +5,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberMapper">
 
   	  <resultMap id="memberResultSet" type="Member">
-  	  		<id column="user_id" property="userId"/>
+  	  		<id column="USER_NO" property="userNo"/>
+  	  		<result column="user_id" property="userId"/>
   	  		<result column="user_pwd" property="userPwd"/>
+  	  		<result column="USER_TYPE" property="userType"/>
   	  		<result column="user_name" property="userName"/>
   	  		<result column="email" property="email"/>
-  	  		<result column="gender" property="gender"/>
-  	  		<result column="age" property="age"/>
-  	  		<result column="phone" property="phone"/>
+  	  		<result column="PHONE" property="phone"/>
+  	  		<result column="USER_ENROLLDATE" property="enrollDate"/>
   	  		<result column="address" property="address"/>
-  	  		<result column="enroll_date" property="enrollDate"/>
-  	  		<result column="modify_date" property="modifyDate"/>
-  	  		<result column="status" property="status"/>
+  	  		<result column="ADDRESSNUM" property="addressNum"/>
+  	  		<result column="USER_POINT" property="point"/>
+  	  		<result column="STATUS" property="status"/>
+  	  		<result column="REASON" property="reason"/>
   	  </resultMap>
 		
   

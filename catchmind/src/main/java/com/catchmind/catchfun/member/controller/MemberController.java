@@ -5,9 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.member.model.service.MemberService;
@@ -20,8 +18,8 @@ public class MemberController {
 	private MemberService mService;
 	
 	// 암호화
-//	@Autowired
-//	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	
 	/*
@@ -214,7 +212,7 @@ public class MemberController {
 		return mv;
 	}
 	*/
-	
+	/*
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
 		session.invalidate();
@@ -225,7 +223,7 @@ public class MemberController {
 	public String enrollForm() {
 		return "member/memberEnrollForm";
 	}
-	
+	*/
 	/*
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, Model model, HttpSession session) {
@@ -277,7 +275,7 @@ public class MemberController {
 	
 	
 	
-	
+	/*
 	@RequestMapping("myPage.me")
 	public String myPage() {
 		return "member/myPage";
@@ -336,7 +334,7 @@ public class MemberController {
 		
 	}
 	
-	
+	*/
 	
 	
 //	아이유 시작
@@ -344,6 +342,26 @@ public class MemberController {
 	@RequestMapping("login.me")
 	public String login() {
 		return "member/login";
+	}
+	
+	@RequestMapping("loginGo.me")
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+		
+		Member loginUser = mService.loginMember(m); // 아이디만을 가지고 조회한 결과
+		
+		// loginUser에 userPwd : 암호문
+		// 		m 에 userPwd : 로그인 시 입력한 비밀번호(평문)
+		
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+			session.setAttribute("loginUser", loginUser);
+			mv.setViewName("redirect:/");
+		}else {
+			//mv.addObject("msg", "로그인 실패!!");
+			//mv.setViewName("common/errorPage");
+			mv.addObject("msg", "로그인실패!!").setViewName("common/errorPage");
+		}
+		
+		return mv;
 	}
 	
 	@RequestMapping("mypage.me")
