@@ -28,6 +28,7 @@ import lombok.ToString;
 //@EqualsAndHashCode
 public class Member {
 	
+	private String userNo;
 	private String userId;
 	private String userPwd;
 	private String userType;
