@@ -35,6 +35,12 @@ public interface AdminService {
 	
 	// 여기부터 Admin 시작 (위에 참고용)
 	
+	// 주혁시작
+	
+	
+	
+	// 주혁 끝
+	
 }
 
 
