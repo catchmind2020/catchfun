@@ -339,12 +339,12 @@ public class MemberController {
 	
 //	아이유 시작
 	
-	@RequestMapping("login.me")
+	@RequestMapping("loginGo.me")
 	public String login() {
 		return "member/login";
 	}
 	
-	@RequestMapping("loginGo.me")
+	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
 		
 		Member loginUser = mService.loginMember(m); // 아이디만을 가지고 조회한 결과
