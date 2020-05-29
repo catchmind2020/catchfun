@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper>
+  <cache-ref namespace="adminMapper"/>
+  <!-- 
+  <resultMap id="adminResultSet" type="Board">
+		<id column="board_no" property="boardNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_writer" property="boardWriter"/>
+		<result column="board_content" property="boardContent"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="count" property="count"/>
+		<result column="create_date" property="createDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<update id="updateMember" parameterType="Member">
+	  		update member
+	  		   set email=#{email}, 
+	  		       age=#{age},
+	  		       phone=#{phone},
+	  		       address=#{address},
+	  		       gender=#{gender},
+	  		       modify_date=sysdate
+	  		 where user_id=#{userId}    
+	  </update>
+	  
+	  <update id="deleteMember" parameterType="string">
+	  		update member
+	  		   set status='N' 
+	  		 where user_id=#{userId}
+	  </update>
+	  
+	  <select id="idCheck" parameterType="string" resultType="_int">
+	  		select count(*)
+	  		  from member
+	  		 where user_id=#{userId}
+	  </select>
+	   -->
+	   
+	   <!-- 위에 참고용 -->
+  	<!-- 주혁시작 -->
+  	
+  	
+  	
+  	<!-- 주혁끝 -->
+  
+</mapper>
