@@ -397,6 +397,18 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+	@RequestMapping("insert.me")
+	public String insertMember(Member m) {
+		
+		System.out.println(m);
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
+		
+		int result = mService.insertMember(m);
+	
+		return "main";
+	}
+	
 	@RequestMapping("idpwdFind.me")
 	public String idpwdFind() {
 		return "member/idpwdFind";
