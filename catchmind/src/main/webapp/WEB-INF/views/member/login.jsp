@@ -55,33 +55,16 @@ span.uname {float: right; padding-top: 16px;}
 .header-area {width: 1200px; margin-left: 40px; color: gray; padding-top: 10px; margin-top: 20px; margin-bottom: 10px;
 	top: 0; right: 0; bottom: 0; left: 0; margin: auto;}
 
-/* 메뉴 */
-.header { display: table-cell; /* width:200px; */ padding-right: 40px; height: 35px; text-align: center; vertical-align: bottom;
-	font-size: 25px; font-weight: 900; color: black; }
 </style>
    
 </head>
 <body>
+    <jsp:include page="../common/menubar.jsp"/>
+    
     <div class="wrap">
-        <div id="header">
-            
-            <div class="header-area">
-                <div class="header">
-                    <img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
-                </div>
-                <div class="header">카테고리</div>
-                <div class="header">오픈예정</div>
-                <div class="header">프로젝트오픈</div>
-                <div class="header">공지</div>
-                <div class="header"></div>
-                <div class="header login">
-                <img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="<%=request.getContextPath() %>/resources/images/usericon32.png"></div>
-              </div>
+        
 
-        </div>
-
-        <h1>로그인</h1>
+        <h1 style="margin-top: 150px;">로그인</h1>
 
         <form id="loginForm" action="login.me" method="post">
           

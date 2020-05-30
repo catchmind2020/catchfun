@@ -461,7 +461,7 @@ li {
 							</tbody>
 						</table>
 						<p style="font-size: 20px; text-align: left; color: red;">
-							<a href="#"><u>회원탈퇴</u></a>
+							<a href="membershipDelete.me"><u>회원탈퇴</u></a>
 						</p>
 						<!-- 2_1. (정보입력)본인인증 및 회원가입 버튼-->
 						<button type="button" class="btn_1" id="btn_1">수정완료</button>

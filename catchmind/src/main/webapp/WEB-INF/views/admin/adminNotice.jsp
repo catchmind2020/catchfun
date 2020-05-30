@@ -291,37 +291,42 @@ textarea{
 	<br><br>
 		<center>
 			<table class="tb" border="1">
-				<tr>
-					<th width="100px">글번호</th>
-					<th width="350px">제목</th>
-					<th width="100px">작성자</th>
-					<th width="150px">작성일</th>
-					<th width="150px"><button type="button" class="createBtn">글쓰기</button></th>
-				</tr>
+				<thead>
+					<tr>
+						<th width="100px">글번호</th>
+						<th width="350px">제목</th>
+						<th width="100px">작성자</th>
+						<th width="150px">작성일</th>
+						<th width="150px"><button type="button" class="createBtn">글쓰기</button></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${ list }" var="b">
+	                    <tr>
+	                        <td>${ b.boardNo }</td>
+	                        <td>${ b.boardTitle }</td>
+	                        <td>${ b.boardWriter }</td>
+	                        <td>${ b.count }</td>
+	                        <td>${ b.createDate }</td>
+	                        <c:choose>
+	                        	<c:when test="${ !empty b.originName }">
+		                        	<td>★</td>
+		                        </c:when>
+		                        <c:otherwise>
+		                        	<td>&nbsp;</td>
+	                        	</c:otherwise>
+	                        </c:choose>
+	                    </tr>
+                    </c:forEach>
+					<tr>
+						<td>3</td>
+						<td>개설준비</td>
+						<td>admin</td>
+						<td>2020.05.24</td>
+						<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
+					</tr>
 
-				<tr>
-					<td>3</td>
-					<td>개설준비</td>
-					<td>admin</td>
-					<td>2020.05.24</td>
-					<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
-				</tr>
-
-				<tr>
-					<td>2</td>
-					<td>코로나 공지</td>
-					<td>admin</td>
-					<td>2020.05.18</td>
-					<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
-				</tr>
-
-				<tr>
-					<td>1</td>
-					<td>홈페이지 점검</td>
-					<td>admin</td>
-					<td>2020.05.10</td>
-					<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
-				</tr>
+				</tbody>
 			</table>
 
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.catchmind.catchfun.board.model.vo.Reply;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
 
@@ -359,7 +360,6 @@ public class MemberController {
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
-			System.out.println("성공성공");
 			if(loginUser.getUserId().equals("admin")) {
 				mv.setViewName("admin/adminCategory");
 //				mv.setViewName("common/admin");
@@ -369,7 +369,6 @@ public class MemberController {
 		}else {
 			//mv.addObject("msg", "로그인 실패!!");
 			//mv.setViewName("common/errorPage");
-			System.out.println("실패실패");
 			mv.addObject("msg", "로그인실패!!").setViewName("common/errorPage");
 		}
 		
@@ -432,10 +431,27 @@ public class MemberController {
 		return "member/message_view";
 	}
 	
-	@RequestMapping("membership_delete.me")
-	public String membership_delete() {
-		return "member/membership_delete";
+	@RequestMapping("membershipDelete.me")
+	public String deleteMember(Member m) {
+		
+		int result = mService.deleteMember(m);
+		
+		if(result > 0) {
+			return "redirect:logout.me";
+		}else {
+			return "member/membershipDelete";
+		}
 	}
+	
+	/*
+	 * public String insertReply(Reply r) {
+	 * 
+	 * int result = bService.insertReply(r);
+	 * 
+	 * if(result > 0) { return "success"; }else { return "fail"; }
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping("mypageModify.me")
 	public String mypageModify() {

@@ -1,6 +1,13 @@
 package com.catchmind.catchfun.admin.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.catchmind.catchfun.board.model.vo.Board;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Repository("aDao")
 public class AdminDao {
@@ -53,7 +60,19 @@ public class AdminDao {
 	
 	// 주혁시작
 	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.selectListCount");
+	}
 	
+	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectList", null, rowBounds);
+		
+	}
 	
 	// 주혁 끝
 }

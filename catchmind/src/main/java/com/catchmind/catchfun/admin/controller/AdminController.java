@@ -277,10 +277,10 @@ public class AdminController {
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		ArrayList<Board> list = aService.selectList(pi);
+		ArrayList<Board> blist = aService.selectList(pi);
 		
 		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
+		model.addAttribute("blist", blist);
 		
 		return "board/boardListView";
 	}

@@ -53,18 +53,17 @@
 	  		 where user_id=#{userId}    
 	  </update>
 	  
-	  <update id="deleteMember" parameterType="string">
-	  		update member
-	  		   set status='N' 
-	  		 where user_id=#{userId}
-	  </update>
-	  
 	  <select id="idCheck" parameterType="string" resultType="_int">
 	  		select count(*)
 	  		  from member
 	  		 where user_id=#{userId}
 	  </select>
 	  
+	  <update id="deleteMember" parameterType="Member">
+	  		update MEMBER
+	  		   set REASON=#{reason}, STATUS='N'
+	  		 where USER_NO=#{userNo}
+	  </update>
   
 </mapper>
 
