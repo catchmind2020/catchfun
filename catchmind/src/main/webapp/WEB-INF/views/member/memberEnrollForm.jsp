@@ -109,7 +109,7 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
 	box-sizing: border-box;
 }
 
-input[type=submit] {
+button[type=submit] {
 	width: 100%;
 	background-color: #28d7d7;
 	color: white;
@@ -120,7 +120,7 @@ input[type=submit] {
 	cursor: pointer;
 }
 
-input[type=submit]:hover {
+button[type=submit]:hover {
 	background-color: #188080;
 }
 
@@ -133,12 +133,21 @@ input[type=submit]:hover {
 	border-radius: 4px;
 	box-sizing: border-box;
 }
+/*우편번호찾기 버튼*/
+#btn_del{
+	font-family: 'Nanum Gothic', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'dotum', '돋움', sans-serif;
+	color: #222;
+	font-size: 18px;
+	line-height: 1.5;
+	width: 135px;
+	height: 50px;
+}
 
 #email_btn {
 	background-color: #e7e7e7;;
 	color: black;
 	border: 2px solid #e7e7e7;
-	width: 500px;
+	width: 540px;
 	height: 40px;
 }
 
@@ -148,7 +157,7 @@ input[type=submit]:hover {
 
 .wrap {
 	width: 1000px;
-	height: 1000px;
+	height: 1200px;
 	margin: auto;
 	text-align: center;
 	font-size: 30px;
@@ -209,68 +218,65 @@ input[type=submit]:hover {
 		<div id="content">
 			<div id="content_2">
 
-				<table>
-					<tr>
-						<td style="font-size: 40px;"><strong>회원가입</strong></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colsapn="2" style="font-size: 20px;">
-							<form action="/action_page.php" style="text-align: left;">
-								<input type="checkbox" id="agree" name="agree" value="agree">
-								<label for="agree"><b>전체동의</b><br></label>
-								<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용
-									동의(필수), 마케팅정보 수집동의(선택)</p>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<form action="/action_page.php">
-								<input type="email" id="email" name="email" placeholder="이메일">
-								<label for="email"><p style="text-align: left;">위
-										이메일로 인증번호가 발송됩니다.</p></label>
-								<button id="email_btn">인증</button>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="name" name="name" placeholder="이름">
-						</td>
-					</tr>
-					<tr>
-						<td><input type="password" id="pass1" name="pass1"
-							placeholder="비밀번호"></td>
-					</tr>
-					<tr>
-						<td><input type="password" id="pass2" name="pass2"
-							placeholder="비밀번호확인"></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="phonenum" name="phonenum"
-							placeholder="전화번호 '-'포함 입력"></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="del_postcode" name="address1" placeholder="우편번호" readonly>
-						<input type="button" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="background-color:gray; color:white;" readonly></td>
-					<tr>
+				<form action="insert.me" method="post" onsubmit="">
+					<table>
+						<tr>
+							<td style="font-size: 40px;"><strong>회원가입</strong></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colsapn="2" style="font-size: 20px;">
+								<div class="form-check" style="text-align: left;">
+									<input type="checkbox" id="agree" name="agree" value="agree">
+									<label for="agree"><b>전체동의</b><br></label>
+									<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="form-group" style="text-align: left;">
+									<input type="email" id="userId" name="userId" placeholder="이메일" required>
+									<label for="email"><p style="text-align: left;">위
+											이메일로 인증번호가 발송됩니다.</p></label>
+									<button id="email_btn">인증</button>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="userName" name="userName" placeholder="이름" required>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" required></td>
+						</tr>
+						<tr>
+							<td><input type="password" id="userPwd2" name="userPwd2" placeholder="비밀번호확인" required></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" ></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" readonly>
+							<input type="button" id="btn_del" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="background-color:gray; color:white;" readonly></td>
+						<tr>
+		                     <td style="width:200px; padding-top:0">
+		                     <input type="text" id="del_address" name="address" placeholder="주소" style="width:380px;" readonly>											
+							 <input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px;" readonly>
+		                    </td>
+	                   </tr>
+	                   <tr>
 	                     <td style="width:200px; padding-top:0">
-	                     <input type="text" id="del_address" name="address2" placeholder="주소" style="width:380px;" readonly>											
-						 <input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px;" readonly>
-	                    </td>
-                   </tr>
-                   <tr>
-                     <td style="width:200px; padding-top:0">
-                     <input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:540px;"> <!-- 사용자가 직접 입력하는 칸  -->
-                     </td>
-                  </tr>
-				  <tr>
-					<td><input type="submit" value="완료"></td>
-				</tr>
-				</table>
+	                     <input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:540px;"> <!-- 사용자가 직접 입력하는 칸  -->
+	                     </td>
+	                  </tr>
+					  <tr>
+						<td><button type="submit" value="완료">완료</button></td>
+					</tr>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 	<script>
     function del_execDaumPostcode() {
         new daum.Postcode({

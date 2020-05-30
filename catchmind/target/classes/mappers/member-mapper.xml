@@ -38,8 +38,7 @@
 	  
 	  <insert id="insertMember" parameterType="Member">
 	  		insert into member
-	  		values(#{userId}, #{userPwd}, #{userName}, #{email},
-	  			   #{gender}, #{age}, #{phone}, #{address}, sysdate, sysdate, 'Y')
+	  		values('M'||SEQ_MNO.NEXTVAL, #{userId}, #{userPwd}, default, #{userName}, null, #{phone}, default, #{address}, #{addressNum}, 0, default, null)
 	  </insert>
 	  
 	  <update id="updateMember" parameterType="Member">
