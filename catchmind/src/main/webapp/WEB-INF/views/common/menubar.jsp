@@ -238,6 +238,8 @@
 
 .button4:hover {background-color: #e7e7e7;}
 
+.header-img{cursor: pointer;}
+
 </style>
 
 </head>
@@ -247,7 +249,9 @@
 	<div class="header-area">
 
 		<div class="header header-img">
-			<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
+			<a href="main">
+				<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
+			</a>
 		</div>
 		<div class="header">카테고리</div>
 		<div class="header">오픈예정</div>
@@ -288,7 +292,7 @@
 					        
 					        </tr>
 					        <tr>
-					            <td colspan="4"><button class="button button4" style="width:200px; height:30px;">로그아웃</button></td>
+					            <td colspan="4"><button class="button button4" style="width:200px; height:30px;" onclick="location.href='logout.me'">로그아웃</button></td>
 					        </tr>
 					
 					      </table>

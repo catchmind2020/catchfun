@@ -339,6 +339,11 @@ public class MemberController {
 	
 //	아이유 시작
 	
+	@RequestMapping("main")
+	public String main() {
+		return "redirect:/";
+	}
+	
 	@RequestMapping("loginGo.me")
 	public String login() {
 		return "member/login";
@@ -355,7 +360,12 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			System.out.println("성공성공");
-			mv.setViewName("redirect:/");
+			if(loginUser.getUserId().equals("admin")) {
+				mv.setViewName("admin/adminCategory");
+//				mv.setViewName("common/admin");
+			}else {
+				mv.setViewName("redirect:/");
+			}
 		}else {
 			//mv.addObject("msg", "로그인 실패!!");
 			//mv.setViewName("common/errorPage");
@@ -364,6 +374,12 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	@RequestMapping("logout.me")
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	@RequestMapping("mypage.me")
