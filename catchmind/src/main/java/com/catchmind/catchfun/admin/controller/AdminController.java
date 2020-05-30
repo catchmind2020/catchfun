@@ -1,10 +1,16 @@
 package com.catchmind.catchfun.admin.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.catchmind.catchfun.admin.model.service.AdminService;
+import com.catchmind.catchfun.board.model.vo.Board;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.common.template.Pagination;
 
 @Controller
 public class AdminController {
@@ -254,11 +260,35 @@ public class AdminController {
 	
 	// 주혁시작
 	
-	@RequestMapping("main.ad")
+	@RequestMapping("category.ad")
 	public String adminMain() {
 		return "admin/adminCategory";
 	}
 	
+	
+	@RequestMapping("notice.ad")
+	public String selectList(int currentPage, Model model) {
+		
+		// 숙제
+		// listCount 관련한 service, dao, mapper 채워오기
+		// arrayList 조회 관련한것도 다 채워오기
+		
+		int listCount = aService.selectListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Board> list = aService.selectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "board/boardListView";
+	}
+	
+	@RequestMapping("inqueiry.ad")
+	public String adminOneInqueiryList() {
+		return "admin/adminOneInqueiryList";
+	}
 	
 	// 주혁 끝
 	

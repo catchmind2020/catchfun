@@ -8,10 +8,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <style>
-	div{
-		border: 1px solid black;
-		box-sizing: border-box;
-	}
 .outer {
 	text-align: center;
 	/* padding: 70px; */
@@ -249,7 +245,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../common/admin.jsp">
+	<jsp:include page="../common/admin.jsp"/>
 	<div class="outer">
 		<center>
 		<div class="t-align">
@@ -384,7 +380,7 @@
 			 // 뽑아온 값을 ajax를 통해 보내고
 			 // 보낸값을 통해 조회하여 display:none -> block로 바꿔 출력
 			 console.log(nno);
-			 //location.href="<%=contextPath%>/detail.no?nno=" + nno;
+			 <%-- location.href="<%=contextPath%>/detail.no?nno=" + nno; --%>
 		});
 
 

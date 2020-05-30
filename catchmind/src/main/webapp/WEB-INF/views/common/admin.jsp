@@ -94,7 +94,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="qna.ad">1:1 문의관리</a>
+            <a class="collapse-item" href="inqueiry.ad">1:1 문의관리</a>
             <a class="collapse-item" href="notice.ad">공지사항</a>
             <a class="collapse-item" href="#">자주하는질문(FAQ)</a>
             <a class="collapse-item" href="#">이벤트관리</a>
