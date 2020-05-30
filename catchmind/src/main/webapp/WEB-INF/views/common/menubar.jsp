@@ -196,6 +196,7 @@
 /* 아이유 전용 스타일 */
 
 .dropbtn {
+  background-color: white;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -211,8 +212,9 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #f1f1f1;
   min-width: 160px;
+  overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -224,11 +226,15 @@
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown a:hover {background-color: #ddd;}
 
-.dropdown:hover .dropdown-content {display: block;}
 
-.dropdown>.dropdown-content>table{width:450px; height:250px; padding-top: 15px; padding-left: 15px;} 
+.show {display: block;}
+
+/* */
+
+
+.dropdown>.dropdown-content>table{width:200px; height:250px; padding-top: 15px; padding-left:5px; } 
 
 .button4 {
   background-color: white;
@@ -247,7 +253,6 @@
 <body>
 	
 	<div class="header-area">
-
 		<div class="header header-img">
 			<a href="main">
 				<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
@@ -260,46 +265,44 @@
 		<div class="header"></div>
 		<div class="header"></div>
 		
-		
 		<c:choose>
 			<c:when test="${!empty loginUser}">
 				<!-- 로그인 후 -->
 		 		<div class="header login  header-img loginnext">
 					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="dropdown">
-					  <div class="dropbtn"><img src="<%=request.getContextPath() %>/resources/images/usericon32.png"></div>
-					    <div class="dropdown-content">
-					      <table style="text-align: center;">
+  						<button onclick="myFunction()" class="dropbtn"><img src="<%=request.getContextPath() %>/resources/images/usericon32.png"></button>
+  							<div id="myDropdown" class="dropdown-content">
+					      	<table style="text-align: center;">
 					          <tr>
 					              <td style="font-size:20px;"><b>${loginUser.userName}님</b></td>
-					              <td></td>
-					              <td rowspan="2"><img src="<%=request.getContextPath() %>/resources/images/home2.png" style="width:30px; height:30px;"><br>마이홈</a></td>
-					              <td rowspan="2"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>
+					              <td rowspan="2"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/home2.png" style="width:30px; height:30px;"><br>마이홈</a></td>
 					          </tr>
 					          <tr>
 					            <td><button class="button button4">정보변경</button></td>
 					            <td></td>
-					
 					        </tr>
-					  
 					        <tr style=border:0.05px solid grey;>
-					            <td rowspan="2" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
-					            <td rowspan="2" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
-					            <td rowspan="2" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
-					            <td rowspan="2" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
-					        
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
 					        </tr>
 					        <tr>
-					            <td colspan="4"><button class="button button4" style="width:200px; height:30px;" onclick="location.href='logout.me'">로그아웃</button></td>
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
 					        </tr>
-					
-					      </table>
+					      
+					        <tr>
+					            <td colspan="2"><button class="button button4" style="width:200px; height:30px;">로그아웃</button></td>
+					        </tr>
+					      </table>		              
 					    </div>
 					  </div>
 					</div>
-				</div>
+				
 			</c:when>
 			<c:otherwise>
 				<!-- 로그인 전 -->
@@ -309,29 +312,55 @@
 				</div> 
 			</c:otherwise>
 		</c:choose>
-	
+	</div>
 	
 		<!-- 검색바 애니메이션 -->
 		<form id="header_searchbar">
 			<input type="text" name="input" class="input" id="search-input">
 			<button type="reset" class="search" id="search-btn"></button>
 		</form>
-		
 	</div>
+		
+	
 
-	<!-- 검색바 스크립트 -->
-	<script>
-		function expand() {
-			$(".search").toggleClass("close");
-			$(".input").toggleClass("square");
-			if ($('.search').hasClass('close')) {
-				$('input').focus();
-			} else {
-				$('input').blur();
-			}
-		}
-		$('button').on('click', expand);
-	</script>
+
+ 	<!-- 검색바 스크립트 -->
+   <!-- <script> 
+    //		function expand() {
+    //			$(".search").toggleClass("close");
+    //			$(".input").toggleClass("square");
+    //			if ($('.search').hasClass('close')) {
+    //				$('input').focus();
+    //			} else {
+    //				$('input').blur();
+    //			}
+    //		}
+    //		$('button').on('click', expand);
+    //	</script>  -->
+	
+	<!-- 사이드메뉴바 스크립트 -->
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+	
 
 
 </body>
