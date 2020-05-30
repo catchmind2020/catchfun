@@ -254,11 +254,20 @@ public class AdminController {
 	
 	// 주혁시작
 	
-	@RequestMapping("main.ad")
+	@RequestMapping("category.ad")
 	public String adminMain() {
 		return "admin/adminCategory";
 	}
 	
+	@RequestMapping("notice.ad")
+	public String adminNotice() {
+		return "admin/adminNotice";
+	}
+	
+	@RequestMapping("inqueiry.ad")
+	public String adminOneInqueiryList() {
+		return "admin/adminOneInqueiryList";
+	}
 	
 	// 주혁 끝
 	

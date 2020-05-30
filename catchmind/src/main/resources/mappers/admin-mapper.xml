@@ -42,6 +42,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   -->
 	   
 	   <!-- 위에 참고용 -->
+	   
+	   
+	<resultMap id="adminNoticeResultSet" type="Notice">
+		<id column="NOTICE_NO" property="noticeNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="NOTICE_TITLE" property="noticeTitle"/>
+		<result column="NOTICE_CONTENT" property="noticeContent"/>
+		<result column="NOTICE_DATE" property="noticeDate"/>
+		<result column="NOTICE_COUNT" property="noticeCount"/>
+		<result column="NOTICE_STATUS" property="noticeStatus"/>
+	</resultMap>
+	
+	<resultMap id="adminFaqResultSet" type="Faq">
+		<id column="FAQ_NO" property="faqNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="FAQ_TITLE" property="faqTitle"/>
+		<result column="FAQ_ANSWER" property="faqAnswer"/>
+		<result column="FAQ_STATUS" property="faqStatus"/>
+		<result column="FAQ_DATE" property="faqDate"/>
+	</resultMap>
+	
   	<!-- 주혁시작 -->
   	
   	

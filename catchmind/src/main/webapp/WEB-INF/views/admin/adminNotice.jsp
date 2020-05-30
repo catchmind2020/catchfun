@@ -276,7 +276,7 @@ textarea{
 </style>
 </head>
 <body>
-	<jsp:include page="../common/admin.jsp">
+	<jsp:include page="../common/admin.jsp"/>
 	
 	<div class="outer">
 	<h2>공지사항 관리</h2><br>
@@ -293,7 +293,7 @@ textarea{
 					<th width="350px">제목</th>
 					<th width="100px">작성자</th>
 					<th width="150px">작성일</th>
-					<th width="100px"><button type="button" class="createBtn">글쓰기</button></th>
+					<th width="150px"><button type="button" class="createBtn">글쓰기</button></th>
 				</tr>
 
 				<tr>
@@ -314,7 +314,7 @@ textarea{
 
 				<tr>
 					<td>1</td>
-					<td>홈페이지 정검</td>
+					<td>홈페이지 점검</td>
 					<td>admin</td>
 					<td>2020.05.10</td>
 					<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
@@ -406,7 +406,7 @@ textarea{
 			// 뽑아온 값을 ajax를 통해 보내고
 			// 보낸값을 통해 조회하여 display:none -> block로 바꿔 출력
 			console.log(dday);
-			//location.href="<%=contextPath%>/detail.no?nno=" + nno;
+			<%-- location.href="<%=contextPath%>/detail.no?nno=" + nno; --%>
 		});
 
 		$(".createBtn").click(function(){
