@@ -47,7 +47,7 @@
 	   
 	<resultMap id="adminNoticeResultSet" type="Notice">
 		<id column="NOTICE_NO" property="noticeNo"/>
-		<result column="USER_NO" property="userNo"/>
+		<result column="USER_ID" property="userId"/>
 		<result column="NOTICE_TITLE" property="noticeTitle"/>
 		<result column="NOTICE_CONTENT" property="noticeContent"/>
 		<result column="NOTICE_DATE" property="noticeDate"/>
@@ -67,13 +67,14 @@
 	<select id="selectListCount" resultType="_int">
 		select count(*)
 		  from NOTICE_TEMP
-		 where status='N'
+		 where NOTICE_STATUS='N'
 	</select>
 	
 	<select id="selectList" resultMap="adminNoticeResultSet">
-		select * 
+		select NOTICE_NO, user_Id, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_COUNT, NOTICE_STATUS
 		  from NOTICE_TEMP
-		 where status='N'
+		  join member m using (user_no)
+		 where NOTICE_STATUS='N'
 		 order by NOTICE_NO desc
 	</select>
   	

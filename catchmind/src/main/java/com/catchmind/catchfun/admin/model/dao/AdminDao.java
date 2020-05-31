@@ -6,7 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.catchmind.catchfun.board.model.vo.Board;
+import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Repository("aDao")
@@ -64,7 +64,7 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectListCount");
 	}
 	
-	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Notice> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,6 +162,10 @@ width: 40%;
 /* 등록페이지 이벤트 */
 #noticeEvent{
 	display: none;
+	width:fit-content;margin:auto;
+}
+#noticeFormEvent{
+	margin-left: 270px;
 }
 
 /* 삭제 모달 css */
@@ -276,6 +280,11 @@ textarea{
 /* 페이징바 */
 #pagingArea{width:fit-content;margin:auto;}
 
+/* 테이블 영역 */
+.tb-area{
+	margin-left: 200px;
+}
+
 </style>
 </head>
 <body>
@@ -289,8 +298,7 @@ textarea{
 		<input type="text" name="keyword" placeholder="키워드 입력"> <button type="button">조회</button>
 	</div>
 	<br><br>
-		<center>
-			<table class="tb" border="1">
+			<table class="tb tb-area" border="1">
 				<thead>
 					<tr>
 						<th width="100px">글번호</th>
@@ -301,104 +309,86 @@ textarea{
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${ list }" var="b">
+					<c:forEach items="${ nlist }" var="n">
 	                    <tr>
-	                        <td>${ b.boardNo }</td>
-	                        <td>${ b.boardTitle }</td>
-	                        <td>${ b.boardWriter }</td>
-	                        <td>${ b.count }</td>
-	                        <td>${ b.createDate }</td>
-	                        <c:choose>
-	                        	<c:when test="${ !empty b.originName }">
-		                        	<td>★</td>
-		                        </c:when>
-		                        <c:otherwise>
-		                        	<td>&nbsp;</td>
-	                        	</c:otherwise>
-	                        </c:choose>
+							<td>${ n.noticeNo }</td>
+							<td>${ n.noticeTitle }</td>
+							<td>${ n.userId }</td>
+							<td>${ n.noticeDate }</td>
+							<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
 	                    </tr>
                     </c:forEach>
-					<tr>
-						<td>3</td>
-						<td>개설준비</td>
-						<td>admin</td>
-						<td>2020.05.24</td>
-						<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
-					</tr>
-
 				</tbody>
 			</table>
 
 
-			<!-- test2 답변 보낼 폼-->
+		<!-- test2 답변 보낼 폼-->
+		<form id="noticeFormEvent" name="" method="post" action="">
 			<div id="noticeEvent">
-				<form id="" name="" method="post" action="">
-				<br>
-				<!-- 제목 -->
-					<div class="faq_input_title relative mtop20">
+			<br>
+			<!-- 제목 -->
+				<div class="faq_input_title relative mtop20">
 
-						<input type="text" id="noTitle" name="title_temp" placeholder="제목" class="text_con_title" maxlength="50" required><br>
-						<!-- <span id="text_counter_title" style="text-align:right">###</span> -->
+					<input type="text" id="noTitle" name="title_temp" placeholder="제목" class="text_con_title" maxlength="50" required><br>
+					<!-- <span id="text_counter_title" style="text-align:right">###</span> -->
 
-					</div><br>
+				</div><br>
 
-				<!-- 시작일, 종료일, 디데이 -->
-						<input class="startDate" type="date"> <input class="endDate" type="date"> <input class="dday" type="text" size="5"> &nbsp;&nbsp;&nbsp;&nbsp; <img src="camera.png" style="width: 30px;"> <input type="file" class="fileName"> <input hidden type="text" placeholder="파일첨부" value="">
-					<br><br>
-				<!-- 내용 -->
-					<div class="faq_input relative mtop20">
-						<textarea class="noContent" name="contents" placeholder="내용을 입력해주세요" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
-						<!-- <div style="width:800px; text-align:right" required><span id="text_counter">0</span> / 4000</div> -->
-						<br>
+			<!-- 시작일, 종료일, 디데이 -->
+					<input class="startDate" type="date"> <input class="endDate" type="date"> <input class="dday" type="text" size="5"> &nbsp;&nbsp;&nbsp;&nbsp; <img src="camera.png" style="width: 30px;"> <input type="file" class="fileName"> <input hidden type="text" placeholder="파일첨부" value="">
+				<br><br>
+			<!-- 내용 -->
+				<div class="faq_input relative mtop20">
+					<textarea class="noContent" name="contents" placeholder="내용을 입력해주세요" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
+					<!-- <div style="width:800px; text-align:right" required><span id="text_counter">0</span> / 4000</div> -->
+					<br>
 
-					</div>
+				</div>
 
-					<div class="text-center">
-						<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
-						<button class="enrollBtn" type="submit">등록하기</button>
-						<a class="cancelBtn" href="javascript:history.back();">취소</a>
-						
-					</div>
-				</form>
+				<div class="text-center">
+					<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
+					<button class="enrollBtn" type="submit">등록하기</button>
+					<a class="cancelBtn" href="#">취소</a>
+					
+				</div>
 			</div>
-
-		</center>
-
-	</div>
+		</form>
+	
+	<br><br>
 	
 	<div id="pagingArea">
-                <ul class="pagination">
-                	
-                	<c:choose>
-                		<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
-	                    </c:when>
-	                    <c:otherwise>
-	                   		<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                    
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    	<c:choose>
-                    		<c:when test="${ p eq pi.currentPage }">
-	                    		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
-	                    	</c:when>
-	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ p }">${ p }</a></li>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
+        <ul class="pagination">
+        	
+        	 <c:choose>
+        		<c:when test="${ pi.currentPage eq 1 }">
+             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+             </c:when>
+             <c:otherwise>
+            		<li class="page-item"><a class="page-link" href="notice.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+            	</c:otherwise>
+            </c:choose>
+            
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+            	<c:choose>
+            		<c:when test="${ p eq pi.currentPage }">
+             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+             	</c:when>
+             	<c:otherwise>
+             		<li class="page-item"><a class="page-link" href="notice.ad?currentPage=${ p }">${ p }</a></li>
+            		</c:otherwise>
+            	</c:choose>
+            </c:forEach>
+            
+            <c:choose>
+            	<c:when test="${ pi.currentPage eq pi.maxPage }">
+             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+             </c:when>
+             <c:otherwise>
+             	<li class="page-item"><a class="page-link" href="notice.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+            	</c:otherwise>
+            </c:choose>
+        </ul>
+    </div>
 
 	<!-- 팝업 될 레이어 --> 
 	<div class="modal modal-body"> 
@@ -447,7 +437,6 @@ textarea{
 			$(".dday").val("D-"+dday)
 			// 뽑아온 값을 ajax를 통해 보내고
 			// 보낸값을 통해 조회하여 display:none -> block로 바꿔 출력
-			console.log(dday);
 			<%-- location.href="<%=contextPath%>/detail.no?nno=" + nno; --%>
 		});
 

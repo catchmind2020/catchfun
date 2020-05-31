@@ -2,7 +2,7 @@ package com.catchmind.catchfun.admin.model.service;
 
 import java.util.ArrayList;
 
-import com.catchmind.catchfun.board.model.vo.Board;
+import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 public interface AdminService {
@@ -46,7 +46,7 @@ public interface AdminService {
 	// 1_1. 공지게시판 총갯수 조회용 서비스
 	int selectListCount();
 	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스
-	ArrayList<Board> selectList(PageInfo pi);
+	ArrayList<Notice> selectList(PageInfo pi);
 	
 	
 	// 주혁 끝

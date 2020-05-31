@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.catchmind.catchfun.admin.model.service.AdminService;
-import com.catchmind.catchfun.board.model.vo.Board;
+import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 
@@ -20,7 +20,7 @@ public class AdminController {
 	
 	/*
 	@RequestMapping("list.bo")
-	public String selectList(int currentPage, Model model) {
+	public String selectList1(int currentPage, Model model) {
 		
 		// 숙제
 		// listCount 관련한 service, dao, mapper 채워오기
@@ -269,20 +269,19 @@ public class AdminController {
 	@RequestMapping("notice.ad")
 	public String selectList(int currentPage, Model model) {
 		
-		// 숙제
-		// listCount 관련한 service, dao, mapper 채워오기
-		// arrayList 조회 관련한것도 다 채워오기
-		
 		int listCount = aService.selectListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		ArrayList<Board> blist = aService.selectList(pi);
+		ArrayList<Notice> nlist = aService.selectList(pi);
+		
+		System.out.println(pi);
+		System.out.println(nlist);
 		
 		model.addAttribute("pi", pi);
-		model.addAttribute("blist", blist);
+		model.addAttribute("nlist", nlist);
 		
-		return "board/boardListView";
+		return "admin/adminNotice";
 	}
 	
 	@RequestMapping("inqueiry.ad")

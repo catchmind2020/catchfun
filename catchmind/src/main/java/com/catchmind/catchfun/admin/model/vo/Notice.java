@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Notice {
 	
 	private String noticeNo;
-	private String userNo;
+	private String userId;
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeDate;

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.admin.model.dao.AdminDao;
-import com.catchmind.catchfun.board.model.vo.Board;
+import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Service("aService")
@@ -75,7 +75,7 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectListCount(sqlSession);
 	}
 	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Notice> selectList(PageInfo pi) {
 		return aDao.selectList(sqlSession, pi);
 	}
 	
