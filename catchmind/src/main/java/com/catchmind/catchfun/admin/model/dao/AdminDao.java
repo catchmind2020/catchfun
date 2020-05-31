@@ -74,6 +74,14 @@ public class AdminDao {
 		
 	}
 	
+	public Notice noticeDetail(SqlSessionTemplate sqlSession, String nno){
+		return sqlSession.selectOne("adminMapper.noticeDetail", nno);
+	}
+	
+	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.insert("adminMapper.insertNotice", n);
+	}
+	
 	// 주혁 끝
 }
 

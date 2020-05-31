@@ -322,24 +322,25 @@ textarea{
 			</table>
 
 
-		<!-- test2 답변 보낼 폼-->
-		<form id="noticeFormEvent" name="" method="post" action="">
+		<!-- 공지 등록 및 수정 -->
+		<!-- <form id="noticeFormEvent" method="post" action="insertNotice.ad"> -->
+			<input hidden name="userId" value="${ loginUser.userId }">
 			<div id="noticeEvent">
 			<br>
 			<!-- 제목 -->
 				<div class="faq_input_title relative mtop20">
 
-					<input type="text" id="noTitle" name="title_temp" placeholder="제목" class="text_con_title" maxlength="50" required><br>
+					<input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목" class="text_con_title" maxlength="50" required><br>
 					<!-- <span id="text_counter_title" style="text-align:right">###</span> -->
 
 				</div><br>
 
 			<!-- 시작일, 종료일, 디데이 -->
-					<input class="startDate" type="date"> <input class="endDate" type="date"> <input class="dday" type="text" size="5"> &nbsp;&nbsp;&nbsp;&nbsp; <img src="camera.png" style="width: 30px;"> <input type="file" class="fileName"> <input hidden type="text" placeholder="파일첨부" value="">
+					<!-- <input class="startDate" type="date"> <input class="endDate" type="date"> <input class="dday" type="text" size="5"> &nbsp;&nbsp;&nbsp;&nbsp; <img src="camera.png" style="width: 30px;"> <input type="file" class="fileName"> <input hidden type="text" placeholder="파일첨부" value=""> -->
 				<br><br>
 			<!-- 내용 -->
 				<div class="faq_input relative mtop20">
-					<textarea class="noContent" name="contents" placeholder="내용을 입력해주세요" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
+					<textarea id="noticeContent" name="noticeContent" placeholder="내용을 입력해주세요" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
 					<!-- <div style="width:800px; text-align:right" required><span id="text_counter">0</span> / 4000</div> -->
 					<br>
 
@@ -347,12 +348,12 @@ textarea{
 
 				<div class="text-center">
 					<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
-					<button class="enrollBtn" type="submit">등록하기</button>
+					<button class="enrollBtn" type="button">등록하기</button>
 					<a class="cancelBtn" href="#">취소</a>
 					
 				</div>
 			</div>
-		</form>
+		<!-- </form> -->
 	
 	<br><br>
 	
@@ -441,7 +442,7 @@ textarea{
 		});
 
 		$(".createBtn").click(function(){
-
+			
 			$("#noTitle").val("");
 			$(".noContent").val("");
 			$(".startDate").val("");
@@ -451,7 +452,27 @@ textarea{
 				$('#noticeEvent').css("display", "block");   
 			}
 		});
-
+		
+		$(".enrollBtn").click(function(){
+			$.ajax({
+    			url:"insertNotice.ad",
+    			data:{noticeTitle:$("#noticeTitle").val(),
+    				  noticeContent:$("#noticeContent").val(),
+    				  userNo:"${loginUser.userNo}"},
+    			type:"post",
+    			success:function(status){
+    				if(status == "success"){
+    					location.href="<%=request.getContextPath()%>/notice.ad?currentPage=1"
+					}else{
+						alert("공지등록실패!!");
+					}
+    			},error:function(){
+    				console.log("공지 등록용 ajax 통신실패!!");	
+    			}
+    		});
+		});
+		
+		
 		$(".cancelBtn").click(function(){
 
 			$('#noticeEvent').css("display", "none");   
@@ -463,12 +484,21 @@ textarea{
 			 var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
 			
 			// class="noTitle" class="noContent"
-
-			$("#noTitle").val("개설준비");
-			$(".noContent").val("지금은 준비를 하고 있습니다.");
-			$(".startDate").val("2020-05-04");
-			$(".endDate").val("2020-05-20");
-
+			
+			/* ajax 시작 */
+			
+			$.ajax({
+    			url:"noticeDetail.ad",
+    			data:{nno:nno},
+    			success:function(list){
+    				$("#noticeTitle").val(list.noticeTitle);
+    				$("#noticeContent").val(list.noticeContent);
+    			},error:function(){
+    				console.log("공지 디테일 조회용 ajax 통신실패!!");	
+    			}
+    		});
+			
+			/* ajax 끝 */
 
 			 if($("#noticeEvent").css("display") == "none"){   
 				$('#noticeEvent').css("display", "block");   

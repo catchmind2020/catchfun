@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.catchmind.catchfun.admin.model.service.AdminService;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class AdminController {
@@ -284,9 +286,35 @@ public class AdminController {
 		return "admin/adminNotice";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="noticeDetail.ad", produces="application/json; charset=utf-8")
+	public String noticeDetail(String nno) {
+		
+		Notice noDetail = aService.noticeDetail(nno);
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(noDetail);
+	}
+	
 	@RequestMapping("inqueiry.ad")
 	public String adminOneInqueiryList() {
 		return "admin/adminOneInqueiryList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="insertNotice.ad")
+	public String insertNotice(Notice n) {
+		
+		System.out.println("등록 테스트" + n);
+		int result = aService.insertNotice(n);
+		
+		System.out.println(result);
+		
+		if(result > 0){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
 	}
 	
 	// 주혁 끝

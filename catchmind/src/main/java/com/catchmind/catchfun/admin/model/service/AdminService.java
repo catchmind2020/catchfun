@@ -48,6 +48,11 @@ public interface AdminService {
 	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스
 	ArrayList<Notice> selectList(PageInfo pi);
 	
+	// 1_3. 공지 수정하기 버튼 디테일
+	Notice noticeDetail(String nno);
+	
+	// 1_4. 공지 등록
+	int insertNotice(Notice n);
 	
 	// 주혁 끝
 	

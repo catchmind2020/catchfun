@@ -78,8 +78,17 @@
 		 order by NOTICE_NO desc
 	</select>
   	
-  	
-  	
+  	<select id="noticeDetail" parameterType="string" resultMap="adminNoticeResultSet">
+		select *
+		  from NOTICE_TEMP
+		 where NOTICE_NO=#{nno}
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into NOTICE_TEMP
+		values('N'||seq_nno.nextval, #{userNo}, #{noticeTitle}, #{noticeContent}, default, 0, default)
+	</insert>
+	
   	<!-- 주혁끝 -->
   
 </mapper>

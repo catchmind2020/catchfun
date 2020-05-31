@@ -78,6 +78,14 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Notice> selectList(PageInfo pi) {
 		return aDao.selectList(sqlSession, pi);
 	}
+	@Override
+	public Notice noticeDetail(String nno) {
+		return aDao.noticeDetail(sqlSession, nno);
+	}
+	@Override
+	public int insertNotice(Notice n) {
+		return aDao.insertNotice(sqlSession, n);
+	}
 	
 	// 주혁 끝
 }
