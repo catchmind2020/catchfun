@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -362,7 +363,7 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			if(loginUser.getUserId().equals("admin")) {
 				mv.setViewName("admin/adminCategory");
-//				mv.setViewName("common/admin");
+				//mv.setViewName("common/admin");
 			}else {
 				mv.setViewName("redirect:/");
 			}
@@ -397,15 +398,26 @@ public class MemberController {
 	}
 	
 	@RequestMapping("insert.me")
-	public String insertMember(Member m) {
+	public String insertMember(Member m, Model model, HttpSession session) {
 		
 		System.out.println(m);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
 		
 		int result = mService.insertMember(m);
+		
+		if(result > 0) { // 회원가입성공
+			
+			session.setAttribute("msg", "회원가입 성공!");
+			return "redirect:/";
+			
+		}else {	// 회원가입실패
+			
+			model.addAttribute("msg", "회원가입 실패");
+			return "common/errorPage";
+		}
 	
-		return "main";
+		
 	}
 	
 	@RequestMapping("idpwdFind.me")

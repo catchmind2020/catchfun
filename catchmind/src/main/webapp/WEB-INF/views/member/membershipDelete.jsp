@@ -172,7 +172,7 @@ textarea {
 
 			<div class="header-area">
 				<div class="header">
-					<img src="images/catchfun_logo.png">
+					<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
 				</div>
 				<div class="header">카테고리</div>
 				<div class="header">오픈예정</div>
@@ -180,14 +180,10 @@ textarea {
 				<div class="header">공지</div>
 				<div class="header"></div>
 				<div class="header login">
-					<img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
-						src="images/usericon32.png">
+					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
+						src="<%=request.getContextPath() %>/resources/images/usericon32.png">
 				</div>
-
 			</div>
-
-
-			</script>
 		</div>
 
 		<div id="content">

@@ -18,6 +18,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<!-- alertifyJS 라이브러리 -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 <style>
 
 /* 메뉴바 영역 */
@@ -256,6 +262,13 @@
 </head>
 
 <body>
+
+	<c:if test="${ !empty msg }">
+		<script>
+			alertify.alert("${msg}");	// 회원가입 성공,실패
+		</script>
+		<c:remove var="msg" scope="session" />
+	</c:if>
 	
 	<div class="header-area">
 		<div class="header header-img">
