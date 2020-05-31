@@ -24,10 +24,6 @@ public class AdminController {
 	@RequestMapping("list.bo")
 	public String selectList1(int currentPage, Model model) {
 		
-		// 숙제
-		// listCount 관련한 service, dao, mapper 채워오기
-		// arrayList 조회 관련한것도 다 채워오기
-		
 		int listCount = bService.selectListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -277,9 +273,6 @@ public class AdminController {
 		
 		ArrayList<Notice> nlist = aService.selectList(pi);
 		
-		System.out.println(pi);
-		System.out.println(nlist);
-		
 		model.addAttribute("pi", pi);
 		model.addAttribute("nlist", nlist);
 		
@@ -304,10 +297,39 @@ public class AdminController {
 	@RequestMapping(value="insertNotice.ad")
 	public String insertNotice(Notice n) {
 		
-		System.out.println("등록 테스트" + n);
 		int result = aService.insertNotice(n);
 		
-		System.out.println(result);
+		System.out.println("이거실행?? : " + result);
+		
+		if(result > 0){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="noticeDelete.ad")
+	public String noticeDelete(String nno) {
+		
+		int result = aService.noticeDelete(nno);
+		
+		if(result > 0){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="noticeUpdateIn.ad")
+	public String noticeUpdatInsert(Notice n) {
+		
+		int result = aService.noticeUpdatInsert(n);
+		
+		System.out.println("요거실행!!! : " + result);
 		
 		if(result > 0){
 			return "success";

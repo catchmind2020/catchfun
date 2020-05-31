@@ -315,7 +315,7 @@ textarea{
 							<td>${ n.noticeTitle }</td>
 							<td>${ n.userId }</td>
 							<td>${ n.noticeDate }</td>
-							<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
+							<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger deleteNotice">삭제</button></td>
 	                    </tr>
                     </c:forEach>
 				</tbody>
@@ -412,7 +412,7 @@ textarea{
 		$(".dday").click(function(){
 			
 			//var nno = $(".td_area>tbody>tr").children().eq(0).text();
-			//var nno = $(this).parent().parent().children().eq(0).text(); // 반허값 뽑아오기
+			//var nno = $(this).parent().parent().children().eq(0).text(); // 반환값 뽑아오기
 			var startDate = $(".startDate").val();
 			var endDate = $(".endDate").val();
 
@@ -480,10 +480,8 @@ textarea{
 		});
 
 		$(".updateNotice").click(function(){
-			//var nno = $(".td_area>tbody>tr").children().eq(0).text();
 			 var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
 			
-			// class="noTitle" class="noContent"
 			
 			/* ajax 시작 */
 			
@@ -499,14 +497,67 @@ textarea{
     		});
 			
 			/* ajax 끝 */
+			
+			/* 업데이트 ajax 시작 */
+			
+			if(nno != "" && nno != null){
+				$(".enrollBtn").click(function(){
+					$.ajax({
+		    			url:"noticeUpdateIn.ad",
+		    			data:{noticeNo:nno,
+		    				  noticeTitle:$("#noticeTitle").val(),
+		    				  noticeContent:$("#noticeContent").val()},
+	    				type:"post",
+		    			success:function(status){
+		    				if(status == "success"){
+		    					location.href="<%=request.getContextPath()%>/notice.ad?currentPage=1"
+	    						alert("업데이트성공");
+							}else{
+								alert("업데이트실패!!");
+							}
+						},error:function(){
+		    				console.log("공지 디테일 조회용 ajax 통신실패!!");	
+		    			}
+		    		});
+				});
+			}
+			
+			/* ajax 끝 */
 
 			 if($("#noticeEvent").css("display") == "none"){   
 				$('#noticeEvent').css("display", "block");   
 			}
 
+		});
+		
+		$(".deleteNotice").click(function(){
+			//var nno = $(".td_area>tbody>tr").children().eq(0).text();
+			 var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
+			
+			// class="noTitle" class="noContent"
+			
+			/* ajax 시작 */
+			
+			$.ajax({
+    			url:"noticeDelete.ad",
+    			data:{nno:nno},
+    			success:function(status){
+    				if(status == "success"){
+    					location.href="<%=request.getContextPath()%>/notice.ad?currentPage=1"
+					}else{
+						alert("공지등록실패!!");
+					}
+    			},error:function(){
+    				console.log("공지 디테일 조회용 ajax 통신실패!!");	
+    			}
+    		});
+			
+			/* ajax 끝 */
 
+			 if($("#noticeEvent").css("display") == "none"){   
+				$('#noticeEvent').css("display", "block");   
+			}
 
-			console.log(nno);
 		});
 
 	</script>

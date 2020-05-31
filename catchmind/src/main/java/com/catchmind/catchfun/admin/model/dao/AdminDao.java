@@ -82,6 +82,13 @@ public class AdminDao {
 		return sqlSession.insert("adminMapper.insertNotice", n);
 	}
 	
+	public int noticeDelete(SqlSessionTemplate sqlSession, String nno) {
+		return sqlSession.update("adminMapper.noticeDelete", nno);
+	}
+	
+	public int noticeUpdatInsert(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.update("adminMapper.noticeUpdatInsert", n);
+	}
 	// 주혁 끝
 }
 

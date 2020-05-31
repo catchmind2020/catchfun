@@ -54,6 +54,11 @@ public interface AdminService {
 	// 1_4. 공지 등록
 	int insertNotice(Notice n);
 	
+	// 1_5. 공지 삭제
+	int noticeDelete(String nno); 
+	
+	// 1_6. 공지 업데이트
+	int noticeUpdatInsert(Notice n); 
 	// 주혁 끝
 	
 }

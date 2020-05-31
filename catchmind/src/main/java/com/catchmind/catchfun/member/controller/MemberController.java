@@ -400,7 +400,6 @@ public class MemberController {
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, Model model, HttpSession session) {
 		
-		System.out.println(m);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
 		

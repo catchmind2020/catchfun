@@ -75,7 +75,7 @@
 		  from NOTICE_TEMP
 		  join member m using (user_no)
 		 where NOTICE_STATUS='N'
-		 order by NOTICE_NO desc
+		 order by NOTICE_DATE desc
 	</select>
   	
   	<select id="noticeDetail" parameterType="string" resultMap="adminNoticeResultSet">
@@ -89,6 +89,17 @@
 		values('N'||seq_nno.nextval, #{userNo}, #{noticeTitle}, #{noticeContent}, default, 0, default)
 	</insert>
 	
+	<update id="noticeDelete" parameterType="string">
+		update NOTICE_TEMP
+		   set NOTICE_STATUS='Y'
+		 where NOTICE_NO=#{nno}
+	</update>
+	
+	<update id="noticeUpdatInsert" parameterType="Notice">
+		update NOTICE_TEMP
+		   set NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent}
+		 where NOTICE_NO=#{noticeNo}
+	</update>
   	<!-- 주혁끝 -->
   
 </mapper>
