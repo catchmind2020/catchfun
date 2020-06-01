@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>1
 <!DOCTYPE html>
 <html>
 <head>
@@ -442,35 +442,43 @@ textarea{
 		});
 
 		$(".createBtn").click(function(){
+			var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
 			
-			$("#noTitle").val("");
-			$(".noContent").val("");
+			$("#noticeTitle").val("");
+			$("#noticeContent").val("");
 			$(".startDate").val("");
 			$(".endDate").val("");
 
+			$(".enrollBtn").click(function(){
+				
+				if(nno == "글번호"){
+					$.ajax({
+		    			url:"insertNotice.ad",
+		    			data:{noticeTitle:$("#noticeTitle").val(),
+		    				  noticeContent:$("#noticeContent").val(),
+		    				  userNo:"${loginUser.userNo}"},
+		    			type:"post",
+		    			success:function(status){
+		    				if(status == "success"){
+		    					location.href="<%=request.getContextPath()%>/notice.ad?currentPage=1"
+	    						alert("공지등록");
+							}else{
+								alert("공지등록실패!!");
+							}
+		    			},error:function(){
+		    				console.log("공지 등록용 ajax 통신실패!!");	
+		    			}
+		    		});
+				}
+			
+			});
+			
+			
 			if($("#noticeEvent").css("display") == "none"){   
 				$('#noticeEvent').css("display", "block");   
 			}
 		});
 		
-		$(".enrollBtn").click(function(){
-			$.ajax({
-    			url:"insertNotice.ad",
-    			data:{noticeTitle:$("#noticeTitle").val(),
-    				  noticeContent:$("#noticeContent").val(),
-    				  userNo:"${loginUser.userNo}"},
-    			type:"post",
-    			success:function(status){
-    				if(status == "success"){
-    					location.href="<%=request.getContextPath()%>/notice.ad?currentPage=1"
-					}else{
-						alert("공지등록실패!!");
-					}
-    			},error:function(){
-    				console.log("공지 등록용 ajax 통신실패!!");	
-    			}
-    		});
-		});
 		
 		
 		$(".cancelBtn").click(function(){

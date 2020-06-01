@@ -6,19 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.catchmind.catchfun.admin.model.service.AdminService;
-import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.service.AdminService2;
+import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
-import com.google.gson.GsonBuilder;
 
 @Controller
-public class AdminController {
+public class AdminController2 {
 	
 	@Autowired
-	private AdminService aService;
+	private AdminService2 aService2;
 	
 	/*
 	@RequestMapping("list.bo")
@@ -256,86 +254,122 @@ public class AdminController {
 	
 	// 여기부터 Admin 시작 (위에 참고용)
 	
-	// 주혁시작
+	/*
+	 * // 주혁시작
+	 * 
+	 * @RequestMapping("category.ad") public String adminMain() { return
+	 * "admin/adminCategory"; }
+	 * 
+	 * 
+	 * @RequestMapping("notice.ad") public String selectList(int currentPage, Model
+	 * model) {
+	 * 
+	 * int listCount = aService.selectListCount();
+	 * 
+	 * PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+	 * 
+	 * ArrayList<Notice> nlist = aService.selectList(pi);
+	 * 
+	 * model.addAttribute("pi", pi); model.addAttribute("nlist", nlist);
+	 * 
+	 * return "admin/adminNotice"; }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="noticeDetail.ad",
+	 * produces="application/json; charset=utf-8") public String noticeDetail(String
+	 * nno) {
+	 * 
+	 * Notice noDetail = aService.noticeDetail(nno);
+	 * 
+	 * return new
+	 * GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(
+	 * noDetail); }
+	 * 
+	 * @RequestMapping("inqueiry.ad") public String adminOneInqueiryList() { return
+	 * "admin/adminOneInqueiryList"; }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="insertNotice.ad") public String insertNotice(Notice n)
+	 * {
+	 * 
+	 * int result = aService.insertNotice(n);
+	 * 
+	 * System.out.println("이거실행?? : " + result);
+	 * 
+	 * if(result > 0){ return "success"; }else { return "fail"; }
+	 * 
+	 * }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="noticeDelete.ad") public String noticeDelete(String
+	 * nno) {
+	 * 
+	 * int result = aService.noticeDelete(nno);
+	 * 
+	 * if(result > 0){ return "success"; }else { return "fail"; }
+	 * 
+	 * }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="noticeUpdateIn.ad") public String
+	 * noticeUpdatInsert(Notice n) {
+	 * 
+	 * int result = aService.noticeUpdatInsert(n);
+	 * 
+	 * System.out.println("요거실행!!! : " + result);
+	 * 
+	 * if(result > 0){ return "success"; }else { return "fail"; }
+	 * 
+	 * }
+	 * 
+	 * // 주혁 끝
+	 */	
 	
-	@RequestMapping("category.ad")
-	public String adminMain() {
-		return "admin/adminCategory";
+	/**
+	 * 회원/블랙리스트 리스트페이지
+	 */
+	@RequestMapping("member.ad")
+	public String adminMemberList(int currentPage, Model model) {
+		  int listCount = aService2.memberListCount();
+		  int listCount1 = aService2.blackListCount();
+		 
+		
+		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		  PageInfo pi1 = Pagination.getPageInfo(listCount1, currentPage, 10, 2);
+		 
+		  ArrayList<Member> mlist = aService2.memberList(pi);
+		  ArrayList<Member> blist = aService2.blackList(pi1);
+		  
+		  model.addAttribute("pi", pi); 
+		  model.addAttribute("pi1", pi1);
+		  model.addAttribute("mlist", mlist);
+		  model.addAttribute("blist", blist);
+		  
+		return "admin/adminMember";
 	}
 	
 	
-	@RequestMapping("notice.ad")
-	public String selectList(int currentPage, Model model) {
-		
-		int listCount = aService.selectListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		ArrayList<Notice> nlist = aService.selectList(pi);
-		
-		model.addAttribute("pi", pi);
-		model.addAttribute("nlist", nlist);
-		
-		return "admin/adminNotice";
+	
+	/**
+	 * 댓글/프로젝트 신고 리스트페이지
+	 */
+	@RequestMapping("report.ad")
+	public String adminReport() {
+		return "admin/adminReport";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="noticeDetail.ad", produces="application/json; charset=utf-8")
-	public String noticeDetail(String nno) {
-		
-		Notice noDetail = aService.noticeDetail(nno);
-		
-		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(noDetail);
+	/**
+	 * 매출 통계 리스트페이지
+	 */
+	@RequestMapping("sales.ad")
+	public String adminSales() {
+		return "admin/adminSales";
 	}
 	
-	@RequestMapping("inqueiry.ad")
-	public String adminOneInqueiryList() {
-		return "admin/adminOneInqueiryList";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="insertNotice.ad")
-	public String insertNotice(Notice n) {
-		
-		int result = aService.insertNotice(n);
-		
-		if(result > 0){
-			return "success";
-		}else {
-			return "fail";
-		}
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="noticeDelete.ad")
-	public String noticeDelete(String nno) {
-		
-		int result = aService.noticeDelete(nno);
-		
-		if(result > 0){
-			return "success";
-		}else {
-			return "fail";
-		}
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="noticeUpdateIn.ad")
-	public String noticeUpdatInsert(Notice n) {
-		
-		int result = aService.noticeUpdatInsert(n);
-		
-		if(result > 0){
-			return "success";
-		}else {
-			return "fail";
-		}
-		
-	}
-	
-	// 주혁 끝
 	
 }
 

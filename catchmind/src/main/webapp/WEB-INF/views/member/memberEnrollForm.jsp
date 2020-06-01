@@ -262,12 +262,12 @@ button[type=submit]:hover {
 						<tr>
 		                     <td style="width:200px; padding-top:0">
 		                     <input type="text" id="del_address" name="address" placeholder="주소" style="width:380px;" readonly>											
-							 <input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px;" readonly>
+							 <input type="text" id="del_extraAddress" name="addressReference" placeholder="참고항목" style="width:150px;" readonly>
 		                    </td>
 	                   </tr>
 	                   <tr>
 	                     <td style="width:200px; padding-top:0">
-	                     <input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:540px;"> <!-- 사용자가 직접 입력하는 칸  -->
+	                     <input type="text" id="del_detailAddress"  name="addressDetail" placeholder="상세주소" style="width:540px;"> <!-- 사용자가 직접 입력하는 칸  -->
 	                     </td>
 	                  </tr>
 					  <tr>
