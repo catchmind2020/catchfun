@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace="adminMapper"/>
+<mapper namespace="adminMapper">
+
   <!-- 
   <resultMap id="adminResultSet" type="Board">
 		<id column="board_no" property="boardNo"/>
@@ -42,10 +42,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   -->
 	   
 	   <!-- 위에 참고용 -->
+	   
   	<!-- 주혁시작 -->
+	   
+	<resultMap id="adminNoticeResultSet" type="Notice">
+		<id column="NOTICE_NO" property="noticeNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="NOTICE_TITLE" property="noticeTitle"/>
+		<result column="NOTICE_CONTENT" property="noticeContent"/>
+		<result column="NOTICE_DATE" property="noticeDate"/>
+		<result column="NOTICE_COUNT" property="noticeCount"/>
+		<result column="NOTICE_STATUS" property="noticeStatus"/>
+	</resultMap>
+	
+	<resultMap id="adminFaqResultSet" type="Faq">
+		<id column="FAQ_NO" property="faqNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="FAQ_TITLE" property="faqTitle"/>
+		<result column="FAQ_ANSWER" property="faqAnswer"/>
+		<result column="FAQ_STATUS" property="faqStatus"/>
+		<result column="FAQ_DATE" property="faqDate"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		select count(*)
+		  from NOTICE_TEMP
+		 where NOTICE_STATUS='N'
+	</select>
+	
+	<select id="selectList" resultMap="adminNoticeResultSet">
+		select NOTICE_NO, user_Id, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_COUNT, NOTICE_STATUS
+		  from NOTICE_TEMP
+		  join member m using (user_no)
+		 where NOTICE_STATUS='N'
+		 order by NOTICE_DATE desc
+	</select>
   	
-  	
-  	
+  	<select id="noticeDetail" parameterType="string" resultMap="adminNoticeResultSet">
+		select *
+		  from NOTICE_TEMP
+		 where NOTICE_NO=#{nno}
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into NOTICE_TEMP
+		values('N'||seq_nno.nextval, #{userNo}, #{noticeTitle}, #{noticeContent}, default, 0, default)
+	</insert>
+	
+	<update id="noticeDelete" parameterType="string">
+		update NOTICE_TEMP
+		   set NOTICE_STATUS='Y'
+		 where NOTICE_NO=#{nno}
+	</update>
+	
+	<update id="noticeUpdatInsert" parameterType="Notice">
+		update NOTICE_TEMP
+		   set NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent}
+		 where NOTICE_NO=#{noticeNo}
+	</update>
   	<!-- 주혁끝 -->
   
 </mapper>

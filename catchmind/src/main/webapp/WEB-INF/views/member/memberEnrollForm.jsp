@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지_메인</title>
-
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 /* 메뉴바 영역 */
 .header-area {
@@ -99,7 +99,7 @@ table {
 	margin-bottom: 10px;
 }
 
-input[type=text], input[type=password], input[type=email], select {
+input[type=text], input[type=password], input[type=email], input[type=number], select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -109,7 +109,7 @@ input[type=text], input[type=password], input[type=email], select {
 	box-sizing: border-box;
 }
 
-input[type=submit] {
+button[type=submit] {
 	width: 100%;
 	background-color: #28d7d7;
 	color: white;
@@ -120,19 +120,35 @@ input[type=submit] {
 	cursor: pointer;
 }
 
-input[type=submit]:hover {
+button[type=submit]:hover {
 	background-color: #188080;
 }
 
-#email_btn {
-	width: 400px;
-	height: 40px;
+#del_postcode{
+	width: 73%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+/*우편번호찾기 버튼*/
+#btn_del{
+	font-family: 'Nanum Gothic', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'dotum', '돋움', sans-serif;
+	color: #222;
+	font-size: 18px;
+	line-height: 1.5;
+	width: 135px;
+	height: 50px;
 }
 
 #email_btn {
 	background-color: #e7e7e7;;
 	color: black;
 	border: 2px solid #e7e7e7;
+	width: 540px;
+	height: 40px;
 }
 
 #email_btn:hover {
@@ -141,7 +157,7 @@ input[type=submit]:hover {
 
 .wrap {
 	width: 1000px;
-	height: 1000px;
+	height: 1200px;
 	margin: auto;
 	text-align: center;
 	font-size: 30px;
@@ -185,7 +201,7 @@ input[type=submit]:hover {
 
 			<div class="header-area">
 				<div class="header">
-					<img src="images/catchfun_logo.png">
+					<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
 				</div>
 				<div class="header">카테고리</div>
 				<div class="header">오픈예정</div>
@@ -193,8 +209,8 @@ input[type=submit]:hover {
 				<div class="header">공지</div>
 				<div class="header"></div>
 				<div class="header login">
-					<img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
-						src="images/usericon32.png">
+					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
+						src="<%=request.getContextPath() %>/resources/images/usericon32.png">
 				</div>
 			</div>
 		</div>
@@ -202,50 +218,113 @@ input[type=submit]:hover {
 		<div id="content">
 			<div id="content_2">
 
-				<table>
-					<tr>
-						<td style="font-size: 40px;"><strong>회원가입</strong></td>
-						<td></td>
+				<form action="insert.me" method="post" onsubmit="">
+					<table>
+						<tr>
+							<td style="font-size: 40px;"><strong>회원가입</strong></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colsapn="2" style="font-size: 20px;">
+								<div class="form-check" style="text-align: left;">
+									<input type="checkbox" id="agree" name="agree" value="agree">
+									<label for="agree"><b>전체동의</b><br></label>
+									<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="form-group" style="text-align: left;">
+									<input type="email" id="userId" name="userId" placeholder="이메일" required>
+									<label for="email"><p style="text-align: left;">위
+											이메일로 인증번호가 발송됩니다.</p></label>
+									<button id="email_btn">인증</button>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="userName" name="userName" placeholder="이름" required>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" required></td>
+						</tr>
+						<tr>
+							<td><input type="password" id="userPwd2" name="userPwd2" placeholder="비밀번호확인" required></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" ></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" readonly>
+							<input type="button" id="btn_del" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="background-color:gray; color:white;" readonly></td>
+						<tr>
+		                     <td style="width:200px; padding-top:0">
+		                     <input type="text" id="del_address" name="address" placeholder="주소" style="width:380px;" readonly>											
+							 <input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px;" readonly>
+		                    </td>
+	                   </tr>
+	                   <tr>
+	                     <td style="width:200px; padding-top:0">
+	                     <input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:540px;"> <!-- 사용자가 직접 입력하는 칸  -->
+	                     </td>
+	                  </tr>
+					  <tr>
+						<td><button type="submit" value="완료">완료</button></td>
 					</tr>
-					<tr>
-						<td colsapn="2" style="font-size: 20px;">
-							<form action="/action_page.php" style="text-align: left;">
-								<input type="checkbox" id="agree" name="agree" value="agree">
-								<label for="agree"><b>전체동의</b><br></label>
-								<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용
-									동의(필수), 마케팅정보 수집동의(선택)</p>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<form action="/action_page.php">
-								<input type="email" id="email" name="email" placeholder="이메일">
-								<label for="email"><p style="text-align: left;">위
-										이메일로 인증번호가 발송됩니다.</p></label>
-								<button id="email_btn">인증</button>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="name" name="name" placeholder="이름">
-						</td>
-					</tr>
-					<tr>
-						<td><input type="password" id="pass1" name="pass1"
-							placeholder="비밀번호"></td>
-					</tr>
-					<tr>
-						<td><input type="password" id="pass2" name="pass2"
-							placeholder="비밀번호확인"></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="완료"></td>
-					</tr>
-
-				</table>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
+	<script>
+    function del_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("del_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("del_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('del_postcode').value = data.zonecode;
+                document.getElementById("del_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("del_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
 </body>
 </html>

@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 
   	  <resultMap id="memberResultSet" type="Member">
-  	  		<id column="user_id" property="userId"/>
+  	  		<id column="USER_NO" property="userNo"/>
+  	  		<result column="user_id" property="userId"/>
   	  		<result column="user_pwd" property="userPwd"/>
+  	  		<result column="USER_TYPE" property="userType"/>
   	  		<result column="user_name" property="userName"/>
   	  		<result column="email" property="email"/>
-  	  		<result column="gender" property="gender"/>
-  	  		<result column="age" property="age"/>
-  	  		<result column="phone" property="phone"/>
+  	  		<result column="PHONE" property="phone"/>
+  	  		<result column="USER_ENROLLDATE" property="enrollDate"/>
   	  		<result column="address" property="address"/>
-  	  		<result column="enroll_date" property="enrollDate"/>
-  	  		<result column="modify_date" property="modifyDate"/>
-  	  		<result column="status" property="status"/>
+  	  		<result column="ADDRESSNUM" property="addressNum"/>
+  	  		<result column="USER_POINT" property="point"/>
+  	  		<result column="STATUS" property="status"/>
+  	  		<result column="REASON" property="reason"/>
   	  </resultMap>
 		
   
@@ -36,8 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  
 	  <insert id="insertMember" parameterType="Member">
 	  		insert into member
-	  		values(#{userId}, #{userPwd}, #{userName}, #{email},
-	  			   #{gender}, #{age}, #{phone}, #{address}, sysdate, sysdate, 'Y')
+	  		values('M'||SEQ_MNO.NEXTVAL, #{userId}, #{userPwd}, default, #{userName}, null, #{phone}, default, #{address}, #{addressNum}, 0, default, null)
 	  </insert>
 	  
 	  <update id="updateMember" parameterType="Member">
@@ -51,18 +52,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		 where user_id=#{userId}    
 	  </update>
 	  
-	  <update id="deleteMember" parameterType="string">
-	  		update member
-	  		   set status='N' 
-	  		 where user_id=#{userId}
-	  </update>
-	  
 	  <select id="idCheck" parameterType="string" resultType="_int">
 	  		select count(*)
 	  		  from member
 	  		 where user_id=#{userId}
 	  </select>
 	  
+	  <update id="deleteMember" parameterType="Member">
+	  		update MEMBER
+	  		   set REASON=#{reason}, STATUS='N'
+	  		 where USER_NO=#{userNo}
+	  </update>
   
 </mapper>
 

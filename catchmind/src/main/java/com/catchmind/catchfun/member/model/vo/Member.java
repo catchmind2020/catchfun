@@ -30,8 +30,8 @@ public class Member {
 	
 	private String userNo;
 	private String userId;
-	private int userType;
 	private String userPwd;
+	private int userType;
 	private String userName;
 	private String email;
 	private String phone;

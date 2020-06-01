@@ -1,5 +1,10 @@
 package com.catchmind.catchfun.admin.model.service;
 
+import java.util.ArrayList;
+
+import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
+
 public interface AdminService {
 	
 	/*
@@ -37,8 +42,23 @@ public interface AdminService {
 	
 	// 주혁시작
 	
+	// 1. 게시판 리스트 조회용 서비스
+	// 1_1. 공지게시판 총갯수 조회용 서비스
+	int selectListCount();
+	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스
+	ArrayList<Notice> selectList(PageInfo pi);
 	
+	// 1_3. 공지 수정하기 버튼 디테일
+	Notice noticeDetail(String nno);
 	
+	// 1_4. 공지 등록
+	int insertNotice(Notice n);
+	
+	// 1_5. 공지 삭제
+	int noticeDelete(String nno); 
+	
+	// 1_6. 공지 업데이트
+	int noticeUpdatInsert(Notice n); 
 	// 주혁 끝
 	
 }

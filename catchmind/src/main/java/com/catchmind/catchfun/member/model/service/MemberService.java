@@ -14,7 +14,7 @@ public interface MemberService {
 	int updateMember(Member m);
 	
 	// 4. 회원탈퇴용 서비스
-	int deleteMember(String userId);
+	int deleteMember(Member m);
 	
 	// 5. 아이디 중복체크용 서비스 (AJAX)
 	int idCheck(String userId);

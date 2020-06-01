@@ -143,12 +143,25 @@ h6 {
 }
 
 /* input */
-#userid, #username, #birthday, #email, #password, #address1, #address2 {
+#userId, #userName, #birthday, #email, #password, #del_detailAddress {
 	width: 400px;
 	height: 55px;
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
+
+/*주소*/ 
+#del_address {
+ 	width: 200px;
+	height: 55px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#userId, #userName{
+	background-color:#d6d6d6;;
+}
+
 
 /*우편번호*/
 #addressnum {
@@ -204,7 +217,7 @@ h6 {
 }
 
 /* firstnumber input*/
-#firstnumber {
+#firstnumber, #del_postcode, #del_extraAddress {
 	margin-top: 15px;
 	width: 120px;
 	height: 55px;
@@ -219,19 +232,6 @@ h6 {
 
 /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */
 
-/* input */
-#userid, #email, #password {
-	width: 400px;
-	height: 55px;
-	margin-bottom: 15px; /**/
-	margin-right: 10px;
-	font-size: 20px;
-}
-
-#username {
-	width: 400px;
-	height: 55px;
-}
 
 /* 인증번호발송 Button */
 .btn1 {
@@ -286,27 +286,6 @@ tbody {
 	font-size: 20px;
 }
 
-/* 인증번호입력 input*/
-#verification {
-	width: 400px;
-	height: 55px;
-}
-
-ul.im1 {
-	list-style-type: disc;
-	list-style-image: url( "images/marker.png" );
-	font-size: 20px;
-}
-
-ul.im2 {
-	list-style-image: url( "images/marker.png" );
-	font-size: 20px;
-}
-
-li {
-	text-align: left;
-}
-
 .wrap {
 	width: 1000px;
 	height: 1000px;
@@ -353,7 +332,7 @@ li {
 
 			<div class="header-area">
 				<div class="header">
-					<img src="images/catchfun_logo.png">
+					<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
 				</div>
 				<div class="header">카테고리</div>
 				<div class="header">오픈예정</div>
@@ -361,8 +340,8 @@ li {
 				<div class="header">공지</div>
 				<div class="header"></div>
 				<div class="header login">
-					<img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
-						src="images/usericon32.png">
+					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
+						src="<%=request.getContextPath() %>/resources/images/usericon32.png">
 				</div>
 			</div>
 		</div>
@@ -378,23 +357,19 @@ li {
 								<ul class=im1>
 									<tr>
 										<td style="font-size: 20px;">아 이 디</td>
-										<td style="text-align: left;"><input type="text"
-											id="userid" placeholder="kkk@naver.com" disabled></td>
+										<td style="text-align: left;"><input type="text" class="form-control" id="userId" name="userId" value="${loginUser.userId}" readonly></td>
 										<td style="width: 280px;"></td>
 									</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td style="font-size: 20px; width: 250px;">이 름</td>
-									<td style="text-align: left; width: 550px align:center"><input
-										type="text" id="username" placeholder="이름(실명으로 입력해주세요)."
-										disabled></td>
+									<td style="text-align: left; width: 550px align:center"><input type="text" class="form-control" id="userName" name="userName" value="${loginUser.userName}" readonly></td>
 									<td style="font-size: 16px; width: 200px;"></td>
 								</tr>
-								<tr>
+<!-- 								<tr>
 									<td style="font-size: 20px;">비 밀 번 호</td>
-									<td style="text-align: left;"><input type="password"
-										id="password" placeholder=" 비밀번호는 6~16자 영문 대소문자, 숫자, 특수문자"></td>
+									<td style="text-align: left;"><input type="password" id="password" placeholder=" 비밀번호는 6~16자 영문 대소문자, 숫자, 특수문자"></td>
 									<td
 										style="font-size: 15px; color: rgb(131, 2, 2); text-align: left;"></td>
 								</tr>
@@ -410,66 +385,107 @@ li {
 									<td style="font-size: 10px; text-align: left">* 비밀번호가 일치하지
 										않을시 회원정보변경이 불가합니다.</td>
 									<td></td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td style="font-size: 20px;">이 메 일</td>
-									<td style="text-align: left;"><input type="text"
-										id="email" placeholder="이메일"></td>
+									<td style="text-align: left;"><input type="text" id="email" placeholder="이메일"></td>
 									<td></td>
 								</tr>
 
 								<tr>
 									<td style="font-size: 20px;">생 년 월 일</td>
-									<td style="text-align: left;" colspan="1"><input
-										type="number" id="birthday" type="birthday"
-										placeholder="생년월일8자리(ex)19940610" disabled>
+									<td style="text-align: left;" colspan="1"><input type="text" class="form-control" id="birthday" name="birthday" placeholder="생년월일8자리"></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td style="font-size: 20px;">휴대폰번호</td>
-									<td style="text-align: left;" colspan="1"><select
-										id="firstnumber" style="width: 120px; height: 55px;">
+									<td style="text-align: left;" colspan="1">
+									<select id="firstnumber" style="width: 120px; height: 55px;">
 											<option value="010" selected>010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
 											<option value="019">019</option>
-									</select> <input type="number" id="number1" type="number1"
-										placeholder="111-2222"></td>
+									</select> <input type="number" id="number1" type="number1" placeholder="111-2222"></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td style="font-size: 20px;">주소</td>
-									<td style="text-align: left;" colspan="1"><input
-										type="number" id="addressnum" type="addressnum"
-										placeholder="우편번호">
-									<button id="addressBtn">검색</button></td>
+									<td style="text-align: left;" colspan="1"><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" readonly>
+									<input type="button" id="btn_del" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="background-color:gray; color:white; height:55px;" readonly></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td></td>
-									<td style="text-align: left;"><input type="text"
-										id="address1" placeholder="기본주소"></td>
-									<td></td>
+								 	<td style="text-align: left;" colspan="1"><input type="text" id="del_address" name="address" placeholder="주소"readonly>
+								 	<input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px;" readonly></td>
 								</tr>
 								<tr>
 									<td></td>
-									<td style="text-align: left;"><input type="text"
-										id="address2" placeholder="상세주소"></td>
+									<td style="text-align: left;" colspan="1"><input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:400px;"> <!-- 사용자가 직접 입력하는 칸  --></td>
 									<td></td>
 								</tr>
 								</ul>
 							</tbody>
 						</table>
 						<p style="font-size: 20px; text-align: left; color: red;">
-							<a href="#"><u>회원탈퇴</u></a>
+							<a href="membershipDelete.me"><u>회원탈퇴</u></a>
 						</p>
 						<!-- 2_1. (정보입력)본인인증 및 회원가입 버튼-->
-						<button type="button" class="btn_1" id="btn_1">수정완료</button>
+						<button type="submit" class="btn_1" id="btn_1" value="완료">수정완료</button>
+				
 					</div>
 				</div>
 			</div>
-			<div id="footer"></div>
-
 		</div>
+		
+	<script>
+    function del_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("del_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("del_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('del_postcode').value = data.zonecode;
+                document.getElementById("del_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("del_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
 </body>
 </html>

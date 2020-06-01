@@ -12,12 +12,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Reply" alias="Reply" />
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Faq" alias="Faq" />
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Notice" alias="Notice" />
 	</typeAliases>
 	
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/admin-mapper.xml"/>
 	</mappers>
 	
 	
