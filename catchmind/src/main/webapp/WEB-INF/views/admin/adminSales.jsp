@@ -55,6 +55,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../common/admin.jsp"/>
   <div class="outer">
     <h2>매출통계</h2><br>
     <br>
