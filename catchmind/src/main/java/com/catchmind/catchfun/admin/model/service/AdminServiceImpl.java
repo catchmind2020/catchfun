@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.admin.model.dao.AdminDao;
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Service("aService")
@@ -93,6 +94,17 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int noticeUpdatInsert(Notice n) {
 		return aDao.noticeUpdatInsert(sqlSession, n);
+	}
+	
+	// Question
+	
+	@Override
+	public int questionSelectListCount() {
+		return aDao.questionSelectListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Question> questionSelectList(PageInfo pi) {
+		return aDao.questionSelectList(sqlSession, pi);
 	}
 	
 	// 주혁 끝

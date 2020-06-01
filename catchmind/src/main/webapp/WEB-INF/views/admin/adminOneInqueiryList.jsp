@@ -241,6 +241,9 @@
 	#qnaEvent{
 		display: none;
 	}
+	
+	/* 페이징바 */
+	#pagingArea{width:fit-content;margin:auto;}
 
 </style>
 </head>
@@ -276,33 +279,42 @@
 		</div>
 	
 		<br><br>
-
 		
 			<table class="tb" border="1">
-				<tr>
-					<th width="100px">번호</th>
-					<th width="100px">회원아이디</th>
-					<th width="100px">상담유형</th>
-					<th width="300px">제목</th>
-					<th width="150px">상담신청일</th>
-					<th width="150px">답변여부</th>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>kimsabu</td>
-					<td>배송</td>
-					<td>배송문의입니다.</td>
-					<td>2020년 05월 24일</td>
-					<td><button type="button" class="qnaEventBtn">답변등록</button></td>
-				</tr>
-				<tr>
+				<thead>
+					<tr>
+						<th width="100px">번호</th>
+						<th width="100px">회원아이디</th>
+						<th width="100px">보낸유형</th>
+						<th width="100px">상담유형</th>
+						<th width="300px">제목</th>
+						<th width="150px">상담신청일</th>
+						<th width="150px">답변여부</th>
+						<th width="150px">답변하기</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${ qlist }" var="q">
+	                    <tr>
+							<td>${ q.questionNo }</td>
+							<td>${ q.userNo }</td>
+							<td>${ q.questionType }</td>
+							<td>${ q.counseling }</td>
+							<td>${ q.questionTitle }</td>
+							<td>${ q.questionDate }</td>
+							<td>${ q.questionYn }</td>
+							<td><button class="updateQuestion" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger deleteQuestion">삭제</button></td>
+	                    </tr>
+                    </c:forEach>
+				</tbody>
+				<!-- <tr>
 					<td>1</td>
 					<td>arisong</td>
 					<td>기타</td>
 					<td>문의할게 있어요</td>
 					<td>2020년 05월 24일</td>
 					<td>답변완료</td>
-				</tr>
+				</tr> -->
 			</table>
 
 			<div id="qnaEvent">
@@ -355,14 +367,45 @@
 						<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
 						<button class="enrollBtn" type="submit">등록하기</button>
 						<!-- <a class="cancelBtn" href="javascript:history.back();">취소</a> -->
-						
 					</div>
-						
-					
 				</form>
 			</div>
-
 		</center>
+		<br>
+		<div id="pagingArea">
+	        <ul class="pagination">
+	        	
+        	 	<c:choose>
+	        		<c:when test="${ qpi.currentPage eq 1 }">
+	             		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+		            </c:when>
+		            <c:otherwise>
+	            		<li class="page-item"><a class="page-link" href="question.ad?currentPage=${ qpi.currentPage-1 }">Previous</a></li>
+	            	</c:otherwise>
+	            </c:choose>
+	            
+	            <c:forEach var="p" begin="${ qpi.startPage }" end="${ qpi.endPage }">
+	            	<c:choose>
+	            		<c:when test="${ p eq qpi.currentPage }">
+	             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+	             	</c:when>
+	             	<c:otherwise>
+	             		<li class="page-item"><a class="page-link" href="question.ad?currentPage=${ p }">${ p }</a></li>
+	            		</c:otherwise>
+	            	</c:choose>
+	            </c:forEach>
+	            
+	            <c:choose>
+	            	<c:when test="${ qpi.currentPage eq qpi.maxPage }">
+	             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	             </c:when>
+	             <c:otherwise>
+	             	<li class="page-item"><a class="page-link" href="question.ad?currentPage=${ qpi.currentPage+1 }">Next</a></li>
+	            	</c:otherwise>
+	            </c:choose>
+	        </ul>
+	    </div>
+
 	</div>
 
 	<script>
