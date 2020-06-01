@@ -299,8 +299,6 @@ public class AdminController {
 		
 		int result = aService.insertNotice(n);
 		
-		System.out.println("이거실행?? : " + result);
-		
 		if(result > 0){
 			return "success";
 		}else {
@@ -328,8 +326,6 @@ public class AdminController {
 	public String noticeUpdatInsert(Notice n) {
 		
 		int result = aService.noticeUpdatInsert(n);
-		
-		System.out.println("요거실행!!! : " + result);
 		
 		if(result > 0){
 			return "success";

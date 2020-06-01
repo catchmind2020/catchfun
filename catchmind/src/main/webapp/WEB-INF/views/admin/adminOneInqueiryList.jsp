@@ -259,7 +259,7 @@
 					<div class="t-inner-r-1">
 
 					</div>
-					
+					1
 					<div class="t-inner-r-2">
 						<input type="checkbox" name="" value=""> 주문/결제
 						<input type="checkbox" name="" value=""> 반품/교환
