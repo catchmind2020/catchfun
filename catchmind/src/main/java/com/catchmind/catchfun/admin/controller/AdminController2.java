@@ -1,11 +1,16 @@
 package com.catchmind.catchfun.admin.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.catchmind.catchfun.admin.model.service.AdminService2;
+import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.common.template.Pagination;
 
 @Controller
 public class AdminController2 {
@@ -328,17 +333,26 @@ public class AdminController2 {
 	 * 회원/블랙리스트 리스트페이지
 	 */
 	@RequestMapping("member.ad")
-	public String adminMember(int currentPage, Model model) {
-		int listCount = aService2.selectListCount();
+	public String adminMemberList(int currentPage, Model model) {
+		  int listCount = aService2.memberListCount();
+		  int listCount1 = aService2.blackListCount();
 		 
-		 PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		  PageInfo pi1 = Pagination.getPageInfo(listCount1, currentPage, 10, 2);
 		 
-		  ArrayList<Notice> nlist = aService.selectList(pi);
+		  ArrayList<Member> mlist = aService2.memberList(pi);
+		  ArrayList<Member> blist = aService2.blackList(pi1);
 		  
-		  model.addAttribute("pi", pi); model.addAttribute("nlist", nlist);
+		  model.addAttribute("pi", pi); 
+		  model.addAttribute("pi1", pi1);
+		  model.addAttribute("mlist", mlist);
+		  model.addAttribute("blist", blist);
 		  
 		return "admin/adminMember";
 	}
+	
+	
 	
 	/**
 	 * 댓글/프로젝트 신고 리스트페이지

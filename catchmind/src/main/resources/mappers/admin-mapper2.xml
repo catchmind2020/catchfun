@@ -4,6 +4,48 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper2">
 
+	<resultMap id="adminMemberResultSet" type="Member1">
+		<id column="USER_NO" property="userNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_PWD" property="userPwd"/>
+		<result column="USER_TYPE" property="userType"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="ADDRESSNUM" property="addressNum"/>
+		<result column="USER_POINT" property="userPoint"/>
+		<result column="STATUS" property="status"/>
+		<result column="REASON" property="reason"/>
+	</resultMap>
+	
+	<select id="memberListCount" resultType="_int">
+		select count(*)
+		  from member	
+		 where status='Y'
+	</select>
+	
+	<select id="memberList" resultMap="adminMemberResultSet">
+		select *
+		  from member
+		 where status='Y'
+		 order by user_no asc
+	</select>
+	
+	<select id="blackListCount" resultType="_int">
+		select count(*)
+		  from member
+		 where status='B'  
+	</select>
+	
+	<select id="blackList" resultMap="adminMemberResultSet">
+		select *
+		  from member
+		 where status='B'
+		 order by user_no asc 
+	</select>
+
   <!-- 
   <resultMap id="adminResultSet" type="Board">
 		<id column="board_no" property="boardNo"/>
@@ -101,5 +143,7 @@
 		 where NOTICE_NO=#{noticeNo}
 	</update>
   	주혁끝 -->
+  	
+  	
   
 </mapper>

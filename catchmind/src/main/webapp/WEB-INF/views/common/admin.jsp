@@ -79,7 +79,7 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="member.ad">회원</a>
+            <a class="collapse-item" href="member.ad?currentPage=1">회원</a>
               <a class="collapse-item" href="report.ad">신고리스트</a>
           </div>
         </div>

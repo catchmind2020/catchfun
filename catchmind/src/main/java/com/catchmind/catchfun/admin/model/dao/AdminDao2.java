@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Repository("aDao2")
@@ -86,6 +87,31 @@ public class AdminDao2 {
 	 * public int noticeUpdatInsert(SqlSessionTemplate sqlSession, Notice n) {
 	 * return sqlSession.update("adminMapper.noticeUpdatInsert", n); } // 주혁 끝
 	 */
+	public int memberListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.memberListCount");
+	}
+	
+	public ArrayList<Member> memberList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.memberList", null, rowBounds);
+	}
+	
+	public int blackListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.blackListCount");
+	}
+	
+	public ArrayList<Member> blackList(SqlSessionTemplate sqlSession, PageInfo pi1){
+		
+		int offset = (pi1.getCurrentPage() -1) * pi1.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi1.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.blackList", null, rowBounds);
+	}
 	
 
 }
