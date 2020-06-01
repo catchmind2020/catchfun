@@ -419,6 +419,26 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("update.me")
+	public String updateMember(Member m, Model model, HttpSession session) {
+		
+		int result = mService.updateMember(m);
+		
+		if(result > 0) { // 회원정보 수정 성공 --> 마이페이지 요청
+			
+			session.setAttribute("loginUser", mService.loginMember(m));
+			session.setAttribute("msg", "회원정보 수정 성공!");
+			
+			return "redirect:myPage.me";
+			
+		}else { // 회원정보 수정 실패 --> 에러페이지로 포워딩
+			
+			model.addAttribute("msg", "회원 정보 수정 실패!");
+			return "common/errorPage";
+		}
+		
+	}
+	
 	@RequestMapping("idpwdFind.me")
 	public String idpwdFind() {
 		return "member/idpwdFind";
