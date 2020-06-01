@@ -152,7 +152,7 @@
       </a>
       <div id="collapsediv" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="#">매출통계</a>
+          <a class="collapse-item" href="sales.ad">매출통계</a>
           <a class="collapse-item" href="#">접속통계</a>
         </div>
       </div>

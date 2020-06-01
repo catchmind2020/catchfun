@@ -2,6 +2,8 @@ package com.catchmind.catchfun.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 
@@ -321,6 +323,38 @@ public class AdminController2 {
 	 * 
 	 * // 주혁 끝
 	 */	
+	
+	/**
+	 * 회원/블랙리스트 리스트페이지
+	 */
+	@RequestMapping("member.ad")
+	public String adminMember(int currentPage, Model model) {
+		int listCount = aService2.selectListCount();
+		 
+		 PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		 
+		  ArrayList<Notice> nlist = aService.selectList(pi);
+		  
+		  model.addAttribute("pi", pi); model.addAttribute("nlist", nlist);
+		  
+		return "admin/adminMember";
+	}
+	
+	/**
+	 * 댓글/프로젝트 신고 리스트페이지
+	 */
+	@RequestMapping("report.ad")
+	public String adminReport() {
+		return "admin/adminReport";
+	}
+	
+	/**
+	 * 매출 통계 리스트페이지
+	 */
+	@RequestMapping("sales.ad")
+	public String adminSales() {
+		return "admin/adminSales";
+	}
 	
 	
 }

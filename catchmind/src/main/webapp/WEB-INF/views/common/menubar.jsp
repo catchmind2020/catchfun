@@ -270,6 +270,10 @@
 		<c:remove var="msg" scope="session" />
 	</c:if>
 	
+	<script>
+		$(".ajs-header").text("로그인실패");
+	</script>
+	
 	<div class="header-area">
 		<div class="header header-img">
 			<a href="main">

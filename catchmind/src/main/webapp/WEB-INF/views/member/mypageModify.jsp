@@ -352,6 +352,7 @@ tbody {
 			<div id="content_2">
 				<div class="container">
 					<div id="modify">
+						<form action="update.me" method="post" onsubmit="">
 						<P style="text-align: left;">회원정보변경</P>
 						<table>
 							<thead>
@@ -392,12 +393,13 @@ tbody {
 									<td style="text-align: left;"><input type="text" id="email" placeholder="이메일"></td>
 									<td></td>
 								</tr>
-
+								<!--
 								<tr>
 									<td style="font-size: 20px;">생 년 월 일</td>
 									<td style="text-align: left;" colspan="1"><input type="text" class="form-control" id="birthday" name="birthday" placeholder="생년월일8자리"></td>
 									<td></td>
 								</tr>
+								  -->
 								<tr>
 									<td style="font-size: 20px;">휴대폰번호</td>
 									<td style="text-align: left;" colspan="1">
