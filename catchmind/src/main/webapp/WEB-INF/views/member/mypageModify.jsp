@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지_메인</title>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 /* 메뉴바 영역 */
 .header-area {
@@ -411,7 +412,7 @@ tbody {
 								<tr>
 									<td style="font-size: 20px;">주소</td>
 									<td style="text-align: left;" colspan="1"><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" readonly>
-									<input type="button" id="btn_del" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="background-color:gray; color:white; height:55px;" readonly></td>
+									<button type="button" onclick="postcode()" style="background-color:gray; color:white; height:55px;">우편번호 찾기 </button></td>
 									<td></td>
 								</tr>
 								<tr>
@@ -439,7 +440,8 @@ tbody {
 		</div>
 		
 	<script>
-    function del_execDaumPostcode() {
+	
+    function postcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
