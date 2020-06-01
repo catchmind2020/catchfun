@@ -582,7 +582,7 @@ textarea{
 			} 
 		}
 
-	   trigger.addEventListener("click", toggleModal); 
+	    trigger.addEventListener("click", toggleModal); 
 		closeButton.addEventListener("click", toggleModal); 
 		cancel.addEventListener("click", toggleModal); 
 		window.addEventListener("click", windowOnClick); 
