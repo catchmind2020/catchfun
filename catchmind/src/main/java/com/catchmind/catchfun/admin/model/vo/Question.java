@@ -17,7 +17,6 @@ public class Question {
 	private String questionNo;
 	private String userNo;
 	private int questionType;
-	private String counseling;
 	private String questionTitle;
 	private String questionContent;
 	private Date questionDate;
@@ -27,5 +26,6 @@ public class Question {
 	private String ansContent;
 	private Date ansDate;
 	private String ansNo;
+	private String counseling;
 	
 }
