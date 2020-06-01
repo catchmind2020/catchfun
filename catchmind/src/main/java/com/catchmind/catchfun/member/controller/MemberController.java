@@ -429,7 +429,7 @@ public class MemberController {
 			session.setAttribute("loginUser", mService.loginMember(m));
 			session.setAttribute("msg", "회원정보 수정 성공!");
 			
-			return "redirect:myPage.me";
+			return "redirect:/"; //myPage.me
 			
 		}else { // 회원정보 수정 실패 --> 에러페이지로 포워딩
 			

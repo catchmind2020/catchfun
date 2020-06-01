@@ -38,18 +38,18 @@
 	  
 	  <insert id="insertMember" parameterType="Member">
 	  		insert into member
-	  		values('M'||SEQ_MNO.NEXTVAL, #{userId}, #{userPwd}, default, #{userName}, null, #{phone}, default, #{address}, #{addressNum}, 0, default, null)
+	  		values('M'||SEQ_MNO.NEXTVAL, #{userId}, #{userPwd}, default, #{userName}, null, #{phone}, default, #{address}, #{addressNum}, 0, default, null, #{addressDetail}, #{addressReference})
 	  </insert>
 	  
 	  <update id="updateMember" parameterType="Member">
 	  		update member
-	  		   set email=#{email}, 
-	  		       age=#{age},
-	  		       phone=#{phone},
-	  		       address=#{address},
-	  		       gender=#{gender},
-	  		       modify_date=sysdate
-	  		 where user_id=#{userId}    
+	  		   set EMAIL=#{email}, 
+	  		       PHONE=#{phone},
+	  		       ADDRESS=#{address},
+	  		       ADDRESSNUM=#{addressNum},
+	  		       ADDRESS_DETAIL=#{addressDetail},
+	  		       ADDRESS_REFERENCE=#{addressReference}
+	  		 where USER_ID=#{userId}    
 	  </update>
 	  
 	  <select id="idCheck" parameterType="string" resultType="_int">
