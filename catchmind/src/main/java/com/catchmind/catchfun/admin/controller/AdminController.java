@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.catchmind.catchfun.admin.model.service.AdminService;
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 import com.google.gson.GsonBuilder;
@@ -288,18 +289,11 @@ public class AdminController {
 		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(noDetail);
 	}
 	
-	@RequestMapping("inqueiry.ad")
-	public String adminOneInqueiryList() {
-		return "admin/adminOneInqueiryList";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="insertNotice.ad")
 	public String insertNotice(Notice n) {
 		
 		int result = aService.insertNotice(n);
-		
-		System.out.println("이거실행?? : " + result);
 		
 		if(result > 0){
 			return "success";
@@ -329,14 +323,28 @@ public class AdminController {
 		
 		int result = aService.noticeUpdatInsert(n);
 		
-		System.out.println("요거실행!!! : " + result);
-		
 		if(result > 0){
 			return "success";
 		}else {
 			return "fail";
 		}
 		
+	}
+	
+	/* Question */	
+	@RequestMapping("question.ad")
+	public String questionSelectList(int currentPage, Model model) {
+		
+		int listCount = aService.questionSelectListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Question> qlist = aService.questionSelectList(pi);
+		
+		model.addAttribute("qpi", pi);
+		model.addAttribute("qlist", qlist);
+		
+		return "admin/adminOneInqueiryList";
 	}
 	
 	// 주혁 끝

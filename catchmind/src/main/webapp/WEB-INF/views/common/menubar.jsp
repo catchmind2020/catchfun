@@ -271,7 +271,7 @@
 	</c:if>
 	
 	<script>
-		$(".ajs-header").text("로그인실패");
+		$(".ajs-header").text("");
 	</script>
 	
 	<div class="header-area">

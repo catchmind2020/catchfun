@@ -79,7 +79,7 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="member.ad">회원</a>
+            <a class="collapse-item" href="member.ad?currentPage=1">회원</a>
               <a class="collapse-item" href="report.ad">신고리스트</a>
           </div>
         </div>
@@ -93,7 +93,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="inqueiry.ad">1:1 문의관리</a>
+            <a class="collapse-item" href="question.ad?currentPage=1">1:1 문의관리</a>
             <a class="collapse-item" href="notice.ad?currentPage=1">공지사항</a>
             <a class="collapse-item" href="#">자주하는질문(FAQ)</a>
             <a class="collapse-item" href="#">이벤트관리</a>
@@ -152,7 +152,7 @@
       </a>
       <div id="collapsediv" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="#">매출통계</a>
+          <a class="collapse-item" href="sales.ad">매출통계</a>
           <a class="collapse-item" href="#">접속통계</a>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>1
 <!DOCTYPE html>
 <html>
 <head>
@@ -444,8 +444,8 @@ textarea{
 		$(".createBtn").click(function(){
 			var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
 			
-			$("#noTitle").val("");
-			$(".noContent").val("");
+			$("#noticeTitle").val("");
+			$("#noticeContent").val("");
 			$(".startDate").val("");
 			$(".endDate").val("");
 
@@ -590,7 +590,7 @@ textarea{
 			} 
 		}
 
-	   trigger.addEventListener("click", toggleModal); 
+	    trigger.addEventListener("click", toggleModal); 
 		closeButton.addEventListener("click", toggleModal); 
 		cancel.addEventListener("click", toggleModal); 
 		window.addEventListener("click", windowOnClick); 

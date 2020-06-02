@@ -2,9 +2,13 @@ package com.catchmind.catchfun.admin.model.service;
 
 import java.util.ArrayList;
 
-import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
+/**
+ * @author 도현
+ *
+ */
 public interface AdminService2 {
 	
 	/*
@@ -56,6 +60,17 @@ public interface AdminService2 {
 	 * 
 	 * // 1_6. 공지 업데이트 int noticeUpdatInsert(Notice n); // 주혁 끝
 	 */	
+	
+	int memberListCount();
+	
+	ArrayList<Member> memberList(PageInfo pi);
+	
+	int blackListCount();
+	
+	ArrayList<Member> blackList(PageInfo pi1);
+	
+	
+	
 }
 
 

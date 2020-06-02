@@ -1,10 +1,14 @@
 package com.catchmind.catchfun.admin.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.admin.model.dao.AdminDao2;
+import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Service("aService2")
 public class AdminServiceImpl2 implements AdminService2 {
@@ -13,6 +17,23 @@ public class AdminServiceImpl2 implements AdminService2 {
 	private SqlSessionTemplate sqlSession;
 	@Autowired
 	private AdminDao2 aDao2;
+	
+	@Override
+	public int memberListCount() {
+		return aDao2.memberListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Member> memberList(PageInfo pi) {
+		return aDao2.memberList(sqlSession, pi);
+	}
+	@Override
+	public int blackListCount() {
+		return aDao2.blackListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Member> blackList(PageInfo pi1) {
+		return aDao2.blackList(sqlSession, pi1);
+	}
 
 	/*
 	@Override

@@ -14,6 +14,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Faq" alias="Faq" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Notice" alias="Notice" />
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Member" alias="Member1"/>
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Project" alias="Project1"/>
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Question" alias="Question" />
 	</typeAliases>
 	
 	

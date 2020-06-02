@@ -55,7 +55,7 @@
 	  <select id="idCheck" parameterType="string" resultType="_int">
 	  		select count(*)
 	  		  from member
-	  		 where user_id=#{userId}
+	  		 where USER_ID=#{userId}
 	  </select>
 	  
 	  <update id="deleteMember" parameterType="Member">
