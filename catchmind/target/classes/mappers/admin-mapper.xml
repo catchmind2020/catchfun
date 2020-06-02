@@ -131,6 +131,13 @@
 		 where QUESTION_STATUS='N'
 		 order by A_QUESTION_NO desc
 	</select>
+	
+	<select id="qnaDetail" parameterType="string" resultMap="adminQuestionResultSet">
+		select *
+		  from PERSON_QUESTION
+		 where A_QUESTION_NO=#{qno}
+	</select>
+	
   	<!-- 주혁끝 -->
   	
   	

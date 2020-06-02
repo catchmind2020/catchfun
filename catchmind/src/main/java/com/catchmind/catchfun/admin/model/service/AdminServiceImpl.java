@@ -106,6 +106,10 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Question> questionSelectList(PageInfo pi) {
 		return aDao.questionSelectList(sqlSession, pi);
 	}
+	@Override
+	public Question qnaDetail(String qno) {
+		return aDao.qnaDetail(sqlSession, qno);
+	}
 	
 	// 주혁 끝
 }

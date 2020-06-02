@@ -107,6 +107,10 @@ public class AdminDao {
 		
 	}
 	
+	public Question qnaDetail(SqlSessionTemplate sqlSession, String qno){
+		return sqlSession.selectOne("adminMapper.qnaDetail", qno);
+	}
+	
 	// 주혁 끝
 }
 

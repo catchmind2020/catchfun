@@ -347,6 +347,16 @@ public class AdminController {
 		return "admin/adminOneInqueiryList";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="qnaDetail.ad", produces="application/json; charset=utf-8")
+	public String qnaDetail(String qno) {
+		
+		Question qnaDetail = aService.qnaDetail(qno);
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(qnaDetail);
+	}
+	
+	
 	// 주혁 끝
 	
 }
