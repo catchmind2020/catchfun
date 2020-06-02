@@ -280,21 +280,22 @@ img {
 		</div>
 	</div>
 	<script>
-  $(document).ready(function(){
-    
     $('.prev').click(function(){
-        $('.list').stop().animate({'margin-left':'-2400px'},function(){
-            $('.list>li').eq(0).appendTo('.list');
-            $('.list').css({'margin-left':'-1200px'});
-        });
-    });
-    $('.next').click(function(){
-        $('.list').stop().animate({'margin-left':'0px'},function(){
-            $('.list>li').eq(2).prependTo('.list');
-            $('.list').css({'margin-left':'-1200px'});
-        });
-    });
- });
+	  $(document).ready(function(){
+	    
+	    $('.prev').click(function(){
+	        $('.list').stop().animate({'margin-left':'-2400px'},function(){
+	            $('.list>li').eq(0).appendTo('.list');
+	            $('.list').css({'margin-left':'-1200px'});
+	        });
+	    });
+	    $('.next').click(function(){
+	        $('.list').stop().animate({'margin-left':'0px'},function(){
+	            $('.list>li').eq(2).prependTo('.list');
+	            $('.list').css({'margin-left':'-1200px'});
+	        });
+	    });
+	 });
 </script>
 
 
