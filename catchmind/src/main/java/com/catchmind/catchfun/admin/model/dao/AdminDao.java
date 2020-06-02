@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Repository("aDao")
@@ -89,6 +90,23 @@ public class AdminDao {
 	public int noticeUpdatInsert(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.update("adminMapper.noticeUpdatInsert", n);
 	}
+	
+	// Question
+	
+	public int questionSelectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.questionSelectListCount");
+	}
+	
+	public ArrayList<Question> questionSelectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.questionSelectList", null, rowBounds);
+		
+	}
+	
 	// 주혁 끝
 }
 

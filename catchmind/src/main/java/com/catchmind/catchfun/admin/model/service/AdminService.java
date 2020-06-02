@@ -3,6 +3,7 @@ package com.catchmind.catchfun.admin.model.service;
 import java.util.ArrayList;
 
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 public interface AdminService {
@@ -58,7 +59,15 @@ public interface AdminService {
 	int noticeDelete(String nno); 
 	
 	// 1_6. 공지 업데이트
-	int noticeUpdatInsert(Notice n); 
+	int noticeUpdatInsert(Notice n);
+	
+	// 2. Question
+	
+	// 1_1. 질문게시판 총갯수 조회용 서비스
+	int questionSelectListCount();
+	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스
+	ArrayList<Question> questionSelectList(PageInfo pi);
+	
 	// 주혁 끝
 	
 }
