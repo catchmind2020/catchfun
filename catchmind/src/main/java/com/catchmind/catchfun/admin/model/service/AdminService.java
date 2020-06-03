@@ -67,6 +67,8 @@ public interface AdminService {
 	int questionSelectListCount();
 	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스
 	ArrayList<Question> questionSelectList(PageInfo pi);
+	// 1_3. 공지 수정하기 버튼 디테일
+	Question qnaDetail(String qno);
 	
 	// 주혁 끝
 	

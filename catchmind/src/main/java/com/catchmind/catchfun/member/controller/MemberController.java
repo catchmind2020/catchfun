@@ -7,9 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.catchmind.catchfun.board.model.vo.Reply;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
 
@@ -321,7 +321,7 @@ public class MemberController {
 			
 		}
 	}
-	
+		*/
 	@ResponseBody
 	@RequestMapping(value="idCheck.me")
 	public String idCheck(String userId) {
@@ -336,7 +336,7 @@ public class MemberController {
 		
 	}
 	
-	*/
+
 	
 	
 //	아이유 시작

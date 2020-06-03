@@ -325,20 +325,20 @@
 					<br>
 						<table>
 							<tr class="font-all">
-								<td style="width: 250px;">상담유형 : 배송</td>
-								<td style="width: 300px;">작성자 : 홍길순</td>
-								<td style="width: 420px;">문의날짜 : 2020년 05월 24일</td>
+								<td style="width: 250px;" id="counseling"></td>
+								<td style="width: 300px;" id="qName"></td>
+								<td style="width: 420px;" id="qDate"></td>
 							</tr>
 						</table>
 					<!-- 제목 -->
 						<div class="faq_input_title relative mtop20">
 						
-							<label class="font-all">제목 : </label><input type="text" name="title_temp" class="text_con_title" maxlength="50" value="배송문의입니다." readonly><br>
+							<label class="font-all">제목 : </label><input type="text" id="qTitle" name="title_temp" class="text_con_title" maxlength="50" value="배송문의입니다." readonly><br>
 						</div>
 					<br>
 					<!-- 내용 -->
 						<div class="faq_input relative mtop20">
-							<label class="font-all">내용 : </label><textarea name="contents" placeholder="내용" class="width100 p10 f_666" id="text_con" maxlength="4000" readonly>배송문의 드려요 ~~~~~~ㅎㅎ</textarea>
+							<label class="font-all">내용 : </label><textarea name="contents" placeholder="내용" class="width100 p10 f_666" id="qContent" maxlength="4000" readonly>배송문의 드려요 ~~~~~~ㅎㅎ</textarea>
 						</div>
 					</div>
 				</div>
@@ -409,7 +409,7 @@
 	</div>
 
 	<script>
-		$('.qnaEventBtn').click(function () {  
+		$('.updateQuestion').click(function () {  
 			if($("#qnaEvent").css("display") == "none"){   
 				$('#qnaEvent').css("display", "block");   
 			} else {  
@@ -417,12 +417,26 @@
 			}
 		});
 
-		$(".qnaEventBtn").click(function(){
+		$(".updateQuestion").click(function(){
 			//var nno = $(".td_area>tbody>tr").children().eq(0).text();
-			 var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
+			 var qno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
 			 // 뽑아온 값을 ajax를 통해 보내고
 			 // 보낸값을 통해 조회하여 display:none -> block로 바꿔 출력
-			 console.log(nno);
+			 console.log(qno);
+			 
+			 $.ajax({
+	    			url:"qnaDetail.ad",
+	    			data:{qno:qno},
+	    			success:function(qnaList){
+	    				$("#counseling").text("상담유형 : " + qnaList.counseling);
+	    				$("#qName").text("작성자 : " + qnaList.userNo);
+	    				$("#qDate").text("문의날짜 : " + qnaList.questionDate);
+	    				$("#qTitle").val(qnaList.questionTitle);
+	    				$("#qContent").val(qnaList.questionContent);
+	    			},error:function(){
+	    				console.log("질문 디테일 조회용 ajax 통신실패!!");	
+	    			}
+	    		});
 			 <%-- location.href="<%=contextPath%>/detail.no?nno=" + nno; --%>
 		});
 
