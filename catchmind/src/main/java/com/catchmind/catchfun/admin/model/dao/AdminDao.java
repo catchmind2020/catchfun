@@ -111,6 +111,14 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.qnaDetail", qno);
 	}
 	
+	public int qnaAnsUpdate(SqlSessionTemplate sqlSession, Question q) {
+		return sqlSession.update("adminMapper.qnaAnsUpdate", q);
+	}
+	
+	public int qnaDelete(SqlSessionTemplate sqlSession, String qno) {
+		return sqlSession.update("adminMapper.qnaDelete", qno);
+	}
+	
 	// 주혁 끝
 }
 

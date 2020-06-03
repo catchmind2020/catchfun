@@ -356,6 +356,34 @@ public class AdminController {
 		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(qnaDetail);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="qnaAns.ad")
+	public String qnaAnsUpdate(Question q) {
+		
+		System.out.println(q);
+		int result = aService.qnaAnsUpdate(q);
+		
+		if(result > 0){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="qnaDelete.ad")
+	public String qnaDelete(String qno) {
+		
+		int result = aService.qnaDelete(qno);
+		
+		if(result > 0){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
 	
 	// 주혁 끝
 	

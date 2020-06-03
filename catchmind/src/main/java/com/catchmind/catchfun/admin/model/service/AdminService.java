@@ -70,6 +70,10 @@ public interface AdminService {
 	// 1_3. 공지 수정하기 버튼 디테일
 	Question qnaDetail(String qno);
 	
+	int qnaAnsUpdate(Question q);
+	
+	int qnaDelete(String qno); 
+	
 	// 주혁 끝
 	
 }
