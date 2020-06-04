@@ -67,8 +67,15 @@ public interface AdminService2 {
 	
 	int blackListCount();
 	
-	ArrayList<Member> blackList(PageInfo pi1);
+	ArrayList<Member> blackList(PageInfo pi);
 	
+	int memberSearchCount(String keyword);
+	
+	ArrayList<Member> memberSearch(PageInfo pi, String keyword);
+	
+	int blackSearchCount(String keyword);
+	
+	ArrayList<Member> blackSearch(PageInfo pi, String keyword);
 	
 	
 }

@@ -56,59 +56,47 @@
 <jsp:include page="../common/admin.jsp"/>
 
 <div class="outer">
-  <h2>회원리스트</h2><br>
+  <h2>블랙리스트</h2><br>
   <br><br>
-  <!-- 회원리스트 -->
-    <div id="member">
-      <form action="msearch.ad" method="get">
+
+    <!-- 블랙리스트 -->
+    <div id="blackList"> 
+      <form action="bsearch.ad" method="POST">
         <div class="k_btn">
-          <input type="text" name="keyword" placeholder="키워드 입력"> <button type="submit" class="mybtn">조회</button>
+          <input type="text" name="keyword" placeholder="아이디 키워드 입력"> <button class="mybtn" type="submit">조회</button>
           <input type="hidden" name="currentPage" value="1">
         </div>
         <br>
       </form>
         회원 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
+        <br>
       <br>
-      
-        <table class="tb" border="1">
-          <thead>
-	          <tr>
-	            
-	            <th width="100px">회원번호</th>
-	            <th width="200px">아이디</th>
-	            <th width="50px">구분</th>
-	            <th width="100px">회원명</th>
-	            <th width="150px">연락처</th>
-	            <th width="150px">이메일</th>
-	            <th width="100px">포인트</th>
-	            <th width="150px">가입일</th>
-	            <th width="100px">변경</th>
-	          </tr>
-	      </thead>
-	      <tbody> 
-			<c:forEach items="${ mlist }" var="m">       
-	          <tr>
-	            <td>${ m.userNo }</td>
-	            <td>${ m.userId }</td>
-	            <td>${ m.userType }</td>
-	            <td>${ m.userName }</td>
-	            <td>${ m.phone }</td>
-	            <td>${ m.email }</td>
-	            <td>${ m.userPoint }</td>
-	            <td>${ m.userEnrolldate }</td>
-	            <td>
-	                <select>
-	                  <option>활동회원</option>
-	                  <option>블랙리스트</option>
-	                  <option>탈퇴회원</option>
-	                </select>
-	            </td>
-	          </tr>
-	        </c:forEach>	 
-          </tbody>  
-          			
-        </table>
-         <br><br>
+          <table class="tb" border="1">
+            <thead>
+                <tr>
+                    <th width="100px">회원번호</th>
+                    <th width="200px">아이디</th> 
+                    <th width="100px">구분</th>
+                    <th width="330px">신고내용</th>
+                    <th width="150px">제제일자</th>
+                    <th width="120px">상태</th>
+                </tr>
+            </thead>
+            <tbody>
+            	<c:forEach items="${ blist }" var="b">
+	                <tr>
+	                    <td>${ b.userNo }</td>
+	                    <td>${ b.userId }</td>
+	                    <td>${ b.userType }</td>
+	                    <td>그냥그냥</td>
+	                    <td>2020-05-24</td>
+	                    <td>${ b.status }</td>
+	                </tr>
+                </c:forEach>
+              
+            </tbody>
+        </table> 
+            <br><br>
           	<div id="pagingArea">
 		        <ul class="pagination">
 		        	
@@ -117,7 +105,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 		             </c:when>
 		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            		<li class="page-item"><a class="page-link" href="black.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		            
@@ -127,7 +115,7 @@
 		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 		             	</c:when>
 		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ p }">${ p }</a></li>
+		             		<li class="page-item"><a class="page-link" href="black.ad?currentPage=${ p }">${ p }</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -137,15 +125,15 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 		             </c:when>
 		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		             	<li class="page-item"><a class="page-link" href="black.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		        </ul>
-		    </div>
-    </div> 
-
-      
+		    </div>   
+    </div>    
+    
   
+  </div>
  
 
   

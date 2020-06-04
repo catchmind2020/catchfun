@@ -56,18 +56,18 @@
 <jsp:include page="../common/admin.jsp"/>
 
 <div class="outer">
-  <h2>회원리스트</h2><br>
+  <h2>회원관리</h2><br>
   <br><br>
   <!-- 회원리스트 -->
     <div id="member">
-      <form action="msearch.ad" method="get">
+      <form action="msearch.ad" method="POST">
         <div class="k_btn">
           <input type="text" name="keyword" placeholder="키워드 입력"> <button type="submit" class="mybtn">조회</button>
           <input type="hidden" name="currentPage" value="1">
         </div>
         <br>
-      </form>
         회원 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
+      </form>
       <br>
       
         <table class="tb" border="1">
@@ -117,7 +117,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 		             </c:when>
 		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		            
@@ -127,7 +127,7 @@
 		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 		             	</c:when>
 		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ p }">${ p }</a></li>
+		             		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ p }">${ p }</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -137,17 +137,12 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 		             </c:when>
 		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		             	<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		        </ul>
 		    </div>
     </div> 
 
-      
-  
- 
-
-  
 </body>
 </html>

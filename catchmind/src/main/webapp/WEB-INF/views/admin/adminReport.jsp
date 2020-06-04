@@ -95,8 +95,7 @@
                 <td>14</td>
                 <td>
                   <select>
-                    <option>변경하기</option>
-                    <option>블랙리스트</option>
+                      <option>블랙리스트</option>
                   </select>
                 </td>
               </tr>
