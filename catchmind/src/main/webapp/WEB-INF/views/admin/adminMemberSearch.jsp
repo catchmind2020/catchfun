@@ -57,13 +57,13 @@
 
 <div class="outer">
   <h2>회원관리</h2><br>
-  <button class="mybtn" onclick="member();">회원</button>&nbsp;<button class="mybtn" onclick="blackList();">블랙리스트</button><br>
   <br><br>
   <!-- 회원리스트 -->
     <div id="member">
-      <form action="" method="">
+      <form action="msearch.ad" method="POST">
         <div class="k_btn">
-          <input type="text" name="keyword" placeholder="키워드 입력"> <button type="button" class="mybtn">조회</button>
+          <input type="text" name="keyword" placeholder="키워드 입력"> <button type="submit" class="mybtn">조회</button>
+          <input type="hidden" name="currentPage" value="1">
         </div>
         <br>
         회원 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
@@ -117,7 +117,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 		             </c:when>
 		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		            
@@ -127,7 +127,7 @@
 		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 		             	</c:when>
 		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ p }">${ p }</a></li>
+		             		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ p }">${ p }</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -137,108 +137,12 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 		             </c:when>
 		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		             	<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		        </ul>
 		    </div>
     </div> 
 
-    <!-- 블랙리스트 -->
-    <div id="blackList"> 
-      <form action="" method="">
-        <div class="k_btn">
-          <input type="text" name="keyword" placeholder="키워드 입력"> <button class="mybtn" type="button">조회</button>
-        </div>
-        <br>
-        회원 수 : <input type="text" style="border: unset;" value="${ pi1.listCount }">
-        <br>
-      </form>
-      <br>
-          <table class="tb" border="1">
-            <thead>
-                <tr>
-                    <th width="100px">회원번호</th>
-                    <th width="200px">아이디</th> 
-                    <th width="100px">구분</th>
-                    <th width="330px">신고내용</th>
-                    <th width="150px">제제일자</th>
-                    <th width="120px">상태</th>
-                </tr>
-            </thead>
-            <tbody>
-            	<c:forEach items="${ blist }" var="b">
-	                <tr>
-	                    <td>${ b.userNo }</td>
-	                    <td>${ b.userId }</td>
-	                    <td>${ b.userType }</td>
-	                    <td>그냥그냥</td>
-	                    <td>2020-05-24</td>
-	                    <td>${ b.status }</td>
-	                </tr>
-                </c:forEach>
-              
-            </tbody>
-        </table> 
-            <br><br>
-          	<div id="pagingArea">
-		        <ul class="pagination">
-		        	
-		        	 <c:choose>
-		        		<c:when test="${ pi1.currentPage eq 1 }">
-		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
-		             </c:when>
-		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi1.currentPage-1 }">Previous</a></li>
-		            	</c:otherwise>
-		            </c:choose>
-		            
-		            <c:forEach var="p" begin="${ pi1.startPage }" end="${ pi1.endPage }">
-		            	<c:choose>
-		            		<c:when test="${ p eq pi1.currentPage }">
-		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
-		             	</c:when>
-		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ p }">${ p }</a></li>
-		            		</c:otherwise>
-		            	</c:choose>
-		            </c:forEach>
-		            
-		            <c:choose>
-		            	<c:when test="${ pi1.currentPage eq pi1.maxPage }">
-		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-		             </c:when>
-		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi1.currentPage+1 }">Next</a></li>
-		            	</c:otherwise>
-		            </c:choose>
-		        </ul>
-		    </div>   
-    </div>    
-    
-  
-  </div>
- 
-
-  
-  <script>
-    function blackList(){
-      if($("#blackList").is(":visible")){
-          $("#blackList").slideDown(0);
-    }else if($("#member").is(":visible")){
-              $("#member").slideUp(0);
-              $("#blackList").slideDown(0);
-      }	
-    }
-
-    function member(){
-      if($("#member").is(":visible")){
-          $("#member").slideDown(0);
-    }else if($("#blackList").is(":visible")){
-              $("#blackList").slideUp(0);
-              $("#member").slideDown(0);
-      }
-    }
-  </script>
 </body>
 </html>
