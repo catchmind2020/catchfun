@@ -49,8 +49,10 @@
 }
 
 .outer {
-	min-width: 1920px;
+	min-width: 800px;
 }
+
+
  .black{
 	color: black; 
 	font-size: 15px;
@@ -81,11 +83,13 @@
 </head>
 
 <body>
-	<!-- <div  style="position: fixed";> -->
+	<div  style="position: fixed";>
 	<%@ include file="../common/menubarIm.jsp"%>
+	</div>
+	
 	<div class="outer">
-		<form style="margin-left: 13%;">
-			<div style="width: 100%; height: 1000px; overflow: auto;">
+		<form style="margin-left: 270px;">
+			<div style=" height: 700px;">
 				<br>
 				<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
 				<div class="card shadow mb-4" style="width: 1000px;">
@@ -126,7 +130,8 @@
 						<input type="date" id="startDate" name="startDate"><br>
 						<br>
 						<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
-						<input type="date" id="finishDate" name="finishDate"> <input
+						<input type="date" id="finishDate" name="finishDate"> 
+						<input
 							type="text" id="datepickerr" name="res_date" class="ipt black"
 							placeholder="날짜버튼">
 						<h1 class="grey">리워드를 설계하기 위해 프로젝트 종료일을 선택하세요.</h1>

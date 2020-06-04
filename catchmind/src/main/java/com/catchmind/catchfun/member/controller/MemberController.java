@@ -360,6 +360,7 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			System.out.println("성공성공");
+			
 			if(loginUser.getUserId().equals("admin")) {
 				mv.setViewName("admin/adminCategory");
 //				mv.setViewName("common/admin");

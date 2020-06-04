@@ -97,10 +97,10 @@
 						<h6 class="m-0 font-weight-bold text-primary">리워드 설계 조건</h6>
 					</div>
 					<div class="card-body" >
-											<p>1.리워드 추가하기<br>
-											2.아이템 추가하기<br>
-											
-											</p>
+						<p>1.리워드 추가하기<br>
+							2.아이템 추가하기<br>
+							
+							</p>
 					</div>
 				</div>
 	
@@ -108,65 +108,31 @@
 
 				<br>
 				<div class="btns">
-					<button type="button" class="btn btn-success btn-user btn-block" style="width: 120px;" id="rewardPlus" >+ 추가하기</button>
+					<button type="button" class="btn btn-success btn-user btn-block" style="width: 120px;" id="rewardPlus" disabled >+ 추가하기</button>
 				</div>
-				
-                <form action="insertReward.pa" method="post" id="rinfo" style="display: none">
-                	<br>
-                	<h3>1단계.리워드 등록</h3>
+
+			<form action="insertOption.pa" method="post" id="oinfo" >
+				<br>
+                	<h3>2단계.아이템 등록</h3>
+                	<input type="hidden" name="rewardNo" value="${ reward.rewardNo }">
                 	
-                	<table style= "margin-top:6px;">
-						
-				
-						<tr>
-							<td class="blackmodal" height="50px">리워드명</td>
-							<td><input class="blackmodal"  type="text" name="rewardTitle" id="rewardTitle" required></td>
-							
-						</tr>
-
-						<tr>
-							<td class="blackmodal"  height="50px">리워드설명</td>
-							<td><textarea  name="rewardContent" id="rewardContent" style="height: 200px; width: 200px;  " required></textarea></td>
-							
-						</tr>
-			
-						<tr>
-							<td class="blackmodal" width="300px" height="50px">금액</td>
-							<td><input type="text" name="rewardCost" id="rewardCost" placeholder="숫자만" required></td>
-						
-						</tr>
-					
-						<tr>
-							<td  class="blackmodal" height="50px">제한수량</td>
-							<td><input class="blackmodal"  type="text" name="rewardRemainingQuantity" placeholder="수량입력"></td>
-					
-						</tr>
-							<tr>
-							<td class="blackmodal"  height="50px">배송비</td>
-							<td><input  class="blackmodal" type="text" name="rewarDeliveryCost" required></td>
-						
-						</tr>
-						<tr>
-							<td  class="blackmodal" height="50px">리워드등록</td>
-							<td> <button type="submit" class="btn btn-primary" id="itembutton">리워드등록</button></td>
-					
-						</tr>
-						</table>
-					</form>	
-
-
-				<form action="insertOptin.pa" method="post" id="oinfo" style="display: none">
 					<table style= "margin-top:6px;">
+					
+						<tr>
+							<td  class="blackmodal" height="50px">리워드명</td>
+							<td  class="blackmodal" height="50px">${ reward.rewardTitle } </td>
+					
+						</tr>
 						<tr>
 							<td  class="blackmodal" width="300px" height="50px">아이템선택</td>
 							<td>
-							<select name="category"  id="category">
+							<select name="itemNo"  id="itemNo">
 					            <option value="">아이템선택</option>    
 					            
 					              <c:forEach items="${ list }" var="i">                       
-				         		 
 										<!-- 현재 쿼리스트링 받은 지역명이랑 총 지점리스트에서 지역명이렁 동일한 값들만 뽑아냄  -->
 										<option value="${ i.itemNo }" >${ i.itemName }</option>		 
+									
 									
 							 </c:forEach>	
 							 </select>	
@@ -179,16 +145,15 @@
 						</tr>
 						<tr>
 							<td  class="blackmodal" height="50px">아이템등록하기</td>
-							<td> <button type="button" class="btn btn-primary" id="itembutton">아이템추가</button></td>
+							<td> <button type="submit" class="btn btn-primary" id="itembutton">아이템추가</button></td>
 					
 						</tr>
 					</table>
 				</form>
 				
-
+	
 				<br>
-				
-			<div class="row" style="width: 100%; ">	
+		<div class="row" style="width: 100%; ">	
 				<c:forEach items="${ rlist }" var="r">
 				
 	                	<div class="card mb-5" style="width: 320px;  margin-left: 1%;">
@@ -243,15 +208,16 @@
 			  </div> 
 					
 					
-					
-				<div class="btns">
+				<div class="btns row">
 					<button class="btn btn-primary btn-user btn-block" style="width: 200px;" >저장하기</button>
+					&nbsp; <a href="rewardList.pa"><button class="btn btn-primary btn-user btn-block" style="width: 200px;" >리워드설계</button></a>
 				</div>
+			
+
 			</div>
 
 		
 		
-
 
 	 
                    
@@ -268,13 +234,6 @@
 	    });
 	});
 	  
-	
-	$(function(){ 
-	    $("#optionButton").on('click',function(){
- 
-	    	$("#oinfo").toggle();
-	    });
-	});
 	  
 	 
 	

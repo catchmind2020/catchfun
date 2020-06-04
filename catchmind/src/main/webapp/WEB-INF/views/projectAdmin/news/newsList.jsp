@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.board.model.vo.*"%>
+	%>
 
 <%
 
-ArrayList<Event> list = (ArrayList<Event>)request.getAttribute("list");
-PageInfo pi = (PageInfo)request.getAttribute("pi");
 
-int currentPage = pi.getCurrentPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
 
 %>
 <!DOCTYPE html>

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
  <%
  	String contextPath = request.getContextPath();
 /* 	String msg = (String)session.getAttribute("msg");
 	
 	Member loginUser = (Member)session.getAttribute("loginUser"); */
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3" >프로젝트관리자 <sup></sup></div>
+        <div class="sidebar-brand-text mx-3" >프로젝트관리자 : ${  projectUser.projectName }<sup></sup></div>
       </a>
 
       <!-- Divider -->
@@ -56,7 +58,7 @@
           </div>
           <div align="center" style="font-size: small;">
             <br>
-           "프젝회원"님<br>
+           ${  projectUser.userNo }님<br>
             환영합니다.
             
           </div>
@@ -66,7 +68,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="<%=contextPath%>/menubarIm.ad">
+        <a class="nav-link" href="<%=contextPath%>/home.pa">
           <span>Home</span></a>
       </li>
 
@@ -81,16 +83,17 @@
  
       <!-- Nav Item -  회원관리 -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="<%=contextPath%>/home.pa" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>펀딩준비</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<%= contextPath %>/memberList.ad?currentPage=1">기본요건</a>
-            <a class="collapse-item" href="<%= contextPath %>/reportBoard.ad?currentPage=1">기본정보/스토리</a>
-            <a class="collapse-item" href="<%= contextPath %>/withdrawal.ad?currentPage=1">아이템/리워드설계</a>
-         	<a class="collapse-item" href="<%= contextPath %>/adList.qu?currentPage=1">메이커정보</a>
+            <a class="collapse-item" href="<%= contextPath %>/basic.pa">기본요건</a>
+            <a class="collapse-item" href="<%= contextPath %>/story.pa?currentPage=1">기본정보/스토리</a>
+            <a class="collapse-item" href="<%= contextPath %>/itemList.pa">아이템설계</a>
+            <a class="collapse-item" href="<%= contextPath %>/rewardList.pa">리워드설계</a>
+         	<a class="collapse-item" href="<%= contextPath %>/maker.pa?currentPage=1">메이커정보</a>
          
           </div>
         </div>
@@ -156,7 +159,7 @@
     </ul>
     <!-- End of Sidebar -->
 <!-- ------------------------------------------------------------------------------------------------------------- -->
-    <!-- Content Wrapper -->
+    <%-- <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
@@ -189,7 +192,7 @@
         <!-- End of Topbar -->
       </div>
       <!-- End of Content Wrapper -->
-   </div>
+   </div> --%>
 <!-- ------------------------------------------------------------------------------------------------------------------------- -->
       
 <!-- ------------------------------------------------------------------------------------------------------------------------ -->

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.kh.member.model.vo.*, com.kh.board.model.vo.PageInfo"%>
+	import="java.util.ArrayList"%>
 <%
 	
 %>
@@ -50,7 +50,7 @@
 }
 
 .outer {
-	min-width: 1920px;
+	min-width: 800px;
 }
 
 .black {
@@ -73,11 +73,13 @@
 </head>
 
 <body>
-	<!-- <div  style="position: fixed";> -->
-	<%@ include file="../menubarIm.jsp"%>
+		<div  style="position: fixed";>
+	<%@ include file="../common/menubarIm.jsp"%>
+	</div>
+	
 	<div class="outer">
-		<form style="margin-left: 13%;">
-			<div style="width: 100%; height: 1000px; overflow: auto;">
+		<form style="margin-left: 270px;">
+			<div style=" height: 700px;">
 				<br>
 				<h1 class="h3 text-gray-900 mb-4">메이커 정보</h1>
 				<h1 class="h4 text-gray-900 mb-4">메이커 기본 정보</h1>
@@ -166,7 +168,7 @@
 					.setDefaults({
 						dateFormat : 'yy-mm-dd' //Input Display Format 변경
 						,
-						changeYear : true //콤보박스에서 년 선택 가능
+						changeYear :x true //콤보박스에서 년 선택 가능
 						,
 						changeMonth : true //콤보박스에서 월 선택 가능  
 						,
