@@ -110,6 +110,14 @@ public class AdminServiceImpl implements AdminService {
 	public Question qnaDetail(String qno) {
 		return aDao.qnaDetail(sqlSession, qno);
 	}
+	@Override
+	public int qnaAnsUpdate(Question q) {
+		return aDao.qnaAnsUpdate(sqlSession, q);
+	}
+	@Override
+	public int qnaDelete(String qno) {
+		return aDao.qnaDelete(sqlSession, qno);
+	}
 	
 	// 주혁 끝
 }
