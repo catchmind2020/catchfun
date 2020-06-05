@@ -77,6 +77,9 @@ public interface AdminService2 {
 	
 	ArrayList<Member> blackSearch(PageInfo pi, String keyword);
 	
+	int memberSelect(Member m);
+	
+	int blackUpdate(Member m);
 	
 }
 

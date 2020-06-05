@@ -50,6 +50,14 @@ public class AdminServiceImpl2 implements AdminService2 {
 	public ArrayList<Member> blackSearch(PageInfo pi, String keyword) {
 		return aDao2.blackSearch(sqlSession, pi, keyword);
 	}
+	@Override
+	public int memberSelect(Member m) {
+		return aDao2.memberSelect(sqlSession,m);
+	}
+	@Override
+	public int blackUpdate(Member m) {
+		return aDao2.blackUpdate(sqlSession, m);
+	}
 
 	/*
 	@Override

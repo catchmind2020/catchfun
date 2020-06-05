@@ -362,6 +362,16 @@ public class AdminController2 {
 		return "admin/adminMemberSearch";
 		
 	}
+	@RequestMapping("adMemberSelect.ad")
+	public String adMemberSelect(Member m, Model model) {
+		
+				
+		int result = aService2.memberSelect(m);
+		
+		return "redirect:member.ad?currentPage=1";
+		
+	}
+	
 	
 	@RequestMapping("black.ad")
 	public String adminBlackList(int currentPage, Model model) {
@@ -386,12 +396,21 @@ public class AdminController2 {
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
 		
-		ArrayList<Member> mlist = aService2.blackSearch(pi, keyword);
+		ArrayList<Member> blist = aService2.blackSearch(pi, keyword);
 		
 		model.addAttribute("pi", pi);
-		model.addAttribute("mlist", mlist);
+		model.addAttribute("blist", blist);
 		
 		return "admin/adminBlackListSearch";
+		
+	}
+	
+	@RequestMapping("adBlackUpdate.ad")
+	public String adBlackUpdate(Member m, Model model ) {
+		
+		int result = aService2.blackUpdate(m);
+		
+		return "redirect:black.ad?currentPage=1";
 		
 	}
 	
