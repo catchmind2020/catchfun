@@ -241,7 +241,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	           	$(function(){
 	        		$(".lists").click(function(){
 	        			var pno = $(this).children().eq(0).val();
-	        			location.href = "detail.pro" + pno;
+	        			location.href = "detail.pro?pno=" + pno;
 	        		});
 	        	});
 			    
