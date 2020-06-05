@@ -49,7 +49,7 @@ public class FundingController {
 	public String selectReplyList(String pno) {
 		
 		ArrayList<Reply> list = fService.selectReplyList(pno);
-		System.out.println(list);
+		//System.out.println(list);
 		
 		return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(list);
 		
