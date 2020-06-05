@@ -234,6 +234,15 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	            $('.list').css({'margin-left':'-1200px'});
 	        });
 	    });
+	    
+	    /* 펀딩프로젝트 상세보기 페이지 이동 */
+       	$(function(){
+    		$(".lists").click(function(){
+    			var pno = $(this).children().eq(0).val();
+    			location.href = "detail.pro?pno=" + pno;
+    		});
+    	});
+	    
 	 });
 </script>
 
