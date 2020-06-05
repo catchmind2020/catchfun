@@ -280,7 +280,6 @@ img {
 		</div>
 	</div>
 	<script>
-    $('.prev').click(function(){
 	  $(document).ready(function(){
 	    
 	    $('.prev').click(function(){
