@@ -23,9 +23,6 @@
 	 
 	}
 	
-	#blackList{
-	  display:none;
-	}
 	.mybtn {
 	
 		background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
@@ -56,9 +53,8 @@
 <jsp:include page="../common/admin.jsp"/>
 
 <div class="outer">
-  <h2>회원관리</h2><br>
-  <button class="mybtn" onclick="member();">회원</button>&nbsp;<button class="mybtn" onclick="blackList();">블랙리스트</button><br>
-  <br><br>
+  <h2>블랙리스트</h2><br>
+  <br>
 
     <!-- 블랙리스트 -->
     <div id="blackList"> 
@@ -81,6 +77,7 @@
                     <th width="330px">신고내용</th>
                     <th width="150px">제제일자</th>
                     <th width="120px">상태</th>
+                    <th width="100px">해제</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,7 +88,18 @@
 	                    <td>${ b.userType }</td>
 	                    <td>그냥그냥</td>
 	                    <td>2020-05-24</td>
-	                    <td>${ b.status }</td>
+	                    <td>
+	                    <c:choose>
+	                    	<c:when test="${ b.status eq 'Y'}">활동회원</c:when>
+	                    	<c:when test="${ b.status eq 'B'}">블랙리스트</c:when>
+	                    	<c:when test="${ b.status eq 'N'}">탈퇴회원</c:when>
+	                    </c:choose>	
+						</td>
+	                    <form action="adBlackUpdate.ad" method="get">
+	                    	<input type="hidden" name="currentPage" value="1">
+				            <input type="hidden" name="userNo" value="${ b.userNo }">
+				            <td><input class="mybtn" type="submit" value="블랙리스트해제"></td>
+	                    </form>
 	                </tr>
                 </c:forEach>
               
@@ -106,7 +114,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 		             </c:when>
 		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            		<li class="page-item"><a class="page-link" href="bsearch.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		            
@@ -116,7 +124,7 @@
 		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 		             	</c:when>
 		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ p }">${ p }</a></li>
+		             		<li class="page-item"><a class="page-link" href="bsearch.ad?currentPage=${ p }">${ p }</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -126,7 +134,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 		             </c:when>
 		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		             	<li class="page-item"><a class="page-link" href="bsearch.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		        </ul>

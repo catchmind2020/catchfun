@@ -70,36 +70,38 @@
               신고리스트 수 : <input type="text" style="border:unset" value="30" >
           </form>
           <br>
-          <table class="tb" border="1">
-              <tr>
-                
-                <th width="100px">회원번호</th>
-                <th width="200px">아이디</th>
-                <th width="50px">구분</th>
-                <th width="100px">회원명</th>
-                <th width="150px">연락처</th>
-                <th width="150px">이메일</th>                  
-                <th width="150px">가입일</th>
-                <th width="100px">신고수</th>
-                <th width="70px">상태</th>
-              </tr>
-              <tr>
-            
-                <td>3</td>
-                <td>reporthaha</td>
-                <td>A</td>
-                <td>악성댓글러</td>
-                <td>010-1234-1234</td>
-                <td>admin@admin.ad</td>                 
-                <td>2020.05.17</td>
-                <td>14</td>
-                <td>
-                  <select>
-                      <option>블랙리스트</option>
-                  </select>
-                </td>
-              </tr>
-            </table>
+         	 <div class="report">
+		          <table class="tb" border="1">
+		              <tr>
+		                
+		                <th width="100px">회원번호</th>
+		                <th width="200px">아이디</th>
+		                <th width="50px">구분</th>
+		                <th width="100px">회원명</th>
+		                <th width="150px">연락처</th>
+		                <th width="150px">이메일</th>                  
+		                <th width="150px">가입일</th>
+		                <th width="100px">신고수</th>
+		                <th width="70px">상태</th>
+		              </tr>
+		              <tr>
+		            
+		                <td>3</td>
+		                <td>reporthaha</td>
+		                <td>A</td>
+		                <td>악성댓글러</td>
+		                <td>010-1234-1234</td>
+		                <td>admin@admin.ad</td>                 
+		                <td>2020.05.17</td>
+		                <td>14</td>
+		                <td>
+		                  <select>
+		                      <option>블랙리스트</option>
+		                  </select>
+		                </td>
+		              </tr>
+	            </table>
+            </div>
       </div>  
 
       <!-- 프로젝트신고 -->
@@ -145,25 +147,19 @@
             </table>
       </div>  
 </div>
-<script>
-  function userReport(){
-    if($("#userReport").is(":visible")){
-        $("#userReport").slideDown(0);
-  }else if($("#projectReport").is(":visible")){
-            $("#projectReport").slideUp(0);
-            $("#userReport").slideDown(0);
-    }
-  }
-
-  function projectReport(){
-    if($("#projectReport").is(":visible")){
-        $("#projectReport").slideDown(0);
-  }else if($("#userReport").is(":visible")){
-            $("#userReport").slideUp(0);
-            $("#projectReport").slideDown(0);
-    }
-  }
-</script>
+    <script>
+   		$(function(){
+   			$(".report>tbody>tr").click(function(){
+   				// console.log("클릭");
+	   				
+	   			var rd = $(this).children().eq(0).text();
+	   			// 상품코드 밸류값이 넘어감 
+	   			
+	 			location.href="reportDetail.ad?rd=" + rd; 
+ 			});
+ 
+   		});   
+    </script>
 
 
 </body>

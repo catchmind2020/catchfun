@@ -138,6 +138,14 @@ public class AdminDao2 {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper2.blackSearch", keyword, rowBounds);
 	}
+	
+	public int memberSelect(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("adminMapper2.memberSelect",m);
+	}
+	
+	public int blackUpdate(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("adminMapper2.blackUpdate", m);
+	}
 
 }
 

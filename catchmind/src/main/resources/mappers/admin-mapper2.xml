@@ -71,6 +71,14 @@
 		 where status='B' and USER_ID LIKE '%' || #{keyword} || '%' 
 	     order by user_no asc  
     </select> 
+    
+    <update id="memberSelect" parameterType="Member">
+    	update Member set status=#{status} where user_no=#{userNo}
+    </update>
+    
+    <update id="blackUpdate" parameterType="Member">
+    	update Member set status='Y' where user_no=#{userNo}
+    </update>
 
   <!-- 
   <resultMap id="adminResultSet" type="Board">

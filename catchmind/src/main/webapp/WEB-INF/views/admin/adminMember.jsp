@@ -57,10 +57,10 @@
 
 <div class="outer">
   <h2>회원리스트</h2><br>
-  <br><br>
+  <br>
   <!-- 회원리스트 -->
     <div id="member">
-      <form action="msearch.ad" method="get">
+      <form action="msearch.ad" method="POST">
         <div class="k_btn">
           <input type="text" name="keyword" placeholder="키워드 입력"> <button type="submit" class="mybtn">조회</button>
           <input type="hidden" name="currentPage" value="1">
@@ -76,13 +76,14 @@
 	            
 	            <th width="100px">회원번호</th>
 	            <th width="200px">아이디</th>
-	            <th width="50px">구분</th>
+	            <th width="80px">구분</th>
 	            <th width="100px">회원명</th>
 	            <th width="150px">연락처</th>
 	            <th width="150px">이메일</th>
 	            <th width="100px">포인트</th>
-	            <th width="150px">가입일</th>
+	            <th width="120px">가입일</th>
 	            <th width="100px">변경</th>
+	            <th width="50px">버튼</th>
 	          </tr>
 	      </thead>
 	      <tbody> 
@@ -90,19 +91,29 @@
 	          <tr>
 	            <td>${ m.userNo }</td>
 	            <td>${ m.userId }</td>
-	            <td>${ m.userType }</td>
+	            <td>
+	            <c:choose>
+	            	<c:when test="${ m.userType eq '1'}">일반회원</c:when>
+	            	<c:when test="${ m.userType eq '2'}">프로잭트회원</c:when>
+	            	<c:when test="${ m.userType eq '3'}">관리자</c:when>
+	            </c:choose>	
+	            </td>
 	            <td>${ m.userName }</td>
 	            <td>${ m.phone }</td>
 	            <td>${ m.email }</td>
 	            <td>${ m.userPoint }</td>
 	            <td>${ m.userEnrolldate }</td>
-	            <td>
-	                <select>
-	                  <option>활동회원</option>
-	                  <option>블랙리스트</option>
-	                  <option>탈퇴회원</option>
-	                </select>
-	            </td>
+	            <form action="adMemberSelect.ad" method="POST">
+		            <input type="hidden" name="currentPage" value="1">
+		            <input type="hidden" name="userNo" value="${ m.userNo }">
+		            <td>
+		                <select name="status">
+		                  <option value="Y">활동회원</option>
+		                  <option value="B">블랙리스트</option>
+		                </select>
+	      	        </td>
+	      	        <td><input class="mybtn" type="submit" value="변경"></td>
+	            </form>
 	          </tr>
 	        </c:forEach>	 
           </tbody>  
