@@ -2,6 +2,7 @@ package com.catchmind.catchfun.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -69,6 +70,14 @@ public interface AdminService {
 	ArrayList<Question> questionSelectList(PageInfo pi);
 	// 1_3. 공지 수정하기 버튼 디테일
 	Question qnaDetail(String qno);
+	
+	int qnaAnsUpdate(Question q);
+	
+	int qnaDelete(String qno); 
+	
+	// 3. Category
+	
+	int insertCategory(Category c);
 	
 	// 주혁 끝
 	
