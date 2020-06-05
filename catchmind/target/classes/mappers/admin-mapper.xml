@@ -150,7 +150,14 @@
 		 where A_QUESTION_NO=#{questionNo}
 	</update>
 	
+	<!-- Category -->
+	<!-- 
+	<insert id="insertCategory" parameterType="Category">
+		insert into NOTICE_TEMP
+		values('N'||seq_nno.nextval, #{userNo}, #{noticeTitle}, #{noticeContent}, default, 0, default)
+	</insert>
 	
+	 -->
   	<!-- 주혁끝 -->
   	
   	
