@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.admin.model.dao.AdminDao;
+import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -118,6 +119,12 @@ public class AdminServiceImpl implements AdminService {
 	public int qnaDelete(String qno) {
 		return aDao.qnaDelete(sqlSession, qno);
 	}
+	@Override
+	public int insertCategory(Category c) {
+		return aDao.insertCategory(sqlSession, c);
+	}
+	
+	// 3. Category
 	
 	// 주혁 끝
 }

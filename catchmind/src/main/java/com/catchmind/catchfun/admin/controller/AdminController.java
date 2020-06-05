@@ -1,14 +1,23 @@
 package com.catchmind.catchfun.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.catchmind.catchfun.admin.model.service.AdminService;
+import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -384,6 +393,80 @@ public class AdminController {
 		}
 		
 	}
+	
+	/* Category */
+	@RequestMapping("insertCategory.ad")
+	public String insertCategory(Category c, HttpServletRequest request,
+							  @RequestParam(name="uploadFile", required=false) MultipartFile file) {
+		
+		// 파일 업로드시 참조번호를 먼저 뽑아서 "C"+숫자값의 +1 하여 setRefNo에 담기 (여러테이블을 참조하기 위하여 사용)
+		
+		System.out.println("객체테스트 : " + c);
+		System.out.println("파일테스트 : " + file.getOriginalFilename()); // 첨부파일 있을 경우 원본명 / 첨부파일 없을 경우 빈문자열
+		
+		// 파일업로드 관련된 라이브러리 추가해야만 잘 담김!!
+		
+		// 현재 넘어온 파일이 있을 경우 서버에 업로드 후 원본명, 수정명 뽑아서 c 주섬주섬 담기
+		if(!file.getOriginalFilename().equals("")) {
+			
+			// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
+			String changeName = saveFile(file, request);
+			
+			c.setOriginName(file.getOriginalFilename());
+			c.setChangeName(changeName);
+			
+		}
+		
+		int result = aService.insertCategory(c);
+		
+		if(result > 0) { // 게시글 작성 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지 
+			return "redirect:Category.ad";
+		}else { // 게시글 작성 실패
+			// 메세지 
+			return "common/errorPage";
+		}
+	}
+	
+	// 전달받은 파일명을 가지고 서버로 부터 삭제하는 메소드
+		public void deleteFile(String fileName, HttpServletRequest request) {
+			String resources = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = resources + "\\uploadFiles\\";
+			
+			File deleteFile = new File(savePath + fileName);
+			deleteFile.delete();
+		}
+		
+		
+		// 공유해서 쓸수 있게끔 따로 정의 해놓은 메소드
+		// 전달받은 파일을 서버에 업로드 시킨 후 수정명 리턴하는 메소드
+		public String saveFile(MultipartFile file, HttpServletRequest request) {
+			
+			// 파일을 업로드 시킬 폴더 경로 (String savePath)
+			String resources = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = resources + "\\uploadFiles\\";
+			
+			// 원본명 (aaa.jpg)
+			String originName = file.getOriginalFilename();
+			
+			// 수정명 (20200522202011.jpg)
+			// 년월일시분초 (String currentTime)
+			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // "20200522202011"
+			
+			// 확장자 (String ext)
+			String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+			
+			String changeName = currentTime + ext;
+			
+					
+			try {
+				file.transferTo(new File(savePath + changeName));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			return changeName;
+			
+		}
 	
 	// 주혁 끝
 	
