@@ -319,20 +319,6 @@
 
     }); 
 
-  	/* <!-- 스크롤 이벤트 -->
-    $( document ).ready( function() {
-    	
-        var jbOffset = $(".tapArea").offset();
-        
-        $( window ).scroll( function() {
-          if ( $( document ).scrollTop() > jbOffset.top ) {
-            $(".tapArea").addClass('jbFixed').css("top", "0px");
-          }
-          else {
-            $(".tapArea").removeClass('jbFixed').css("top", "0px");
-          }
-        });
-    }); */
 </script>
 
 <body>
@@ -383,7 +369,7 @@
                     </td>
                     <td class="info_title">
                         <b>모인금액</b><br>
-                        <span style="font-size: 25px;"><fmt:formatNumber value="${ fl.sumPrice + fl.sumSponsership }" pattern="#,###" /></span>원 모금
+                        <span style="font-size: 30px;"><fmt:formatNumber value="${ fl.sumPrice + fl.sumSponsership }" pattern="#,###" /></span>원 모금
                     </td>
 
                 </tr>
@@ -416,7 +402,7 @@
                     	<img src="${ m.filePath }/${ m.changeName }" id="maker_img">
                     </td>
                     <td>
-                        ${ m.makerName } <a href="http://www.naver.com" target="_blank"><img src="resources/images/maker_homepage.png" id="maker_detail"></a>
+                        ${ m.makerName } <a href="https://www.iei.or.kr/main/main.kh" target="_blank"><img src="resources/images/maker_homepage.png" id="maker_detail"></a>
                         <!-- <button class="maker_detail">SNS</button> --><br>
                         ${ m.makerEmail }
                     </td>
@@ -453,8 +439,8 @@
                                 
                             <!-- 소개 -->
                             <section id="content1">
-                                <div style="float:left;width: 500px;">
-                                    <div style="float:left; width:500px; word-break:break-all;">
+                                <div style="float:left;width: 600px;">
+                                    <div style="width:550px; word-break:break-all;">
                                         <br><br> <!-- summernote -->
                                         <p>${ p.projectContent }</p>
                                     </div>
