@@ -31,8 +31,32 @@ public class AdminServiceImpl2 implements AdminService2 {
 		return aDao2.blackListCount(sqlSession);
 	}
 	@Override
-	public ArrayList<Member> blackList(PageInfo pi1) {
-		return aDao2.blackList(sqlSession, pi1);
+	public ArrayList<Member> blackList(PageInfo pi) {
+		return aDao2.blackList(sqlSession, pi);
+	}
+	@Override
+	public int memberSearchCount(String keyword) {
+		return aDao2.memberSearchCount(sqlSession, keyword);
+	}
+	@Override
+	public ArrayList<Member> memberSearch(PageInfo pi, String keyword) {
+		return aDao2.memberSearch(sqlSession, pi, keyword);
+	}
+	@Override
+	public int blackSearchCount(String keyword) {
+		return aDao2.blackSearchCount(sqlSession, keyword);
+	}
+	@Override
+	public ArrayList<Member> blackSearch(PageInfo pi, String keyword) {
+		return aDao2.blackSearch(sqlSession, pi, keyword);
+	}
+	@Override
+	public int memberSelect(Member m) {
+		return aDao2.memberSelect(sqlSession,m);
+	}
+	@Override
+	public int blackUpdate(Member m) {
+		return aDao2.blackUpdate(sqlSession, m);
 	}
 
 	/*

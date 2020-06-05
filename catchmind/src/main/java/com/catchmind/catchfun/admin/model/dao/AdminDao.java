@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -105,6 +106,24 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.questionSelectList", null, rowBounds);
 		
+	}
+	
+	public Question qnaDetail(SqlSessionTemplate sqlSession, String qno){
+		return sqlSession.selectOne("adminMapper.qnaDetail", qno);
+	}
+	
+	public int qnaAnsUpdate(SqlSessionTemplate sqlSession, Question q) {
+		return sqlSession.update("adminMapper.qnaAnsUpdate", q);
+	}
+	
+	public int qnaDelete(SqlSessionTemplate sqlSession, String qno) {
+		return sqlSession.update("adminMapper.qnaDelete", qno);
+	}
+	
+	// 3. Category
+	
+	public int insertCategory(SqlSessionTemplate sqlSession, Category c) {
+		return sqlSession.insert("adminMapper.insertCategory", c);
 	}
 	
 	// 주혁 끝

@@ -199,19 +199,21 @@ textarea{
 				</div>
 
 				<!-- 카테고리 등록 -->
-				<div class="c-align-r">
-					<div class="c-align-r-all">
-						<div class="c-align-r-inner">
-							<br>
-							<img class="category-imgs" src="camera.png" style="width: 30px;"><br><br>
-							제목 <input type="text" name="enrollTitle" id=""><br><br>
-							<input type="file" name="fileName" id="">
-							<br><br>
-							<button type="button">등록하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="enrollCancel">취소하기</button>
-							<br><br>
+				<form id="enrollCategoryForm" method="post" action="insertCategory.ad" enctype="multipart/form-data">
+					<div class="c-align-r">
+						<div class="c-align-r-all">
+							<div class="c-align-r-inner">
+								<br>
+								<!-- <img class="category-imgs" src="camera.png" style="width: 30px;"><br><br> -->
+								제목 <input type="text" name="projectCategoryName" id="projectCategoryName"><br><br>
+								<input type="file" id="uploadFile" name="uploadFile" id="upfile">
+								<br><br>
+								<button type="button" class="enrollBtn">등록하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="enrollCancel">취소하기</button>
+								<br><br>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 
 				<!-- 카테고리 수정 -->
 				<div class="c-align-r-r">
@@ -277,6 +279,50 @@ textarea{
 			$('.c-align>div').css("float", "none"); 
 		});
 	</script>
+	
+	<!-- 업로드 스크립트 -->
+	
+	<script type="text/javascript">
+	
+		/* $(".enrollBtn").click(function(){ */
+			
+			/* 
+			var uploadFile = new FormData($("#enrollCategoryForm")[0]);
+			
+			$('#enrollCategoryForm').ajaxSubmit({
+				url:"insertCategory.ad",
+				enctype:'multipart/form-data',
+    			data:{projectCategoryName:$("#projectCategoryName").val(),
+    				  uploadFile:uploadFile},
+   				processData: false,
+   				contentType: false,
+    			type="post",
+    			success:function(status){
+    				
+    			},error:function(){
+    				console.log("카테고리 등록용 ajax 통신실패!!");	
+    			}
+			});
+			 */
+			 /* function fileUpload(){ */
+		/* }); */
+		
+		$(".enrollBtn").click(function(){
+			
+			$.ajax({
+				url: "insertCategory.ad",
+				enctype:"multipart/form-data", // 여기에 url과 enctype은 꼭 지정해주어야 하는 부분이며 multipart로 지정해주지 않으면 controller로 파일을 보낼 수 없음
+				data:{projectCategoryName:$("#projectCategoryName").val()},
+				success:function(status){
+					alert(status);
+				},error:function(){
+    				console.log("카테고리 등록용 ajax 통신실패!!");	
+    			}
+			});
+			
+			$("#enrollCategoryForm").submit();
+		});
+	</script>
 
 	<!-- 모달 스크립트 -->
 
@@ -298,7 +344,7 @@ textarea{
 			} 
 		}
 
-	   trigger.addEventListener("click", toggleModal); 
+		trigger.addEventListener("click", toggleModal); 
 		closeButton.addEventListener("click", toggleModal); 
 		cancel.addEventListener("click", toggleModal); 
 		window.addEventListener("click", windowOnClick); 

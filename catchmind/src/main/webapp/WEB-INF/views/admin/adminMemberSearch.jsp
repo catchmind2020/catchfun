@@ -56,7 +56,7 @@
 <jsp:include page="../common/admin.jsp"/>
 
 <div class="outer">
-  <h2>회원리스트</h2><br>
+  <h2>회원관리</h2><br>
   <br>
   <!-- 회원리스트 -->
     <div id="member">
@@ -66,8 +66,8 @@
           <input type="hidden" name="currentPage" value="1">
         </div>
         <br>
-      </form>
         회원 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
+      </form>
       <br>
       
         <table class="tb" border="1">
@@ -97,7 +97,7 @@
 	            	<c:when test="${ m.userType eq '2'}">프로잭트회원</c:when>
 	            	<c:when test="${ m.userType eq '3'}">관리자</c:when>
 	            </c:choose>	
-	            </td>
+				</td>
 	            <td>${ m.userName }</td>
 	            <td>${ m.phone }</td>
 	            <td>${ m.email }</td>
@@ -111,8 +111,8 @@
 		                  <option value="Y">활동회원</option>
 		                  <option value="B">블랙리스트</option>
 		                </select>
-	      	        </td>
-	      	        <td><input class="mybtn" type="submit" value="변경"></td>
+		            </td>
+	            	<td><input class="mybtn" type="submit" value="변경"></td>
 	            </form>
 	          </tr>
 	        </c:forEach>	 
@@ -128,7 +128,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 		             </c:when>
 		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		            
@@ -138,7 +138,7 @@
 		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 		             	</c:when>
 		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ p }">${ p }</a></li>
+		             		<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ p }">${ p }</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -148,17 +148,12 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 		             </c:when>
 		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		             	<li class="page-item"><a class="page-link" href="msearch.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		        </ul>
 		    </div>
     </div> 
 
-      
-  
- 
-
-  
 </body>
 </html>

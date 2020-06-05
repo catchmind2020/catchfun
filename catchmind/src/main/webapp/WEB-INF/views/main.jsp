@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,27 +16,12 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
-.carousel-inner img {
-	width: 100%;
-}
 
-* {
-	margin: 0px;
-	padding: 0px;
-}
-
-ul {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-}
-
-img {
-	border: none;
-	vertical-align: top;
-}
+.carousel-inner img { width: 100%; }
+* { margin: 0px; padding: 0px; }
+ul { list-style: none; }
+a { text-decoration: none; }
+img { border: none; vertical-align: top; }
 
 .listCarousel {
 	width: 1300px;
@@ -52,7 +39,7 @@ img {
 
 .listCarousel .view .list {
 	width: 3600px;
-	margin-left: -1200px;
+	margin-left: 0px;
 }
 
 .listCarousel .view .list:after {
@@ -61,120 +48,25 @@ img {
 	clear: both;
 }
 
-.listCarousel .view .list>li {
-	float: left;
-}
+.listCarousel .view .list>li { float: left; }
+.listCarousel .view .list>li ul:after { content: ""; display: block; clear: both; }
+.listCarousel .view .list>li ul li { float: left; width: 370px; height: 450px; }
+.listCarousel .view .list>li ul li.a1 { margin-left: 0; margin-right: 45px; }
+.listCarousel .view .list>li ul li.a2 { margin-left: 0; margin-right: 45px; }
+.listCarousel .view .list>li ul li.a3 { margin-left: 0; margin-right: 0px; }
 
-.listCarousel .view .list>li ul:after {
-	content: "";
-	display: block;
-	clear: both;
-}
+.list { width: 370px; height: 300px; display: inline-block; box-sizing: border-box; }
+.lists img { width: 370px; height: 200px; }
+.lists h4 { margin: 0px; }
+.dday { float: right; }
+.dday>img { width: 17px; height: 17px; vertical-align: text-bottom; }
+.maker { color: darkgray; font-weight: 800; font-size: 13px; }
+.icon { float: right; margin-top: 20px; }
+.title { font-size: 25px; font-weight: 900; height: 45px; }
 
-.listCarousel .view .list>li ul li {
-	float: left;
-	width: 370px;
-	height: 450px;
-}
-
-.listCarousel .view .list>li ul li.a1 {
-	background-color: pink;
-	margin-left: 0;
-	margin-right: 45px;
-}
-
-.listCarousel .view .list>li ul li.a2 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 45px;
-}
-
-.listCarousel .view .list>li ul li.a3 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 0px;
-}
-
-.listCarousel .view .list>li ul li.a4 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 45px;
-}
-
-.listCarousel .view .list>li ul li.a5 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 45px;
-}
-
-.listCarousel .view .list>li ul li.a6 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 0px;
-}
-
-.listCarousel .view .list>li ul li.a7 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 45px;
-}
-
-.listCarousel .view .list>li ul li.a8 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 45px;
-}
-
-.listCarousel .view .list>li ul li.a9 {
-	background-color: lightblue;
-	margin-left: 0;
-	margin-right: 0px;
-}
-
-.list {
-	width: 370px;
-	height: 300px;
-	display: inline-block;
-	/* border:1px solid black; */
-	box-sizing: border-box;
-}
-
-.lists img {
-	width: 370px;
-	height: 200px;
-}
-
-.lists h4 {
-	margin: 0px;
-}
-
-.dday {
-	float: right;
-}
-
-.dday>img {
-	width: 17px;
-	height: 17px;
-	vertical-align: text-bottom;
-}
-
-.maker {
-	color: darkgray;
-	font-weight: 800;
-	font-size: 13px;
-}
-
-.icon {
-	float: right;
-	margin-top: 20px;
-
-}
-
-.title {
-	font-size: 25px;
-	font-weight: 900;
-	height: 45px;
-}
+progress { width: 370px; height: 10px; background-color: #2ed5d5; }
+progress::-webkit-progress-bar { background-color: white; }
+progress::-webkit-progress-value { background-color: #2ed5d5; }
 </style>
 </head>
 <body>
@@ -217,61 +109,107 @@ img {
 				</a>
 			</div>
 			<br> <br>
-			<!--주목할 만한 프로젝트 슬라이더 -->
+			
+			
+			<!-- 주목할만한 프로젝트 -->
+		
 			<div class="listCarousel">
 				<div class="view">
 					<div class="title">
 						주목할만한 프로젝트 
-						<span class="prev icon"><img src="resources/images/arrow_right16.png"></span> 
+						<span class="prev icon"><img src="${pageContext.servletContext.contextPath}/resources/images/arrow_right16.png"></span> 
 						<span class="prev icon">　　</span> 
-						<span class="next icon"><img src="resources/images/arrow_left16.png"></span>
+						<span class="next icon"><img src="${pageContext.servletContext.contextPath}/resources/images/arrow_left16.png"></span>
 					</div>
+					
 					<ul class="list">
 						<li>
 							<ul>
-								<li class="a1">
-									<div class="lists">
-										<div>
-											<img src="resources/images/20200428142303454_55552.jpg">
+								<c:forEach items="${ list }" var="p" varStatus="index" begin="0" end="2">
+									<li class="a${index.count}">
+										<div class="lists">
+											<input type="hidden" value="${p.projectNo}">
+											<div>
+												<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
+											</div>
+											<div>
+												<h4 style="height:60px;">
+													<b>${p.projectName}</b>
+												</h4>
+											</div>
+											<div class="maker">${p.projectCategory} | ${p.makerName}</div>
+											<div>
+												<progress value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" max="100"></progress>
+											</div>
+											<div>
+												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />% &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
+												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
+											</div>
 										</div>
-										<div>
-											<h4>
-												<b>활용도 100% 액티비티 파우치와 0%마진 마스크파우치</b>
-											</h4>
-										</div>
-										<div class="maker">카테고리명 | 메이커명</div>
-										<div>
-											<progress value="150" max="100"></progress>
-										</div>
-										<div>
-											<span>900% 4,502,000원</span><span class="dday"><img
-												src="images/time.png"> 26일 남음</span>
-										</div>
-									</div>
-								</li>
-								<li class="a2"><a href="#">메뉴2</a></li>
-								<li class="a3"><a href="#">메뉴3</a></li>
+									</li>
+								</c:forEach>
 							</ul>
 						</li>
 						<li>
 							<ul>
-								<li class="a4"><a href="#">메뉴4</a></li>
-								<li class="a5"><a href="#">메뉴5</a></li>
-								<li class="a6"><a href="#">메뉴6</a></li>
+								<c:forEach items="${ list }" var="p" varStatus="index" begin="3" end="5">
+									<li class="a${index.count}">
+										<div class="lists">
+											<input type="hidden" value="${p.projectNo}">
+											<div>
+												<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
+											</div>
+											<div>
+												<h4 style="height:60px;">
+													<b>${p.projectName}</b>
+												</h4>
+											</div>
+											<div class="maker">${p.projectCategory} | ${p.makerName}</div>
+											<div>
+												<progress value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" max="100"></progress>
+											</div>
+											<div>
+												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />% &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
+												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
+													
+											</div>
+										</div>
+									</li>
+								</c:forEach>
 							</ul>
 						</li>
 						<li>
 							<ul>
-								<li class="a7"><a href="#">메뉴7</a></li>
-								<li class="a8"><a href="#">메뉴8</a></li>
-								<li class="a9"><a href="#">메뉴9</a></li>
+								<c:forEach items="${ list }" var="p" varStatus="index" begin="6" end="8">
+									<li class="a${index.count}">
+										<div class="lists">
+											<input type="hidden" value="${p.projectNo}">
+											<div>
+												<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
+											</div>
+											<div>
+												<h4 style="height:60px;">
+													<b>${p.projectName}</b>
+												</h4>
+											</div>
+											<div class="maker">${p.projectCategory} | ${p.makerName}</div>
+											<div>
+												<progress value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" max="100"></progress>
+											</div>
+											<div>
+												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />%  &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
+												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
+													
+											</div>
+										</div>
+									</li>
+								</c:forEach>
 							</ul>
 						</li>
 					</ul>
 				</div>
-
 			</div>
-
+			
 			<!-- 인기프로젝트 -->
 
 
@@ -279,6 +217,8 @@ img {
 
 		</div>
 	</div>
+	
+	
 	<script>
 	  $(document).ready(function(){
 	    

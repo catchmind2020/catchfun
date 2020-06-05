@@ -104,15 +104,48 @@ public class AdminDao2 {
 		return sqlSession.selectOne("adminMapper2.blackListCount");
 	}
 	
-	public ArrayList<Member> blackList(SqlSessionTemplate sqlSession, PageInfo pi1){
+	public ArrayList<Member> blackList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
-		int offset = (pi1.getCurrentPage() -1) * pi1.getBoardLimit();
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		
-		RowBounds rowBounds = new RowBounds(offset, pi1.getBoardLimit());
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("adminMapper2.blackList", null, rowBounds);
 	}
 	
+	public int memberSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("adminMapper2.memberSearchCount",keyword);
+	}
+	
+	public ArrayList<Member> memberSearch(SqlSessionTemplate sqlSession, PageInfo pi, String keyword){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.memberSearch", keyword, rowBounds);
+	}
+	
+	public int blackSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("adminMapper2.blackSearchCount", keyword);
+	}
+	
+	public ArrayList<Member> blackSearch(SqlSessionTemplate sqlSession, PageInfo pi, String keyword){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.blackSearch", keyword, rowBounds);
+	}
+	
+	public int memberSelect(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("adminMapper2.memberSelect",m);
+	}
+	
+	public int blackUpdate(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("adminMapper2.blackUpdate", m);
+	}
 
 }
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mainMapper">
+
+	<resultMap id="mainResultSet" type="Main">
+		<id column="PROJECT_NUMBER" property="projectNo" />
+		<result column="PROJECT_NAME" property="projectName" /> 
+		<result column="PROJECT_CATEGORY_NAME" property="projectCategory" /> 
+		<result column="CHANGE_NAME" property="projectImg" /> 
+		<result column="MAKER_NAME" property="makerName" /> 
+		<result column="CHANGE_NAME" property="projectImg" /> 
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount" /> 
+		<result column="TOTALCOST" property="fundingTotalCost" /> 
+		<result column="DDAY" property="projectDday" />
+		<result column="PROJECT_STATUS" property="projectStatus" /> 
+	</resultMap>
+
+	
+	<select id="mainSpotlightList" resultMap="mainResultSet" parameterType="Main">
+	SELECT * FROM (SELECT PROJECT_NUMBER, PROJECT_NAME, PROJECT_TARGET_AMOUNT, CHANGE_NAME, PROJECT_STATUS, MAKER_NAME, 
+                      	  PROJECT_CATEGORY_NAME, SUM(FUNDING_COST+NVL(FUNDING_SPONSERSHIP,0)) as TOTALCOST,
+                      	  CEIL(PROJECT_FINISHDATE-SYSDATE) as DDAY
+					 FROM PROJECT
+					 JOIN PROJECT_MAKER USING(PROJECT_NUMBER)
+					 JOIN CATEGORY_TYPE USING(PROJECT_CATEGORY)
+				LEFT JOIN ATTACHMENT ON (PROJECT_NUMBER = REF_NO)
+				LEFT JOIN FUNDING_LIST USING(PROJECT_NUMBER)
+					WHERE PROJECT_STATUS='Y'
+					GROUP BY PROJECT_NAME, PROJECT_NUMBER, PROJECT_TARGET_AMOUNT, CHANGE_NAME, PROJECT_STATUS, 
+         				  MAKER_NAME, PROJECT_CATEGORY_NAME, CEIL(PROJECT_FINISHDATE-SYSDATE)
+					ORDER BY TOTALCOST DESC NULLS LAST)
+					<![CDATA[WHERE ROWNUM <= 9]]>
+	</select>
+	
+	
+</mapper>
