@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.catchmind.catchfun.admin.model.service.AdminService;
 import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.PayTotal;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
@@ -586,6 +587,35 @@ public class AdminController {
 	// 결재내역
 	@RequestMapping("adminProjectPayTotal.ad")
 	public String adminProjectPayTotal() {
+		
+		// 프로젝트 번호만 조회해와서 ArrayList에 담고 그걸 이용하여 selectOne문을 포문으로 길이만큼 실행
+		// 실행해온 값을 포문안에 ArrayList에 add 해준다 그걸 키 밸류로 보내서 리스트 출력을 한다.
+		
+		ArrayList<PayTotal> list = new ArrayList<>();
+		
+		//참고 
+		/*
+		 */
+		// 리스트 미리 만들어두기!
+		 ArrayList<PayTotal> ex = new ArrayList<>();
+		 for(int i=0; i<10; i++) {
+		// 객체에 주섬주섬 담아서 그값을 for문 도는동안 리스트에 넣기!
+		 PayTotal zz = new PayTotal("one", "one", "one", "one", 1, 1, 1, "2020-05-05", "one", 1);
+		 
+		 // 리스트에 넣는 과정
+	        ex.add(zz);
+	        /*
+	        ex.add("two");
+	        ex.add("three");
+	        */
+	        
+		 }
+		 
+		 // 리스트에 잘 담겼는지 확인용 
+		 for(int j=0; j<ex.size(); j++){
+			 System.out.println(ex.get(j));
+		 }
+		 
 		return "admin/adminProjectPayTotal";
 	}
 	
