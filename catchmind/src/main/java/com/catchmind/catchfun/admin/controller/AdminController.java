@@ -583,6 +583,13 @@ public class AdminController {
 		
 	}
 	
+	// 결재내역
+	@RequestMapping("adminProjectPayTotal.ad")
+	public String adminProjectPayTotal() {
+		return "admin/adminProjectPayTotal";
+	}
+	
+	
 	// 주혁 끝
 	
 }
