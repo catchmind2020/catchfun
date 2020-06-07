@@ -54,63 +54,56 @@
  
 <jsp:include page="../common/admin.jsp"/>
 <div class="outer">
-  <h2>댓글 신고관리</h2><br>
+  <h2>프로젝트 신고관리</h2><br>
   <br>
-      <!-- 댓글신고 -->
-      <div id="userReport">
-          <form action="rSearch.ad" method="POST">
+
+      <!-- 프로젝트신고 -->
+      <div id="projectReport">
+          <form action="prSearch.ad" method="POST">
               <div class="k_btn">
                 <input type="text" name="keyword" placeholder="키워드 입력"> <button class="mybtn" type="submit">조회</button>
                 <input type="hidden" name="currentPage" value="1">
               </div>
               <br>
+              신고리스트 수 : <input type="text" style="border:unset" value="${ pi.listCount }" readonly> 
           </form>
-              신고리스트 수 : <input type="text" style="border:unset" value="${ pi.listCount }" readonly>
           <br>
-         	 <div class="report">
-		          <table class="tb" border="1">
-			          <thead>
-			              <tr>
-			                
-			                <th width="100px">회원번호</th>
-			                <th width="200px">아이디</th>
-			                <th width="100px">구분</th>
-			                <th width="100px">회원명</th>
-			                <th width="150px">연락처</th>
-			                <th width="150px">이메일</th>                  
-			                <th width="150px">가입일</th>
-			                <th width="100px">신고수</th>
-			                <th width="70px">상태</th>
-			              </tr>
-		              </thead>
-		              <tbody>
-		              	<c:forEach items="${ rlist }" var="r">
-				              <tr>
-				                <td>${ r.userNo }</td>
-				                <td>${ r.userId }</td>
-				                <td> 
-				                <c:choose>
-					            	<c:when test="${ r.userType eq '1'}">일반회원</c:when>
-					            	<c:when test="${ r.userType eq '2'}">프로잭트회원</c:when>
-					            	<c:when test="${ r.userType eq '3'}">관리자</c:when>
-					            </c:choose>	
-					            </td>
-				                <td>${ r.userName }</td>
-				                <td>${ r.phone }</td>
-				                <td>${ r.email }</td>                 
-				                <td>${ r.userEnrolldate }</td>
-				                <td>${ r.questionBanCount }</td>
-				                <td>
-				                  <select>
-				                  	  <option>활동회원</option>
-				                      <option>블랙리스트</option>
-				                  </select>
-				                </td>
-				              </tr>
-			              </c:forEach>
-		              </tbody>
-	            </table>
-	            <br><br>
+          <table class="tb" border="1">
+          	<thead>
+	              <tr>
+	                <th width="120px">프로젝트번호</th>
+	                <th width="200px">프로젝트이름</th>
+	                <th width="150px">프로젝트 시작일</th>
+	                <th width="130px">등록자명</th>
+	                <th width="150px">등록자 연락처</th>
+	                <th width="170px">이메일</th>
+	                <th width="70px">신고수</th>
+	                <th width="70px">프로젝트 달성률</th>
+	                <th width="70px">변경하기</th>
+	              </tr>
+            </thead>
+            <tbody>  
+            	<c:forEach items="${ prlist }" var="pr">
+	              <tr>
+	                <td>${ pr.projectNumber }</td>
+	                <td>${ pr.projectName }</td>
+	                <td>${ pr.projectStartDate }</td>
+	                <td>${ pr.userName }</td>
+	                <td>${ pr.phone }</td>
+	                <td>${ pr.email }</td>
+	                <td>${ pr.projectReport }</td>
+	                <td>300%</td>
+	                <td>
+	                  <select>
+	                    <option>변경하기</option>
+	                    <option>프로젝트삭제</option>
+	                  </select>
+	                </td>
+	              </tr>
+	            </c:forEach>  
+              </tbody>
+           </table>
+            <br><br>
 	          	<div id="pagingArea">
 			        <ul class="pagination">
 			        	
@@ -119,7 +112,7 @@
 			             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 			             </c:when>
 			             <c:otherwise>
-			            		<li class="page-item"><a class="page-link" href="report.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+			            		<li class="page-item"><a class="page-link" href="pReport.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 			            	</c:otherwise>
 			            </c:choose>
 			            
@@ -129,7 +122,7 @@
 			             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 			             	</c:when>
 			             	<c:otherwise>
-			             		<li class="page-item"><a class="page-link" href="report.ad?currentPage=${ p }">${ p }</a></li>
+			             		<li class="page-item"><a class="page-link" href="pReport.ad?currentPage=${ p }">${ p }</a></li>
 			            		</c:otherwise>
 			            	</c:choose>
 			            </c:forEach>
@@ -139,14 +132,12 @@
 			             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 			             </c:when>
 			             <c:otherwise>
-			             	<li class="page-item"><a class="page-link" href="report.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+			             	<li class="page-item"><a class="page-link" href="pReport.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 			            	</c:otherwise>
 			            </c:choose>
 			        </ul>
 			    </div>
-            </div>
       </div>  
-
 </div>
     <script>
    		$(function(){

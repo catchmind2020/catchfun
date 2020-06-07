@@ -22,5 +22,13 @@ public class Reply {
 	private String questionYN;
 	private String questionStatus;
 	private int questionBanCount;
+	
+	private String userId;
+	private int userType;
+	private String userName;
+	private String email;
+	private String phone;
+	private Date userEnrolldate;
+	
 
 }
