@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Maker" alias="Maker" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.FundingList" alias="FundingList" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.News" alias="News" />
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Category" alias="Category" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Reply" alias="ReplyP" />
 	</typeAliases>
 	

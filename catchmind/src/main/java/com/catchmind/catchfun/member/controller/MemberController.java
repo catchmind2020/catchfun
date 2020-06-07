@@ -362,7 +362,7 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			if(loginUser.getUserId().equals("admin")) {
-				mv.setViewName("admin/adminCategory");
+				mv.setViewName("admin/adminMember");
 				//mv.setViewName("common/admin");
 			}else {
 				mv.setViewName("redirect:/");

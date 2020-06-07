@@ -27,4 +27,5 @@ public class Category {
 	private Date uploadDate;
 	private int fileLevel;
 	private String status;
+	private String projectName;
 }

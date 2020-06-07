@@ -177,24 +177,24 @@ textarea{
 				<!-- 카테고리 리스트 -->
 				<div class="c-align-l">
 					<table class="tb" border="1">
-						<tr>
-							<th width="100px" style="height: 50px;">번호</th>
-							<th width="100px" style="height: 50px;">카테고리명</th>
-							<th width="200px">이미지</th>
-							<th width="150px"><button type="button" class="categoryEnroll">등록</button></th>
-						</tr>
-						<tr>
-							<td style="height: 50px;">2</td>
-							<td>모임</td>
-							<td><img class="category-imgs" src="camera.png" style="width: 30px;"></td>
-							<td><button type="button" class="categoryUpdate">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
-						</tr>
-						<tr>
-							<td style="height: 50px;">1</td>
-							<td>공연·컬쳐</td>
-							<td><img class="category-imgs" src="camera.png" style="width: 30px;"></td>
-							<td><button type="button" class="categoryUpdate">수정</button>&nbsp;&nbsp;<button type="button" class="trigger">삭제</button></td>
-						</tr>
+						<thead>
+							<tr>
+								<th width="100px" style="height: 50px;">번호</th>
+								<th width="100px" style="height: 50px;">카테고리명</th>
+								<th width="200px">이미지</th>
+								<th width="150px"><button type="button" class="categoryEnroll">등록</button></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${ clist }" var="c">
+								<tr>
+			                        <td width="100px" style="height: 50px;">${ c.refNo }</td>
+			                        <td width="100px" style="height: 50px;">${ c.projectName }</td>
+			                        <td width="200px"><img class="category-imgs" src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${c.changeName}" style="width: 80px;"></td>
+			                        <td width="150px"><button type="button" class="categoryUpdate">수정</button>&nbsp;&nbsp;<button type="button" class="trigger categoryDelete">삭제</button></td>
+			                    </tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 
@@ -202,13 +202,13 @@ textarea{
 				<form id="enrollCategoryForm" method="post" action="insertCategory.ad" enctype="multipart/form-data">
 					<div class="c-align-r">
 						<div class="c-align-r-all">
-							<div class="c-align-r-inner">
+							<div class="c-align-r-inner" style="margin-left: 100px;">
 								<br>
 								<!-- <img class="category-imgs" src="camera.png" style="width: 30px;"><br><br> -->
 								제목 <input type="text" name="projectCategoryName" id="projectCategoryName"><br><br>
-								<input type="file" id="uploadFile" name="uploadFile" id="upfile">
+								<input type="file" id="uploadFile" name="uploadFile" id="upfile" style="margin-left: 10px;" required>
 								<br><br>
-								<button type="button" class="enrollBtn">등록하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="enrollCancel">취소하기</button>
+								<button type="submit" class="enrollBtn">등록하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="enrollCancel">취소하기</button>
 								<br><br>
 							</div>
 						</div>
@@ -216,20 +216,22 @@ textarea{
 				</form>
 
 				<!-- 카테고리 수정 -->
-				<div class="c-align-r-r">
-					<div class="c-align-r-all-r">
-						<div class="c-align-r-inner">
-							<br>
-							<img class="category-imgs" src="camera.png" style="width: 30px;"><br><br>
-							제목 <input type="text" name="updateTitle" id="" value="모임"><br><br>
-							<input type="file" name="fileName1" id="">
-							<br><br>
-							<button type="button">수정하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="updateCancel">취소하기</button>
-							<br><br>
+				<form id="updateCategoryForm" method="post" action="updateCategory.ad" enctype="multipart/form-data">
+					<div class="c-align-r-r">
+						<div class="c-align-r-all-r">
+							<div class="c-align-r-inner" style="margin-left: 100px;">
+								<br>
+								<img id="detailImg" src="" style="width: 150px;"><br><br>
+								<input hidden class="projectCategory" name="projectCategory">
+								제목 <input type="text" name="projectCategoryName" id="detailTitle" value=""><br><br>
+								<input type="file" name="reUploadFile" id="" style="margin-left: 10px;" required>
+								<br><br>
+								<button type="submit">수정하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="updateCancel">취소하기</button>
+								<br><br>
+							</div>
 						</div>
 					</div>
-				</div>
-	
+				</form>
 			</div>
 			</center>
 	</div>
@@ -306,7 +308,7 @@ textarea{
 			 */
 			 /* function fileUpload(){ */
 		/* }); */
-		
+		/* 
 		$(".enrollBtn").click(function(){
 			
 			$.ajax({
@@ -322,8 +324,59 @@ textarea{
 			
 			$("#enrollCategoryForm").submit();
 		});
+		 */
 	</script>
 
+	<script>
+		$(".categoryUpdate").click(function(){
+			var cno = $(this).parent().parent().children().eq(0).text();
+			$(".projectCategory").val(cno);
+			console.log(cno);
+			
+			$.ajax({
+    			url:"categoryDetail.ad",
+    			data:{cno:cno},
+    			success:function(cu){
+    			
+    				console.log(cu.projectName);
+    				console.log(cu.fileNo);
+    				console.log(cu.originName);
+    				console.log(cu.changeName);
+    				
+    				var img1 = "${ pageContext.servletContext.contextPath }/resources/uploadFiles/";
+    				var img2 = cu.changeName;
+    				
+    				var img = img1 + img2;
+    				
+    				console.log(img1);
+    				console.log(img2);
+    				console.log(img);
+    			
+    				$("#detailTitle").val(cu.projectName);
+    				$("#detailImg").attr("src", img);
+    			},error:function(){
+    				console.log("공지 디테일 조회용 ajax 통신실패!!");	
+    			}
+    		});
+		});
+		
+		$(".categoryDelete").click(function(){
+
+			var cno = $(this).parent().parent().children().eq(0).text();
+			console.log("삭제확인 cno : " + cno);
+			
+			$.ajax({
+    			url:"deleteCategory.ad",
+    			data:{cno:cno},
+    			success:function(){
+    				console.log("삭제성공!!");	
+    			},error:function(){
+    				console.log("ajax 통신실패!!");	
+    			}
+    		});
+			
+		});
+	</script>
 	<!-- 모달 스크립트 -->
 
 	<script type="text/javascript"> 
