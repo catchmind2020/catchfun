@@ -28,5 +28,9 @@ public class Project {
 	private String hashTags;
 	private String projectStatus;
 	private String statusStory;
+	
+	private String userName;
+	private String email;
+	private String phone;
 
 }
