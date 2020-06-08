@@ -7,15 +7,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
-	
 	<typeAliases>
 		<typeAlias type="com.catchmind.catchfun.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.ProjectBasic" alias="Basic" />
-		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Project" alias="Project" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Project" alias="Project2" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Item" alias="Item" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Reward" alias="Reward" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Option" alias="Option" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Faq" alias="Faq" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Notice" alias="Notice" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Member" alias="Member1"/>
@@ -29,6 +29,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Category" alias="Category" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Reply" alias="ReplyP" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Reply" alias="Reply1"/>
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.PayTotal" alias="PayTotal"/>
+		
 	</typeAliases>
 	
 	
