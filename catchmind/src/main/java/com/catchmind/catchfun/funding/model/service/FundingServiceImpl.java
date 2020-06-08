@@ -10,8 +10,12 @@ import com.catchmind.catchfun.funding.model.dao.FundingDao;
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
 import com.catchmind.catchfun.funding.model.vo.News;
+import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
 import com.catchmind.catchfun.funding.model.vo.Reply;
+import com.catchmind.catchfun.funding.model.vo.Report;
+import com.catchmind.catchfun.funding.model.vo.Reward;
+import com.catchmind.catchfun.funding.model.vo.Wishlist;
 
 @Service("fService")
 public class FundingServiceImpl implements FundingService{
@@ -48,6 +52,12 @@ public class FundingServiceImpl implements FundingService{
 	}
 
 	@Override
+	public ArrayList<Reward> selectReward(String pno) {
+		
+		return fDao.selectReward(sqlSession, pno);
+	}
+	
+	@Override
 	public ArrayList<Reply> selectReplyList(String pno) {
 
 		return fDao.selectReplyList(sqlSession, pno);
@@ -58,6 +68,66 @@ public class FundingServiceImpl implements FundingService{
 
 		return fDao.insertReply(sqlSession, r);
 	}
+
+	@Override
+	public int banReply(String replyNo) {
+
+		return fDao.banReply(sqlSession, replyNo);
+	}
+
+	@Override
+	public int insertQuestion(PersonQuestion pq) {
+		
+		return fDao.insertQuestion(sqlSession, pq);
+	}
+
+	@Override
+	public int insertReport(Report r) {
+
+		return fDao.insertReport(sqlSession, r);
+	}
 	
+	@Override
+	public int selectReport(Report r) {
+		
+		return fDao.selectReport(sqlSession, r);
+	}
+
+	@Override
+	public int insertWishlist(Wishlist w) {
+		
+		return fDao.insertWishlist(sqlSession, w);
+	}
+
+	@Override
+	public int selectWish(Wishlist w) {
+		
+		return fDao.selectWish(sqlSession, w);
+	}
+
+	
+	// 주혁
+	
+	@Override
+	public int selectWishlistCount(Wishlist w) {
+		return fDao.selectWishlistCount(sqlSession, w);
+	}
+
+	@Override
+	public int addWishlist(Wishlist w) {
+		return fDao.addWishlist(sqlSession, w);
+	}
+
+	@Override
+	public int deleteWishlist(Wishlist w) {
+		
+		return fDao.deleteWishlist(sqlSession, w);
+	}
+
+
+	
+	
+	
+
 
 }
