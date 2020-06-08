@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,7 +181,7 @@ textarea{
 							<th width="100px" style="height: 50px;">번호</th>
 							<th width="100px" style="height: 50px;">카테고리명</th>
 							<th width="200px">이미지</th>
-							<th width="100px"><button type="button" class="categoryEnroll">등록</button></th>
+							<th width="150px"><button type="button" class="categoryEnroll">등록</button></th>
 						</tr>
 						<tr>
 							<td style="height: 50px;">2</td>
@@ -271,6 +271,11 @@ textarea{
 			$('.c-align>div').css("float", "none"); 
 		});
 
+		$('.updateCancel').click(function () {  
+			$('.c-align-r').css("display", "none");
+			$('.c-align-r-r').css("display", "none");
+			$('.c-align>div').css("float", "none"); 
+		});
 	</script>
 
 	<!-- 모달 스크립트 -->

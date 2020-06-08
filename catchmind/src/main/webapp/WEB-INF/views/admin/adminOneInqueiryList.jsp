@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +8,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <style>
-	div{
-		border: 1px solid black;
-		box-sizing: border-box;
-	}
 .outer {
 	text-align: center;
 	/* padding: 70px; */
@@ -245,11 +241,14 @@
 	#qnaEvent{
 		display: none;
 	}
+	
+	/* 페이징바 */
+	#pagingArea{width:fit-content;margin:auto;}
 
 </style>
 </head>
 <body>
-	<jsp:include page="../common/admin.jsp">
+	<jsp:include page="../common/admin.jsp"/>
 	<div class="outer">
 		<center>
 		<div class="t-align">
@@ -263,7 +262,7 @@
 					<div class="t-inner-r-1">
 
 					</div>
-					
+					1
 					<div class="t-inner-r-2">
 						<input type="checkbox" name="" value=""> 주문/결제
 						<input type="checkbox" name="" value=""> 반품/교환
@@ -280,33 +279,42 @@
 		</div>
 	
 		<br><br>
-
 		
 			<table class="tb" border="1">
-				<tr>
-					<th width="100px">번호</th>
-					<th width="100px">회원아이디</th>
-					<th width="100px">상담유형</th>
-					<th width="300px">제목</th>
-					<th width="150px">상담신청일</th>
-					<th width="150px">답변여부</th>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>kimsabu</td>
-					<td>배송</td>
-					<td>배송문의입니다.</td>
-					<td>2020년 05월 24일</td>
-					<td><button type="button" class="qnaEventBtn">답변등록</button></td>
-				</tr>
-				<tr>
+				<thead>
+					<tr>
+						<th width="100px">번호</th>
+						<th width="100px">회원아이디</th>
+						<th width="100px">보낸유형</th>
+						<th width="100px">상담유형</th>
+						<th width="300px">제목</th>
+						<th width="150px">상담신청일</th>
+						<th width="150px">답변여부</th>
+						<th width="150px">답변하기</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${ qlist }" var="q">
+	                    <tr>
+							<td>${ q.questionNo }</td>
+							<td>${ q.userNo }</td>
+							<td>${ q.questionType }</td>
+							<td>${ q.counseling }</td>
+							<td>${ q.questionTitle }</td>
+							<td>${ q.questionDate }</td>
+							<td>${ q.questionYn }</td>
+							<td><button class="updateQuestion" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger deleteQuestion">삭제</button></td>
+	                    </tr>
+                    </c:forEach>
+				</tbody>
+				<!-- <tr>
 					<td>1</td>
 					<td>arisong</td>
 					<td>기타</td>
 					<td>문의할게 있어요</td>
 					<td>2020년 05월 24일</td>
 					<td>답변완료</td>
-				</tr>
+				</tr> -->
 			</table>
 
 			<div id="qnaEvent">
@@ -317,20 +325,20 @@
 					<br>
 						<table>
 							<tr class="font-all">
-								<td style="width: 250px;">상담유형 : 배송</td>
-								<td style="width: 300px;">작성자 : 홍길순</td>
-								<td style="width: 420px;">문의날짜 : 2020년 05월 24일</td>
+								<td style="width: 250px;" id="counseling"></td>
+								<td style="width: 300px;" id="qName"></td>
+								<td style="width: 420px;" id="qDate"></td>
 							</tr>
 						</table>
 					<!-- 제목 -->
 						<div class="faq_input_title relative mtop20">
 						
-							<label class="font-all">제목 : </label><input type="text" name="title_temp" class="text_con_title" maxlength="50" value="배송문의입니다." readonly><br>
+							<label class="font-all">제목 : </label><input type="text" id="qTitle" name="title_temp" class="text_con_title" maxlength="50" value="배송문의입니다." readonly><br>
 						</div>
 					<br>
 					<!-- 내용 -->
 						<div class="faq_input relative mtop20">
-							<label class="font-all">내용 : </label><textarea name="contents" placeholder="내용" class="width100 p10 f_666" id="text_con" maxlength="4000" readonly>배송문의 드려요 ~~~~~~ㅎㅎ</textarea>
+							<label class="font-all">내용 : </label><textarea name="contents" placeholder="내용" class="width100 p10 f_666" id="qContent" maxlength="4000" readonly>배송문의 드려요 ~~~~~~ㅎㅎ</textarea>
 						</div>
 					</div>
 				</div>
@@ -342,14 +350,14 @@
 				<!-- 제목 -->
 					<div class="faq_input_title relative mtop20">
 
-						<label class="font-all">제목 : </label><input type="text" name="title_temp" placeholder="제목을 적어주세요." class="text_con_title" maxlength="50" required><br>
+						<label class="font-all">제목 : </label><input type="text" id="ansTitle" name="ansTitle" placeholder="제목을 적어주세요." class="text_con_title" maxlength="50" required><br>
 						<!-- <span id="text_counter_title" style="text-align:right">###</span> -->
 
 					</div><br>
 
 				<!-- 내용 -->
 					<div class="faq_input relative mtop20">
-						<label class="font-all">내용 : </label><textarea name="contents" placeholder="내용" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
+						<label class="font-all">내용 : </label><textarea id="ansContent" name="ansContent" placeholder="내용" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
 						<!-- <div style="width:800px; text-align:right" required><span id="text_counter">0</span> / 4000</div> -->
 						<br>
 
@@ -357,20 +365,51 @@
 
 					<div class="text-center">
 						<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
-						<button class="enrollBtn" type="submit">등록하기</button>
+						<button class="ansBtn" type="button">등록하기</button>
 						<!-- <a class="cancelBtn" href="javascript:history.back();">취소</a> -->
-						
 					</div>
-						
-					
 				</form>
 			</div>
-
 		</center>
+		<br>
+		<div id="pagingArea">
+	        <ul class="pagination">
+	        	
+        	 	<c:choose>
+	        		<c:when test="${ qpi.currentPage eq 1 }">
+	             		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+		            </c:when>
+		            <c:otherwise>
+	            		<li class="page-item"><a class="page-link" href="question.ad?currentPage=${ qpi.currentPage-1 }">Previous</a></li>
+	            	</c:otherwise>
+	            </c:choose>
+	            
+	            <c:forEach var="p" begin="${ qpi.startPage }" end="${ qpi.endPage }">
+	            	<c:choose>
+	            		<c:when test="${ p eq qpi.currentPage }">
+	             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+	             	</c:when>
+	             	<c:otherwise>
+	             		<li class="page-item"><a class="page-link" href="question.ad?currentPage=${ p }">${ p }</a></li>
+	            		</c:otherwise>
+	            	</c:choose>
+	            </c:forEach>
+	            
+	            <c:choose>
+	            	<c:when test="${ qpi.currentPage eq qpi.maxPage }">
+	             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	             </c:when>
+	             <c:otherwise>
+	             	<li class="page-item"><a class="page-link" href="question.ad?currentPage=${ qpi.currentPage+1 }">Next</a></li>
+	            	</c:otherwise>
+	            </c:choose>
+	        </ul>
+	    </div>
+
 	</div>
 
 	<script>
-		$('.qnaEventBtn').click(function () {  
+		$('.updateQuestion').click(function () {  
 			if($("#qnaEvent").css("display") == "none"){   
 				$('#qnaEvent').css("display", "block");   
 			} else {  
@@ -378,13 +417,67 @@
 			}
 		});
 
-		$(".qnaEventBtn").click(function(){
+		$(".updateQuestion").click(function(){
 			//var nno = $(".td_area>tbody>tr").children().eq(0).text();
-			 var nno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
+			 var qno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
 			 // 뽑아온 값을 ajax를 통해 보내고
 			 // 보낸값을 통해 조회하여 display:none -> block로 바꿔 출력
-			 console.log(nno);
-			 //location.href="<%=contextPath%>/detail.no?nno=" + nno;
+			 console.log("1" + qno);
+			 $.ajax({
+	    			url:"qnaDetail.ad",
+	    			data:{qno:qno},
+	    			success:function(qnaList){
+	    				$("#counseling").text("상담유형 : " + qnaList.counseling);
+	    				$("#qName").text("작성자 : " + qnaList.userNo);
+	    				$("#qDate").text("문의날짜 : " + qnaList.questionDate);
+	    				$("#qTitle").val(qnaList.questionTitle);
+	    				$("#qContent").val(qnaList.questionContent);
+	    			},error:function(){
+	    				console.log("질문 디테일 조회용 ajax 통신실패!!");	
+	    			}
+	    		});
+			 <%-- location.href="<%=contextPath%>/detail.no?nno=" + nno; --%>
+			 
+			 $(".ansBtn").click(function(){
+				 $.ajax({
+		    			url:"qnaAns.ad",
+		    			data:{questionNo:qno,
+		    				  ansTitle:$("#ansTitle").val(),
+		    				  ansContent:$("#ansContent").val(),
+		    				  ansNo:"${loginUser.userNo}"},
+		    			success:function(status){
+		    				if(status == "success"){
+		    					location.href="<%=request.getContextPath()%>/question.ad?currentPage=1"
+	    						alert("답변성공");
+							}else{
+								alert("답변실패!!");
+							}
+		    			},error:function(){
+		    				console.log("답변용 ajax 통신실패!!");	
+		    			}
+		    		});
+			 
+			});
+		});
+		
+		$(".deleteQuestion").click(function(){
+				var qno = $(this).parent().parent().children().eq(0).text(); // 번호(기본키) 뽑아오기
+				console.log("3" + qno);
+				 
+				$.ajax({
+		    		url:"qnaDelete.ad",
+		    		data:{qno:qno},
+		    		success:function(status){
+		    			if(status == "success"){
+		    				location.href="<%=request.getContextPath()%>/question.ad?currentPage=1"
+	    					alert("1:1질문 삭제 성공");
+						}else{
+							alert("1:1질문 삭제 실패!!");
+						}
+		    		},error:function(){
+		    			console.log("1:1질문 삭제용 ajax 통신실패!!");	
+		    		}
+		    	});
 		});
 
 

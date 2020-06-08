@@ -2,7 +2,49 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="adminMapper">
+<mapper namespace="adminMapper2">
+
+	<resultMap id="adminMemberResultSet" type="Member1">
+		<id column="USER_NO" property="userNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_PWD" property="userPwd"/>
+		<result column="USER_TYPE" property="userType"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="ADDRESSNUM" property="addressNum"/>
+		<result column="USER_POINT" property="userPoint"/>
+		<result column="STATUS" property="status"/>
+		<result column="REASON" property="reason"/>
+	</resultMap>
+	
+	<select id="memberListCount" resultType="_int">
+		select count(*)
+		  from member	
+		 where status='Y'
+	</select>
+	
+	<select id="memberList" resultMap="adminMemberResultSet">
+		select *
+		  from member
+		 where status='Y'
+		 order by user_no asc
+	</select>
+	
+	<select id="blackListCount" resultType="_int">
+		select count(*)
+		  from member
+		 where status='B'  
+	</select>
+	
+	<select id="blackList" resultMap="adminMemberResultSet">
+		select *
+		  from member
+		 where status='B'
+		 order by user_no asc 
+	</select>
 
   <!-- 
   <resultMap id="adminResultSet" type="Board">
@@ -45,7 +87,7 @@
 	   
   	<!-- 주혁시작 -->
 	   
-	<resultMap id="adminNoticeResultSet" type="Notice">
+<!-- 	<resultMap id="adminNoticeResultSet" type="Notice">
 		<id column="NOTICE_NO" property="noticeNo"/>
 		<result column="USER_ID" property="userId"/>
 		<result column="NOTICE_TITLE" property="noticeTitle"/>
@@ -62,22 +104,6 @@
 		<result column="FAQ_ANSWER" property="faqAnswer"/>
 		<result column="FAQ_STATUS" property="faqStatus"/>
 		<result column="FAQ_DATE" property="faqDate"/>
-	</resultMap>
-	
-	<resultMap id="adminQuestionResultSet" type="Question">
-		<id column="A_QUESTION_NO" property="questionNo"/>
-		<result column="USER_NO" property="userNo"/>
-		<result column="QUESTION_TYPE" property="questionType"/>
-		<result column="QUESTION_TITLE" property="questionTitle"/>
-		<result column="QUESTION_CONTENT" property="questionContent"/>
-		<result column="QUESTION_DATE" property="questionDate"/>
-		<result column="QUESTION_YN" property="questionYn"/>
-		<result column="QUESTION_STATUS" property="questionStatus"/>
-		<result column="ANS_TITLE" property="ansTitle"/>
-		<result column="ANS_CONTENT" property="ansContent"/>
-		<result column="ANS_DATE" property="ansDate"/>
-		<result column="ANS_NO" property="ansNo"/>
-		<result column="COUNSELING" property="counseling"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -116,42 +142,7 @@
 		   set NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent}
 		 where NOTICE_NO=#{noticeNo}
 	</update>
-	
-	<!-- Question -->
-	<select id="questionSelectListCount" resultType="_int">
-		select count(*)
-		  from PERSON_QUESTION
-		 where QUESTION_STATUS='N'
-	</select>
-	
-	<select id="questionSelectList" resultMap="adminQuestionResultSet">
-		select *
-		  from PERSON_QUESTION
-		  join member m using (user_no)
-		 where QUESTION_STATUS='N'
-		 order by A_QUESTION_NO desc
-	</select>
-	
-	<select id="qnaDetail" parameterType="string" resultMap="adminQuestionResultSet">
-		select *
-		  from PERSON_QUESTION
-		 where A_QUESTION_NO=#{qno} and QUESTION_STATUS='N'
-	</select>
-	
-	<update id="qnaAnsUpdate" parameterType="Question">
-		update PERSON_QUESTION
-		   set ANS_TITLE=#{ansTitle}, ANS_CONTENT=#{ansContent}, ANS_DATE=default, QUESTION_YN='Y', ANS_NO=#{ansNo}
-		 where A_QUESTION_NO=#{questionNo}
-	</update>
-	
-	<update id="qnaDelete" parameterType="string">
-		update PERSON_QUESTION
-		   set QUESTION_STATUS='Y'
-		 where A_QUESTION_NO=#{questionNo}
-	</update>
-	
-	
-  	<!-- 주혁끝 -->
+  	주혁끝 -->
   	
   	
   

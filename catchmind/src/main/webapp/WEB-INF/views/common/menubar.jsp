@@ -18,6 +18,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<!-- alertifyJS 라이브러리 -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 <style>
 
 /* 메뉴바 영역 */
@@ -50,8 +56,10 @@
 }
 
 /* 검색바 */
+/* margin-left: 1050px; 1920 1080 */
+/* margin-left: 1700px; qhd */
 #header_searchbar {
-	margin-left: 1050px;
+	/* margin-left: 1700px; */
 	margin-top: 7px; /* 위치설정 이거*/
 	position: absolute;
 	height: 50px;
@@ -246,11 +254,25 @@
 
 .header-img{cursor: pointer;}
 
+/* div{
+	border: 1px solid black;
+} */
 </style>
 
 </head>
 
 <body>
+
+	<c:if test="${ !empty msg }">
+		<script>
+			alertify.alert("${msg}");	// 회원가입 성공,실패
+		</script>
+		<c:remove var="msg" scope="session" />
+	</c:if>
+	
+	<script>
+		$(".ajs-header").text("");
+	</script>
 	
 	<div class="header-area">
 		<div class="header header-img">
@@ -269,9 +291,12 @@
 			<c:when test="${!empty loginUser}">
 				<!-- 로그인 후 -->
 		 		<div class="header login  header-img loginnext">
+		 		
 					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="dropdown">
-  						<button onclick="myFunction()" class="dropbtn"><img src="<%=request.getContextPath() %>/resources/images/usericon32.png"></button>
+  						<button onclick="myFunction()" class="dropbtn">
+  							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
+  						</button>
   							<div id="myDropdown" class="dropdown-content">
 					      	<table style="text-align: center;">
 					          <tr>
@@ -279,7 +304,7 @@
 					              <td rowspan="2"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/home2.png" style="width:30px; height:30px;"><br>마이홈</a></td>
 					          </tr>
 					          <tr>
-					            <td><button class="button button4">정보변경</button></td>
+					            <td><button class="button button4" onclick="location.href='mypageModify.me'">정보변경</button></td>
 					            <td></td>
 					        </tr>
 					        <tr style=border:0.05px solid grey;>
@@ -296,47 +321,56 @@
 					        </tr>
 					      
 					        <tr>
-					            <td colspan="2"><button class="button button4" style="width:200px; height:30px;">로그아웃</button></td>
+					            <td colspan="2"><button class="button button4" style="width:200px; height:30px;" onclick="location.href='logout.me'">로그아웃</button></td>
 					        </tr>
-					      </table>		              
+					      </table>
 					    </div>
 					  </div>
 					</div>
 				
 			</c:when>
 			<c:otherwise>
+	 			
 				<!-- 로그인 전 -->
 				<div class="header login">
-					 <a href="loginGo.me">로그인 ｜</a>
-				     <a href="memberEnrollForm.me">회원가입</a>
-				</div> 
+					 <!-- 검색바 애니메이션 -->
+					<form id="header_searchbar">
+						<input type="text" name="input" class="input" id="search-input">
+						<button type="reset" class="search" id="search-btn"></button>
+					</form>
+					
+					<a href="loginGo.me">로그인 ｜</a>
+				    <a href="memberEnrollForm.me">회원가입</a>
+				</div>
+				
 			</c:otherwise>
 		</c:choose>
 	</div>
 	
-		<!-- 검색바 애니메이션 -->
+	<!-- <div class="test">
+		검색바 애니메이션
 		<form id="header_searchbar">
 			<input type="text" name="input" class="input" id="search-input">
 			<button type="reset" class="search" id="search-btn"></button>
 		</form>
-	</div>
+	</div> -->
 		
 	
 
 
  	<!-- 검색바 스크립트 -->
-   <!-- <script> 
-    //		function expand() {
-    //			$(".search").toggleClass("close");
-    //			$(".input").toggleClass("square");
-    //			if ($('.search').hasClass('close')) {
-    //				$('input').focus();
-    //			} else {
-    //				$('input').blur();
-    //			}
-    //		}
-    //		$('button').on('click', expand);
-    //	</script>  -->
+   	<script> 
+   		function expand() {
+   			$(".search").toggleClass("close");
+   			$(".input").toggleClass("square");
+   			if ($('.search').hasClass('close')) {
+   				$('input').focus();
+   			} else {
+   				$('input').blur();
+   			}
+   		}
+   		$('button').on('click', expand);
+   	</script>
 	
 	<!-- 사이드메뉴바 스크립트 -->
 <script>
@@ -348,7 +382,7 @@ function myFunction() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
+  if (!event.target.matches('.dropbtn1')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {

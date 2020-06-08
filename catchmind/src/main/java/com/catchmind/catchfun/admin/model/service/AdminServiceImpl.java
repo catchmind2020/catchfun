@@ -1,10 +1,15 @@
 package com.catchmind.catchfun.admin.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.admin.model.dao.AdminDao;
+import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.Question;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Service("aService")
 public class AdminServiceImpl implements AdminService {
@@ -66,7 +71,53 @@ public class AdminServiceImpl implements AdminService {
 	
 	// 주혁시작
 	
+	@Override
+	public int selectListCount() {
+		return aDao.selectListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Notice> selectList(PageInfo pi) {
+		return aDao.selectList(sqlSession, pi);
+	}
+	@Override
+	public Notice noticeDetail(String nno) {
+		return aDao.noticeDetail(sqlSession, nno);
+	}
+	@Override
+	public int insertNotice(Notice n) {
+		return aDao.insertNotice(sqlSession, n);
+	}
+	@Override
+	public int noticeDelete(String nno) {
+		return aDao.noticeDelete(sqlSession, nno);
+	}
+	@Override
+	public int noticeUpdatInsert(Notice n) {
+		return aDao.noticeUpdatInsert(sqlSession, n);
+	}
 	
+	// Question
+	
+	@Override
+	public int questionSelectListCount() {
+		return aDao.questionSelectListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Question> questionSelectList(PageInfo pi) {
+		return aDao.questionSelectList(sqlSession, pi);
+	}
+	@Override
+	public Question qnaDetail(String qno) {
+		return aDao.qnaDetail(sqlSession, qno);
+	}
+	@Override
+	public int qnaAnsUpdate(Question q) {
+		return aDao.qnaAnsUpdate(sqlSession, q);
+	}
+	@Override
+	public int qnaDelete(String qno) {
+		return aDao.qnaDelete(sqlSession, qno);
+	}
 	
 	// 주혁 끝
 }

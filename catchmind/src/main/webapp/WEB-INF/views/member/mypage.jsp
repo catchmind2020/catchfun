@@ -255,14 +255,9 @@ input {
 					<img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp; <img
 						src="images/usericon32.png">
 				</div>
-
 			</div>
 
-			<form id="header_searchbar">
-				<input type="text" name="input" class="input" id="search-input">
-				<button type="reset" class="search" id="search-btn"></button>
 
-			</form>
 
 			<script>
 				function expand() {

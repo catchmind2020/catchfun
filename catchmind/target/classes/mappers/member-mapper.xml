@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 
@@ -38,33 +38,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  
 	  <insert id="insertMember" parameterType="Member">
 	  		insert into member
-	  		values(#{userId}, #{userPwd}, #{userName}, #{email},
-	  			   #{gender}, #{age}, #{phone}, #{address}, sysdate, sysdate, 'Y')
+	  		values('M'||SEQ_MNO.NEXTVAL, #{userId}, #{userPwd}, default, #{userName}, null, #{phone}, default, #{address}, #{addressNum}, 0, default, null, #{addressDetail}, #{addressReference})
 	  </insert>
 	  
 	  <update id="updateMember" parameterType="Member">
 	  		update member
-	  		   set email=#{email}, 
-	  		       age=#{age},
-	  		       phone=#{phone},
-	  		       address=#{address},
-	  		       gender=#{gender},
-	  		       modify_date=sysdate
-	  		 where user_id=#{userId}    
-	  </update>
-	  
-	  <update id="deleteMember" parameterType="string">
-	  		update member
-	  		   set status='N' 
-	  		 where user_id=#{userId}
+	  		   set EMAIL=#{email}, 
+	  		       PHONE=#{phone},
+	  		       ADDRESS=#{address},
+	  		       ADDRESSNUM=#{addressNum},
+	  		       ADDRESS_DETAIL=#{addressDetail},
+	  		       ADDRESS_REFERENCE=#{addressReference}
+	  		 where USER_ID=#{userId}    
 	  </update>
 	  
 	  <select id="idCheck" parameterType="string" resultType="_int">
 	  		select count(*)
 	  		  from member
-	  		 where user_id=#{userId}
+	  		 where USER_ID=#{userId}
 	  </select>
 	  
+	  <update id="deleteMember" parameterType="Member">
+	  		update MEMBER
+	  		   set REASON=#{reason}, STATUS='N'
+	  		 where USER_NO=#{userNo}
+	  </update>
   
 </mapper>
 

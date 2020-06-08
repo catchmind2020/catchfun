@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.member.model.service.MemberService;
@@ -319,7 +321,7 @@ public class MemberController {
 			
 		}
 	}
-	
+		*/
 	@ResponseBody
 	@RequestMapping(value="idCheck.me")
 	public String idCheck(String userId) {
@@ -334,7 +336,7 @@ public class MemberController {
 		
 	}
 	
-	*/
+
 	
 	
 //	아이유 시작
@@ -359,18 +361,20 @@ public class MemberController {
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
+<<<<<<< HEAD
 			System.out.println("성공성공");
 			
+=======
+>>>>>>> 9786948eec0581bc1416fc60e1ec369cf5c2764f
 			if(loginUser.getUserId().equals("admin")) {
 				mv.setViewName("admin/adminCategory");
-//				mv.setViewName("common/admin");
+				//mv.setViewName("common/admin");
 			}else {
 				mv.setViewName("redirect:/");
 			}
 		}else {
 			//mv.addObject("msg", "로그인 실패!!");
 			//mv.setViewName("common/errorPage");
-			System.out.println("실패실패");
 			mv.addObject("msg", "로그인실패!!").setViewName("common/errorPage");
 		}
 		
@@ -396,6 +400,48 @@ public class MemberController {
 	@RequestMapping("memberEnrollForm.me")
 	public String memberEnrollForm() {
 		return "member/memberEnrollForm";
+	}
+	
+	@RequestMapping("insert.me")
+	public String insertMember(Member m, Model model, HttpSession session) {
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
+		
+		int result = mService.insertMember(m);
+		
+		if(result > 0) { // 회원가입성공
+			
+			session.setAttribute("msg", "회원가입 성공!");
+			return "redirect:/";
+			
+		}else {	// 회원가입실패
+			
+			model.addAttribute("msg", "회원가입 실패");
+			return "common/errorPage";
+		}
+	
+		
+	}
+	
+	@RequestMapping("update.me")
+	public String updateMember(Member m, Model model, HttpSession session) {
+		
+		int result = mService.updateMember(m);
+		
+		if(result > 0) { // 회원정보 수정 성공 --> 마이페이지 요청
+			
+			session.setAttribute("loginUser", mService.loginMember(m));
+			session.setAttribute("msg", "회원정보 수정 성공!");
+			
+			return "redirect:/"; //myPage.me
+			
+		}else { // 회원정보 수정 실패 --> 에러페이지로 포워딩
+			
+			model.addAttribute("msg", "회원 정보 수정 실패!");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	@RequestMapping("idpwdFind.me")
@@ -433,10 +479,27 @@ public class MemberController {
 		return "member/message_view";
 	}
 	
-	@RequestMapping("membership_delete.me")
-	public String membership_delete() {
-		return "member/membership_delete";
+	@RequestMapping("membershipDelete.me")
+	public String deleteMember(Member m) {
+		
+		int result = mService.deleteMember(m);
+		
+		if(result > 0) {
+			return "redirect:logout.me";
+		}else {
+			return "member/membershipDelete";
+		}
 	}
+	
+	/*
+	 * public String insertReply(Reply r) {
+	 * 
+	 * int result = bService.insertReply(r);
+	 * 
+	 * if(result > 0) { return "success"; }else { return "fail"; }
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping("mypageModify.me")
 	public String mypageModify() {
