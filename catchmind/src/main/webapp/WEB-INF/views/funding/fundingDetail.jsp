@@ -587,17 +587,9 @@
 	                	<c:when test="${ !empty loginUser }">  
 		                    <td align="right" style="padding-right:0px;"><button class="maker_button trigger">개설자문의</button> <button id="maker_ban_button" class="trigger2">개설자신고</button></td>
 		                    <td></td>
-		                    <td class="info_title" id="zzimDir" style="vertical-align: middle;">
+		                    <td class="info_title" style="vertical-align: middle;">
 			                    <input type="button" class="side_button2" value="공유">&nbsp;&nbsp;
-			                    <c:choose>
-	                				<c:when test="${ wr == 1 }">
-	                					<input type="button" class="side_button" id="addWish" value="♥">
-	                				</c:when>
-	                				<c:otherwise>
-	                					 <input type="button" class="side_button" id="addWish" value="♡">
-	                				</c:otherwise>
-	                			</c:choose>
-			                    
+			                    <span id="zzimDir"></span>			                    
 		                    </td>
                 		</c:when>
                 		<c:otherwise>
@@ -606,11 +598,7 @@
                 			<td></td>
                 		</c:otherwise>
                 	</c:choose>
-                	
-                	<form id="addWish" action="addWish.pro" method="post">
-                		<input style="display:none;" name="userNo" value="${ loginUser.userNo }">
-                		<input style="display:none;" name="projectNumber" value="${ p.projectNumber }">
-                	</form>
+
                 	
                 </tr>
             </table>
@@ -780,7 +768,7 @@
     </div>
 
 	<%-- <jsp:include page="../common/footer.jsp"/> --%>
-	<input hidden id="dddd" value="${loginUser.userId}" >
+	<input hidden id="dddd" value="${ loginUser.userId }" >
 
     <script>
 
@@ -847,7 +835,7 @@
     				
     				for(var i in list){ // Gson 기본 포맷에 맞게 날짜가 나옴 
     					
-     					if( $("#dddd").val() != null ){ // 로그인 했을 때
+     					if( $("#dddd").val() != "" ){ // 로그인 했을 때
     						
         					if( $("#dddd").val() == list[i].userNo ){ // 로그인한 id와 동일할 때 --> 신고 x, 삭제/수정 o
         						
@@ -869,6 +857,7 @@
     					}else{	// 로그인 안했을 때
     						
     				        value += "<tr>" +
+    				        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
 					                    "<td width='330px' colspan='2'>" + list[i].replyContent + "</td>" +
 					                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
 					                 "</tr>";
@@ -894,6 +883,7 @@
     			}
     		});
     	}
+
     	
     	// 댓글 신고
     	function replyBan(replyNo){ 
@@ -943,15 +933,46 @@
     	
     	
     	
-    // 찜 리스트 추가 
-	 $("#addWish").click(function(){
+    // 찜 불러오기
+   	$(function(){
+   		
+		var projectNumber = $("#zzimNumber").val();
+		var userNo = $("#zzimNo").val()
 		 
+   		$.ajax({
+   			url:"selectWishlist.pro",
+			data:{projectNumber:projectNumber,
+				  userNo:userNo},
+		    type:"post",
+   			
+   			success:function(status){
+   				
+   				if(status == "no"){
+					value = "<input type='button' class='side_button' id='addWish' onclick='addWish();' value='♡'>";
+				
+				}else{
+					value = "<input type='button' class='side_button' id='addWish' onclick='addWish();' value='♥'>";
+					
+				}
+   				$("#zzimDir").html(value);
+   				
+   			},error:function(){
+   				console.log("ajax 통신실패!!");	
+   			}
+   		});
+   		
+   	});	
+    		
+    // 찜 리스트 추가 및 삭제
+	function addWish(){
+		 
+		 console.log("a");
 		 var projectNumber = $("#zzimNumber").val();
 		 var userNo = $("#zzimNo").val()
 		 
 		 
 		 $.ajax({
-    			url:"selectWish.pro",
+    			url:"updateWish.pro",
     			data:{projectNumber:projectNumber,
     				  userNo:userNo},
     			type:"post",
@@ -974,8 +995,7 @@
     				console.log("ajax 통신실패!!");	
     			}
     		});
-		 
-	 });
+	 }
 
     </script>
     
@@ -1074,7 +1094,7 @@
 		    trigger2.addEventListener("click", toggleModal2); 
 		    closeButton2.addEventListener("click", toggleModal2); 
 		    cancel2.addEventListener("click", toggleModal2); 
-		    window2.addEventListener("click", windowOnClick2); 
+		    window.addEventListener("click", windowOnClick2); 
 		    <!-- 개설자 신고 popup 끝 -->	
 		}
 		

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.funding.model.service.FundingService;
@@ -31,20 +32,21 @@ public class FundingController {
 	@RequestMapping("detail.pro")
 	public ModelAndView selectProject(String pno, ModelAndView mv, HttpSession session) {
 		
-		
-		String userNo = "";
+		/*
 		Wishlist w = new Wishlist();
 		int wResult = 4;
 		int wr = 4;
 		
-		if( session.getAttribute(userNo) != null ) { // 로그인 되어있으면
+		if( loginUser != null ) { // 로그인 되어있으면
 			
-			w.setUserNo((String)session.getAttribute(userNo));
+			w.setUserNo((String)session.getAttribute(userId));
 			w.setProjectNumber(pno);
 			
+			System.out.println("a");
+			Sfystem.out.println(w);
 			wResult = fService.selectWish(w);  // 찜하기 내역 정보
 			System.out.println(wResult);
-		}
+		} 
 		
 		if(wResult > 0) { // 찜내역 있음
 			
@@ -56,7 +58,7 @@ public class FundingController {
 			wr = 0;
 			mv.addObject("wr", 0);
 		}
-
+		*/
 		
 		Project p = fService.selectProject(pno); // 프로젝트 정보
 		Maker m = fService.selectMaker(pno); // 메이커 정보
@@ -137,23 +139,47 @@ public class FundingController {
 	@RequestMapping("binsert.pro") 
 	public String insertReport(Report r, HttpSession session) {
 		
-		int result = fService.insertReport(r);
+		int list = fService.selectReport(r);
+		//System.out.println(list);
 		
-		if(result > 0) { 
+		if(list == 0) {	// 신고 내역이 없을 때
 			
-			session.setAttribute("msg", "신고가 정상적으로 전송되었습니다.");
+			int result = fService.insertReport(r);
+			
+			if(result > 0) { 
+				
+				session.setAttribute("msg", "신고가 정상적으로 전송되었습니다.");
+				return "redirect:detail.pro?pno=" + r.getReportNo();
+				
+			}else {
+				
+				session.setAttribute("msg", "신고 등록에 실패하였습니다. 다시 시도해주세요.");
+				return "redirect:detail.pro?pno=" + r.getReportNo();
+			} 
+			
+		}else {	// 신고 내역이 있을 때
+			session.setAttribute("msg", "이미 신고된 내역이 있습니다.");
 			return "redirect:detail.pro?pno=" + r.getReportNo();
-			
-		}else {
-			
-			session.setAttribute("msg", "신고 등록에 실패하였습니다. 다시 시도해주세요.");
-			return "redirect:detail.pro?pno=" + r.getReportNo();
-		} 
+		}
 	}
 
 	// 찜하기
 	@ResponseBody
-	@RequestMapping("selectWish.pro")
+	@RequestMapping("selectWishlist.pro")
+	public String selectWishlist(Wishlist w, HttpSession session) {
+
+		int result1 = fService.selectWishlistCount(w);
+
+		if(result1 > 0) { // 찜목록 있음 
+			return "yes";
+		}else { // 찜목록 없음 
+			return "no";
+		}
+	}
+	
+	// 찜하기
+	@ResponseBody
+	@RequestMapping("updateWish.pro")
 	public String selectWishlistCount(Wishlist w, HttpSession session) {
 
 		int result1 = fService.selectWishlistCount(w);

@@ -86,6 +86,12 @@ public class FundingServiceImpl implements FundingService{
 
 		return fDao.insertReport(sqlSession, r);
 	}
+	
+	@Override
+	public int selectReport(Report r) {
+		
+		return fDao.selectReport(sqlSession, r);
+	}
 
 	@Override
 	public int insertWishlist(Wishlist w) {
@@ -95,7 +101,7 @@ public class FundingServiceImpl implements FundingService{
 
 	@Override
 	public int selectWish(Wishlist w) {
-
+		
 		return fDao.selectWish(sqlSession, w);
 	}
 
@@ -117,6 +123,8 @@ public class FundingServiceImpl implements FundingService{
 		
 		return fDao.deleteWishlist(sqlSession, w);
 	}
+
+
 	
 	
 	

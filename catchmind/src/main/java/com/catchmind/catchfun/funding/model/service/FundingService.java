@@ -44,6 +44,8 @@ public interface FundingService {
 	// 개설자 신고
 	int insertReport(Report r);
 	
+	int selectReport(Report r);
+	
 	// 찜하기 
 	int insertWishlist(Wishlist w);
 	

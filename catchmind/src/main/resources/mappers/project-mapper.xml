@@ -147,6 +147,11 @@
 		VALUES(#{userNo}, #{reportNo}, 2, SYSDATE, #{reportTitle}, #{reportContent})
    </insert>
    
+   <select id="selectReport" resultType="_int">
+		select count(*)
+		  from REPORT
+		 where USER_NO=#{userNo} and REPORT_NO=#{reportNo}
+   </select>
    
    
    <!-- 주혁 -->   

@@ -82,6 +82,11 @@ public class FundingDao {
 		return sqlSession.insert("projectMapper.insertReport", r);
 	}
 	
+	public int selectReport(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.selectOne("projectMapper.selectReport", r);
+	}
+	
 	public int insertWishlist(SqlSessionTemplate sqlSession, Wishlist w) {
 		
 		return sqlSession.insert("projectMapper.insertWishlist", w);
@@ -93,7 +98,6 @@ public class FundingDao {
 	}
 	
 	// 주혁
-	
 	public int selectWishlistCount(SqlSessionTemplate sqlSession, Wishlist w) {
 		
 		return sqlSession.selectOne("projectMapper.selectWishlistCount", w);
