@@ -59,8 +59,8 @@
 /* margin-left: 1050px; 1920 1080 */
 /* margin-left: 1700px; qhd */
 #header_searchbar {
-	/* margin-left: 1700px; */
-	margin-top: 7px; /* 위치설정 이거*/
+	margin-left:-20px;
+	margin-top: 37px; /* 위치설정 이거*/
 	position: absolute;
 	height: 50px;
 	width: 5px;
@@ -197,9 +197,9 @@
 
 /* 로그인 부분*/
 .login { position: relative; display: table-cell; font-size: 15px;
-	color: gray; padding-left: 190px; padding-right: 0px; }
-.header>img{margin-bottom:7px;}
-.loginnext{bottom:-6px;}
+	color: gray; padding-left: 160px; padding-right: 0px; }
+a { text-decoration:none !important } 
+a:hover { text-decoration:none !important }
 
 /* 아이유 전용 스타일 */
 
@@ -254,9 +254,18 @@
 
 .header-img{cursor: pointer;}
 
-/* div{
-	border: 1px solid black;
-} */
+.vertical-container {
+  height: 100px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+ 
+/* div{border:1px solid black;} */
+
 </style>
 
 </head>
@@ -274,11 +283,10 @@
 		$(".ajs-header").text("");
 	</script>
 	
-	<div class="header-area">
-		<div class="header header-img">
-			<a href="main">
-				<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
-			</a>
+	<div class="header-area vertical-container">
+
+		<div style="margin-right:40px;">
+			<img src="resources/images/catchfun_logo.png">
 		</div>
 		<div class="header">카테고리</div>
 		<div class="header">오픈예정</div>
@@ -316,7 +324,7 @@
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
 					        </tr>
 					        <tr>
-					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> -->
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
 					        </tr>
 					      
@@ -332,7 +340,7 @@
 			<c:otherwise>
 	 			
 				<!-- 로그인 전 -->
-				<div class="header login">
+				<div class="login">
 					 <!-- 검색바 애니메이션 -->
 					<form id="header_searchbar">
 						<input type="text" name="input" class="input" id="search-input">
