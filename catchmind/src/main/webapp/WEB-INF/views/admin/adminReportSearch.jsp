@@ -72,7 +72,7 @@
 			          <thead>
 			              <tr>
 			                
-			                <th width="100px">회원번호</th>
+			                <th width="100px">댓글번호</th>
 			                <th width="200px">아이디</th>
 			                <th width="100px">구분</th>
 			                <th width="100px">회원명</th>
@@ -86,7 +86,7 @@
 		              <tbody>
 		              	<c:forEach items="${ rlist }" var="r">
 				              <tr>
-				                <td>${ r.userNo }</td>
+				                <td>${ r.replyNo }</td>
 				                <td>${ r.userId }</td>
 				                <td> 
 				                <c:choose>

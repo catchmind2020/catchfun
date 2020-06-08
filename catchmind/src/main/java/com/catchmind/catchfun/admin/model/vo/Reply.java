@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Reply {
 	
-	private String pQuestionNo;
+	private String replyNo;
 	private String userNo;
 	private String questionContent;
 	private Date questionDate;

@@ -201,7 +201,14 @@ public class AdminDao2 {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper2.proReportSearch", keyword, rowBounds);
 	}
+	
+	public Reply rpReportDetail(SqlSessionTemplate sqlSession, String rd) {
+		return sqlSession.selectOne("adminMapper2.rpReportDetail", rd);
+	}
 
+	public int reportBlack(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.update("adminMapper2.reportBlack", userNo);
+	}
 }
 
 
