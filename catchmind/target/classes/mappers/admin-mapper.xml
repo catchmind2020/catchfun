@@ -86,6 +86,8 @@
 		 where NOTICE_STATUS='N'
 	</select>
 	
+	
+	
 	<select id="selectList" resultMap="adminNoticeResultSet">
 		select NOTICE_NO, user_Id, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_COUNT, NOTICE_STATUS
 		  from NOTICE_TEMP
