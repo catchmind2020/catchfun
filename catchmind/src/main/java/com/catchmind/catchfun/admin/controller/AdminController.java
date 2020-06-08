@@ -607,6 +607,7 @@ public class AdminController {
 		/* ArrayList<PayTotal>() list = aService.payList2(pr); */
 		
 		model.addAttribute("payList", realPayList);
+		model.addAttribute("payListLength", prn.size());
 		
 		return "admin/adminProjectPayTotal";
 	}

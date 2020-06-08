@@ -31,7 +31,7 @@
 		<input type="text" name="keyword" placeholder="아이디 입력"> <button type="button">조회</button>
 	</div>
 	<br>
-	입금대기 수 : 3 개
+	입금대기 수 : ${ payListLength } 개
 	<br><br>
 
 	<div>
@@ -51,28 +51,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>알록달록 양말</td>
-						<td>hohoho55</td>
-						<td>1,300,000</td>
-						<td>2,600,000(200%)</td>
-						<td>2020-05-20</td>
-						<td>의류</td>
-						<td>2,418,000</td>
-						<td>미발급</td>
-						<td><button type="button">발급하기</button></td>
-					</tr>
-					<tr>
-						<td>양면 모니터</td>
-						<td>momo7</td>
-						<td>100,000,000</td>
-						<td>200,000,000(200%)</td>
-						<td>2020-06-28</td>
-						<td>가전제품</td>
-						<td>186,000,000</td>
-						<td>미발급</td>
-						<td><button type="button">발급하기</button></td>
-					</tr>
+					<c:forEach items="${ payList }" var="p">
+		                    <tr>
+								<td>${ p.projectName }</td>
+								<td>${ p.userId }</td>
+								<td>${ p.projectTargetAmount }</td>
+								<td>${ p.total }(237%)</td>
+								<td>${ p.projectFinishDate }</td>
+								<td>${ p.categoryName }</td>
+								<td>${ p.total * 0.93 }</td>
+								<td>미발급 (컬럼추가예정)</td>
+								<td><button type="button">발급하기</button></td>
+		                    </tr>
+                    </c:forEach>
 				</tbody>
 			</table>
 		</center>
