@@ -45,9 +45,15 @@
     /* 모인금액 퍼센트 */
     #percent{
     	width: 230px;
+    	height: 10px;
     	/* background-color: rgb(0, 0, 0); */
     	color: rgb(31, 205, 211);
+    	background-color: #2ed5d5;
+    	
     }
+    progress::-webkit-progress-bar { background-color: lightgray; }
+	progress::-webkit-progress-value { background-color: #2ed5d5; }
+	
     .info_title {
         padding-left: 20px;
         width: 230px;
@@ -66,11 +72,24 @@
         font-weight: 700;
     }
 
-    /* 공유 & 찜하기 */
-    .side_button {
-        width: 110px;
+
+    /* 공유 */
+    .side_button2 {
+        width: 109px;
         height: 40px;
-        font-size: 13px;
+        font-size: 15px;
+        /* background-color: rgb(31, 205, 211, 0.2); */
+        background-color: white;
+        border: 1px solid darkgray;
+        color: black;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    /* 찜하기 */
+    .side_button {
+        width: 109px;
+        height: 40px;
+        font-size: 17px;
         background-color: white;
         border: 1px solid darkgray;
         color: black;
@@ -78,12 +97,22 @@
         border-radius: 3px;
     }
 
+
     /* 메이커 정보 & 문의 버튼 */
     .maker_button {
         height: 40px;
         font-size: 11px;
         background-color: gray;
         border: 1px solid gray;
+        color: white;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    #maker_ban_button {
+        height: 40px;
+        font-size: 11px;
+        background-color: rgb(255, 0, 0, 0.5);
+        border: 1px solid rgb(255, 0, 0, 0.5);
         color: white;
         cursor: pointer;
         border-radius: 3px;
@@ -289,6 +318,145 @@
     	padding-top: 20px;
     }
     #replyUserId b{font-size: 17px;}
+    
+    .rBtn{
+    	width: 40px;
+    	height: 25px;
+    	background-color: rgb(31, 205, 211, 0.1);
+    	border: 1px solid rgb(31, 205, 211, 0.1);
+    	font-size: 11px;
+    	cursor: pointer;
+        border-radius: 3px;
+        float: right;
+        margin-right: 3px;
+    }
+    .rBanBtn{
+    	width: 40px;
+    	height: 25px;
+    	background-color: rgb(255, 0, 0, 0.1);
+    	border: 1px solid rgb(255, 0, 0, 0.1);
+    	font-size: 11px;
+    	cursor: pointer;
+        border-radius: 3px;
+        float: right;
+        margin-right: 3px;
+    }
+    
+    
+    /* popup css */
+    .modal h1 { 
+         font-family: 'Oswald', sans-serif; 
+         font-size: 30px; 
+         color: black; 
+         padding-left: 25px;
+     } 
+     .modal2 h1{ 
+         font-family: 'Oswald', sans-serif; 
+         font-size: 30px; 
+         color: rgb(203, 61, 36); 
+         padding-left: 25px;
+     } 
+     .modal h4, .modal2 h4 {color: gray; padding-left: 25px; padding-top: 0px; }
+     .modal label, .modal2 label { 
+         display: block; 
+         margin-top: 20px; 
+         letter-spacing: 2px; 
+     } 
+     .modal form, .modal2 form { 
+         margin: 0 auto; 
+         width: 459px; 
+     } 
+     .modal input, .modal textarea, .modal2 input, .modal2 textarea { 
+         width: 439px; 
+         height: 27px; 
+         background-color: #efefef; 
+         border-radius: 6px; 
+         border: 1px solid #dedede; 
+         padding: 10px; 
+         margin-top: 3px; 
+         font-size: 0.9em; 
+         color: #3a3a3a; 
+     } 
+     .modal input:focus, .modal textarea:focus, .modal2 input:focus, .modal2 textarea:focus{ 
+             border: 1px solid #97d6eb; 
+         } 
+     
+     .modal textarea, .modal2 textarea{ 
+         height: 120px; 
+         background-color: #efefef; 
+         font-size: 1.2em; 
+     } 
+     #submit, #submit2{ 
+         width: 127px; 
+         height: 48px; 
+         text-align: center; 
+         border: none; 
+         margin-top: 20px; 
+         cursor: pointer; 
+     } 
+     #submit:hover, #submit2:hover{ 
+         color: #fff; 
+         background-color: rgb(31, 205, 211); 
+         opacity: 0.9; 
+     } 
+     #cancel, #cancel2 { 
+         width: 127px; height: 48px; 
+         text-align: center; 
+         border: none; 
+         margin-top: 20px; 
+         cursor: pointer; 
+     } 
+     #cancel:hover, #cancel2:hover{ 
+         color: #fff; 
+         background-color: rgb(31, 205, 211); 
+         opacity: 0.9; 
+     }
+
+    .modal, .modal2 { 
+         position: fixed; 
+         left: 0; 
+         top: 0; 
+         width: 100%; 
+         height: 100%; 
+         background-color: rgba(0, 0, 0, 0.5); 
+         opacity: 0; 
+         visibility: hidden; 
+         transform: scale(1.1); 
+         transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+     } 
+     .modal-content { 
+         position: absolute; 
+         top: 50%; 
+         left: 50%; 
+         transform: translate(-50%, -50%); 
+         background-color: white; 
+         padding: 1rem 1.5rem; 
+         width: 500px; 
+         height: 450px; 
+         border-radius: 0.5rem; 
+     } 
+     .close-button, .close-button2 { 
+         float: right; 
+         width: 1.5rem; 
+         line-height: 1.5rem; 
+         text-align: center; 
+         cursor: pointer; 
+         border-radius: 0.25rem; 
+         font-size: 30px;
+         /* background-color: lightgray;  */
+     } 
+     .close-button:hover, .close-button2:hover { 
+         background-color: darkgray; 
+         font-size: 30px;
+     } 
+     .show-modal, .show-modal2 { 
+         opacity: 1; 
+         visibility: visible; 
+         transform: scale(1.0); 
+         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
+     } 
+	/* popup css */
+    
 </style>
 
 <script>
@@ -327,6 +495,7 @@
 	<br><br>
 	<hr>
 	<br>
+	
     <div id="outer">
         <br>
 
@@ -394,7 +563,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="info_title"><button class="main_button" style="width: 230px;">참여하기</button></td>
+                	<c:choose>
+	                	<c:when test="${ !empty loginUser }"> 
+                    		<td class="info_title"><button class="main_button" style="width: 230px;" onclick="location.href='rewardList.pay?pno=${ p.projectNumber }'">참여하기</button></td>
+                    	</c:when>
+                		<c:otherwise>
+                			<td class="info_title"><button class="main_button" style="width: 230px;" onclick="alert('로그인 후 사용이 가능합니다.');">참여하기</button></td>
+                		</c:otherwise>
+                	</c:choose>
                 </tr>
 
                 <tr>
@@ -406,9 +582,36 @@
                         <!-- <button class="maker_detail">SNS</button> --><br>
                         ${ m.makerEmail }
                     </td>
-                    <td align="right" style="padding-right:0px;"><button class="maker_button">개설자문의</button></td>
-                    <td></td>
-                    <td class="info_title" style="vertical-align: middle;"><button class="side_button">공유</button>&nbsp;&nbsp;<button class="side_button">♡</button></td>
+                    
+                    <c:choose>
+	                	<c:when test="${ !empty loginUser }">  
+		                    <td align="right" style="padding-right:0px;"><button class="maker_button trigger">개설자문의</button> <button id="maker_ban_button" class="trigger2">개설자신고</button></td>
+		                    <td></td>
+		                    <td class="info_title" id="zzimDir" style="vertical-align: middle;">
+			                    <input type="button" class="side_button2" value="공유">&nbsp;&nbsp;
+			                    <c:choose>
+	                				<c:when test="${ wr == 1 }">
+	                					<input type="button" class="side_button" id="addWish" value="♥">
+	                				</c:when>
+	                				<c:otherwise>
+	                					 <input type="button" class="side_button" id="addWish" value="♡">
+	                				</c:otherwise>
+	                			</c:choose>
+			                    
+		                    </td>
+                		</c:when>
+                		<c:otherwise>
+                			<td></td>
+                			<td></td>
+                			<td></td>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                	<form id="addWish" action="addWish.pro" method="post">
+                		<input style="display:none;" name="userNo" value="${ loginUser.userNo }">
+                		<input style="display:none;" name="projectNumber" value="${ p.projectNumber }">
+                	</form>
+                	
                 </tr>
             </table>
         </div><br>
@@ -524,6 +727,20 @@
                         <td class="rewardArea" >
                             <!-- 리워드들 -->
                             <table id="rewardTable">
+                            
+                                <!-- for문 -->
+	                            <c:forEach items="${ rlist }" var ="r">
+	                                <tr>
+	                                    <td><div>
+	                                        <b class="reward_money"><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" />원 펀딩</b>
+	                                        <p class="reward_name">${ r.rewardTitle }<br></p>
+	                                        <p>${ r.rewardContent }<br></p>
+	                                        <button class="reward_sum">${ r.rewardFundingCount }명</button>&nbsp;&nbsp;참여 / 수량 ${ r.rewardRemainingQuantity }개 남음
+	                                    </div></td>
+	                                </tr>
+                                </c:forEach>
+                                
+								<!--                                 
                                 <tr>
                                     <td><div>
                                         <b class="reward_money">30,000원 펀딩</b>
@@ -540,6 +757,8 @@
                                         <button class="reward_sum">50명</button>&nbsp;&nbsp;참여 / 수량 70개 남음
                                     </div></td>
                                 </tr>
+                                 -->
+                                
                             </table>
                         </td>
                     </tr>
@@ -560,9 +779,9 @@
 
     </div>
 
-	<jsp:include page="../common/footer.jsp"/>
-	
-	
+	<%-- <jsp:include page="../common/footer.jsp"/> --%>
+	<input hidden id="dddd" value="${loginUser.userId}" >
+
     <script>
 
 		// D-day 
@@ -580,18 +799,18 @@
 		});
 		
 		
-		 // 댓글 등록
+		// 댓글 등록
 		$(function(){
-    		selectReplyList();
+    		selectReplyList(); // 댓글 조회
     		
-    		/*
     		$("#addReply").click(function(){
     			
     			$.ajax({
     				url: "rinsert.pro",
-    				data: {replyContent:$("#replyContent").val(),
-    					   refBoardNo:${p.projectNumber},
-    					   replyWriter:"${loginUser.userId}"},
+    				data: { userNo: "${ loginUser.userNo }", 					    
+    						replyContent: $("#replyContent").val(),
+    						projectNumber: "${p.projectNumber}"
+    					    },
     				type: "post",
     				success: function(status){
     					
@@ -611,32 +830,63 @@
     			
     		});
     		
-    		*/
     	}); 
     	
     	// 댓글 출력
     	function selectReplyList(){
-    			
+    						
     		$.ajax({
     			url: "rlist.pro",
     			data: { pno:"${ p.projectNumber }" },
     			success: function(list){
     				
-    				//console.log(list);
-    				
     				//$("#rcount").text(list.length); // 댓글 수
     				
     				var value = "";
     				
+    				
     				for(var i in list){ // Gson 기본 포맷에 맞게 날짜가 나옴 
     					
-				        value += "<tr>" +
+     					if( $("#dddd").val() != null ){ // 로그인 했을 때
+    						
+        					if( $("#dddd").val() == list[i].userNo ){ // 로그인한 id와 동일할 때 --> 신고 x, 삭제/수정 o
+        						
+        				        value += "<tr>" +
+						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
+						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn' >수정</button> <button class='rBtn'>삭제</button>" + "</td>" +
+						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
+						                 "</tr>";
+			                 
+        					}else{ // 동일하지않을 때
+        						
+        				        value += "<tr>" +
+						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
+						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBanBtn' onclick='replyBan(" + list[i].replyNo + ");'>신고</button></td>" +
+						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
+						                 "</tr>";
+        					}
+    						
+    					}else{	// 로그인 안했을 때
+    						
+    				        value += "<tr>" +
+					                    "<td width='330px' colspan='2'>" + list[i].replyContent + "</td>" +
+					                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
+					                 "</tr>";
+    					}
+    					
+
+    				 
+    				 
+    				/* //var a = "list[i].replyNo";
+    				 
+			        value += "<tr>" +
+			        				"<td style='display:none'>" + list[i].replyNo + "</td>" +
 				        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-				                    "<td width='330px' colspan='2'>" + list[i].replyContent + "</td>" +
+				                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn'>수정</button> <button class='rBtn'>삭제</button>" + "<button class='rBanBtn' onclick='replyBan(\'" + list[i].replyNo + "\');'>신고</button></td>" +
 				                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
-				                 "</tr>";
+				                 "</tr>"; 
+    				 */
     				}
-    				
     				$("#replyArea tbody").html(value);
     				
     			}, error: function(){
@@ -645,8 +895,193 @@
     		});
     	}
     	
+    	// 댓글 신고
+    	function replyBan(replyNo){ 
+    		
+    		//var userNo = $(this).parent().parent().parent().eq(0).text();
+    		//console.log(replyNo);
+
+    	/* $(".rBanBtn").click(function(replyNo){ */
+    		
+			$.ajax({
+				url: "rBan.pro",
+				data: { replyNo: "replyNo"  },
+				type: "post",
+				success: function(status){
+				
+					if(status == "success"){
+						
+						alert("댓글 신고 성공");
+						selectReplyList(); // 다시 댓글 조회
+						
+					}else{
+						alert("댓글 신고 실패");
+					}
+				}, error: function(){
+					alert("댓글 신고 ajax 통신 실패");
+				}
+			});
+			
+    	}
+    	
+/*     	// 참여하기 버튼
+    	function goFunding(){
+    		
+    		var $userNo = $("#userNo").val();
+    		console.log($userNo);
+    		
+    		if( $userId != null ){
+    			
+    			location.href="rewardList.pay?pno=" + "${ p.projectNumber }";
+    			
+    		}else{
+    			
+    			alert("로그인 후 사용가능합니다.");
+    		}
+    		
+    	} */
+    	
+    	
+    	
+    // 찜 리스트 추가 
+	 $("#addWish").click(function(){
+		 
+		 var projectNumber = $("#zzimNumber").val();
+		 var userNo = $("#zzimNo").val()
+		 
+		 
+		 $.ajax({
+    			url:"selectWish.pro",
+    			data:{projectNumber:projectNumber,
+    				  userNo:userNo},
+    			type:"post",
+    			
+    			success:function(status){
+    				
+    				if(status == "delete"){
+    					
+							alert("찜하기가 취소되었습니다.");
+							$("#addWish").val("♡");
+
+					}else{
+						
+						alert("해당 프로젝트가 찜되었습니다. 찜목록은 마이페이지에서 확인 가능합니다.");
+						$("#addWish").val("♥");
+						
+					}
+    				
+    			},error:function(){
+    				console.log("ajax 통신실패!!");	
+    			}
+    		});
+		 
+	 });
+
     </script>
+    
+    <!--------------------------------- 팝업 ---------------------------------------------------------------->
+	<!-- 개설자 문의 popup -->
+	<div class="modal"> 
+		 <div class="modal-content"> 
+		     <span class="close-button">&times;</span> 
+		     <h1 class="title">개설자 문의</h1> 
+		     <h4>프로젝트 : ${ p.projectName }</h4>
+		     
+		     <form action="qinsert.pro?pno=${ p.projectNumber }" method="POST"> 
+		       <!-- <label for="text">제목</label>  -->
+		       <input hidden id="zzimNumber" value="${ p.projectNumber }">
+		       <input type="text" id="zzimNo" name="userNo" style="display:none" value="${ loginUser.userNo }">
+		       <input type="text" name="counseling" style="display:none" value="${ p.userNo }">
+		       <input type="text" name="questionTitle" placeholder="제목" required="required"> 
+		       <label></label> 
+		       <textarea name="questionContent" placeholder="내용" required="required" style="resize:none"></textarea>
+		            
+	          <div align="center">
+	           	<input type="submit" id="submit" value="보내기"> 
+	            <input type="button" id="cancel" value="취소"> 
+	           </div>
+	         </form> 
+	     </div> 
+	 </div>
+	 <!-- 개설자 신고 popup -->
+	<div class="modal2"> 
+	    <div class="modal-content"> 
+	        <span class="close-button2">&times;</span> 
+	        <h1 class="title">개설자 신고</h1> 
+	        <h4>프로젝트 : ${ p.projectName }</h4>
+	        
+	        <form action="binsert.pro" method="POST"> 
+	          <input type="text" name="userNo" style="display:none" value="${ loginUser.userNo }"> <!-- 신고한 사람 -->
+	          <input type="text" name="reportNo" style="display:none" value="${ p.projectNumber }"> <!-- 신고 프로젝트 -->
+	          <input type="text" name="reportTitle" placeholder="제목" required="required"> 
+	          <label></label> 
+	          <textarea name="reportContent" placeholder="신고 내용" required="required" style="resize:none"></textarea>
+	            
+	           <div align="center">
+	           	   <input type="submit" id="submit2" value="보내기"> 
+	            <input type="button" id="cancel2" value="취소"> 
+	           </div>
+	         </form> 
+	     </div> 
+	 </div>
+	<!--------------------------------- 팝업 ---------------------------------------------------------------->
+		
+		
+	<!--------------------------------- 팝업  스크립트---------------------------------------------------------------->
+	<script type="text/javascript"> 
+	
+		window.onload = function(){
+		
+			<!-- 개설자 문의 popup -->
+		    var modal = document.querySelector(".modal"); 
+		    var trigger = document.querySelector(".trigger"); 
+		    var closeButton = document.querySelector(".close-button"); 
+		    var cancelButton = document.querySelector("#cancel");
+		
+		   function toggleModal() { 
+		        modal.classList.toggle("show-modal"); 
+		    }
+		
+		   function windowOnClick(event) { 
+		        if (event.target === modal) { 
+		            toggleModal(); 
+		        } 
+		    }
+		
+		   trigger.addEventListener("click", toggleModal); 
+		    closeButton.addEventListener("click", toggleModal); 
+		    cancel.addEventListener("click", toggleModal); 
+		    window.addEventListener("click", windowOnClick);
+			<!-- 개설자 문의 popup 끝 -->	
+	
+			
+			<!-- 개설자 신고 popup -->	
+		    var modal2 = document.querySelector(".modal2"); 
+		    var trigger2 = document.querySelector(".trigger2"); 
+		    var closeButton2 = document.querySelector(".close-button2"); 
+		    var cancelButton2 = document.querySelector("#cancel2");
+		
+		   function toggleModal2() { 
+		        modal2.classList.toggle("show-modal2"); 
+		    }
+		
+		   function windowOnClick2(event) { 
+		        if (event.target === modal2) { 
+		            toggleModal2(); 
+		        } 
+		    }
+		
+		    trigger2.addEventListener("click", toggleModal2); 
+		    closeButton2.addEventListener("click", toggleModal2); 
+		    cancel2.addEventListener("click", toggleModal2); 
+		    window2.addEventListener("click", windowOnClick2); 
+		    <!-- 개설자 신고 popup 끝 -->	
+		}
+		
+	</script>
+	<!--------------------------------- 팝업 ---------------------------------------------------------------->
+
+
 
 </body>
-
 </html>
