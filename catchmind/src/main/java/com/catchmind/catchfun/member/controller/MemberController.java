@@ -389,11 +389,10 @@ public class MemberController {
 		System.out.println(loginUser);
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
-<<<<<<< HEAD
+
 			System.out.println("성공성공");
-			
-=======
->>>>>>> 9786948eec0581bc1416fc60e1ec369cf5c2764f
+		
+
 			if(loginUser.getUserId().equals("admin")) {
 				mv.setViewName("admin/adminMember");
 				//mv.setViewName("common/admin");
