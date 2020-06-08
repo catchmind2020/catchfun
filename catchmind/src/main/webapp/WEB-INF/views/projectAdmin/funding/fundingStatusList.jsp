@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.*" %>
+    pageEncoding="UTF-8" %>
 <%
 
-ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-PageInfo pi = (PageInfo)request.getAttribute("pi");
 
-int currentPage = pi.getCurrentPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
 
 %>
 
@@ -55,7 +49,7 @@ int maxPage = pi.getMaxPage();
 }
 
 .outer {
-	min-width: 1800px;
+	min-width: 800px;
 }
 
 .black {
@@ -64,6 +58,7 @@ int maxPage = pi.getMaxPage();
 }
 
 .blacktool {
+	/* vertical-align: middle; */
 	width: 700px;
 	height: 120px;
 	background-color: white;
@@ -72,16 +67,21 @@ int maxPage = pi.getMaxPage();
 	color: black;
 }
 </style>
+
+</style>
 </head>
 
 <body>
-<%@ include file="../menubarIm.jsp" %>
+	<div style="position: fixed">
+		<%@ include file="../common/menubarIm.jsp"%>
+	</div>
 	<!-- <div  style="position: fixed";> -->
 
 	<div class="outer">
 	
-		<form style="margin-left: 13%;">
-			<div style="width: 100%; height: 1000px; overflow: auto;">
+	<div style=" height: 700px ; margin-left: 270px;">
+		
+		
 			<br>
 			<h1 class="h3 text-gray-900 mb-4">펀딩결제현황</h1>
 			<div class="card shadow mb-4" style="width: 500px;">
@@ -90,10 +90,10 @@ int maxPage = pi.getMaxPage();
                 </div>
                 <div class="card-body">
 	                 	<h1 class="black">
-						1) 1,300,000원목표
+						1) ${project.projectTargetAmount }원목표
 						</h1>
 						<h1 class="black">
-						2) 2018.05.02~2018.06.03 자정마감
+						2) ${project.projectStartDate }~${project.projectFinishDate } 마감
 						</h1>
                 </div>
             </div>
@@ -109,7 +109,7 @@ int maxPage = pi.getMaxPage();
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 결제 예약금액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">164,000원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum}</div>
                       <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 5,000원</div>
                     </div>
                   
@@ -136,7 +136,7 @@ int maxPage = pi.getMaxPage();
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 건수</div>
+                      <div class="h5 font-weight-bold text-primary text-uppercase mb-1">${fundSum.fundCount}</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">11건</div>
                       <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 1건</div>
                     </div>
@@ -147,7 +147,7 @@ int maxPage = pi.getMaxPage();
             </div>
 		</div>
 		<br><br>
-		  <div class="card shadow mb-4" style="width: 1000px; height: 500px; margin-left: 13%;">
+		  <div class="card shadow mb-4" style="width: 800px; height: 500px; ">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">수익현황</h6>
                 </div>
@@ -161,7 +161,7 @@ int maxPage = pi.getMaxPage();
               </div>
 		 <br>
 		 <h1 class="h3 text-gray-900 mb-4">펀딩내역</h1>
-		 <table class="table-bordered table-hover table-sm listArea" style="width:1300px; height: 500px;" cellspacing="0">
+		 <table class="table-bordered table-hover table-sm listArea" style="width:1000px; height: 500px;">
             <thead>
               <tr>
                 <th width="50px" style="text-align: center;">
@@ -180,71 +180,35 @@ int maxPage = pi.getMaxPage();
             </thead>
             <tbody>
             
-			<% if(list.isEmpty()){ 	// 리스트가 비어있을 경우 %>	
+		
 			<tr>
 				<td colspan="6">존재하는 공지사항이 없습니다.</td>
 			</tr>
-			<% } else {	// 리스트가 비어있지 않을 경우 %>
 			
-				<% for(Notice n : list){ %>
 				<tr>
 					<td class="firsttd" style="text-align: center;"><div class="" >
 					
                     <label>
                     <input class="checkbox " type="checkbox" name="" value="" style="vertical-align: middle; transform: scale(1.4);"></label>
                   </div></td>
-					<td><%= n.getNoticeNo() %></td>
-					<td><%= n.getNoticeTitle() %></td>
-					<td><%= n.getNoticeWriter() %></td>
-					<td><%= n.getNoticeCount() %></td>
-					<td><%= n.getNoticeDate() %></td>
-					<td><%= n.getNoticeCount() %></td>
-					<td><%= n.getNoticeDate() %></td>
+					<td>getNoticeDate() %></td>
+					<td>getNoticeDate() %></td>
+					<td>getNoticeDate() %></td>
+					<td>getNoticeDate() %></td>
 				</tr>	
-				<% } %>
-				
-			<% } %>
+			
             </tbody>
           </table>
              
 
    	<br><br>
-   	
- 							<div class="" style="margin-right: 40%;">
-					            <ul class="pagination justify-content-center">
-						        <% if(currentPage!=1) {%>
-						              <li class="paginate_button page-item previous" id="">
-						                <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=1" class="page-link">FIRST</a>
-						              </li>
-						 		      <li class="paginate_button page-item previous" id="">
-					                  <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=currentPage-1%>" class="page-link">&lt;</a>
-					                  </li>
-						        <% } %>
-								  <%for(int p=startPage; p<=endPage; p++){ %>
-										<% if(currentPage != p){%>
-										<li class="paginate_button page-item" id="">
-					              				<a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=p%>" class="page-link"><%=p%></a>
-					             		</li>
-										<% }else { %>
-										<li class="paginate_button page-item" id="">
-					              				<a href="#" class="page-link" style="none"><%=p%></a>
-					             		</li>	
-										<% } %>
-								  <%} %>
-						  		<% if(currentPage!=maxPage) {%>
-					              <li class="paginate_button page-item next" id="">
-					                <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=currentPage+1%>" class="page-link">&gt;</a>
-					              </li>
-
-						 		  <li class="paginate_button page-item next" id="">
-					                <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=maxPage%>" class="page-link">LAST</a>
-					              </li>
-						  		<% } %>
-					            </ul>
-					          </div>				
+   					
+			
+			
+			
 			</div>
 
-		</form>
+		
 	</div>
  
  

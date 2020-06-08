@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%
  	String contextPath = request.getContextPath();
-/* 	String msg = (String)session.getAttribute("msg");
-	
-	Member loginUser = (Member)session.getAttribute("loginUser"); */
+
 %>
 
 <!DOCTYPE html>
@@ -14,11 +12,9 @@
 <meta charset="UTF-8">
 <title>통합관리자</title>
 
-<script src="<%=contextPath%>/resources/js/jquery-3.2.1.min.js"></script>
-	<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
-	<script src="<%=contextPath%>/resources/js/owl.carousel.min.js"></script>
-	<script src="<%=contextPath%>/resources/js/jquery.marquee.min.js"></script>
-	<script src="<%=contextPath%>/resources/js/main.js"></script>
+
+
+
 <!-- Custom fonts for this template-->
   <link href="<%=contextPath%>/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -83,17 +79,30 @@
  
       <!-- Nav Item -  회원관리 -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<%=contextPath%>/home.pa" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      
+        <c:choose>
+		<c:when test="${ project.projectStatus eq 'E' }">
+     	  <a class="nav-link collapsed" href="<%=contextPath%>/home.pa">
+          <i class="fas fa-fw fa-user"></i>
+          <span>펀딩준비(제출)</span>
+        </a>
+        </c:when>
+        <c:otherwise>
+        
+           <a class="nav-link collapsed" href="<%=contextPath%>/home.pa" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>펀딩준비</span>
         </a>
+        </c:otherwise>
+        </c:choose>
+        
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<%= contextPath %>/basic.pa">기본요건</a>
-            <a class="collapse-item" href="<%= contextPath %>/story.pa?currentPage=1">기본정보/스토리</a>
+            <a class="collapse-item" href="<%= contextPath %>/basicSelect.pa">기본요건</a>
+            <a class="collapse-item" href="<%= contextPath %>/story.pa">기본정보/스토리</a>
             <a class="collapse-item" href="<%= contextPath %>/itemList.pa">아이템설계</a>
             <a class="collapse-item" href="<%= contextPath %>/rewardList.pa">리워드설계</a>
-         	<a class="collapse-item" href="<%= contextPath %>/maker.pa?currentPage=1">메이커정보</a>
+         	<a class="collapse-item" href="<%= contextPath %>/selectMaker.pa">메이커정보</a>
          
           </div>
         </div>
@@ -235,8 +244,11 @@
   <script src="<%= contextPath %>/resources/js/main.js"></script>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="<%= contextPath %>/resources/admin/vendor/jquery/jquery.min.js"></script>
+
   <script src="<%= contextPath %>/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
 
   <!-- Core plugin JavaScript-->
   <script src="<%= contextPath %>/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>

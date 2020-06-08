@@ -1,199 +1,237 @@
 package com.catchmind.catchfun.projectAdmin.controller;
 
-
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.projectAdmin.model.service.ProjectAdminService;
+import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
 import com.catchmind.catchfun.projectAdmin.model.vo.Option;
 import com.catchmind.catchfun.projectAdmin.model.vo.Project;
 import com.catchmind.catchfun.projectAdmin.model.vo.ProjectBasic;
+import com.catchmind.catchfun.projectAdmin.model.vo.ProjectMaker;
 import com.catchmind.catchfun.projectAdmin.model.vo.Reward;
-
-
-
-
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
-import com.google.gson.GsonBuilder;
 
 @Controller
 public class ProjectAdminController {
 
 	@Autowired // DI
 	private ProjectAdminService paService;
-		
+
 	@RequestMapping("basicSelect.pa")
-		public ModelAndView basicInformation(HttpSession session, ModelAndView mv) {
-		
-		
-		Project pro  = (Project)session.getAttribute("projectUser");
-		
-		System.out.println("삽입프젝객체");
-		System.out.println(pro);
+	public ModelAndView basicInformation(HttpSession session, ModelAndView mv) {
+
+		Project pro = (Project) session.getAttribute("projectUser");
+
 		ProjectBasic pb = paService.basicInformation(pro);
-		
-		System.out.println("기본객체");
+
 		System.out.println(pb);
-		
-		session.setAttribute("projectBasic1", pb);
+		session.setAttribute("projectBasic", pb);
+
 		mv.setViewName("projectAdmin/projectEnroll/basicInformation");
-		
+
 		return mv;
-			
-		}
+
+	}
+
+	@RequestMapping("selectMaker.pa")
+	public ModelAndView selectMaker(HttpSession session, ModelAndView mv) {
+
+		Project pro = (Project) session.getAttribute("projectUser");
+
+		ProjectMaker maker = paService.selectMaker(pro);
+
+		session.setAttribute("projectMaker", maker);
+
+		System.out.println(maker);
+		mv.setViewName("projectAdmin/projectEnroll/makerInformation");
+
+		return mv;
+
+	}
 	
+	@RequestMapping("selectProject.pa")
+	public ModelAndView selectProject(HttpSession session, ModelAndView mv) {
+
+		Project pro = (Project) session.getAttribute("projectUser");
+
+		
+		
+		Project project = paService.selectProject(pro);
+System.out.println(project);
+		session.setAttribute("project", project);
+
+	
+		mv.setViewName("projectAdmin/projectEnroll/stroyproject");
+
+		return mv;
+
+	}
+	
+	@RequestMapping("fund.pa")
+	public ModelAndView selectfund
+	(HttpSession session, ModelAndView mv) {
+
+		Project project = (Project) session.getAttribute("projectUser");
+
+		
+		
+		FundSum fundSum = paService.fundSum(project.getProjectNo());
+
+		
+		System.out.println(fundSum);
+		session.setAttribute("fundSum", fundSum);
+
+	
+		mv.setViewName("projectAdmin/funding/fundingStatusList");
+
+		return mv;
+
+	}
+	/*
+	 * @RequestMapping("summer.pa") public String basicInformatiodn() { return
+	 * "projectAdmin/projectEnroll/summernote"; }
+	 */
+
 	@RequestMapping("basic.pa")
 	public String basicInformation() {
 		return "projectAdmin/projectEnroll/basicInformation";
 	}
-	
+
 	@RequestMapping("story.pa")
 	public String fundingRequirment() {
 		return "projectAdmin/projectEnroll/stroyproject";
 	}
+
 	@RequestMapping("maker.pa")
 	public String makerInformation() {
 		return "projectAdmin/projectEnroll/makerInformation";
 	}
+
 	@RequestMapping("reward.pa")
 	public String itemDesign() {
 		return "projectAdmin/projectEnroll/rewardDesign";
 	}
-	
+
 	@RequestMapping("home.pa")
-	public String home(Model model, HttpSession session) {
+	public String home(Model model, HttpSession session, ModelAndView mv) {
 		selectRewardList(model, session);
 		selectItemList(model, session);
 		selectOptionList(model, session);
-		
-		
+		basicInformation(session, mv);
+		selectMaker(session, mv);
+		selectProject(session, mv);
 		return "projectAdmin/projectEnroll/home";
 	}
 
 	@RequestMapping("insertBasic.pa")
 	public ModelAndView insertBasic(ProjectBasic pb, ModelAndView mv, HttpSession session) {
 		System.out.println(pb);
-		
-		Project pro  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		pb.setProjectNo(pro.getProjectNo()); //bp객체에 불러온 프로젝트 번호를 넣어주고
-		
+
+		Project pro = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		pb.setProjectNo(pro.getProjectNo()); // bp객체에 불러온 프로젝트 번호를 넣어주고
+
 		int result = paService.insertBasic(pb); // pb 객체를 인설트함.
- 		
-		if(result > 0) { 
-			
+
+		if (result > 0) {
+
 			session.setAttribute("projectBasic", pb);
-			mv.setViewName("projectAdmin/projectEnroll/home");
-			
-		}else {
-			
+			mv.setViewName("redirect:home.pa");
+
+		} else {
+
 			System.out.println("실패");
 			mv.setViewName("projectAdmin/projectEnroll/home");
 		}
 		return mv;
-		
+
 	}
-	
-	
+
 	@RequestMapping("insertItem.pa")
 	public String insertItem(Item item, Model model, HttpSession session) {
 
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		item.setProjectNo(project.getProjectNo()); //item객체에 불러온 프로젝트 번호를 넣어주고
-		
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		item.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
 		int result = paService.insertItem(item); // item 객체를 인설트함.
- 		
-		if(result > 0) {
-		
+
+		if (result > 0) {
+
 			model.addAttribute("item", item);
 
-			return "redirect:itemList.pa";  //리스트 출력을위해 리스트 컨트롤 단 감.
-			
-		}else { 
-			
+			return "redirect:itemList.pa"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		} else {
+
 			System.out.println("실패");
 			return "projectAdmin/projectEnroll/itemDesign";
 		}
-	
-		
+
 	}
-	
+
 	@RequestMapping("deleteItem.pa")
 	public String deleteItem(Item item, Model model, HttpSession session) {
 
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		item.setProjectNo(project.getProjectNo()); //item객체에 불러온 프로젝트 번호를 넣어주고
-		
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		item.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
 		int result = paService.deleteItem(item); // item 객체를 인설트함.
- 		
-		if(result > 0) {
+
+		if (result > 0) {
 
 			return "redirect:itemList.pa";
-			
-		}else { 
-			
+
+		} else {
+
 			System.out.println("실패");
 			return "redirect:itemList.pa";
 		}
-	
-		
+
 	}
-	
-	
-	
+
 	@RequestMapping("plogin.pa")
 	public ModelAndView ploginMember(int projectNo, HttpSession session, ModelAndView mv) {
-		
+
 		Project projectUser = paService.ploginMember(projectNo); // 아이디만을 가지고 조회한 결과
-		
-		
-			session.setAttribute("projectUser", projectUser);
-			System.out.println("성공성공");	
-			
-				mv.setViewName("projectAdmin/projectEnroll/home");
+
+		session.setAttribute("projectUser", projectUser);
+		System.out.println("성공성공");
+
+		mv.setViewName("projectAdmin/projectEnroll/home");
 //				mv.setViewName("common/admin");
-			
-		
+
 		return mv;
 	}
-	
-	
-	
+
 	@RequestMapping("ptest.pa")
-	public ModelAndView ploginMember(ModelAndView mv, HttpSession session) {
-		
-		Project projectUser = new Project("PR1","","M1","용환프젝","","","","","","","","Y","Y"); // 아이디만을 가지고 조회한 결과
-		
-		
-			session.setAttribute("projectUser", projectUser);
-			System.out.println(projectUser);	
-				mv.setViewName("projectAdmin/projectEnroll/home");
-		
+	public ModelAndView ploginMember(ModelAndView mv, HttpSession session, Model model) {
+
+		Project projectUser = new Project("PR10", "", "", "", "", "", "", "", "", "", "", "", "","",""); // 아이디만을 가지고
+																											// 조회한 결과
+
+		session.setAttribute("projectUser", projectUser);
+		System.out.println(projectUser);
+
+		home(model, session, mv);
+		mv.setViewName("projectAdmin/projectEnroll/home");
+
 		return mv;
 	}
-	
+
 	/*
 	 * @RequestMapping("selectProject.pa") public String selectproject(Project p,
 	 * HttpSession session, ModelAndView mv) { ProjectBasic pb =
@@ -203,167 +241,292 @@ public class ProjectAdminController {
 	 * return "projectAdmin/projectEnroll/stroyproject"; }
 	 */
 	@RequestMapping("itemList.pa")
-	public String selectItemList(Model model,HttpSession session) {
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		
-		ArrayList<Item> list = paService.selectItemList(project.getProjectNo());
-		
-		
+	public String selectItemList(Model model, HttpSession session) {
 
-	
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+
+		ArrayList<Item> list = paService.selectItemList(project.getProjectNo());
 
 //		for(Item dd : list) {
 //
 //		    System.out.println(dd);
 //
 //		}
-		
 
-		model.addAttribute("list", list);
-		
+		session.setAttribute("ilist", list);
+
 		return "projectAdmin/projectEnroll/itemDesign";
 	}
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping("insertReward.pa")
 	public String insertReward(Reward reward, Model model, HttpSession session) {
 
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		reward.setProjectNo(project.getProjectNo()); //item객체에 불러온 프로젝트 번호를 넣어주고
-		
-		
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		reward.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
+		paService.insertReward(reward); // item 객체를 인설트함.
+
 	
-		int result = paService.insertReward(reward); // item 객체를 인설트함.
- 		
-		if(result > 0) {
+
+		
+			 selectItemList(model, session); selectRewardList(model, session);
+			 
+			return "projectAdmin/projectEnroll/rewardDesign"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+
+	
+	}
+	
+	@RequestMapping("enrollProject.pa")
+	public String enrollProject(Reward reward, Model model, HttpSession session) {
+
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		 // item객체에 불러온 프로젝트 번호를 넣어주고
+		System.out.println(project.getProjectNo());
+		paService.updateBasic(project.getProjectNo()); //등록대기상태변환
+		paService.updateMaker(project.getProjectNo());
+		paService.updateStory(project.getProjectNo());	// 프로젝트임이건
+		paService.updateItem(project.getProjectNo());
+		paService.updateReward(project.getProjectNo());
 			
-			selectItemList(model, session);
-			selectRewardList(model, session);
-			return "projectAdmin/projectEnroll/rewardDesign";  //리스트 출력을위해 리스트 컨트롤 단 감.
+			session.setAttribute("project", project);
+			return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		
+	}
+	
+	@RequestMapping("updateBasic2.pa")
+	public String enrollProject(ProjectBasic Basic, Model model, HttpSession session) {
+
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		 // item객체에 불러온 프로젝트 번호를 넣어주고
+		Basic.setProjectNo(project.getProjectNo());
+		paService.updateBasic2(Basic); //등록대기상태변환
+	
 			
-		}else { 
+			return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		
+	}
+	@RequestMapping("updateMaker2.pa")
+	public String enrollProject(ProjectMaker maker, HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
+
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		 // item객체에 불러온 프로젝트 번호를 넣어주고
+		if (!file.getOriginalFilename().equals("")) {
+
+			// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
+			String changeName = saveFile(file, request);
+
+			maker.setOriginName(file.getOriginalFilename());
+			maker.setChangeName(changeName);
+
+		}
+		maker.setProjectNo(project.getProjectNo());
+		paService.updateMaker2(maker); //등록대기상태변환
+	
 			
+		
+			return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		
+	}
+	
+	
+
+	@RequestMapping("updateProject.pa")
+	public String insertProject(Project project, HttpServletRequest request, HttpSession session,
+		@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
+
+		Project p = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		project.setProjectNo(p.getProjectNo()); // item객체에 불러온 
+	
+		
+		if (!file.getOriginalFilename().equals("")) {
+
+			// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
+			String changeName = saveFile(file, request);
+
+			project.setOriginName(file.getOriginalFilename());
+			project.setChangeName(changeName);
+
+		}
+
+		System.out.println(project);
+		
+		paService.insertFile(project);
+		int result = paService.updateProject(project); // item 객체를 인설트함.
+
+		/* session.setAttribute("projectUser", projectUser); 좀따 셀렉 */
+		if (result > 0) {
+
+			return "redirect:home.pa"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		} else {
+
 			System.out.println("실패");
 			return "projectAdmin/projectEnroll/itemDesign";
 		}
-	
-		
-		
 	}
-	
-	
+
 	@RequestMapping("rewardList.pa")
-	public String selectRewardList(Model model,HttpSession session) {
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		
+	public String selectRewardList(Model model, HttpSession session) {
+
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+
 		ArrayList<Reward> rlist = paService.selectRewardList(project.getProjectNo());
-		
-		
-	
-	
 
 //		for(Item dd : list) {
 //
 //		    System.out.println(dd);
 //
 //		}
-		
+
 		session.setAttribute("rlist", rlist);
-	
+
 		selectOptionList(model, session);
-		
-		
-		
+
 		return "projectAdmin/projectEnroll/rewardDesign";
 	}
-	
+
 	@RequestMapping("optionList.pa")
-	public String selectOptionList(Model model,HttpSession session) {
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		
+	public String selectOptionList(Model model, HttpSession session) {
+
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+
 		ArrayList<Option> optionlist = paService.selectOptionList();
-		
-		
-	
-	
 
 //		for(Item dd : list) {
 //
 //		    System.out.println(dd);
 //
 //		}
-		
+
 		session.setAttribute("optionlist", optionlist);
-		
-		
+
 		return "projectAdmin/projectEnroll/rewardDesign2";
 	}
-	
+
 	@RequestMapping("deleteReward.pa")
 	public String deleteReward(Reward reward, Model model, HttpSession session) {
 
-		
-		Project project  = (Project)session.getAttribute("projectUser"); //현재 프로젝트 로그인된걸 불러와요
-		reward.setProjectNo(project.getProjectNo()); //item객체에 불러온 프로젝트 번호를 넣어주고
-		
+		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		reward.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
 		int result = paService.deleteReward(reward); // item 객체를 인설트함.
 		selectOptionList(model, session);
-		if(result > 0) {
+		if (result > 0) {
 
 			return "redirect:rewardList.pa";
-			
-		}else { 
-			
+
+		} else {
+
 			System.out.println("실패");
 			return "redirect:itemList.pa";
 		}
-	
-		
+
 	}
-	
+
 	@RequestMapping("rewardDesign2.pa")
 	public String rewardDesign2(Reward reward, Model model, HttpSession session) {
-		Project project  = (Project)session.getAttribute("projectUser");
-		
-		reward.setProjectNo(project.getProjectNo()); //item객체에 불러온 프로젝트 번호를 넣어주고
-		
-	
+		Project project = (Project) session.getAttribute("projectUser");
+
+		reward.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
 		session.setAttribute("reward", reward);
 		selectOptionList(model, session);
 		selectItemList(model, session);
 		selectRewardList(model, session);
 		return "projectAdmin/projectEnroll/rewardDesign2";
 	}
-	
-	
-	
+
 	@RequestMapping("insertOption.pa")
 	public String insertOption(Option option, Model model, HttpSession session) {
 
-		
-	
-
 		int result = paService.insertOption(option); // item 객체를 인설트함.
- 		
-		if(result > 0) {
+
+		if (result > 0) {
 			selectOptionList(model, session);
 			selectItemList(model, session);
 			selectRewardList(model, session);
-			return "projectAdmin/projectEnroll/rewardDesign2";  //리스트 출력을위해 리스트 컨트롤 단 감.
-			
-		}else { 
-			
+			return "projectAdmin/projectEnroll/rewardDesign2"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		} else {
+
 			System.out.println("실패");
 			return "projectAdmin/projectEnroll/itemDesign";
 		}
 
 	}
+
+	@RequestMapping("insertMaker.pa")
+	public String insertMaker(ProjectMaker maker, HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
+
+		Project project = (Project) session.getAttribute("projectUser");
+
+		maker.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
+		// System.out.println(b);
+		// System.out.println(file.getOriginalFilename()); // 첨부파일 있을 경우 원본명 / 첨부파일 없을
+		// 경우 빈문자열
+
+		// 파일업로드 관련된 라이브러리 추가해야만 잘 담김!!
+
+		// 현재 넘어온 파일이 있을 경우 서버에 업로드 후 원본명, 수정명 뽑아서 b 주섬주섬 담기
+		if (!file.getOriginalFilename().equals("")) {
+
+			// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
+			String changeName = saveFile(file, request);
+
+			maker.setOriginName(file.getOriginalFilename());
+			maker.setChangeName(changeName);
+
+		}
+
+		System.out.println(maker);
+		int result = paService.insertMaker(maker);
+
+		if (result > 0) { // 게시글 작성 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지
+
+			return "projectAdmin/projectEnroll/home";
+			/* return "redirect:list.bo?currentPage=1"; */
+
+		} else { // 게시글 작성 실패
+			// 메세지
+			return "common/errorPage";
+		}
+
+	}
+
+	// 공유해서 쓸수 있게끔 따로 정의 해놓은 메소드
+	// 전달받은 파일을 서버에 업로드 시킨 후 수정명 리턴하는 메소드
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+
+		// 파일을 업로드 시킬 폴더 경로 (String savePath)
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources + "\\uploadFiles\\";
+
+		// 원본명 (aaa.jpg)
+		String originName = file.getOriginalFilename();
+
+		// 수정명 (20200522202011.jpg)
+		// 년월일시분초 (String currentTime)
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // "20200522202011"
+
+		// 확장자 (String ext)
+		String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+
+		String changeName = currentTime + ext;
+
+		try {
+			file.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return changeName;
+
+	}
+
 }
