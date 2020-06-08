@@ -38,7 +38,7 @@
 	</resultMap>
 	
 	
-	<resultMap id="projectResultSet" type="Project">
+	<resultMap id="projectResultSet" type="Project2">
 		<id column="PROJECT_NUMBER" property="projectNo"/>
 		<result column="PROJECT_CATEGORY" property="projectCategory"/>
 		<result column="USER_NO" property="userNo"/>
@@ -104,7 +104,7 @@
 	  </select>
 	
 	
-	<select id="basicInformation" parameterType="Project" resultMap="basicResultSet">
+	<select id="basicInformation" parameterType="Project2" resultMap="basicResultSet">
 		select * 
 		  from PROJECT_BASIC
 		 where PROJECT_NUMBER=#{projectNo}
