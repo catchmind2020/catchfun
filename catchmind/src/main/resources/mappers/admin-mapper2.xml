@@ -20,10 +20,37 @@
 		<result column="REASON" property="reason"/>
 	</resultMap>
 	
+	<resultMap id="adminReportResultSet" type="Reply1">
+		<id column="P_QUESTION_NO" property="pQuestionNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="QUESTION_CONTENT" property="questionContent"/>
+		<result column="QUESTION_DATE" property="questionDate"/>
+		<result column="QUESTION_YN" property="questionYN"/>
+		<result column="QUESTION_STATUS" property="questionStatus"/>
+		<result column="QUESTION_BAN_COUNT" property="questionBanCount"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_TYPE" property="userType"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+	</resultMap>
+	
+	<resultMap id="adminProReportResultSet" type="Project1">
+		<id column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PROJECT_REPORT" property="projectReport"/>
+	</resultMap>
+	
 	<select id="memberListCount" resultType="_int">
 		select count(*)
 		  from member	
 		 where status='Y'
+		 
 	</select>
 	
 	<select id="memberList" resultMap="adminMemberResultSet">
@@ -45,6 +72,92 @@
 		 where status='B'
 		 order by user_no asc 
 	</select>
+	
+	<select id="memberSearchCount" resultType="_int">
+		select count(*) 
+		  from member 
+		 where status='Y' and USER_ID LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="memberSearch" resultMap="adminMemberResultSet">
+		select *
+		  from member
+		 where status='Y' and USER_ID LIKE '%' || #{keyword} || '%' 
+	     order by user_no asc  
+	</select>
+	
+	<select id="blackSearchCount" resultType="_int">
+		select count(*)
+		  from member
+		 where status='B'and USER_ID LIKE '%' || #{keyword} || '%' 
+	</select>
+	
+	<select id="blackSearch" resultMap="adminMemberResultSet">
+		select *
+		  from member
+		 where status='B' and USER_ID LIKE '%' || #{keyword} || '%' 
+	     order by user_no asc  
+    </select> 
+    
+    <update id="memberSelect" parameterType="Member">
+    	update Member set status=#{status} where user_no=#{userNo}
+    </update>
+    
+    <update id="blackUpdate" parameterType="Member">
+    	update Member set status='Y' where user_no=#{userNo}
+    </update>
+    
+    <select id="reportListCount" resultType="_int">
+    	select count(*)
+    	  from reply
+    	 where question_status='N'  
+    </select>
+    
+    <select id="reportList" resultMap="adminReportResultSet">
+    	select *
+    	  from reply r
+    	  join member m using(user_no)    	  
+    </select>
+    
+    <select id="reportSearchCount" resultType="_int">
+    	select count(*)
+    	  from reply
+    	  join member using(user_no)
+    	 where USER_ID LIKE '%' || #{keyword} || '%' 
+    </select>
+    
+    <select id="reportSearch" resultMap="adminReportResultSet">
+    	select *
+    	  from reply r
+    	  join member m using(user_no)  
+    	 where m.USER_ID LIKE '%' || #{keyword} || '%'   	  
+    </select>
+    
+    <select id="proReportListCount" resultType="_int">
+    	select count(*)
+		from project p
+		join member m using(user_no) 
+    </select>
+    
+    <select id="proReportList" resultMap="adminProReportResultSet">
+		select *
+		from project p
+		join member m using(user_no)  	  
+    </select>
+    
+    <select id="proReportSearchCount" resultType="_int">
+    	select count(*)
+		from project p
+		join member m using(user_no) 
+    	 where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%' 
+    </select>
+    
+    <select id="proReportSearch" resultMap="adminProReportResultSet">
+     	select *
+		from project p
+		join member m using(user_no)  
+    	where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%'   	  
+    </select>
 
   <!-- 
   <resultMap id="adminResultSet" type="Board">

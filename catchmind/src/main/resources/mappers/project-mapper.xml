@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="projectMapper">
+
+	<resultMap id="projectResultSet" type="Project">
+		<id column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="PROJECT_CATEGORY_NAME" property="projectCategory"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="PROJECT_DATE" property="projectDate"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="PROJECT_CONTENT" property="projectContent"/>
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
+		<result column="PROJECT_REPORT" property="projectReport"/>
+		<result column="HASHTAGS" property="hashtags"/>
+		<result column="PROJECT_STATUS" property="projectStatus"/>
+		<result column="STATUS_STORY" property="statusStory"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
+	<resultMap id="makerResultSet" type="Maker">
+		<id column="MAKER_NO" property="makerNo"/>
+		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="MAKER_NAME" property="makerName"/>
+		<result column="MAKER_EMAIL" property="makerEmail"/>
+		<result column="MAKER_PHONE" property="makerPhone"/>
+		<result column="MAKER_TYPE" property="makerType"/>
+		<result column="REPRESENTATIVE_NAME" property="representativeName"/>
+		<result column="REPRESENTATIVE_EMAIL" property="representativeEmail"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
+	<resultMap id="fundingResultSet" type="FundingList">
+		<result column="SUMPRICE" property="sumPrice"/>
+		<result column="SUMSPONSERSHIP" property="sumSponsership"/>
+		<result column="PERSONCOUNT" property="personCount"/>
+	</resultMap>
+   
+   <resultMap id="newsResultSet" type="News">
+   		<id column="NEWS_NO" property="newsNo"/>
+   		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="NEWS_TITLE" property="newsTitle"/>
+		<result column="NEWS_CONTENT" property="newsContent"/>
+		<result column="NEWS_DATE" property="newsDate"/>
+		<result column="NEWS_COUNT" property="newsCount"/>
+		<result column="NEWS_STATUS" property="newsStatus"/>
+   </resultMap>
+   
+   <resultMap id="replyResultSet" type="ReplyP">
+   	   	<id column="REPLY_NO" property="replyNo"/>
+   		<result column="USER_ID" property="userNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_YN" property="replyYn"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="REPLY_BAN_COUNT" property="replyBanCount"/>
+		<result column="PROJECT_NUMBER" property="projectNumber"/>
+   </resultMap>
+   
+   
+   <select id="selectProject" parameterType="string" resultMap="projectResultSet">
+		SELECT PROJECT_NUMBER, CT.PROJECT_CATEGORY_NAME, USER_NO, P.PROJECT_NAME, PROJECT_FINISHDATE, PROJECT_CONTENT, 
+		               PROJECT_TARGET_AMOUNT, PROJECT_REPORT, HASHTAGS, PROJECT_STATUS, STATUS_STORY, CHANGE_NAME, FILE_PATH
+		  FROM PROJECT P
+		  JOIN CATEGORY_TYPE CT USING (PROJECT_CATEGORY)
+		  JOIN ATTACHMENT A ON (A.REF_NO = P.PROJECT_NUMBER)
+	     WHERE PROJECT_NUMBER = #{pno} AND PROJECT_STATUS = 'N'
+   </select>
+   
+   <select id="selectMaker" parameterType="string" resultMap="makerResultSet">
+   		SELECT PM.*, CHANGE_NAME, FILE_PATH
+		  FROM PROJECT_MAKER PM
+		  JOIN ATTACHMENT A ON (A.REF_NO = PM.MAKER_NO)
+		 WHERE PROJECT_NUMBER = #{pno} AND PM.STATUS = 'N'
+   </select>
+   
+   <select id="selectFunding" parameterType="string" resultMap="fundingResultSet">
+   		SELECT SUM(FUNDING_COST) AS SUMPRICE, SUM(FUNDING_SPONSERSHIP) AS SUMSPONSERSHIP, COUNT(DISTINCT USER_NO) AS PERSONCOUNT
+		FROM FUNDING_LIST
+		WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'N'
+   </select>
+   
+   <select id="selectNews" parameterType="string" resultMap="newsResultSet">
+	   SELECT *
+	   FROM NEWS
+	   WHERE PROJECT_NUMBER=#{pno} AND NEWS_STATUS = 'N'
+	   ORDER BY NEWS_NO
+   </select>
+   
+   <select id="selectReplyList" parameterType="string" resultMap="replyResultSet">
+		SELECT REPLY_NO, USER_ID, REPLY_CONTENT, REPLY_DATE, REPLY_YN, REPLY_STATUS, REPLY_BAN_COUNT, PROJECT_NUMBER
+		  FROM REPLY
+		  JOIN MEMBER USING(USER_NO)
+		 WHERE PROJECT_NUMBER=#{pno} AND REPLY_STATUS= 'N'
+		 ORDER BY REPLY_NO DESC
+   </select>
+   
+   <insert id="insertReply" parameterType="Reply">
+   		insert into reply
+		values('REP'||seq_REPNO.nextval, #{userId}, #{replyContent}, sysdate, 'N', 'N', 0, , #{projectNumber})
+   </insert>
+   
+</mapper>

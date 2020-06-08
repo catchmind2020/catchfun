@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 
@@ -330,26 +332,88 @@ public class AdminController2 {
 	 */	
 	
 	/**
-	 * 회원/블랙리스트 리스트페이지
+	 * 회원 리스트페이지
 	 */
 	@RequestMapping("member.ad")
 	public String adminMemberList(int currentPage, Model model) {
 		  int listCount = aService2.memberListCount();
-		  int listCount1 = aService2.blackListCount();
 		 
 		
 		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
-		  PageInfo pi1 = Pagination.getPageInfo(listCount1, currentPage, 10, 2);
 		 
 		  ArrayList<Member> mlist = aService2.memberList(pi);
-		  ArrayList<Member> blist = aService2.blackList(pi1);
 		  
 		  model.addAttribute("pi", pi); 
-		  model.addAttribute("pi1", pi1);
 		  model.addAttribute("mlist", mlist);
-		  model.addAttribute("blist", blist);
 		  
 		return "admin/adminMember";
+	}
+	
+	@RequestMapping("msearch.ad")
+	public String adminMemberSearch(int currentPage, Model model, String keyword) {
+		
+		int listCount = aService2.memberSearchCount(keyword);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Member> mlist = aService2.memberSearch(pi, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("mlist", mlist);
+		
+		return "admin/adminMemberSearch";
+		
+	}
+	@RequestMapping("adMemberSelect.ad")
+	public String adMemberSelect(Member m, Model model) {
+		
+				
+		int result = aService2.memberSelect(m);
+		
+		return "redirect:member.ad?currentPage=1";
+		
+	}
+	
+	
+	@RequestMapping("black.ad")
+	public String adminBlackList(int currentPage, Model model) {
+		  int listCount = aService2.blackListCount();
+		 
+		
+		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		 
+		  ArrayList<Member> blist = aService2.blackList(pi);
+		  
+		  model.addAttribute("pi", pi);
+		  model.addAttribute("blist", blist);
+		  
+		return "admin/adminBlackList";
+	}
+	
+	
+	@RequestMapping("bsearch.ad")
+	public String adminBlackSearch(int currentPage, Model model, String keyword) {
+		
+		int listCount = aService2.blackSearchCount(keyword);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Member> blist = aService2.blackSearch(pi, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("blist", blist);
+		
+		return "admin/adminBlackListSearch";
+		
+	}
+	
+	@RequestMapping("adBlackUpdate.ad")
+	public String adBlackUpdate(Member m, Model model ) {
+		
+		int result = aService2.blackUpdate(m);
+		
+		return "redirect:black.ad?currentPage=1";
+		
 	}
 	
 	
@@ -358,10 +422,64 @@ public class AdminController2 {
 	 * 댓글/프로젝트 신고 리스트페이지
 	 */
 	@RequestMapping("report.ad")
-	public String adminReport() {
+	public String adminReportList(int currentPage, Model model) {
+		int listCount = aService2.reportListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Reply> rlist = aService2.reportList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("rlist", rlist);
+		
+		
 		return "admin/adminReport";
 	}
 	
+	@RequestMapping("rSearch.ad")
+	public String adminReportSearch(int currentPage, Model model, String keyword) {
+		
+		int listCount = aService2.reportSearchCount(keyword);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Reply> rlist = aService2.reportSearch(pi, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("rlist", rlist);
+		
+		return "admin/adminReportSearch";
+	}
+	
+	@RequestMapping("pReport.ad")
+	public String adminpProReportList(int currentPage, Model model) {
+		int listCount = aService2.proReportListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> prlist = aService2.proReportList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("prlist", prlist);
+		
+		
+		return "admin/adminPjReport";
+	}
+	
+	@RequestMapping("prSearch.ad")
+	public String adminProReportSearch(int currentPage, Model model, String keyword) {
+		
+		int listCount = aService2.proReportSearchCount(keyword);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> prlist = aService2.proReportSearch(pi, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("prlist", prlist);
+		
+		return "admin/adminPjReportSearch";
+	}
 	/**
 	 * 매출 통계 리스트페이지
 	 */

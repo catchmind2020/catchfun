@@ -79,8 +79,10 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="member.ad?currentPage=1">회원</a>
-              <a class="collapse-item" href="report.ad">신고리스트</a>
+              <a class="collapse-item" href="member.ad?currentPage=1">회원리스트</a>
+              <a class="collapse-item" href="black.ad?currentPage=1">블랙리스트</a>
+              <a class="collapse-item" href="report.ad?currentPage=1">댓글신고 리스트</a>
+              <a class="collapse-item" href="pReport.ad?currentPage=1">프로젝트신고 리스트</a>
           </div>
         </div>
       </li>
@@ -138,7 +140,7 @@
       </a>
       <div id="collapsediv2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="#">결제내역</a>
+          <a class="collapse-item" href="adminProjectPayTotal.ad">결제내역</a>
           <a class="collapse-item" href="#">보류</a>
         </div>
       </div>
