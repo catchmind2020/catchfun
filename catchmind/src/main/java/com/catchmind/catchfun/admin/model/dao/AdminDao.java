@@ -121,10 +121,46 @@ public class AdminDao {
 	}
 	
 	// 3. Category
-	
+	// 등록
 	public int insertCategory(SqlSessionTemplate sqlSession, Category c) {
 		return sqlSession.insert("adminMapper.insertCategory", c);
 	}
+	
+	public int insertAttachment(SqlSessionTemplate sqlSession, Category c) {
+		return sqlSession.insert("adminMapper.insertAttachment", c);
+	}
+	
+	public String refNoCategory(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.refNoCategory");
+	}
+	
+	// 디테일
+	public Category categoryDetail(SqlSessionTemplate sqlSession, String cno){
+		return sqlSession.selectOne("adminMapper.categoryDetail", cno);
+	}
+	
+	// 수정
+	public int updateCategory(SqlSessionTemplate sqlSession, Category c) {
+		return sqlSession.update("adminMapper.updateCatrgory", c);
+	}
+	public int updateCategory2(SqlSessionTemplate sqlSession, Category c) {
+		return sqlSession.update("adminMapper.updateCatrgory2", c);
+	}
+	
+	// 삭제
+	public int deleteCategory(SqlSessionTemplate sqlSession, String cno) {
+		return sqlSession.update("adminMapper.deleteCatrgory", cno);
+	}
+	
+	public String deleteCategoryFile(SqlSessionTemplate sqlSession, String cno) {
+		return sqlSession.selectOne("adminMapper.deleteCategoryFile", cno);
+	}
+	
+	// 리스트조회
+	public ArrayList<Category> categoryList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminMapper.categoryList");
+	}
+	
 	
 	// 주혁 끝
 }

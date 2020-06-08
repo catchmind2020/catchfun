@@ -99,7 +99,7 @@ body, input, textarea, select, button, table {
             
         <div class="header-area">
             <div class="header">
-                <img src="images/catchfun_logo.png">
+                <img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
             </div>
             <div class="header">카테고리</div>
             <div class="header">오픈예정</div>
@@ -107,56 +107,82 @@ body, input, textarea, select, button, table {
             <div class="header">공지</div>
             <div class="header"></div>
             <div class="header login">
-            <img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="images/usericon32.png"></div>
+            <img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="<%=request.getContextPath() %>/resources/images/usericon32.png"></div>
     
         </div>
     <div class="content">
         <br><br>
         <div class="innerOuter" style="padding:5% 10%;">
             <h2>메세지함</h2>
-            <table id="boardList" class="table table-hover" align="center">
+            <c:if test="${ loginUser.userType eq 2 }" >
+            	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button>
+            </c:if>
+            <table id="questionList" class="table table-hover" align="center">
                 <thead>
                   <tr>
+                  	<th>글번호</th>
                     <th>제목</th>
                     <th>보낸사람</th>
                     <th>작성일</th>
                   </tr>
                 </thead>
                 <tbody>
-	                <tr>
-	                    <td>홈페이지 개편안내입니다.</td>
-	                    <td>관리자</td>
-	                    <td>20.05.25</td>
-                    </tr>
-                     <tr>
-	                    <td>홈페이지 개편안내입니다.</td>
-	                    <td>관리자</td>
-	                    <td>20.05.25</td>
-                    </tr>
-                    <tr>
-	                    <td>홈페이지 개편안내입니다.</td>
-	                    <td>관리자</td>
-	                    <td>20.05.25</td>
-	                </tr>
-
+	                <c:forEach items="${ list }" var="q">
+	                    <tr>
+	                    	<td>${ q.questionNo }</td>
+							<td>${ q.questionTitle }</td>
+							<td>${ q.userId }</td>
+							<td>${ q.questionDate }</td>
+	                    </tr>
+                    </c:forEach>
+                 </tbody>
             </table>
             <br>
-
-            <div id="pagingArea">
-                <ul class="pagination" style="width: 400px; height:100px; align:center;">
-                    <li class="page-item disabled"><a class="page-link" href="#"><<</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">>></a></li>
-                </ul>
-            </div>
+            <script>
+             	$(function(){
+             		$("#questionList tbody tr").click(function(){
+             			location.href = "messageView2.me?qno=" + $(this).children().eq(0).text();
+             			
+             		});
+             	});
+             </script>
+            
+             <div id="pagingArea">
+		        <ul class="pagination">
+		        	
+		        	 <c:choose>
+		        		<c:when test="${ pi.currentPage eq 1 }">
+		             		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+		             	</c:when>
+		             	<c:otherwise>
+		            		<li class="page-item"><a class="page-link" href="MessageRest.me?userNo=${ loginUser.userNo }&currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		            
+		            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		            	<c:choose>
+		            		<c:when test="${ p eq pi.currentPage }">
+		             			<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+		             		</c:when>
+		             		<c:otherwise>
+		             			<li class="page-item"><a class="page-link" href="MessageRest.me?userNo=${ loginUser.userNo }&currentPage=${ p }">${ p }</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:forEach>
+		            
+		            <c:choose>
+		            	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+		             </c:when>
+		             <c:otherwise>
+		             	<li class="page-item"><a class="page-link" href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=${ pi.currentPage+1 }">Next</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		        </ul>
+		    </div>
            
             <br clear="both"><br>
-            
 
             <form id="searchForm" action="" method="Get" align="center">
                 <div class="select">

@@ -15,12 +15,20 @@ import lombok.ToString;
 @ToString
 public class Reply {
 	
-	private String pQuestionNo;
+	private String replyNo;
 	private String userNo;
 	private String questionContent;
 	private Date questionDate;
 	private String questionYN;
 	private String questionStatus;
 	private int questionBanCount;
+	
+	private String userId;
+	private int userType;
+	private String userName;
+	private String email;
+	private String phone;
+	private Date userEnrolldate;
+	
 
 }

@@ -19,6 +19,22 @@
   	  		<result column="STATUS" property="status"/>
   	  		<result column="REASON" property="reason"/>
   	  </resultMap>
+  	  
+  	  <resultMap id="projectQuestionResultSet" type="Question">
+		<id column="A_QUESTION_NO" property="questionNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="QUESTION_TYPE" property="questionType"/>
+		<result column="QUESTION_TITLE" property="questionTitle"/>
+		<result column="QUESTION_CONTENT" property="questionContent"/>
+		<result column="QUESTION_DATE" property="questionDate"/>
+		<result column="QUESTION_YN" property="questionYn"/>
+		<result column="QUESTION_STATUS" property="questionStatus"/>
+		<result column="ANS_TITLE" property="ansTitle"/>
+		<result column="ANS_CONTENT" property="ansContent"/>
+		<result column="ANS_DATE" property="ansDate"/>
+		<result column="ANS_NO" property="ansNo"/>
+		<result column="COUNSELING" property="counseling"/>
+	</resultMap>
 		
   
 	  <select id="loginMember" resultMap="memberResultSet" parameterType="Member">
@@ -63,7 +79,60 @@
 	  		   set REASON=#{reason}, STATUS='N'
 	  		 where USER_NO=#{userNo}
 	  </update>
-  
+	  
+	  <!-- 메세지 -->
+	  
+	  <select id="sellerMessageRestListCount" resultType="_int" parameterType="string">
+		select count(*)
+		  from PERSON_QUESTION
+		 where QUESTION_STATUS='N' AND COUNSELING=#{counseling}
+	</select>
+	
+	<select id="sellerMessageRestList" resultMap="projectQuestionResultSet" parameterType="string">
+		select A_QUESTION_NO, user_id, QUESTION_TYPE, QUESTION_TITLE, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, ANS_TITLE, ANS_CONTENT, ANS_DATE, ANS_NO, COUNSELING
+		from PERSON_QUESTION
+		join MEMBER using (user_no)
+		where QUESTION_STATUS='N' and COUNSELING=#{counseling}
+		order by QUESTION_DATE desc
+	</select>
+	
+	<select id="MessageRestListCount" resultType="_int" parameterType="string">
+		select count(*)
+		  from PERSON_QUESTION
+		 where QUESTION_STATUS='N' AND USER_NO=#{userNo}
+	</select>
+	
+	<select id="MessageRestList" resultMap="projectQuestionResultSet" parameterType="string">
+		select A_QUESTION_NO, user_id, QUESTION_TYPE, QUESTION_TITLE, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, ANS_TITLE, ANS_CONTENT, ANS_DATE, ANS_NO, COUNSELING
+		from PERSON_QUESTION
+		join MEMBER using (user_no)
+		where QUESTION_STATUS='N' and USER_NO=#{userNo}
+		order by QUESTION_DATE desc
+	</select>
+	 
+	 
+<!-- 	<update id="increaseCount" parameterType="string">
+		update PERSON_QUESTION
+		   set count = count + 1
+		  where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N'
+	</update> -->
+	
+	<select id="selectMessage" parameterType="string" resultMap="projectQuestionResultSet">
+		select A_QUESTION_NO, user_id, QUESTION_TYPE, QUESTION_TITLE, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, ANS_TITLE, ANS_CONTENT, ANS_DATE, ANS_NO, COUNSELING
+		from PERSON_QUESTION
+		join MEMBER using (user_no)
+		where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N'
+	</select>
+	
+	<update id="deleteMessage" parameterType="_int">
+		update PERSON_QUESTION
+		  set QUESTION_STATUS='Y'
+		where A_QUESTION_NO=#{qno} 
+	</update>
+	  
+	  
+	  <!-- 이메일!! -->
+	  
 </mapper>
 
 

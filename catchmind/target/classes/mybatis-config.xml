@@ -7,11 +7,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
-	
 	<typeAliases>
 		<typeAlias type="com.catchmind.catchfun.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.catchmind.catchfun.board.model.vo.Reply" alias="Reply" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.ProjectBasic" alias="Basic" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Project" alias="Project2" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Item" alias="Item" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Reward" alias="Reward" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Option" alias="Option" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Faq" alias="Faq" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Notice" alias="Notice" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Member" alias="Member1"/>
@@ -28,12 +32,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.PersonQuestion" alias="PersonQuestion5" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Report" alias="Report5" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Wishlist" alias="Wishlist5" />
+
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Category" alias="Category" />
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Reply" alias="Reply1"/>
 	</typeAliases>
 	
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/projectAdmin-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper2.xml"/>
 		<mapper resource="mappers/main-mapper.xml" />

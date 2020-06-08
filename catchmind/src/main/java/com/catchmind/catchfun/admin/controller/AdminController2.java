@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 
@@ -420,8 +422,82 @@ public class AdminController2 {
 	 * 댓글/프로젝트 신고 리스트페이지
 	 */
 	@RequestMapping("report.ad")
-	public String adminReport() {
+	public String adminReportList(int currentPage, Model model) {
+		int listCount = aService2.reportListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Reply> rlist = aService2.reportList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("rlist", rlist);
+		
+		
 		return "admin/adminReport";
+	}
+	
+	@RequestMapping("rSearch.ad")
+	public String adminReportSearch(int currentPage, Model model, String keyword) {
+		
+		int listCount = aService2.reportSearchCount(keyword);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Reply> rlist = aService2.reportSearch(pi, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("rlist", rlist);
+		
+		return "admin/adminReportSearch";
+	}
+	
+	@RequestMapping("pReport.ad")
+	public String adminpProReportList(int currentPage, Model model) {
+		int listCount = aService2.proReportListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> prlist = aService2.proReportList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("prlist", prlist);
+		
+		
+		return "admin/adminPjReport";
+	}
+	
+	@RequestMapping("prSearch.ad")
+	public String adminProReportSearch(int currentPage, Model model, String keyword) {
+		
+		int listCount = aService2.proReportSearchCount(keyword);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> prlist = aService2.proReportSearch(pi, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("prlist", prlist);
+		
+		return "admin/adminPjReportSearch";
+	}
+	
+	@RequestMapping("reportDetail.ad")
+	public String adminReportDetail(String rd, Model model) {
+		
+		Reply rp = aService2.rpReportDetail(rd);
+		
+		model.addAttribute("rp", rp);
+		
+		return "admin/adminReportDetail";
+	}
+	
+	@RequestMapping("reportBlack.ad")
+	public String reportBlack(String userNo, Model model) {
+		
+		int result = aService2.reportBlack(userNo);
+		
+		return "redirect:report.ad?currentPage=1";
+		
 	}
 	
 	/**

@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Repository("aDao2")
@@ -146,7 +148,67 @@ public class AdminDao2 {
 	public int blackUpdate(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("adminMapper2.blackUpdate", m);
 	}
+	
+	
+	public int reportListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.reportListCount");
+	}
+	
+	public ArrayList<Reply> reportList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.reportList", null, rowBounds);
+	}
+	
+	public int reportSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("adminMapper2.reportSearchCount",keyword);
+	}
+	
+	public ArrayList<Reply> reportSearch(SqlSessionTemplate sqlSession, PageInfo pi, String keyword){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.reportSearch", keyword, rowBounds);
+	}
+	
+	public int proReportListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.proReportListCount");
+	}
+	
+	public ArrayList<Project> proReportList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.proReportList", null, rowBounds);
+	}
+	
+	public int proReportSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("adminMapper2.proReportSearchCount",keyword);
+	}
+	
+	public ArrayList<Project> proReportSearch(SqlSessionTemplate sqlSession, PageInfo pi, String keyword){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.proReportSearch", keyword, rowBounds);
+	}
+	
+	public Reply rpReportDetail(SqlSessionTemplate sqlSession, String rd) {
+		return sqlSession.selectOne("adminMapper2.rpReportDetail", rd);
+	}
 
+	public int reportBlack(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.update("adminMapper2.reportBlack", userNo);
+	}
 }
 
 

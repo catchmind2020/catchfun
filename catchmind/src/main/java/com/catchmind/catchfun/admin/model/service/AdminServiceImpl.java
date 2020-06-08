@@ -123,6 +123,44 @@ public class AdminServiceImpl implements AdminService {
 	public int insertCategory(Category c) {
 		return aDao.insertCategory(sqlSession, c);
 	}
+	@Override
+	public String refNoCategory() {
+		return aDao.refNoCategory(sqlSession);
+	}
+	@Override
+	public int insertAttachment(Category c) {
+		return aDao.insertAttachment(sqlSession, c);
+	}
+
+	@Override
+	public Category categoryDetail(String cno) {
+		return aDao.categoryDetail(sqlSession, cno);
+	}
+	
+	@Override
+	public int updateCategory(Category c) {
+		return aDao.updateCategory(sqlSession, c);
+	}
+	
+	@Override
+	public int updateCategory2(Category c) {
+		return aDao.updateCategory2(sqlSession, c);
+	}
+	
+	@Override
+	public int deleteCategory(String cno) {
+		return aDao.deleteCategory(sqlSession, cno);
+	}
+	
+	@Override
+	public String deleteCategoryFile(String cno) {
+		return aDao.deleteCategoryFile(sqlSession, cno);
+	}
+	
+	@Override
+	public ArrayList<Category> categoryList() {
+		return aDao.categoryList(sqlSession);
+	}
 	
 	// 3. Category
 	

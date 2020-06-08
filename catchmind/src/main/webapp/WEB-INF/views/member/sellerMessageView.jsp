@@ -17,12 +17,12 @@
     color: #222; font-size: 18px; line-height: 1.5;} 
 
 
-        /*버튼*/
+     /*버튼*/
     .button {
         background-color: #4CAF50; /* Green */
         border: none;
         color: white;
-        padding: 3px 32px;
+        padding: 16px 32px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -30,7 +30,6 @@
         margin: 4px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
-        height: 50px;
         }
 
     .button2 {
@@ -41,17 +40,6 @@
 
     .button2:hover {
         background-color: #008CBA;
-        color: white;
-        }
-    
-    .button3 {
-        background-color: white; 
-        color: black; 
-        border: 2px solid #f44336;
-        }
-
-    .button3:hover {
-        background-color: #f44336;
         color: white;
         }
 
@@ -76,7 +64,7 @@
 </head>
 <body>
     
-    <jsp:include page="../common/menubar.jsp"/>
+    <jsp:include page="../common/menubar.jsp" />
 
     <div class="content">
         <br><br>
@@ -86,16 +74,16 @@
             
           
             <br><br>
-            <table id="contentArea" align="center" class="table">
+             <table id="contentArea" align="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">배송언제오나요</td>
+                    <td colspan="3">${ q.questionTitle }</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>khkh007</td>
+                    <td>${ q.userId }</td>
                     <th>작성일</th>
-                    <td>20.05.25</td>
+                    <td>${ q.questionDate }</td>
                 </tr>
 
                 <tr>
@@ -103,19 +91,21 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">주문한지 일주일됐는데, 아직 배송준비중이라고 떠요.</p></td>
+                    <td colspan="4"><p style="height:150px">${q.questionContent}</p></td>
                 </tr>
             </table>
-            <center>
-                <button class="button button2" >목록으로</button>
-                <button class="button button3" >답변보내기</button>
-            </center>
-            <br>
+           
+           <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
+               <div align="center">
+                  <button class="button button2" onclick="postFormSubmit(1);">목록으로</button>
+                  <button class="button button3"><a href ="sellerMessageAnswer.me?qno=${ q.questionNo }">답변보내기</a></button>
+               </div>
+               
         </div>
         <br><br>
     </div>
 
-   <jsp:include page="../common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
     
 </body>
 </html>
