@@ -3,6 +3,8 @@ package com.catchmind.catchfun.admin.model.service;
 import java.util.ArrayList;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 /**
@@ -67,8 +69,35 @@ public interface AdminService2 {
 	
 	int blackListCount();
 	
-	ArrayList<Member> blackList(PageInfo pi1);
+	ArrayList<Member> blackList(PageInfo pi);
 	
+	int memberSearchCount(String keyword);
+	
+	ArrayList<Member> memberSearch(PageInfo pi, String keyword);
+	
+	int blackSearchCount(String keyword);
+	
+	ArrayList<Member> blackSearch(PageInfo pi, String keyword);
+	
+	int memberSelect(Member m);
+	
+	int blackUpdate(Member m);
+	
+	int reportListCount();
+	
+	ArrayList<Reply> reportList(PageInfo pi);
+	
+	int reportSearchCount(String keyword);
+	
+	ArrayList<Reply> reportSearch(PageInfo pi, String keyword);
+	
+	int proReportListCount();
+	
+	ArrayList<Project> proReportList(PageInfo pi);
+	
+	int proReportSearchCount(String keyword);
+	
+	ArrayList<Project> proReportSearch(PageInfo pi, String keyword);
 	
 	
 }

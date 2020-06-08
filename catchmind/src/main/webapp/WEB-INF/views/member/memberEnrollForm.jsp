@@ -5,9 +5,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>마이페이지_메인</title>
+<title>회원가입폼</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
 <style>
 /* 메뉴바 영역 */
 .header-area {
@@ -72,33 +73,18 @@ table {
 }
 /*아이디표시 input*/
 #userid {
-	width: 600px;
+	width: 300px;
 	height: 60px;
 	margin-bottom: 15px;
 }
 
-/* 아이디발송요청 Buttom*/
-.userid_request {
-	width: 600px;
+/*certified*/
+#certified {
+	width: 300px;
 	height: 60px;
-	margin-top: 25px;
-	margin-bottom: 150px;
-	background-color: rgb(224, 224, 224);
-	color: rgb(63, 62, 62);
-	font-size: 18px;
+	margin-bottom: 15px;
 }
 
-/* 임시비밀번호 재발급 Button*/
-.password2 {
-	width: 600px;
-	height: 60px;
-	font-size: 20px;
-	color: black;
-	background-color: rgb(224, 224, 224);
-	margin: 0 auto;
-	margin-top: 25px;
-	margin-bottom: 10px;
-}
 
 input[type=text], input[type=password], input[type=email], input[type=number], select {
 	width: 100%;
@@ -144,12 +130,12 @@ button[type=submit]:hover {
 	height: 50px;
 }
 
-#email_btn {
+#email_btn, #email_btn1 {
 	background-color: #e7e7e7;;
 	color: black;
 	border: 2px solid #e7e7e7;
-	width: 540px;
-	height: 40px;
+	width: 230px; /*540px;*/
+	height: 60px;
 }
 
 #email_btn:hover {
@@ -193,6 +179,8 @@ button[type=submit]:hover {
 	width: 100%;
 	height: 20%;
 }
+/* 회원가입 버튼 css */
+
 </style>
 <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
 </head>
@@ -237,10 +225,17 @@ button[type=submit]:hover {
 						<tr>
 							<td>
 								<div class="form-group" style="text-align: left;">
-									<input type="email" id="userId" name="userId" placeholder="이메일" required>
-									 <div id="checkResult" style="display:none; font-size:0.8em"></div>
-									<label for="email"><p style="text-align: left;">위 이메일로 인증번호가 발송됩니다.</p></label>
-									<button id="email_btn">인증</button>
+									<form action="auth.do" method="post">
+										<input type="email" id="userId" name="userId" placeholder="이메일" required style="width: 300px;">
+										<button id="email_btn1">보내기</button>
+										 <div id="checkResult" style="display:none; font-size:0.8em"></div>
+										<label for="email"><p style="text-align: left;">위 이메일로 인증번호가 발송됩니다.</p></label>
+									</form>
+									
+									<form action="join_injeung.do${dice}" method="post">
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력"> 
+										<button id="email_btn">인증</button>
+									</form>
 							</td>
 							<td></td>
 						</tr>
@@ -250,16 +245,17 @@ button[type=submit]:hover {
 							</td>
 						</tr>
 						<tr>
-							<td><input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" required></td>
+							<td><input type="password" placeholder="Enter Password" name="userPwd" class="pass" id="repwd1" oninput="checkPwd()" required></td>
 						</tr>
 						<tr>
-							<td><input type="password" id="userPwd2" name="userPwd2" placeholder="비밀번호확인" required></td>
+							<td><input type="password"  placeholder="Repeat Password" name="psw-repeat" class="pass" id="repwd" oninput="checkPwd()" required>
+								<div id="checkResult1" style="display:none; font-size:0.8em"></div></td>
 						</tr>
 						<tr>
-							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" ></td>
+							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" oninput="signupCheck()" required></td>
 						</tr>
 						<tr>
-							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" readonly>
+							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" oninput="signupCheck()" required readonly>
 							<input type="button" id="btn_del" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="background-color:gray; color:white;" readonly></td>
 						<tr>
 		                     <td style="width:200px; padding-top:0">
@@ -273,7 +269,7 @@ button[type=submit]:hover {
 	                     </td>
 	                  </tr>
 					  <tr>
-						<td><button type="submit" id="enrollBtn" onclick="next();">완료</button></td>
+						<td><button type="submit" id="enrollBtn" class="enrollBtn" onclick="return next();" >완료</button></td>
 					</tr>
 					</table>
 					</form>
@@ -297,7 +293,7 @@ button[type=submit]:hover {
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     addr = data.jibunAddress;
                 }
-
+				
                 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
                 if(data.userSelectedType === 'R'){
                     // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -330,13 +326,34 @@ button[type=submit]:hover {
     }
 </script>
  <script>
-    $("#enrollBtn").click(function(){
-            // 유효성 검사할 각각의 "input 요소"들 변수에 받아두기
-            var id = document.getElementById("userId");
-            var pwd1 = document.getElementById("userPwd");
-            var pwd2 = document.getElementById("userPwd2");
-            var name = document.getElementById("userName");
+    /* $("#enrollBtn").click(function(){
+            
 
+             //$("#enrollBtn").removeAttr("disabled");
+             //$("#enrollBtn").submit();
+			//$("#defaultOpen3").click();	// 다음페이지로 이동
+
+       	 }); */
+ </script>
+ <script> /*본인인증 및 회원가입버튼 클릭시*/
+    	function next(){
+            if($("input:checkbox[id='ex_rd']").is(":checked") == true ) { // 약관동의에 체크 되었을 경우
+            	//$("#enrollBtn").attr("disabled", false); // 활성화
+            	//$("#first_agree_btn").click(function(){ // '모두동의'버튼 클릭시
+					//$("#defaultOpen2").click();	// 다음페이지로 이동
+				//});
+            }else{//체크 안되었을 경우
+                alert("약관동의에 체크해주세요.");
+                //$("#enrollBtn").attr("disabled", true); // 비활성화
+                return false;
+            }
+            
+         // 유효성 검사할 각각의 "input 요소"들 변수에 받아두기
+            var id = document.getElementById("userId");
+            var rpwd1 = document.getElementById("repwd1");
+            var rpwd = document.getElementById("repwd");
+            var name = document.getElementById("userName");
+            var veri = document.getElementById("phone"); // 전화번호
 
             // 1) 이름 검사
             //    한글로만 2글자 이상
@@ -348,28 +365,38 @@ button[type=submit]:hover {
                 return false;               
             }
             
-            // 2) 생년월일검사
-            //    숫자!!로만 8글자 이상, 8글자 이하
-            regExp = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-            if(!regExp.test(birth.value)){
-                alert("유효한 생년월일을 입력하세요");
-                birth.value = "";
-                birth.focus();
-                return false;               
+         // 5_1) 비밀번호 검사
+            //    특수문자(!@#$%^&*) 또는 영문자 또는 숫자 포함 총 8자~15자
+            regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
+            if(!regExp.test(rpwd1.value)){
+                alert("유효한 비밀번호를 입력하세요!!");
+                rpwd1.value="";
+                rpwd1.focus();
+                return false;
+            }
+			
+            // 5_2) 비밀번호 일치 확인
+            // 비밀번호값과 비밀번호 확인값이 일치하는지 검사
+            if(rpwd1.value != rpwd.value){
+                alert("동일한 비밀번호 확인값을 입력하세요!!");
+                rpwd.value = "";
+                rpwd1.focus();
+                return false;
             }
            
-            
+          /*   
             // 3) 전화번호검사
             //    숫자!!로만 7글자 이상, 8글자 이하
-            regExp = /^[0-9]{7,8}$/; 
+            regExp = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g
             if(!regExp.test(veri.value)){
                 alert("유효한 전화번호를 입력하세요");
                 veri.value = "";
                 veri.focus();
-                return false;               
+                return false;
             }
+             */
 
-            // 4) 아이디 검사
+            // 4) 아이디 검사(이메일형식)
             // 영문자 또는 숫자 포함해서 총 4~12자로 입력 (단, 첫글자는 반드시 영문자로)
               var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
                if (!emailRegExp.test(id.value)) {
@@ -378,51 +405,15 @@ button[type=submit]:hover {
                    form.id.focus();
                    return false;
                 }            
-            
-          
-            // 5_1) 비밀번호 검사
-            //    특수문자(!@#$%^&*) 또는 영문자 또는 숫자 포함 총 8자~15자
-            regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
-            if(!regExp.test(pwd1.value)){
-                alert("유효한 비밀번호를 입력하세요!!");
-                pwd1.value="";
-                pwd1.focus();
-                return false;
-            }
-			
-            // 5_2) 비밀번호 일치 확인
-            // 비밀번호값과 비밀번호 확인값이 일치하는지 검사
-            if(pwd1.value != pwd2.value){
-                alert("동일한 비밀번호 확인값을 입력하세요!!");
-                pwd2.value = "";
-                pwd1.focus();
-                return false;
-            }
-
-             
-             $("#enrollBtn").removeAttr("disabled");
-			//$("#defaultOpen3").click();	// 다음페이지로 이동
-
-       	 });
- </script>
- <script> /*본인인증 및 회원가입버튼 클릭시*/
-    	function next(){
-            if($("input:checkbox[id='ex_rd']").is(":checked") == true ) { // 약관동의에 체크 되었을 경우
-            	//$("#first_agree_btn").click(function(){ // '모두동의'버튼 클릭시
-					//$("#defaultOpen2").click();	// 다음페이지로 이동
-				//});
-            }else{//체크 안되었을 경우
-                alert("약관동의에 체크해주세요.");
-            }
         }
  </script>
 
-    <script>
+  <script>
     	// 아이디 중복체크를 아직 안하는 경우  : 메세지 보여지지 않음 버튼 비활성
     	// 아이디 중복체크 후 사용불가능한 아이디일 경우 : "중복아이디 존재 사용불가능" 메세지 보여짐, 버튼 비활성화 
     	// 아이디 중복체크 후 사용가능한 아이디일 경우 : "사용 가능하나 아이디임" 메세지 보여짐, 버튼 활성화
     	
-    	    	function idCheckValidate(num){
+    	    function idCheckValidate(num){
     		
     		if(num == 1){	// 아이디 중복체크를 아직 안하는 경우 : 메세지 보여지지 않음 버튼 비활성화
     			
@@ -440,14 +431,13 @@ button[type=submit]:hover {
     			$("#checkResult").css("color", "green").text("사용가능한 아이디입니다.");
     			$("#checkResult").show();
     			$("#enrollBtn").removeAttr("disabled");
+    			$("enrollBtn").attr("disabled", false);
     			
     		}
     	}
 
-   	$(function(){
-            
-            // 이벤트 걸고자 하는 input 요소 변수에 기록해놓기
-            
+   	$(function(){  // 이벤트 걸고자 하는 input 요소 변수에 기록해놓기
+           
             var $idInput = $("#enrollForm input[name=userId]");
             
             $idInput.keyup(function(){
@@ -477,8 +467,37 @@ button[type=submit]:hover {
           	  
             });
          });
-    	
-    	
-    </script>
+
+   //재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
+    function checkPwd() {
+        var inputed = $('.pass').val();
+        var reinputed = $('#repwd').val();
+        if(reinputed=="" && (inputed != reinputed || inputed == reinputed)){ // null이면서 같지않을시
+            $(".enrollBtn").prop("disabled", true);
+            $(".enrollBtn").css("background-color", "#aaaaaa");
+            $("#repwd").css("background-color", "#FFCECE"); // 빨강
+        }
+        else if (inputed == reinputed) {
+            $("#repwd").css("background-color", "#B0F6AC");
+            //$("#enrollBtn").removeAttr("disabled"); // enrollBt버튼의 disabled 속성제거
+            
+            //pwdCheck = 1;
+            if($("#repwd1").val() == $("#repwd").val()) {
+                $(".enrollBtn").prop("disabled", false);
+                $(".enrollBtn").css("background-color", "#4CAF50"); // 파랑
+                
+            }
+            
+        } else if (inputed != reinputed) { 
+            pwdCheck = 0;
+            $(".enrollBtn").prop("disabled", true);
+            $(".enrollBtn").css("background-color", "#aaaaaa");
+            $("#repwd").css("background-color", "#FFCECE"); // 빨강
+           
+        }
+    }
+
+    </script> 
+ 
 </body>
 </html>

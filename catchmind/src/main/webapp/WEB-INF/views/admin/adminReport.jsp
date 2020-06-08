@@ -23,9 +23,6 @@
     
     }
     
-    #projectReport{
-        display:none;
-    }
     .mybtn {
 
       background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
@@ -57,114 +54,113 @@
  
 <jsp:include page="../common/admin.jsp"/>
 <div class="outer">
-  <h2>신고관리</h2><br>
-  <button class="mybtn" onclick="userReport();">댓글신고</button>&nbsp;<button class="mybtn" onclick="projectReport();">프로젝트신고</button><br>
+  <h2>댓글 신고관리</h2><br>
   <br>
       <!-- 댓글신고 -->
       <div id="userReport">
-          <form>
+          <form action="rSearch.ad" method="POST">
               <div class="k_btn">
-                <input type="text" name="keyword" placeholder="키워드 입력"> <button class="mybtn" type="button">조회</button>
+                <input type="text" name="keyword" placeholder="키워드 입력"> <button class="mybtn" type="submit">조회</button>
+                <input type="hidden" name="currentPage" value="1">
               </div>
               <br>
-              신고리스트 수 : <input type="text" style="border:unset" value="30" >
           </form>
+              신고리스트 수 : <input type="text" style="border:unset" value="${ pi.listCount }" readonly>
           <br>
-          <table class="tb" border="1">
-              <tr>
-                
-                <th width="100px">회원번호</th>
-                <th width="200px">아이디</th>
-                <th width="50px">구분</th>
-                <th width="100px">회원명</th>
-                <th width="150px">연락처</th>
-                <th width="150px">이메일</th>                  
-                <th width="150px">가입일</th>
-                <th width="100px">신고수</th>
-                <th width="70px">상태</th>
-              </tr>
-              <tr>
-            
-                <td>3</td>
-                <td>reporthaha</td>
-                <td>A</td>
-                <td>악성댓글러</td>
-                <td>010-1234-1234</td>
-                <td>admin@admin.ad</td>                 
-                <td>2020.05.17</td>
-                <td>14</td>
-                <td>
-                  <select>
-                    <option>변경하기</option>
-                    <option>블랙리스트</option>
-                  </select>
-                </td>
-              </tr>
-            </table>
+         	 <div class="report">
+		          <table class="tb" border="1">
+			          <thead>
+			              <tr>
+			                
+			                <th width="100px">회원번호</th>
+			                <th width="200px">아이디</th>
+			                <th width="100px">구분</th>
+			                <th width="100px">회원명</th>
+			                <th width="150px">연락처</th>
+			                <th width="150px">이메일</th>                  
+			                <th width="150px">가입일</th>
+			                <th width="100px">신고수</th>
+			                <th width="70px">상태</th>
+			              </tr>
+		              </thead>
+		              <tbody>
+		              	<c:forEach items="${ rlist }" var="r">
+				              <tr>
+				                <td>${ r.userNo }</td>
+				                <td>${ r.userId }</td>
+				                <td> 
+				                <c:choose>
+					            	<c:when test="${ r.userType eq '1'}">일반회원</c:when>
+					            	<c:when test="${ r.userType eq '2'}">프로잭트회원</c:when>
+					            	<c:when test="${ r.userType eq '3'}">관리자</c:when>
+					            </c:choose>	
+					            </td>
+				                <td>${ r.userName }</td>
+				                <td>${ r.phone }</td>
+				                <td>${ r.email }</td>                 
+				                <td>${ r.userEnrolldate }</td>
+				                <td>${ r.questionBanCount }</td>
+				                <td>
+				                  <select>
+				                  	  <option>활동회원</option>
+				                      <option>블랙리스트</option>
+				                  </select>
+				                </td>
+				              </tr>
+			              </c:forEach>
+		              </tbody>
+	            </table>
+	            <br><br>
+	          	<div id="pagingArea">
+			        <ul class="pagination">
+			        	
+			        	 <c:choose>
+			        		<c:when test="${ pi.currentPage eq 1 }">
+			             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+			             </c:when>
+			             <c:otherwise>
+			            		<li class="page-item"><a class="page-link" href="report.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+			            	</c:otherwise>
+			            </c:choose>
+			            
+			            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+			            	<c:choose>
+			            		<c:when test="${ p eq pi.currentPage }">
+			             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+			             	</c:when>
+			             	<c:otherwise>
+			             		<li class="page-item"><a class="page-link" href="report.ad?currentPage=${ p }">${ p }</a></li>
+			            		</c:otherwise>
+			            	</c:choose>
+			            </c:forEach>
+			            
+			            <c:choose>
+			            	<c:when test="${ pi.currentPage eq pi.maxPage }">
+			             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+			             </c:when>
+			             <c:otherwise>
+			             	<li class="page-item"><a class="page-link" href="report.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+			            	</c:otherwise>
+			            </c:choose>
+			        </ul>
+			    </div>
+            </div>
       </div>  
 
-      <!-- 프로젝트신고 -->
-      <div id="projectReport">
-          <form>
-              <div class="k_btn">
-                <input type="text" name="keyword" placeholder="키워드 입력"> <button class="mybtn" type="button">조회</button>
-              </div>
-              <br>
-              신고리스트 수 : <input type="text" style="border:unset" value="24" > 
-          </form>
-          <br>
-          <table class="tb" border="1">
-              <tr>
-                
-                <th width="120px">프로젝트번호</th>
-                <th width="200px">프로젝트이름</th>
-                <th width="150px">프로젝트 시작일</th>
-                <th width="130px">등록자명</th>
-                <th width="150px">등록자 연락처</th>
-                <th width="170px">이메일</th>
-                <th width="70px">신고수</th>
-                <th width="70px">프로젝트 달성률</th>
-                <th width="70px">변경하기</th>
-              </tr>
-              <tr>
-            
-                <td>21</td>
-                <td>아무거나다판다</td>
-                <td>2020.05.17</td>
-                <td>악성댓글러</td>
-                <td>010-1234-1234</td>
-                <td>admin@admin.ad</td>
-                <td>4,500</td>
-                <td>300%</td>
-                <td>
-                  <select>
-                    <option>변경하기</option>
-                    <option>프로젝트삭제</option>
-                  </select>
-                </td>
-              </tr>
-            </table>
-      </div>  
 </div>
-<script>
-  function userReport(){
-    if($("#userReport").is(":visible")){
-        $("#userReport").slideDown(0);
-  }else if($("#projectReport").is(":visible")){
-            $("#projectReport").slideUp(0);
-            $("#userReport").slideDown(0);
-    }
-  }
-
-  function projectReport(){
-    if($("#projectReport").is(":visible")){
-        $("#projectReport").slideDown(0);
-  }else if($("#userReport").is(":visible")){
-            $("#userReport").slideUp(0);
-            $("#projectReport").slideDown(0);
-    }
-  }
-</script>
+    <script>
+   		$(function(){
+   			$(".tb>tbody>tr").click(function(){
+   				// console.log("클릭");
+	   				
+	   			var rd = $(this).children().eq(0).text();
+	   			// 상품코드 밸류값이 넘어감 
+	   			
+	 			location.href="reportDetail.ad?rd=" + rd; 
+ 			});
+ 
+   		});   
+    </script>
 
 
 </body>

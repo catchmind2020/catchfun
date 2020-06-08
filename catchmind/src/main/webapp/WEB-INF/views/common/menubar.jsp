@@ -17,7 +17,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
 <!-- alertifyJS 라이브러리 -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -59,8 +59,8 @@
 /* margin-left: 1050px; 1920 1080 */
 /* margin-left: 1700px; qhd */
 #header_searchbar {
-	/* margin-left: 1700px; */
-	margin-top: 7px; /* 위치설정 이거*/
+	margin-left:-20px;
+	margin-top: 37px; /* 위치설정 이거*/
 	position: absolute;
 	height: 50px;
 	width: 5px;
@@ -197,9 +197,9 @@
 
 /* 로그인 부분*/
 .login { position: relative; display: table-cell; font-size: 15px;
-	color: gray; padding-left: 190px; padding-right: 0px; }
-.header>img{margin-bottom:7px;}
-.loginnext{bottom:-6px;}
+	color: gray; padding-left: 160px; padding-right: 0px; }
+a { text-decoration:none !important } 
+a:hover { text-decoration:none !important }
 
 /* 아이유 전용 스타일 */
 
@@ -254,9 +254,18 @@
 
 .header-img{cursor: pointer;}
 
-/* div{
-	border: 1px solid black;
-} */
+.vertical-container {
+  height: 100px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+ 
+/* div{border:1px solid black;} */
+
 </style>
 
 </head>
@@ -274,11 +283,10 @@
 		$(".ajs-header").text("");
 	</script>
 	
-	<div class="header-area">
-		<div class="header header-img">
-			<a href="main">
-				<img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
-			</a>
+	<div class="header-area vertical-container">
+
+		<div style="margin-right:40px;">
+			<img src="resources/images/catchfun_logo.png">
 		</div>
 		<div class="header">카테고리</div>
 		<div class="header">오픈예정</div>
@@ -332,7 +340,7 @@
 			<c:otherwise>
 	 			
 				<!-- 로그인 전 -->
-				<div class="header login">
+				<div class="login">
 					 <!-- 검색바 애니메이션 -->
 					<form id="header_searchbar">
 						<input type="text" name="input" class="input" id="search-input">

@@ -27,5 +27,6 @@ public class Question {
 	private Date ansDate;
 	private String ansNo;
 	private String counseling;
+	private String userId;
 	
 }

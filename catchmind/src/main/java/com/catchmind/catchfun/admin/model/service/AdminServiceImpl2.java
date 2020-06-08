@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.admin.model.dao.AdminDao2;
 import com.catchmind.catchfun.admin.model.vo.Member;
+import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
 @Service("aService2")
@@ -31,8 +33,64 @@ public class AdminServiceImpl2 implements AdminService2 {
 		return aDao2.blackListCount(sqlSession);
 	}
 	@Override
-	public ArrayList<Member> blackList(PageInfo pi1) {
-		return aDao2.blackList(sqlSession, pi1);
+	public ArrayList<Member> blackList(PageInfo pi) {
+		return aDao2.blackList(sqlSession, pi);
+	}
+	@Override
+	public int memberSearchCount(String keyword) {
+		return aDao2.memberSearchCount(sqlSession, keyword);
+	}
+	@Override
+	public ArrayList<Member> memberSearch(PageInfo pi, String keyword) {
+		return aDao2.memberSearch(sqlSession, pi, keyword);
+	}
+	@Override
+	public int blackSearchCount(String keyword) {
+		return aDao2.blackSearchCount(sqlSession, keyword);
+	}
+	@Override
+	public ArrayList<Member> blackSearch(PageInfo pi, String keyword) {
+		return aDao2.blackSearch(sqlSession, pi, keyword);
+	}
+	@Override
+	public int memberSelect(Member m) {
+		return aDao2.memberSelect(sqlSession,m);
+	}
+	@Override
+	public int blackUpdate(Member m) {
+		return aDao2.blackUpdate(sqlSession, m);
+	}
+	@Override
+	public int reportListCount() {
+		return aDao2.reportListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Reply> reportList(PageInfo pi) {
+		return aDao2.reportList(sqlSession, pi);
+	}
+	@Override
+	public int reportSearchCount(String keyword) {
+		return aDao2.reportSearchCount(sqlSession, keyword);
+	}
+	@Override
+	public ArrayList<Reply> reportSearch(PageInfo pi, String keyword) {
+		return aDao2.reportSearch(sqlSession, pi, keyword);
+	}
+	@Override
+	public int proReportListCount() {
+		return aDao2.proReportListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Project> proReportList(PageInfo pi) {
+		return aDao2.proReportList(sqlSession, pi);
+	}
+	@Override
+	public int proReportSearchCount(String keyword) {
+		return aDao2.proReportSearchCount(sqlSession,keyword);
+	}
+	@Override
+	public ArrayList<Project> proReportSearch(PageInfo pi, String keyword) {
+		return aDao2.proReportSearch(sqlSession, pi, keyword);
 	}
 
 	/*

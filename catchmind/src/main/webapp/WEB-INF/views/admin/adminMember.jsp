@@ -56,18 +56,18 @@
 <jsp:include page="../common/admin.jsp"/>
 
 <div class="outer">
-  <h2>회원관리</h2><br>
-  <button class="mybtn" onclick="member();">회원</button>&nbsp;<button class="mybtn" onclick="blackList();">블랙리스트</button><br>
-  <br><br>
+  <h2>회원리스트</h2><br>
+  <br>
   <!-- 회원리스트 -->
     <div id="member">
-      <form action="" method="">
+      <form action="msearch.ad" method="POST">
         <div class="k_btn">
-          <input type="text" name="keyword" placeholder="키워드 입력"> <button type="button" class="mybtn">조회</button>
+          <input type="text" name="keyword" placeholder="키워드 입력"> <button type="submit" class="mybtn">조회</button>
+          <input type="hidden" name="currentPage" value="1">
         </div>
         <br>
-        회원 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
       </form>
+        회원 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
       <br>
       
         <table class="tb" border="1">
@@ -76,13 +76,14 @@
 	            
 	            <th width="100px">회원번호</th>
 	            <th width="200px">아이디</th>
-	            <th width="50px">구분</th>
+	            <th width="80px">구분</th>
 	            <th width="100px">회원명</th>
 	            <th width="150px">연락처</th>
 	            <th width="150px">이메일</th>
 	            <th width="100px">포인트</th>
-	            <th width="150px">가입일</th>
+	            <th width="120px">가입일</th>
 	            <th width="100px">변경</th>
+	            <th width="50px">버튼</th>
 	          </tr>
 	      </thead>
 	      <tbody> 
@@ -90,19 +91,29 @@
 	          <tr>
 	            <td>${ m.userNo }</td>
 	            <td>${ m.userId }</td>
-	            <td>${ m.userType }</td>
+	            <td>
+	            <c:choose>
+	            	<c:when test="${ m.userType eq '1'}">일반회원</c:when>
+	            	<c:when test="${ m.userType eq '2'}">프로잭트회원</c:when>
+	            	<c:when test="${ m.userType eq '3'}">관리자</c:when>
+	            </c:choose>	
+	            </td>
 	            <td>${ m.userName }</td>
 	            <td>${ m.phone }</td>
 	            <td>${ m.email }</td>
 	            <td>${ m.userPoint }</td>
 	            <td>${ m.userEnrolldate }</td>
-	            <td>
-	                <select>
-	                  <option>활동회원</option>
-	                  <option>블랙리스트</option>
-	                  <option>탈퇴회원</option>
-	                </select>
-	            </td>
+	            <form action="adMemberSelect.ad" method="POST">
+		            <input type="hidden" name="currentPage" value="1">
+		            <input type="hidden" name="userNo" value="${ m.userNo }">
+		            <td>
+		                <select name="status">
+		                  <option value="Y">활동회원</option>
+		                  <option value="B">블랙리스트</option>
+		                </select>
+	      	        </td>
+	      	        <td><input class="mybtn" type="submit" value="변경"></td>
+	            </form>
 	          </tr>
 	        </c:forEach>	 
           </tbody>  
@@ -144,101 +155,10 @@
 		    </div>
     </div> 
 
-    <!-- 블랙리스트 -->
-    <div id="blackList"> 
-      <form action="" method="">
-        <div class="k_btn">
-          <input type="text" name="keyword" placeholder="키워드 입력"> <button class="mybtn" type="button">조회</button>
-        </div>
-        <br>
-        회원 수 : <input type="text" style="border: unset;" value="${ pi1.listCount }">
-        <br>
-      </form>
-      <br>
-          <table class="tb" border="1">
-            <thead>
-                <tr>
-                    <th width="100px">회원번호</th>
-                    <th width="200px">아이디</th> 
-                    <th width="100px">구분</th>
-                    <th width="330px">신고내용</th>
-                    <th width="150px">제제일자</th>
-                    <th width="120px">상태</th>
-                </tr>
-            </thead>
-            <tbody>
-            	<c:forEach items="${ blist }" var="b">
-	                <tr>
-	                    <td>${ b.userNo }</td>
-	                    <td>${ b.userId }</td>
-	                    <td>${ b.userType }</td>
-	                    <td>그냥그냥</td>
-	                    <td>2020-05-24</td>
-	                    <td>${ b.status }</td>
-	                </tr>
-                </c:forEach>
-              
-            </tbody>
-        </table> 
-            <br><br>
-          	<div id="pagingArea">
-		        <ul class="pagination">
-		        	
-		        	 <c:choose>
-		        		<c:when test="${ pi1.currentPage eq 1 }">
-		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
-		             </c:when>
-		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi1.currentPage-1 }">Previous</a></li>
-		            	</c:otherwise>
-		            </c:choose>
-		            
-		            <c:forEach var="p" begin="${ pi1.startPage }" end="${ pi1.endPage }">
-		            	<c:choose>
-		            		<c:when test="${ p eq pi1.currentPage }">
-		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
-		             	</c:when>
-		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ p }">${ p }</a></li>
-		            		</c:otherwise>
-		            	</c:choose>
-		            </c:forEach>
-		            
-		            <c:choose>
-		            	<c:when test="${ pi1.currentPage eq pi1.maxPage }">
-		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-		             </c:when>
-		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="member.ad?currentPage=${ pi1.currentPage+1 }">Next</a></li>
-		            	</c:otherwise>
-		            </c:choose>
-		        </ul>
-		    </div>   
-    </div>    
-    
+      
   
-  </div>
  
 
   
-  <script>
-    function blackList(){
-      if($("#blackList").is(":visible")){
-          $("#blackList").slideDown(0);
-    }else if($("#member").is(":visible")){
-              $("#member").slideUp(0);
-              $("#blackList").slideDown(0);
-      }	
-    }
-
-    function member(){
-      if($("#member").is(":visible")){
-          $("#member").slideDown(0);
-    }else if($("#blackList").is(":visible")){
-              $("#blackList").slideUp(0);
-              $("#member").slideDown(0);
-      }
-    }
-  </script>
 </body>
 </html>

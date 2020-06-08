@@ -1,5 +1,9 @@
 package com.catchmind.catchfun.member.model.service;
 
+import java.util.ArrayList;
+
+import com.catchmind.catchfun.admin.model.vo.Question;
+import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.member.model.vo.Member;
 
 public interface MemberService {
@@ -19,6 +23,81 @@ public interface MemberService {
 	// 5. 아이디 중복체크용 서비스 (AJAX)
 	int idCheck(String userId);
 	
+	// 6. 메세지 리스트(프로젝트 개설자)
+	int sellerMessageRestListCount(String counseling);
+	
+	ArrayList<Question> sellerMessageRestList(PageInfo pi, String counseling);
+	
+	// 7. 메세지 리스트
+	int MessageRestListCount(String userNo);
+	
+	ArrayList<Question> MessageRestList(PageInfo pi, String userNo);
+	
+	// (프로젝트개설자의) 메세지 상세조회
+	int sellerMessageView(int qno);
+	
+	// (일반사용자의) 메세지 상세조회
+	Question messageView(String qno);
+	
+	// 메세지 답변달기 상세조회
+	// (일반사용자의) 메세지 상세조회
+	Question sellerMessageAnswer(String qno);
+
+	// 7. 메세지삭제용 서비스  ///
+	int deleteMessage(int pno);
+
+
+	int updateMessage(Question q);
+
+	Question selectMessage(int qno);
+
+
+
+	
+	
+	// 메세지수정용 서비스
+	//int updateMessage(Question q);
+	
+	
+	// 9. 해당 게시글에 있는 댓글리스트 조회용 서비스
+	
+	// 10. 댓글 작성용 서비스
+	
+	
+	
+	
+	
+	// 이메일 !!
+	
+	/*
+	
+    public void join (Map<String, Object>map,MemberDTO dto); //회원가입 관련
+    
+    
+    public boolean loginCheck(MemberDTO dto, HttpSession session);    //로그인 관련
+    
+    
+    public String find_idCheck(MemberDTO dto);    //아이디 찾기 관련
+    
+    
+    public String find_passCheck(MemberDTO dto);    //비밀번호 찾기 관련
+    
+    
+    public void authentication(MemberDTO dto);        //회원 인증관련 메소드
+    
+    
+    public void pass_change(Map<String, Object> map, MemberDTO dto)throws Exception;    //비밀번호 변경
+    
+    
+    public boolean email_check(String e_mail) throws Exception;    //이메일 중복확인을 하는 메소드
+    
+    
+    public boolean join_id_check(String user_id) throws Exception;    //회원가입시 아이디를 체크하는 메소드
+    
+    
+    public List<MemberDTO> member_profile(String user_id) throws Exception;    //회원의 프로필을 볼 수 있는 메소드
+	
+	*/
 }
 
 

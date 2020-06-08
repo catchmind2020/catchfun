@@ -90,14 +90,14 @@
             <br><br>
             <table id="contentArea" align="center" class="table">
                 <tr>
-                    <th width="100">제목</th>
-                    <td colspan="3">배송언제오나요</td>
+                    <th width="120">제목</th>
+                    <td colspan="3">${ q.questionTitle }</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>khkh007</td>
+                    <td>${ q.userId }</td>
                     <th>작성일</th>
-                    <td>20.05.25</td>
+                    <td>${ q.questionDate }</td>
                 </tr>
 
                 <tr>
@@ -105,9 +105,34 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">주문한지 일주일됐는데, 아직 배송준비중이라고 떠요.</p></td>
+                    <td colspan="4"><p style="height:150px">${ q.questionContent }</p></td>
                 </tr>
             </table>
+            
+            <!-- 수정하기, 삭제하기 버튼은 본인이 단 댓글에(프로젝트개설자)에 대해서 보여져야됨 -->
+            <c:if test="${ loginUser.userNo eq q.counseling }">
+	            <div align="center">
+	            	<button class="btn btn-primary" onclick="postFormSubmit(1)">수정하기</button>
+	            	<button class="btn btn-danger" onclick="postFormSubmit(2)">삭제하기</button>
+	            </div>
+	            
+	            <form action="" id="postForm" method="post">
+	            	<input type="hidden" name="qno" value="${ q.questionNo }">
+	            </form>
+	            
+	            <script>
+                  function postFormSubmit(num){
+                     if(num == 1){ // 수정하기클릭시
+                        $('#postForm').attr("action", "updateForm.qu");
+      
+                     } else { // 삭제하기 클릭시
+                        $('#postForm').attr("action", "delete.qu");                  
+                     }
+                     $('#postForm').submit();
+                  }
+               </script>
+	            
+            </c:if>
 
             <br>
              <!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->
@@ -119,13 +144,16 @@
                         </td>
                         <td><button class="button button3">등록</button></td>
                     </tr>
+                    <tr>
+                    	<td colspan="3">댓글(<span id="rcount">3</span>) </td>
+                    </tr>
                    
                 </thead>
                 <tbody>
                     <tr>
-                        <th>프로젝트개설자</th>
-                        <td>고객님, 배송이 지연되어 죄송합니다. 오늘 출고될 예정입니다.</td>
-                        <td>2020.05.25</td>
+                        <th>${ q.userId }</th>
+                        <td>${ q.ansContent }</td>
+                        <td>${ q.ansDate }</td>
                     </tr>
 
                 </tbody>

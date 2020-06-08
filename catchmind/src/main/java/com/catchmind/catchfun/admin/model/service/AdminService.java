@@ -2,6 +2,7 @@ package com.catchmind.catchfun.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -73,6 +74,27 @@ public interface AdminService {
 	int qnaAnsUpdate(Question q);
 	
 	int qnaDelete(String qno); 
+	
+	// 3. Category
+	
+	// 카테고리 등록용 서비스
+	int insertCategory(Category c);
+	int insertAttachment(Category c);
+	String refNoCategory();
+	
+	// 카테고리 삭제용 서비스
+	int deleteCategory(String cno);
+	String deleteCategoryFile(String cno);
+	
+	// 카테고리 수정용 서비스
+	int updateCategory(Category c);
+	int updateCategory2(Category c);
+	
+	// 카테고리 디테일
+	Category categoryDetail(String cno);
+	
+	// 카테고리 리스트 출력
+	ArrayList<Category> categoryList();
 	
 	// 주혁 끝
 	

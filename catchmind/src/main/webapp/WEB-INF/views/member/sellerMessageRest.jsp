@@ -52,7 +52,7 @@ body, input, textarea, select, button, table {
         #boardList{text-align: center;}
         #boardList>tbody>tr:hover{cursor:pointer;}
 
-        #pagingArea{width:100%; margin:auto; text-align: center;}
+       /*  #pagingArea{width:100%; margin:auto; text-align: center;} */
        
         #searchForm{
             width:80%;
@@ -99,6 +99,7 @@ body, input, textarea, select, button, table {
             background-color: white;
             border-color: rgb(196, 4, 4);
         }
+        #pagingArea{width:fit-content;margin:auto;}
     </style>
 </head>
 <body>
@@ -106,7 +107,7 @@ body, input, textarea, select, button, table {
             
         <div class="header-area">
             <div class="header">
-                <img src="images/catchfun_logo.png">
+                <img src="<%=request.getContextPath() %>/resources/images/catchfun_logo.png">
             </div>
             <div class="header">카테고리</div>
             <div class="header">오픈예정</div>
@@ -114,17 +115,18 @@ body, input, textarea, select, button, table {
             <div class="header">공지</div>
             <div class="header"></div>
             <div class="header login">
-            <img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="images/usericon32.png"></div>
+            <img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="<%=request.getContextPath() %>/resources/images/usericon32.png"></div>
     
         </div>
     <div class="content">
         <br><br>
         <div class="innerOuter" style="padding:5% 10%;">
-            <h2>메세지함</h2>
-            <table id="boardList" class="table table-hover" align="center">
+            <h2>프로젝트 개설자의 메세지함</h2>
+            <table id="questionList" class="table table-hover" align="center">
                 <thead>
                   <tr>
+                  	<th>글번호</th>
                     <th>제목</th>
                     <th>보낸사람</th>
                     <th>작성일</th>
@@ -132,28 +134,27 @@ body, input, textarea, select, button, table {
                   </tr>
                 </thead>
                 <tbody>
-	                <tr>
-	                    <td>배송언제오나요.</td>
-	                    <td>khkh007</td>
-                        <td>20.05.25</td>
-                        <td><button id="answerBtn">답변하기</button></td>
-                    </tr>
-                     <tr>
-	                    <td>옵션을 다시 변경할 수 있나요?</td>
-	                    <td>user03</td>
-                        <td>20.05.20</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-	                    <td>발송됐는데 주소를 잘못적었어요.</td>
-	                    <td>kk123</td>
-                        <td>20.05.15</td>
-                        <td>답변완료</td>
-	                </tr>
-
+	                <c:forEach items="${ list }" var="q">
+	                    <tr>
+	                    	<td>${ q.questionNo }</td>
+							<td>${ q.questionTitle }</td>
+							<td>${ q.userId }</td>
+							<td>${ q.questionDate }</td>
+							<c:choose>
+								<c:when test="${ q.questionYn eq 'N' }">
+									<td><button id="answerBtn">답변하기</button></td>
+								</c:when>
+								<c:otherwise>
+									<td>답변완료</td>
+								</c:otherwise>
+							</c:choose>
+	                    </tr>
+                    </c:forEach>
+                 </tbody>
             </table>
             <br>
 
+<!-- 
             <div id="pagingArea">
                 <ul class="pagination" style="width: 400px; height:100px; align:center;">
                     <li class="page-item disabled"><a class="page-link" href="#"><<</a></li>
@@ -165,6 +166,52 @@ body, input, textarea, select, button, table {
                     <li class="page-item"><a class="page-link" href="#">>></a></li>
                 </ul>
             </div>
+             -->
+             
+             <script>
+             	$(function(){
+             		$("#questionList tbody tr").click(function(){
+             			location.href = "sellerMessageView.me?qno=" + $(this).children().eq(0).text();
+             			
+             		});
+             	});
+             </script>
+             
+             
+             <div id="pagingArea">
+		        <ul class="pagination">
+		        	
+		        	 <c:choose>
+		        		<c:when test="${ pi.currentPage eq 1 }">
+		             		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+		             	</c:when>
+		             	<c:otherwise>
+		            		<li class="page-item"><a class="page-link" href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		            
+		            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		            	<c:choose>
+		            		<c:when test="${ p eq pi.currentPage }">
+		             			<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+		             		</c:when>
+		             		<c:otherwise>
+		             			<li class="page-item"><a class="page-link" href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=${ p }">${ p }</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:forEach>
+		            
+		            <c:choose>
+		            	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+		             </c:when>
+		             <c:otherwise>
+		             	<li class="page-item"><a class="page-link" href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=${ pi.currentPage+1 }">Next</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		        </ul>
+		    </div>
+            
            
             <br clear="both"><br>
             
