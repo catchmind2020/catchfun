@@ -20,7 +20,7 @@
             <h2>게시글 수정하기</h2>
             <br>
 
-            <form id="updateForm" method="post" action="update.bo" enctype="multipart/form-data">
+            <form id="updateForm" method="post" action="updateForm.qu" enctype="multipart/form-data">
             	<input type="hidden" name="questionNo" value="${ q.questionNo }">
                 <table align="center">
                     <tr>
@@ -38,7 +38,7 @@
                     <tr>
                         <th colspan="2"><textarea class="form-control" required name="questionContent" id="content" rows="10" style="resize:none;">${ q.questionContent }</textarea></th>
                     </tr>
-                </table>
+                </table> 
                 <br>
 
                 <div align="center">

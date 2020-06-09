@@ -72,15 +72,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMessage(int qno) {
+	public int deleteMessage(String qno) {
 		return mDao.deleteMessage(sqlSession, qno);
 	}
 
-	@Override
-	public int updateMessage(Question q) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int sellerMessageView(int qno) {
@@ -104,7 +99,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Question selectMessage(int qno) {
+	public Question updateMessage(String qno) {
 		return mDao.selectMessage(sqlSession, qno);
 	}
 
@@ -117,6 +112,30 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Question> MessageRestList(PageInfo pi, String userNo) {
 		return mDao.MessageRestList(sqlSession, pi, userNo);
 	}
+
+	@Override
+	public int updateMessage(Question q) {
+		
+		return mDao.updateMessage(sqlSession, q);
+	}
+
+	@Override
+	public Question messageUpdateForm(String qno) {
+		return mDao.messageUpdateForm(sqlSession, qno);
+	}
+
+	@Override
+//	public ArrayList<Question> selectReplyList(String qno) {
+	public Question selectReplyList(String qno) {
+		return mDao.selectReplyList(sqlSession, qno);
+	}
+
+
+	@Override
+	public int insertReply(Question q) {
+		return mDao.insertReply(sqlSession, q);
+	}
+	
 
 
 

@@ -71,15 +71,31 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectMessage", qno);
 	}
 
-	public int deleteMessage(SqlSessionTemplate sqlSession, int qno) {
+	public int deleteMessage(SqlSessionTemplate sqlSession, String qno) {
 		
 		return sqlSession.update("memberMapper.deleteMessage", qno);
 	}
 
-	public Question selectMessage(SqlSessionTemplate sqlSession, int qno) {
-		
-		return sqlSession.selectOne("memberMapper.selectMessage", qno);
+	public int updateMessage(SqlSessionTemplate sqlSession, Question q) {
+		System.out.println(q);
+		return sqlSession.update("memberMapper.updateMessage", q);
 	}
+
+	public Question messageUpdateForm(SqlSessionTemplate sqlSession, String qno) {
+		return sqlSession.selectOne("memberMapper.messageUpdateForm", qno);
+	}
+
+//	public ArrayList<Question> selectReplyList(SqlSessionTemplate sqlSession, String qno) {
+	public Question selectReplyList(SqlSessionTemplate sqlSession, String qno) {
+//		return (ArrayList)sqlSession.selectList("memberMapper.selectReplyList", qno);
+		return sqlSession.selectOne("memberMapper.selectReplyList", qno);
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, Question q) {
+		return sqlSession.update("memberMapper.insertReply", q);
+	}
+
+
 
 
 	// 이메일 !!

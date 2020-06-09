@@ -28,6 +28,7 @@ import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
+import com.google.gson.Gson;
 
 @Controller // 해당 이 클래스를 Controller 역할을 하는 빈으로 등록시키는 어노테이션
 public class MemberController {
@@ -572,14 +573,14 @@ public class MemberController {
 	}
 	// 메세지(질문) 삭제하기
 	@RequestMapping("delete.qu")
-	public String deleteMessage(int qno, Model model) { 
+	public String deleteMessage(String qno, Model model) { 
 		
 		int result = mService.deleteMessage(qno);
 		
 		
 		if(result > 0) {// 게시글 삭제 성공 
 
-			return "redirect:sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1";
+			return "redirect:messageRest.me?userNo=M3&currentPage=1";
 			
 		}else {	// 게시글 삭제 실패
 			
@@ -590,16 +591,37 @@ public class MemberController {
 
 	}
 	
-	// 메세지(질문) 수정하기
-	@RequestMapping("updateForm.qu")
-	public String updateForm(int qno, Model model) {
+	
+	@RequestMapping("messageUpdateForm.qu")
+	public String messageUpdateForm(String qno, Model model) { 
+		//System.out.println("gg : " + qno);
+		Question qd = mService.messageUpdateForm(qno);
+		//System.out.println("테스트 : " + qno);
+		model.addAttribute("q", qd);
 		
-		model.addAttribute("q", mService.selectMessage(qno));
 		return "member/messageUpdateForm";
 		
 	}
 	
+	// 메세지(질문) 수정하기
+	@RequestMapping("updateForm.qu")
+	public String updateForm(Question q, Model model) {
+		
+		//model.addAttribute("q", mService.selectMessage(qno));
+		
+		int result = mService.updateMessage(q);
+		
+		if(result > 0) {
+			
+			return "redirect:messageView2.me?qno=" + q.getQuestionNo();
+			
+		}else {
+			model.addAttribute("msg", "메세지 수정 실패!!");
+			return "common/errorPage";
+		}
 	
+		
+	}
 	
 	
 	// 회원탈퇴
@@ -629,6 +651,35 @@ public class MemberController {
 	public String mypageModify() {
 		return "member/mypageModify";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="alist.qu", produces="application/json; charset=utf-8")
+	public String selectReplyList(String qno) {
+		
+		System.out.println("화긴화긴1 : " + qno);
+		//ArrayList<Question> list1 = mService.selectReplyList(qno);
+		Question list1 = mService.selectReplyList(qno);
+		System.out.println("화긴화긴 : " + list1);
+		
+		return new Gson().toJson(list1);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="ainsert.qu")
+	public String insertReply(Question q, Model model) {
+		System.out.println(q);
+		int result = mService.insertReply(q);
+		System.out.println("asdasdsada : " + result);
+		
+		if(result > 0){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	
 	
 
 	// 이메일 인증 시작!
