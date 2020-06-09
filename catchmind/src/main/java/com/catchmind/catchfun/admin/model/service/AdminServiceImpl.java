@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.catchmind.catchfun.admin.model.dao.AdminDao;
 import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.PayTotal;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
@@ -160,6 +161,14 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public ArrayList<Category> categoryList() {
 		return aDao.categoryList(sqlSession);
+	}
+	@Override
+	public PayTotal payList(String pr) {
+		return aDao.payList(sqlSession, pr);
+	}
+	@Override
+	public ArrayList<String> prList() {
+		return aDao.prList(sqlSession);
 	}
 	
 	// 3. Category

@@ -63,32 +63,27 @@
 </style>
 </head>
 <body>
+<jsp:include page="../common/admin.jsp"/>
  <div class="outer">
     <h2>댓글 신고내용</h2><br>
      <div id="report1">   
       <table >
         <tr height="50">
           <th width="100">댓글 작성자 : </th>
-          <td width="100">user01</td>
-          <th width="90">신고자 ID : </th>
-          <td width="100">관리자</td>
+          <td width="100">${ rp.userId }</td>
           <th width="90">신고날짜 : </th>
-          <td width="100">2020-10-10</td>
+          <td width="100">${ rp.questionDate }</td>
        </tr>
        <tr>
           <th>댓글 내용</th>
-          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;">하하하하</textarea></td> 
-       </tr>
-       <tr>
-          <th>신고자 내용</th>
-          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;"></textarea></td>
+          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ rp.questionContent}</textarea></td> 
        </tr>
        <tr align="center">
          <th colspan="6">
-           <form action="" method="POST">
-              <input type="hidden" value="">
+           <form action="reportBlack.ad" method="method">
+           	  <input type="hidden" name="userNo" value="${ rp.userNo }">
               <input type="submit" value="블랙리스트 등록">&nbsp;
-              <input type="button" value="목록으로">
+              <input type="button" value="목록으로" onClick="location.href='report.ad?currentPage=1'">
            </form> 
         </th>
        </tr>
@@ -97,7 +92,7 @@
     </div>
   </div>
 <!-- ---------------------------------------------------- -->
-  <div class="outer">
+ <!--  <div class="outer">
     <h2>프로젝트 신고내용</h2><br>
      <div id="report1">   
       <table >
@@ -129,7 +124,7 @@
 
       </table>
     </div>
-  </div>
+  </div> -->
  
 </body>
 </html>

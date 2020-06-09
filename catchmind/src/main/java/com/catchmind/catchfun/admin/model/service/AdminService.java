@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.PayTotal;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
@@ -95,6 +96,11 @@ public interface AdminService {
 	
 	// 카테고리 리스트 출력
 	ArrayList<Category> categoryList();
+	
+	// 통계!!
+	PayTotal payList(String pr);
+	
+	ArrayList<String> prList();
 	
 	// 주혁 끝
 	

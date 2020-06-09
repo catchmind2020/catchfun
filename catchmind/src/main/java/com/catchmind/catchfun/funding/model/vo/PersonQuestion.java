@@ -1,4 +1,4 @@
-package com.catchmind.catchfun.admin.model.vo;
+package com.catchmind.catchfun.funding.model.vo;
 
 import java.sql.Date;
 
@@ -13,22 +13,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Reply {
-	
-	private String replyNo;
+public class PersonQuestion {
+
+	private String questionNo;
 	private String userNo;
+	private int questionType;
+	private String counseling;
+	private String questionTitle;
 	private String questionContent;
 	private Date questionDate;
-	private String questionYN;
+	private String questionYn;
 	private String questionStatus;
-	private int questionBanCount;
-	
-	private String userId;
-	private int userType;
-	private String userName;
-	private String email;
-	private String phone;
-	private Date userEnrolldate;
-	
-
+	private String ansTitle;
+	private String ansContent;
+	private Date ansDate;
+	private String ansNo;
 }

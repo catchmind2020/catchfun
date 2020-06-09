@@ -99,6 +99,9 @@ public interface AdminService2 {
 	
 	ArrayList<Project> proReportSearch(PageInfo pi, String keyword);
 	
+	Reply rpReportDetail(String rd);
+	
+	int reportBlack(String userNo);
 	
 }
 
