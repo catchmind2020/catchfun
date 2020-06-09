@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,11 +56,11 @@
 		                    <tr>
 								<td>${ p.projectName }</td>
 								<td>${ p.userId }</td>
-								<td>${ p.projectTargetAmount }</td>
-								<td>${ p.total }(237%)</td>
+								<td><fmt:formatNumber value="${ p.projectTargetAmount }" pattern="#,###" />원</td>
+								<td><fmt:formatNumber value="${ p.total }" pattern="#,###" />원(<fmt:formatNumber type="percent" value="${ p.total/p.projectTargetAmount }"  pattern="0%"/>)</td>
 								<td>${ p.projectFinishDate }</td>
 								<td>${ p.categoryName }</td>
-								<td>${ p.total * 0.93 }</td>
+								<td><fmt:formatNumber value="${ p.total * 0.93 }" pattern="#,###" />원</td>
 								<td>미발급 (컬럼추가예정)</td>
 								<td><button type="button">발급하기</button></td>
 		                    </tr>
