@@ -18,6 +18,8 @@
             left:0;
             margin:auto;
         }
+        
+        
         .footer-area{
             margin-left:40px;
             color:black;
@@ -36,12 +38,12 @@
             font-weight: 900;
         }
         .sizef{font-size: 10px; float:right; color:black}
-        hr{margin:5px;}
+        .hr{margin:5px;}
 </style>
 <body>
 	<div class="footer">
 		<div style="height:100px;"></div>
-        <hr>
+        <hr class="hr">
         <div class="footer-area">
             <div class="footermenu">회원가입약관</div>
             <div class="footermenu">서비스이용약관</div>
@@ -50,7 +52,7 @@
             <div class="footermenu">이용가이드</div>
             <div class="footermenu">캐치펀문의</div>
         </div>
-        <hr>
+        <hr class="hr">
         <div>
             <div class="footer-copyright">
                 캐치펀은 플랫폼 제공자로서 프로젝트의 당사자가 아니며, 직접적인 통신판매를 진행하지 않습니다. <br>
