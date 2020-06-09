@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>${ q.userNo }</td>
+                    <td>${ q.userId }</td>
                     <th>작성일</th>
                     <td>${ q.questionDate }</td>
                 </tr>
@@ -108,7 +108,7 @@
                 </tr>
             </table>
            
-           <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
+<!--            수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨
                <div align="center">
                   <button class="button button2" onclick="postFormSubmit(1);">목록으로</button>
                   <button class="button button3"><a href = "sellerMessageAnswer.me">답변보내기</a></button>
@@ -125,7 +125,37 @@
                      $('#postForm').submit();
                   }
                </script>
-               
+                -->
+                
+             <!-- 수정하기, 삭제하기 버튼은 본인이 단 댓글에(프로젝트개설자)에 대해서 보여져야됨 -->
+            <c:if test="${ loginUser.userNo eq q.counseling }">
+	            <div align="center">
+	            	<button class="button button2" onclick="postFormSubmit(1)">수정하기</button>
+	            	<button class="button button3" onclick="postFormSubmit(2)">삭제하기</button>
+	            </div>
+	            
+	            <form action="" id="postForm" method="post">
+	            	<input type="hidden" name="qno" value="${ q.questionNo }">
+	            </form>
+	            
+	            <script>
+                  function postFormSubmit(num){
+                     if(num == 1){ // 수정하기클릭시 messageUpdateForm.qu
+                        $('#postForm').attr("action", "messageUpdateForm.qu");
+      
+                     } else { // 삭제하기 클릭시
+                        $('#postForm').attr("action", "delete.qu");                  
+                     }
+                     $('#postForm').submit();
+                  }
+               </script>
+	            
+            </c:if>
+
+            <br>
+                
+                
+                
         <!-- 게시글에 딸려있는 댓글 조회용 ajax  -->
         <script>
        

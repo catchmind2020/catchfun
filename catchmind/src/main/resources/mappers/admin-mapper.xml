@@ -92,13 +92,25 @@
 		<result column="PROJECT_NAME" property="projectName"/>
 	</resultMap>
 	
+	<resultMap id="adminPayTotalResultSet" type="PayTotal">
+		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="REWARD_NO" property="rewardNo"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="user_id" property="userId"/>
+		<result column="FUNDING_COST" property="fundingCost"/>
+		<result column="FUNDING_QUANTITY" property="fundingQuantity"/>
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="CATEGORY_NAME" property="categoryName"/>
+		<result column="total" property="total"/>
+	</resultMap>
+	
+	
 	<select id="selectListCount" resultType="_int">
 		select count(*)
 		  from NOTICE_TEMP
 		 where NOTICE_STATUS='N'
 	</select>
-	
-	
 	
 	<select id="selectList" resultMap="adminNoticeResultSet">
 		select NOTICE_NO, user_Id, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_COUNT, NOTICE_STATUS
@@ -221,6 +233,32 @@
 		   set STATUS='Y'
 		 where REF_NO=#{cno}
 	</update>
+	
+	<!-- 통계!! -->
+	<select id="payList" parameterType="string" resultMap="adminPayTotalResultSet">
+		select p.PROJECT_NUMBER as PROJECT_NUMBER, REWARD_NO as REWARD_NO, p.PROJECT_NAME as PROJECT_NAME, m2.user_id as user_id, FUNDING_COST as FUNDING_COST, FUNDING_QUANTITY as FUNDING_QUANTITY, PROJECT_TARGET_AMOUNT as PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_NAME as CATEGORY_NAME,
+		(select sum(FUNDING_COST*FUNDING_QUANTITY)
+		from FUNDING_LIST f
+		join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		join member m on (f.user_no = m.user_no)
+		join member m2 on (p.user_no = m2.user_no)
+		where f.PROJECT_NUMBER = #{pr}
+		group by p.PROJECT_NUMBER) as total
+		from FUNDING_LIST f
+		join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		join member m on (f.user_no = m.user_no)
+		join member m2 on (p.user_no = m2.user_no)
+		where f.PROJECT_NUMBER = #{pr} and <![CDATA[rownum <= 1]]>
+	</select>
+	
+	<select id="prList" resultType="string">
+		select PROJECT_NUMBER
+		  from PROJECT
+	</select>
+	
+	
   	<!-- 주혁끝 -->
   	
   	

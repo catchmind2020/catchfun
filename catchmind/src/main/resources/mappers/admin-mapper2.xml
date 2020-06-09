@@ -21,7 +21,7 @@
 	</resultMap>
 	
 	<resultMap id="adminReportResultSet" type="Reply1">
-		<id column="P_QUESTION_NO" property="pQuestionNo"/>
+		<result column="P_QUESTION_NO" property="replyNo"/>
 		<result column="USER_NO" property="userNo"/>
 		<result column="QUESTION_CONTENT" property="questionContent"/>
 		<result column="QUESTION_DATE" property="questionDate"/>
@@ -109,28 +109,30 @@
     
     <select id="reportListCount" resultType="_int">
     	select count(*)
-    	  from reply
-    	 where question_status='N'  
+    	  from reply r
+          join member m using(user_no)
+    	 where m.status='Y' and question_status='N' 
     </select>
     
     <select id="reportList" resultMap="adminReportResultSet">
     	select *
     	  from reply r
-    	  join member m using(user_no)    	  
+    	  join member m using(user_no)
+    	 where m.status='Y'     	  
     </select>
     
     <select id="reportSearchCount" resultType="_int">
     	select count(*)
-    	  from reply
-    	  join member using(user_no)
-    	 where USER_ID LIKE '%' || #{keyword} || '%' 
+    	  from reply r
+    	  join member m using(user_no)
+    	 where m.status='Y' and USER_ID LIKE '%' || #{keyword} || '%' 
     </select>
     
     <select id="reportSearch" resultMap="adminReportResultSet">
     	select *
     	  from reply r
     	  join member m using(user_no)  
-    	 where m.USER_ID LIKE '%' || #{keyword} || '%'   	  
+    	 where m.status='Y' and m.USER_ID LIKE '%' || #{keyword} || '%'   	  
     </select>
     
     <select id="proReportListCount" resultType="_int">
@@ -158,6 +160,17 @@
 		join member m using(user_no)  
     	where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%'   	  
     </select>
+    
+    <select id="rpReportDetail" parameterType="string" resultMap="adminReportResultSet">
+        select *
+    	  from reply r
+    	  join member m using(user_no) 
+    	 where P_QUESTION_NO =#{rd}   
+    </select>
+    
+    <update id="reportBlack" parameterType="string">
+    	update Member set status='B' where user_no=#{userNo}
+    </update>
 
   <!-- 
   <resultMap id="adminResultSet" type="Board">

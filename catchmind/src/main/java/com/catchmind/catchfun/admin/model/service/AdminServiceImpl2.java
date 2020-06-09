@@ -92,6 +92,14 @@ public class AdminServiceImpl2 implements AdminService2 {
 	public ArrayList<Project> proReportSearch(PageInfo pi, String keyword) {
 		return aDao2.proReportSearch(sqlSession, pi, keyword);
 	}
+	@Override
+	public Reply rpReportDetail(String rd) {
+		return aDao2.rpReportDetail(sqlSession, rd);
+	}
+	@Override
+	public int reportBlack(String userNo) {
+		return aDao2.reportBlack(sqlSession, userNo);
+	}
 
 	/*
 	@Override

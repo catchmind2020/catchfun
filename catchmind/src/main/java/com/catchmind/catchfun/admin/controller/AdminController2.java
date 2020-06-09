@@ -480,6 +480,26 @@ public class AdminController2 {
 		
 		return "admin/adminPjReportSearch";
 	}
+	
+	@RequestMapping("reportDetail.ad")
+	public String adminReportDetail(String rd, Model model) {
+		
+		Reply rp = aService2.rpReportDetail(rd);
+		
+		model.addAttribute("rp", rp);
+		
+		return "admin/adminReportDetail";
+	}
+	
+	@RequestMapping("reportBlack.ad")
+	public String reportBlack(String userNo, Model model) {
+		
+		int result = aService2.reportBlack(userNo);
+		
+		return "redirect:report.ad?currentPage=1";
+		
+	}
+	
 	/**
 	 * 매출 통계 리스트페이지
 	 */

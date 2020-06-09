@@ -286,7 +286,7 @@ a:hover { text-decoration:none !important }
 	<div class="header-area vertical-container">
 
 		<div style="margin-right:40px;">
-			<img src="resources/images/catchfun_logo.png">
+			<a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/catchfun_logo.png"></a>
 		</div>
 		<div class="header">카테고리</div>
 		<div class="header">오픈예정</div>
@@ -324,7 +324,7 @@ a:hover { text-decoration:none !important }
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
 					        </tr>
 					        <tr>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
 					        </tr>
 					      

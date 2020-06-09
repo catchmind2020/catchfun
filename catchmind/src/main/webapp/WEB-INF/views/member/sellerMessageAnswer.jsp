@@ -110,7 +110,7 @@
             </table>
             
             <!-- 수정하기, 삭제하기 버튼은 본인이 단 댓글에(프로젝트개설자)에 대해서 보여져야됨 -->
-            <c:if test="${ loginUser.userNo eq q.counseling }">
+<%--             <c:if test="${ loginUser.userNo eq q.counseling }">
 	            <div align="center">
 	            	<button class="btn btn-primary" onclick="postFormSubmit(1)">수정하기</button>
 	            	<button class="btn btn-danger" onclick="postFormSubmit(2)">삭제하기</button>
@@ -132,7 +132,7 @@
                   }
                </script>
 	            
-            </c:if>
+            </c:if> --%>
 
             <br>
              <!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->
@@ -140,26 +140,116 @@
                 <thead>
                     <tr>
                         <td colspan="2">
-                            <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
+                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
                         </td>
-                        <td><button class="button button3">등록</button></td>
+                        <td><button class="button button3" id="addReply">등록</button></td>
                     </tr>
                     <tr>
-                    	<td colspan="3">댓글(<span id="rcount">3</span>) </td>
+                    	<td colspan="3">댓글(<span id="rcount"></span>) </td>
                     </tr>
                    
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>${ q.userId }</th>
-                        <td>${ q.ansContent }</td>
-                        <td>${ q.ansDate }</td>
-                    </tr>
 
                 </tbody>
+                
             </table>
         </div>
-        <br><br>
+        
+        <script>
+        
+        	$(function(){
+        		selectReplyList();
+        		
+        		$("#addReply").click(function(){
+        			
+        			$.ajax({
+        				url:"ainsert.qu",
+        				data:{ansContent:$("#content").val(),
+        					questionNo:"${q.questionNo}",
+        					ansNo:"${loginUser.userId}"},
+        				type:"post",
+        				success:function(status){
+        					if(status == "success"){
+   								location.href="<%=request.getContextPath()%>/sellerMessageAnswer.me?qno=${q.questionNo}"
+							}else{
+								alert("업데이트실패!!");
+							}
+        				}, error:function(){
+        					console.log("댓글작성용 통신실패!");
+        				}
+        			});
+        			
+        		});
+        		
+        		
+        	});
+        	
+        	// 해당 게시글에 딸려있는 댓글 리스트를 ajax로 조회해서 화면에 뿌려주는
+        	/* 
+        	function selectReplyList(){
+        		
+        		$.ajax({
+        			url:"alist.qu",
+        			data:{qno:"${q.questionNo}"},
+        			success:function(list1){
+        				
+        				console.log("gggggg123 : " + list1);
+        				
+        				
+        				// 댓글갯수
+        				$("#rcount").text(list1.length);
+        				var value = "";
+        				for(var i in list1){
+        					if(list1[i].questionYn == 'Y'){
+        					console.log("qqqqq : " + list1[i].questionYn);
+	        					value += "<tr>" +
+	        								"<th>" + list1[i].userId +"<th>" +
+	        								"<th>" + list1[i].ansContent +"<th>" +
+	        								"<th>" + list1[i].ansDate +"<th>" +
+	        							"<tr>";
+        					}
+        				}
+        				
+        				$("#replyArea tbody").html(value);
+        				
+        				
+        			}, error:function(){
+        				console.log("댓글리스트 조회용 ajax 통신실패!!");
+        			}
+        		});
+        	}
+        	 */
+        	 
+        	// JH
+        	function selectReplyList(){
+					$.ajax({
+		    			url:"alist.qu",
+		    			data:{qno:"${q.questionNo}"},
+	    				type:"post",
+		    			success:function(list){
+		    				console.log("성공!");
+		        					var value = "<tr>" +
+		        								"<td>" + list.userId +"<td>" +
+		        								"<td>" + list.ansContent +"<td>" +
+		        								"<td>" + list.ansDate +"<td>" +
+		        							"<tr>";
+		        							
+		        					$("#replyArea tbody").html(value);
+		    				
+						},error:function(){
+		    				console.log("공지 디테일 조회용 ajax 통신실패!!");	
+		    			}
+		    		});
+        	 }
+        	
+        	
+        </script>
+        
+        
+        
+        
+        
     </div>
 
    
