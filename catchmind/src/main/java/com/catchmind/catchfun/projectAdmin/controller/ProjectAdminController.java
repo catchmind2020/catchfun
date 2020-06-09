@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.common.template.Pagination;
+import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.service.ProjectAdminService;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
+import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
 import com.catchmind.catchfun.projectAdmin.model.vo.Option;
 import com.catchmind.catchfun.projectAdmin.model.vo.Project;
@@ -63,41 +67,84 @@ public class ProjectAdminController {
 		return mv;
 
 	}
-	
+
 	@RequestMapping("selectProject.pa")
 	public ModelAndView selectProject(HttpSession session, ModelAndView mv) {
 
 		Project pro = (Project) session.getAttribute("projectUser");
 
-		
-		
 		Project project = paService.selectProject(pro);
-System.out.println(project);
+		System.out.println(project);
 		session.setAttribute("project", project);
 
-	
 		mv.setViewName("projectAdmin/projectEnroll/stroyproject");
 
 		return mv;
 
 	}
-	
+
 	@RequestMapping("fund.pa")
-	public ModelAndView selectfund
-	(HttpSession session, ModelAndView mv) {
+	public ModelAndView selectfund(HttpSession session, ModelAndView mv, int currentPage, Model model) {
 
-		Project project = (Project) session.getAttribute("projectUser");
+		Project project = (Project) session.getAttribute("project");
 
-		
-		
 		FundSum fundSum = paService.fundSum(project.getProjectNo());
+		FundSum todayfundSum = paService.todayfundSum(project.getProjectNo());
+		ArrayList<FundSum> daylistfundSum = paService.daylistfundSum(project.getProjectNo());
+
+		int listCount = paService.selectfundListCount(project.getProjectNo());
+		// 카운트 24 함수 만들어서 추가하면 끝
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 
 		
-		System.out.println(fundSum);
-		session.setAttribute("fundSum", fundSum);
+		System.out.println(listCount);
+		ArrayList<Funding> fundingList = paService.selectFundingList(pi, project.getProjectNo());
 
-	
+		
+		
+		String fundDayMoney = "";
+		String fundDayDate = "";
+		for (FundSum df : daylistfundSum) {
+			fundDayMoney += df.getFundSum() + ",";
+			fundDayDate += '"' + df.getFundDate() + '"' + ",";
+
+		}
+
+		model.addAttribute("pi", pi);
+		model.addAttribute("fundingList", fundingList);
+		session.setAttribute("fundDayDate", fundDayDate);
+		session.setAttribute("fundDayMoney", fundDayMoney);
+		session.setAttribute("fundSum", fundSum);
+		session.setAttribute("todayfundSum", todayfundSum);
+		session.setAttribute("daylistfundSum", daylistfundSum);
 		mv.setViewName("projectAdmin/funding/fundingStatusList");
+
+		return mv;
+
+	}
+	
+	@RequestMapping("news.pa")
+	public ModelAndView selectNewsList(HttpSession session, ModelAndView mv, int currentPage, Model model) {
+
+		Project project = (Project) session.getAttribute("project");
+
+
+		int listCount = paService.selectNewsListCount(project.getProjectNo());
+		// 카운트 24 함수 만들어서 추가하면 끝
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+
+		
+		
+		ArrayList<News> newsList = paService.selectNewsList(pi, project.getProjectNo());
+
+		
+		
+	
+
+		model.addAttribute("pi", pi);
+		model.addAttribute("newsList", newsList);
+		
+		mv.setViewName("projectAdmin/news/newsList");
 
 		return mv;
 
@@ -125,6 +172,11 @@ System.out.println(project);
 	@RequestMapping("reward.pa")
 	public String itemDesign() {
 		return "projectAdmin/projectEnroll/rewardDesign";
+	}
+	
+	@RequestMapping("newsEnroll.pa")
+	public String newsEnroll() {
+		return "projectAdmin/news/newsEnroll";
 	}
 
 	@RequestMapping("home.pa")
@@ -183,6 +235,46 @@ System.out.println(project);
 
 	}
 
+	@RequestMapping("insertNews.pa")
+	public String insertNews(News news, Model model, HttpSession session) {
+
+		Project project = (Project) session.getAttribute("project"); // 현재 프로젝트 로그인된걸 불러와요
+		news.setProjectNo(project.getProjectNo()); // item객체에 불러온 프로젝트 번호를 넣어주고
+
+		int result = paService.insertNews(news); // item 객체를 인설트함.
+		
+		if (result > 0) {
+
+		
+			
+			return "redirect:news.pa?currentPage=1"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		}else {
+
+			System.out.println("실패");
+			return "projectAdmin/projectEnroll/itemDesign";
+		}
+
+	}
+	@RequestMapping("newDetail.pa")
+	public ModelAndView selectNews(String nno, ModelAndView mv,HttpSession session) {
+		
+			System.out.println(nno);
+			News news = paService.selectNews(nno);
+			
+			System.out.println(news);
+			
+			session.setAttribute("news", news);
+			
+			mv.setViewName("projectAdmin/news/newsDetail");
+			
+	
+	
+		
+		return mv;
+		
+	}
+	
 	@RequestMapping("deleteItem.pa")
 	public String deleteItem(Item item, Model model, HttpSession session) {
 
@@ -220,7 +312,7 @@ System.out.println(project);
 	@RequestMapping("ptest.pa")
 	public ModelAndView ploginMember(ModelAndView mv, HttpSession session, Model model) {
 
-		Project projectUser = new Project("PR10", "", "", "", "", "", "", "", "", "", "", "", "","",""); // 아이디만을 가지고
+		Project projectUser = new Project("PR11", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); // 아이디만을 가지고
 																											// 조회한 결과
 
 		session.setAttribute("projectUser", projectUser);
@@ -266,53 +358,66 @@ System.out.println(project);
 
 		paService.insertReward(reward); // item 객체를 인설트함.
 
-	
+		selectItemList(model, session);
+		selectRewardList(model, session);
 
-		
-			 selectItemList(model, session); selectRewardList(model, session);
-			 
-			return "projectAdmin/projectEnroll/rewardDesign"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+		return "projectAdmin/projectEnroll/rewardDesign"; // 리스트 출력을위해 리스트 컨트롤 단 감.
 
-	
 	}
-	
+
 	@RequestMapping("enrollProject.pa")
 	public String enrollProject(Reward reward, Model model, HttpSession session) {
 
 		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
-		 // item객체에 불러온 프로젝트 번호를 넣어주고
+		// item객체에 불러온 프로젝트 번호를 넣어주고
 		System.out.println(project.getProjectNo());
-		paService.updateBasic(project.getProjectNo()); //등록대기상태변환
+		paService.updateBasic(project.getProjectNo()); // 등록대기상태변환
 		paService.updateMaker(project.getProjectNo());
-		paService.updateStory(project.getProjectNo());	// 프로젝트임이건
+		paService.updateStory(project.getProjectNo()); // 프로젝트임이건
 		paService.updateItem(project.getProjectNo());
 		paService.updateReward(project.getProjectNo());
-			
-			session.setAttribute("project", project);
-			return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
 
-		
+		session.setAttribute("project", project);
+		return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
 	}
-	
+
 	@RequestMapping("updateBasic2.pa")
-	public String enrollProject(ProjectBasic Basic, Model model, HttpSession session) {
+	public String updateBasic2(ProjectBasic Basic, Model model, HttpSession session) {
 
 		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
-		 // item객체에 불러온 프로젝트 번호를 넣어주고
+		// item객체에 불러온 프로젝트 번호를 넣어주고
 		Basic.setProjectNo(project.getProjectNo());
-		paService.updateBasic2(Basic); //등록대기상태변환
-	
-			
-			return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+		paService.updateBasic2(Basic); // 등록대기상태변환
 
-		
+		return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
 	}
+	
+	@RequestMapping("updateNews.pa")
+	public String updateNews(News news, Model model, HttpSession session) {
+
+		News newsno = (News) session.getAttribute("news"); // 현재 프로젝트 로그인된걸 불러와요
+		// item객체에 불러온 프로젝트 번호를 넣어주고
+		
+		news.setNewsNo(newsno.getNewsNo());
+		
+		
+		paService.updateNews(news); // 등록대기상태변환
+
+		return "redirect:news.pa?currentPage=1";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
+	}
+	
+	
+	
+
 	@RequestMapping("updateMaker2.pa")
 	public String enrollProject(ProjectMaker maker, HttpServletRequest request, HttpSession session,
 			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
 
 		Project project = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
-		 // item객체에 불러온 프로젝트 번호를 넣어주고
+		// item객체에 불러온 프로젝트 번호를 넣어주고
 		if (!file.getOriginalFilename().equals("")) {
 
 			// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
@@ -323,38 +428,36 @@ System.out.println(project);
 
 		}
 		maker.setProjectNo(project.getProjectNo());
-		paService.updateMaker2(maker); //등록대기상태변환
-	
-			
-		
-			return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+		paService.updateMaker2(maker); // 등록대기상태변환
 
-		
+		return "redirect:home.pa";// 리스트 출력을위해 리스트 컨트롤 단 감.
+
 	}
-	
-	
 
 	@RequestMapping("updateProject.pa")
-	public String insertProject(Project project, HttpServletRequest request, HttpSession session,
-		@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
+	public String updateProject(Project project, HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
 
 		Project p = (Project) session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
-		project.setProjectNo(p.getProjectNo()); // item객체에 불러온 
-	
+		project.setProjectNo(p.getProjectNo()); // item객체에 불러온
+
 		
-		if (!file.getOriginalFilename().equals("")) {
+	
+	
+			if (!file.getOriginalFilename().equals("")) {
 
-			// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
-			String changeName = saveFile(file, request);
+				// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
+				String changeName = saveFile(file, request);
 
-			project.setOriginName(file.getOriginalFilename());
-			project.setChangeName(changeName);
+				project.setOriginName(file.getOriginalFilename());
+				project.setChangeName(changeName);
 
-		}
+				paService.insertFile(project);
+			} 
+		
 
 		System.out.println(project);
-		
-		paService.insertFile(project);
+
 		int result = paService.updateProject(project); // item 객체를 인설트함.
 
 		/* session.setAttribute("projectUser", projectUser); 좀따 셀렉 */
@@ -369,6 +472,45 @@ System.out.println(project);
 		}
 	}
 
+	
+	@RequestMapping("updateProject2.pa")
+	public String updateProject2(Project project, HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
+
+		Project p = (Project)session.getAttribute("projectUser"); // 현재 프로젝트 로그인된걸 불러와요
+		
+		project.setProjectNo(p.getProjectNo()); // item객체에 불러온
+
+		
+	
+	
+			if (!file.getOriginalFilename().equals("")) {
+
+				// 서버에 파일 업로드 --> saveFile 메소드로 따로 빼서 정의할 것
+				String changeName = saveFile(file, request);
+
+				project.setOriginName(file.getOriginalFilename());
+				project.setChangeName(changeName);
+
+				paService.updateFile(project);
+			} 
+		
+
+		System.out.println(project);
+
+		int result = paService.updateProject(project); // item 객체를 인설트함.
+
+		/* session.setAttribute("projectUser", projectUser); 좀따 셀렉 */
+		if (result > 0) {
+
+			return "redirect:home.pa"; // 리스트 출력을위해 리스트 컨트롤 단 감.
+
+		} else {
+
+			System.out.println("실패");
+			return "projectAdmin/projectEnroll/itemDesign";
+		}
+	}
 	@RequestMapping("rewardList.pa")
 	public String selectRewardList(Model model, HttpSession session) {
 
@@ -424,6 +566,22 @@ System.out.println(project);
 			System.out.println("실패");
 			return "redirect:itemList.pa";
 		}
+
+	}
+	
+	@RequestMapping("deleteNews.pa")
+	public String deleteNews(Model model, HttpSession session) {
+
+		News newsno = (News) session.getAttribute("news");
+		System.out.println("---");
+System.out.println(newsno);
+		paService.deleteNews(newsno); // item 객체를 인설트함.
+	
+
+			return "redirect:news.pa?currentPage=1";
+
+	
+
 
 	}
 

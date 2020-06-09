@@ -1,5 +1,7 @@
 package com.catchmind.catchfun.projectAdmin.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +13,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class FundSum {
+public class News {
+	private String newsNo;
 	private String projectNo;
-	private int fundSum;
-	private int fundCount;
-	private String fundDate;
+	private String newsTitle;
+	private String newsContent;
+	private String newsDate;
+	private String newsCount;
+	private String newsStatus;
 }

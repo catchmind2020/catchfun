@@ -6,8 +6,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.dao.ProjectAdminDao;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
+import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
 import com.catchmind.catchfun.projectAdmin.model.vo.Option;
 import com.catchmind.catchfun.projectAdmin.model.vo.Project;
@@ -109,6 +112,11 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 		return paDao.updateProject(sqlSession, project);
 	}
 
+	public int updateNews(News news) {
+		// TODO Auto-generated method stub
+		return paDao.updateNews(sqlSession, news);
+	}
+	
 	@Override
 	public int insertFile(Project project) {
 		// TODO Auto-generated method stub
@@ -167,6 +175,68 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 	public FundSum fundSum(String projectNo) {
 		// TODO Auto-generated method stub
 		return paDao.fundSum(sqlSession, projectNo);
+	}
+
+	@Override
+	public FundSum todayfundSum(String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.todayfundSum(sqlSession, projectNo);
+	}
+
+	@Override
+	public ArrayList<FundSum> daylistfundSum(String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.daylistfundSum(sqlSession, projectNo);
+	}
+
+	@Override
+	public ArrayList<Funding> selectFundingList(PageInfo pi , String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.selectFundingList(sqlSession, pi, projectNo);
+	}
+
+	@Override
+	public int selectfundListCount(String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.selectfundListCount(sqlSession, projectNo);
+	}
+
+	
+	
+	@Override
+	public int updateFile(Project project) {
+		// TODO Auto-generated method stub
+		return paDao.updateFile(sqlSession, project);
+	}
+
+	@Override
+	public int selectNewsListCount(String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.selectNewsListCount(sqlSession, projectNo);
+	}
+
+	@Override
+	public ArrayList<News> selectNewsList(PageInfo pi, String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.selectNewsList(sqlSession, pi, projectNo);
+	}
+
+	@Override
+	public int insertNews(News news) {
+		// TODO Auto-generated method stub
+		return paDao.insertNews(sqlSession, news);
+	}
+
+	@Override
+	public News selectNews(String nno) {
+		// TODO Auto-generated method stub
+		return paDao.selectNews(sqlSession, nno);
+	}
+
+	@Override
+	public int deleteNews(News news) {
+		// TODO Auto-generated method stub
+		return paDao.deleteNews(sqlSession, news);
 	}
 
 

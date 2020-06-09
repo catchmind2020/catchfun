@@ -179,7 +179,6 @@
 								  	  <%-- ${op.rewardNo} <br> --%>
 									${op.itemName}  &nbsp;  ${op.itemQuantity}개<br>
 								  </c:if>
-					
 							</c:forEach>
 								
 							</div>

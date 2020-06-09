@@ -116,8 +116,8 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<%=contextPath%>/adList.no?currentPage=1">결제현황</a>
-            <a class="collapse-item" href="<%=contextPath%>/adList.ev?currentPage=1">새소식</a>
+            <a class="collapse-item" href="<%=contextPath%>/fund.pa?currentPage=1">펀딩현황</a>
+            <a class="collapse-item" href="<%=contextPath%>/news.pa?currentPage=1">새소식</a>
              
             <a class="collapse-item" href="<%=contextPath%>/adList.brno?currentPage=1">가맹점 공지사항</a> 
          	

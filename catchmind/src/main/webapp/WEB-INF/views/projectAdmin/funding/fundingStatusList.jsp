@@ -79,9 +79,9 @@
 
 	<div class="outer">
 	
+	
 	<div style=" height: 700px ; margin-left: 270px;">
-		
-		
+
 			<br>
 			<h1 class="h3 text-gray-900 mb-4">펀딩결제현황</h1>
 			<div class="card shadow mb-4" style="width: 500px;">
@@ -109,8 +109,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 결제 예약금액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum}</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 5,000원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum}원</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundSum}원</div>
                     </div>
                   
                   </div>
@@ -123,8 +123,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 달성률</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">12%</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 0.7%</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum / project.projectTargetAmount *100}%</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundSum /project.projectTargetAmount *100}%</div>
                     </div>
                   
                   </div>
@@ -136,9 +136,9 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="h5 font-weight-bold text-primary text-uppercase mb-1">${fundSum.fundCount}</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">11건</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 1건</div>
+                      <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 건수</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundCount}건</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundCount}건</div>
                     </div>
                   
                   </div>
@@ -149,7 +149,7 @@
 		<br><br>
 		  <div class="card shadow mb-4" style="width: 800px; height: 500px; ">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">수익현황</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">수익현황(10일전까지)</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
@@ -161,15 +161,12 @@
               </div>
 		 <br>
 		 <h1 class="h3 text-gray-900 mb-4">펀딩내역</h1>
-		 <table class="table-bordered table-hover table-sm listArea" style="width:1000px; height: 500px;">
+		 
+		 <table class="table-bordered table-hover table-sm listArea" style="width:1000px;">
             <thead>
               <tr>
-                <th width="50px" style="text-align: center;">
-                  <div>
-                    <label><input class="checkbox " type="checkbox" name="" value="" style="vertical-align: middle; transform: scale(1.4);"></label>
-                  </div>
-                </th>
-                <th width="100px">이름</th>
+               
+                <th width="150px">이름</th>
                 <th width="400px">선택 리워드</th>
                 <th width="200px">금액</th>
                 <th width="100px">갯수</th>
@@ -181,28 +178,65 @@
             <tbody>
             
 		
-			<tr>
+			<!-- tr>
 				<td colspan="6">존재하는 공지사항이 없습니다.</td>
-			</tr>
+			</tr> -->
 			
-				<tr>
-					<td class="firsttd" style="text-align: center;"><div class="" >
-					
-                    <label>
-                    <input class="checkbox " type="checkbox" name="" value="" style="vertical-align: middle; transform: scale(1.4);"></label>
-                  </div></td>
-					<td>getNoticeDate() %></td>
-					<td>getNoticeDate() %></td>
-					<td>getNoticeDate() %></td>
-					<td>getNoticeDate() %></td>
-				</tr>	
-			
+			<c:forEach items="${ fundingList }" var="b">
+		
+				<c:if test="${ b.projectNo eq project.projectNo }">
+	                    <tr>
+	                        <td>${ b.fundingProduct }</td>
+	                        <td>${ b.rewardTitle }</td>
+	                        <td>${ b.fundingCost }</td>
+	                        <td>${ b.fundingQuantity }</td>
+	                        <td>${ b.fundingDate }</td>
+	                      	<td>${ b.fundingStatus }</td>
+	                      	<td>${ b.fundingQuantity * b.fundingCost }</td>
+	                    </tr>
+	                </c:if>
+                 </c:forEach>
+                    
             </tbody>
           </table>
              
 
    	<br><br>
-   					
+   			<div id="pagingArea">
+                <ul class="pagination">
+                	
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+	                    </c:when>
+	                    <c:otherwise>
+	                   		<li class="page-item"><a class="page-link" href="fund.pa?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<c:choose>
+                    		<c:when test="${ p eq pi.currentPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="fund.pa?currentPage=${ p }">${ p }</a></li>
+                    		</c:otherwise>
+                    	</c:choose>
+                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="fund.pa?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                </ul>
+                
+                
+            </div>
 			
 			
 			
@@ -215,20 +249,8 @@
 	     
 
 
-
 	<script>
-		$(function(){
-			$("table>tbody>tr").click(function(){
-				
-				//console.log("클릭");
 		
-				// 현재 클릭했을 때의 해당 공지사항 번호
-				var nno = $(this).children().eq(1).text();
-				
-				// 쿼리스트링을 이용해서 전달값 전달
-				 location.href="<%=contextPath%>/adDetail.no?nno=" + nno;
-			});
-		});
 		
 		
 		
@@ -267,7 +289,7 @@
 		var myLineChart = new Chart(ctx, {
 		  type: 'line',
 		  data: {
-		    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		    labels: [${fundDayDate}],
 		    datasets: [{
 		      label: "Earnings",
 		      lineTension: 0.3,
@@ -281,7 +303,7 @@
 		      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
 		      pointHitRadius: 10,
 		      pointBorderWidth: 2,
-		      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+		      data: [${fundDayMoney}],
 		    }],
 		  },
 		  options: {
@@ -313,7 +335,7 @@
 		          padding: 10,
 		          // Include a dollar sign in the ticks
 		          callback: function(value, index, values) {
-		            return '$' + number_format(value);
+		            return  number_format(value)+'원';
 		          }
 		        },
 		        gridLines: {
@@ -345,7 +367,7 @@
 		      callbacks: {
 		        label: function(tooltipItem, chart) {
 		          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-		          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+		          return datasetLabel + ': 원' + number_format(tooltipItem.yLabel);
 		        }
 		      }
 		    }
