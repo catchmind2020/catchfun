@@ -391,7 +391,7 @@
 	
 	<update id="deleteNews" parameterType="News2">
 		update News
-		set status='Y'
+		set NEWS_STATUS='Y'
 		where NEWS_NO=#{newsNo}
 	</update>
 	
