@@ -8,5 +8,7 @@ public interface MainService {
 
 
 	ArrayList<Main> mainSpotlightList();
+	
+	ArrayList<Main> mainComingsoonList();
 
 }

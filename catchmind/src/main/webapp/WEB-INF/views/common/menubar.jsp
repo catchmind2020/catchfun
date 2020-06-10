@@ -198,8 +198,8 @@
 /* 로그인 부분*/
 .login { position: relative; display: table-cell; font-size: 15px;
 	color: gray; padding-left: 160px; padding-right: 0px; }
-a { text-decoration:none !important } 
-a:hover { text-decoration:none !important }
+a { text-decoration:none !important; color:black;} 
+a:hover { text-decoration:none !important; color:black; }
 
 /* 아이유 전용 스타일 */
 
@@ -289,7 +289,7 @@ a:hover { text-decoration:none !important }
 			<a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/catchfun_logo.png"></a>
 		</div>
 		<div class="header">카테고리</div>
-		<div class="header">오픈예정</div>
+		<div class="header"><a href="comingsoon.mu">오픈예정</a></div>
 		<div class="header">프로젝트오픈</div>
 		<div class="header">공지</div>
 		<div class="header"></div>
@@ -300,9 +300,9 @@ a:hover { text-decoration:none !important }
 				<!-- 로그인 후 -->
 		 		<div class="header login  header-img loginnext">
 		 		
-					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="dropdown">
   						<button onclick="myFunction()" class="dropbtn">
+							<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
   						</button>
   							<div id="myDropdown" class="dropdown-content">

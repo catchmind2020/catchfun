@@ -27,5 +27,13 @@ public class MainController {
 		return "main";
 	}
 
+	@RequestMapping("comingsoon.mu")
+	public String mainComingsoonList(Model model) { 
+		
+		ArrayList<Main> list = maService.mainComingsoonList();
+	
+		model.addAttribute("list", list);
+		return "mainMenu/comingsoon";
+	}
 
 }
