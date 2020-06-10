@@ -103,6 +103,10 @@ public interface AdminService2 {
 	
 	int reportBlack(String userNo);
 	
+	Project pjReportDetail(String rd);
+	
+	int pjDelete(String projectNumber);
+	
 }
 
 

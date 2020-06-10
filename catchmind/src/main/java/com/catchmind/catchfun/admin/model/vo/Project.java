@@ -32,5 +32,12 @@ public class Project {
 	private String userName;
 	private String email;
 	private String phone;
+	
+	private String reportNo;
+	private String reportCategory;
+	private Date reportDate;
+	private String reportTitle;
+	private String reportContent; 
+	private String userNo1;
 
 }

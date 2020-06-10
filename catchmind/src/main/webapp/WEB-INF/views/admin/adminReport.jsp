@@ -66,7 +66,7 @@
               <br>
           </form>
               신고리스트 수 : <input type="text" style="border:unset" value="${ pi.listCount }" readonly>
-          <br>
+          <br><br>
          	 <div class="report">
 		          <table class="tb" border="1">
 			          <thead>

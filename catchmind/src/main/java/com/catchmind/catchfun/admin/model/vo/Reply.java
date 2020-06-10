@@ -30,5 +30,8 @@ public class Reply {
 	private String phone;
 	private Date userEnrolldate;
 	
+	private String userNo1;
+	private String reportContent;
+	
 
 }

@@ -66,6 +66,12 @@ public class ProjectAdminDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("projectAdminMapper.daylistfundSum", projectNo);
 	}
+	
+	public ArrayList<Project> selectProjectList(SqlSessionTemplate sqlSession, String projectNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectProjectList", projectNo);
+	}
+	
 	public ArrayList<Funding> selectFundingList(SqlSessionTemplate sqlSession, PageInfo pi, String projectNo) {
 		// TODO Auto-generated method stub
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -156,11 +162,20 @@ public class ProjectAdminDao {
 		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectCategoryList");
 	}
 	
+	
+	
+	
 	public int insertMaker(SqlSessionTemplate sqlSession, ProjectMaker maker) {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.insert("projectAdminMapper.insertMaker", maker);
 	}
+	public int insertProject(SqlSessionTemplate sqlSession, Project project) {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.insert("projectAdminMapper.insertProject", project);
+	}
+	
 	public int insertFile(SqlSessionTemplate sqlSession, Project project) {
 		// TODO Auto-generated method stub
 		
