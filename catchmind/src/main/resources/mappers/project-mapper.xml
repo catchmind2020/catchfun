@@ -137,6 +137,12 @@
 		VALUES('REP'||SEQ_REPNO.NEXTVAL, #{userNo}, #{replyContent}, SYSDATE, 'N', 'N', 0, #{projectNumber})
    </insert>
    
+   <update id="increasebanReply" parameterType="string">
+   		update REPLY
+   		   set REPLY_BAN_COUNT = REPLY_BAN_COUNT + 1
+   		 where reply_no = #{replyNo} and REPLY_STATUS = 'N'
+   </update>
+   
    <insert id="insertQuestion" parameterType="PersonQuestion5">
 		INSERT INTO PERSON_QUESTION
 		VALUES('Q'||SEQ_QNO.NEXTVAL, #{userNo}, 1, #{counseling}, #{questionTitle}, #{questionContent}, SYSDATE, 'N', 'N', null, null, null, null)
@@ -153,6 +159,17 @@
 		 where USER_NO=#{userNo} and REPORT_NO=#{reportNo}
    </select>
    
+   <update id="increasebanReport" parameterType="Report5">
+   		update PROJECT
+   		   set PROJECT_REPORT = PROJECT_REPORT + 1
+   		 where PROJECT_NUMBER = #{reportNo}
+   </update>
+   
+   <update id="deleteReply" parameterType="string">
+        update REPLY
+   		   set REPLY_STATUS = 'Y'
+   		 where reply_no = #{replyNo}
+   </update>
    
    <!-- 주혁 -->   
 <!--    <select id="selectWishlistCount" parameterType="Wishlist5" resultMap="wishlistResultSet">

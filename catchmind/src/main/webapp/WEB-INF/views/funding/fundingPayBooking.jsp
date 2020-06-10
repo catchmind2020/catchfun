@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,16 +133,19 @@
 <body>
     
     <jsp:include page="../common/menubar.jsp"/>
+	<br><br>
+	<hr>
+	<br>
     
     <div id="outer">
         <table id="rewardArea">
 
             <thead>
                 <tr>
-                    <th colspan="3" id="project_title"><h1>독도야 간밤에 잘 잤느냐, 독도프로젝트</h1></th>
+                    <th colspan="3" id="project_title"><h1>${ p.projectName }</h1></th>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align:right; padding-bottom:40px">by 온프로젝트</td>
+                    <td colspan="3" style="text-align:right; padding-bottom:40px">by ${ m.makerName }</td>
                 </tr>
                 <tr>
                     <td id="tab1">1. 리워드금액설정</td>
@@ -158,18 +162,26 @@
                 <tr>
                     <td colspan="3">
                         <div class="rewardCheckbox" style="margin-top:50px">
-                            <div><b>독도이음팔찌 RedBlue 1개 + BlueRed 1개 </b><span>13,000원 (수량 1개)</span></div>
+                        
+                        	<c:forEach items="${ flList }" var ="fl">
+                        		<div><b>${ fl.fundingTitle2 } (${ fl.fundingProduct2 })</b><span><fmt:formatNumber value="${ fl.fundingCost2 }" pattern="#,###" />원 (수량 ${ fl.fundingQuantity2 }개)</span></div>
+                            	<hr>
+                        	</c:forEach>
+                        	
+                            <!-- <div><b>독도이음팔찌 RedBlue 1개 + BlueRed 1개 </b><span>13,000원 (수량 1개)</span></div>
                             <hr>
                             <div><b>희망머그컵 1개 </b><span>10,000원 (수량 1개)</span></div>
-                            <hr>
+                            <hr> -->
+                            
                             <div>배송비<span>3,000원</span></div>
+                            
                         </div>         
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3"> 
                         <div class="rewardCheckbox">
-                            후원금 <span>10,000원</span>
+                            	후원금 <span><fmt:formatNumber value="${ spon }" pattern="#,###" />원</span>
                         </div>
                     </td>
                 </tr>
@@ -180,11 +192,11 @@
         <table id="payArea">
             <tr>
                 <td>펀딩금액</td>
-                <td class="payContent">23,000월</td>
+                <td class="payContent"><fmt:formatNumber value="${ sum }" pattern="#,###" />월</td>
             </tr>
             <tr>
                 <td>후원금</td>
-                <td class="payContent">10,000원</td>
+                <td class="payContent"><fmt:formatNumber value="${ spon }" pattern="#,###" />원</td>
             </tr>
             <tr>
                 <td>배송비</td>

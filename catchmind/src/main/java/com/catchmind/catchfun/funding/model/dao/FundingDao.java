@@ -67,9 +67,9 @@ public class FundingDao {
 		return sqlSession.insert("projectMapper.insertReply", r);
 	}
 	
-	public int banReply(SqlSessionTemplate sqlSession, String replyNo) {
+	public int increasebanReply(SqlSessionTemplate sqlSession, String replyNo) {
 		
-		return sqlSession.update("projectMapper.banReply", replyNo);
+		return sqlSession.update("projectMapper.increasebanReply", replyNo);
 	}
 	
 	public int insertQuestion(SqlSessionTemplate sqlSession, PersonQuestion pq) {
@@ -85,6 +85,16 @@ public class FundingDao {
 	public int selectReport(SqlSessionTemplate sqlSession, Report r) {
 		
 		return sqlSession.selectOne("projectMapper.selectReport", r);
+	}
+	
+	public int increasebanReport(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.update("projectMapper.increasebanReport", r);
+	}
+	
+	public int deleteReply(SqlSessionTemplate sqlSession, String replyNo) {
+		
+		return sqlSession.update("projectMapper.deleteReply", replyNo);
 	}
 	
 	public int insertWishlist(SqlSessionTemplate sqlSession, Wishlist w) {
