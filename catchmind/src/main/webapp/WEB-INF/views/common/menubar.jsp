@@ -305,7 +305,7 @@ a:hover { text-decoration:none !important; color:black; }
 				<!-- 로그인 후 -->
 		 		<div class="header login  header-img loginnext">
 		 		
-					<div class="dropdown">
+					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
 							<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
