@@ -288,7 +288,7 @@ a:hover { text-decoration:none !important; color:black; }
 		<div style="margin-right:40px;">
 			<a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/catchfun_logo.png"></a>
 		</div>
-		<div class="header">카테고리</div>
+		<div class="header"><a href="category.mu">카테고리</a></div>
 		<div class="header"><a href="comingsoon.mu">오픈예정</a></div>
 		<div class="header">프로젝트오픈</div>
 		<div class="header">공지</div>

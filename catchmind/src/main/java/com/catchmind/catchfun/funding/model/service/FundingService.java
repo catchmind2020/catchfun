@@ -35,8 +35,10 @@ public interface FundingService {
 	// 댓글 작성
 	int insertReply(Reply r);
 	
-	// 댓글 신고
-	int banReply(String replyNo);
+	// 댓글 신고 카운트 증가
+	int increasebanReply(String replyNo);
+	
+	int deleteReply(String replyNo);
 	
 	// 개설자 문의
 	int insertQuestion(PersonQuestion pq);
@@ -44,7 +46,11 @@ public interface FundingService {
 	// 개설자 신고
 	int insertReport(Report r);
 	
+	// 개설자 신고 내역 확인
 	int selectReport(Report r);
+	
+	// 개설자 신고 카운트 증가
+	int increasebanReport(Report r);
 	
 	// 찜하기 
 	int insertWishlist(Wishlist w);

@@ -70,9 +70,15 @@ public class FundingServiceImpl implements FundingService{
 	}
 
 	@Override
-	public int banReply(String replyNo) {
+	public int increasebanReply(String replyNo) {
+		
+		return fDao.increasebanReply(sqlSession, replyNo);
+	}
 
-		return fDao.banReply(sqlSession, replyNo);
+	@Override
+	public int deleteReply(String replyNo) {
+		
+		return fDao.deleteReply(sqlSession, replyNo);
 	}
 
 	@Override
@@ -92,6 +98,13 @@ public class FundingServiceImpl implements FundingService{
 		
 		return fDao.selectReport(sqlSession, r);
 	}
+	
+	@Override
+	public int increasebanReport(Report r) {
+
+		return fDao.increasebanReport(sqlSession, r);
+	}
+
 
 	@Override
 	public int insertWishlist(Wishlist w) {
@@ -107,7 +120,6 @@ public class FundingServiceImpl implements FundingService{
 
 	
 	// 주혁
-	
 	@Override
 	public int selectWishlistCount(Wishlist w) {
 		return fDao.selectWishlistCount(sqlSession, w);
@@ -123,6 +135,9 @@ public class FundingServiceImpl implements FundingService{
 		
 		return fDao.deleteWishlist(sqlSession, w);
 	}
+
+
+
 
 
 	
