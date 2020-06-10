@@ -3,10 +3,11 @@ package com.catchmind.catchfun.projectAdmin.model.service;
 import java.util.ArrayList;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
-import com.catchmind.catchfun.projectAdmin.model.vo.News;
+import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
+import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.vo.Option;
 import com.catchmind.catchfun.projectAdmin.model.vo.Project;
 import com.catchmind.catchfun.projectAdmin.model.vo.ProjectBasic;
@@ -59,6 +60,8 @@ public interface ProjectAdminService {
 
 	ArrayList<Option> selectOptionList();
 
+	ArrayList<Category> selectCategoryList();
+	
 	int insertMaker(ProjectMaker maker);
 
 	int insertNews(News news);

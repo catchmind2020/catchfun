@@ -97,94 +97,82 @@
 		<%@ include file="../common/menubarIm.jsp"%>
 	</div>
 
-<c:choose>
-<c:when test="${ empty project.projectStatus }">
-	<div class="outer">
-		<div style="height: 700px; margin-left: 270px;">
-			<form action="updateProject.pa" method="post"
-				enctype="multipart/form-data">
-				<br>
-				<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
-				<div class="card shadow mb-4" style="width: 1000px;">
-					<div class="card-header py-3">
+	<c:choose>
+		<c:when test="${ empty project.projectStatus }">
+			<div class="outer">
+				<div style="height: 700px; margin-left: 270px;">
+					<form action="updateProject.pa" method="post"
+						enctype="multipart/form-data">
+						<br>
+						<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요 기본
-							정보를 입력하세요.</h6>
-					</div>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요
+									기본 정보를 입력하세요.</h6>
+							</div>
 
-					<div class="card-body">
+							<div class="card-body">
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
-						<input id="question3" name="projectName" class="questioninput"
-							value="${project.projectName}" required></input> <br> <br>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
+								<input id="question3" name="projectName" class="questioninput"
+									value="${project.projectName}" required></input> <br> <br>
 
-						<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
-						<input id="question4" name="projectTargetAmount"
-							class="questioninput" value="${project.projectTargetAmount}"
-							required></input> <br> <br>
+								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
+								<input id="question4" name="projectTargetAmount"
+									class="questioninput" value="${project.projectTargetAmount}"
+									required></input> <br> <br>
 
-						<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
-					<%-- 	<c:choose>
-							<c:when test="${ empty project.projectStatus }"> --%>
+								<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
+
 								<select id="question5" name="projectCategory"
 									class="questioninput" required>
-									<option value="ko">한국</option>
-									<option value="us" selected>공연컬쳐</option>
-									<option value="eu">영국</option>
 
-								</select>
-								<br>
-					<%-- 		</c:when>
-							<c:otherwise>
-								<select id="question5" name="projectCategory"
-									class="questioninput">
-
-									<option value="${project.projectName}" selected>공연컬쳐</option>
+									
+									<c:forEach items="${ categoryList }" var="c">
+										<option value="${ c.categoryName}">${ c.categoryName}</option>
 
 
-								</select>
-								<br>
-							</c:otherwise>
-						</c:choose> --%>
-						<br>
+									</c:forEach>
 
-						<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
-						<label for="upfile">첨부파일</label> <input type="file" id="upfile"
-							class="form-control-file border" name="uploadFile" required>
-						<c:choose>
-							<c:when test="${ !empty project.originName }">
+								</select> <br> <br>
+
+								<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
+								<label for="upfile">첨부파일</label> <input type="file" id="upfile"
+									class="form-control-file border" name="uploadFile" required>
+								<c:choose>
+									<c:when test="${ !empty project.originName }">
 	                        	업로드된파일:<a
-									href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${project.changeName}"
-									download="${ project.originName }">${ project.originName }</a>
-							</c:when>
-							<c:otherwise>
+											href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${project.changeName}"
+											download="${ project.originName }">${ project.originName }</a>
+									</c:when>
+									<c:otherwise>
 	                                                        첨부파일이 없습니다.
                         	</c:otherwise>
-						</c:choose>
-						<h1 class="grey">
-							3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트 및
-							로고 삽입 금지
-						</h1>
-						<br>
+								</c:choose>
+								<h1 class="grey">
+									3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트
+									및 로고 삽입 금지
+								</h1>
+								<br>
 
 
-						<%-- <c:choose>
+								<%-- <c:choose>
 							<c:when test="${ empty project.projectStatus }">
  --%>
 								<h6 class="m-0 font-weight-bold text-primary" required>프로젝트
 									시작일</h6>
 								<input type="date" id="startDate" name="projectStartDate">
 								<h1 class="grey">리워드를 설계하기 위해 프로젝트 시작일을 선택하세요.</h1>
-								${project.projectStartDate}
-								<br>
+								${project.projectStartDate} <br>
 
 
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
 								<input type="date" id="finishDate" name="projectFinishDate"
 									required>
 								<h1 class="grey">리워드를 설계하기 위해 프로젝트 종료일을 선택하세요.</h1>
-									${project.projectFinishDate}
-						<%-- 	</c:when>
+								${project.projectFinishDate}
+								<%-- 	</c:when>
 							<c:otherwise>
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트 시작일</h6>
 								
@@ -196,37 +184,37 @@
 						</c:choose> --%>
 
 
-						<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
-						<input id="tag" name="hhsh" class="questioninput"
-							value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
-						<br> <br>
+								<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
+								<input id="tag" name="hhsh" class="questioninput"
+									value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
+								<br> <br>
 
-						<!-- <div class="btn btn-info btn-icon-split">
+								<!-- <div class="btn btn-info btn-icon-split">
 							<span class="text">사망 X</span>
 						</div>
 						<div class="btn btn-info btn-icon-split">
 							<span class="text">사아망 X</span>
 						</div> -->
-					</div>
-				</div>
+							</div>
+						</div>
 
 
-				<br> <br>
+						<br> <br>
 
-				<div class="card shadow mb-4" style="width: 1000px;">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
-					</div>
-					<div class="card-body">
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
+							</div>
+							<div class="card-body">
 
-						<textarea id="summernote" name="projectContent" required>${project.projectContent}</textarea>
-					</div>
-				</div>
+								<textarea id="summernote" name="projectContent" required>${project.projectContent}</textarea>
+							</div>
+						</div>
 
-				<br>
+						<br>
 
 
-				<%-- <c:choose>
+						<%-- <c:choose>
 					<c:when test="${ !empty project.projectStatus }">
 
 						<div class="col-auto">
@@ -246,42 +234,42 @@
 									style="width: 200px;">저장하기</button>
 							</div>
 						</div>
-<%-- 
+						<%-- 
 					</c:otherwise>
 				</c:choose>
  --%>
-			</form>
+					</form>
 
-		</div>
-	</div>
-</c:when>
-<c:otherwise>
-<div class="outer">
-		<div style="height: 700px; margin-left: 270px;">
-			<form action="updateProject2.pa" method="post"
-				enctype="multipart/form-data">
-				<br>
-				<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
-				<div class="card shadow mb-4" style="width: 1000px;">
-					<div class="card-header py-3">
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="outer">
+				<div style="height: 700px; margin-left: 270px;">
+					<form action="updateProject2.pa" method="post"
+						enctype="multipart/form-data">
+						<br>
+						<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요 기본
-							정보를 입력하세요.</h6>
-					</div>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요
+									기본 정보를 입력하세요.</h6>
+							</div>
 
-					<div class="card-body">
+							<div class="card-body">
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
-						<input id="question3" name="projectName" class="questioninput"
-							value="${project.projectName}" required></input> <br> <br>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
+								<input id="question3" name="projectName" class="questioninput"
+									value="${project.projectName}" required></input> <br> <br>
 
-						<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
-						<input id="question4" name="projectTargetAmount"
-							class="questioninput" value="${project.projectTargetAmount}"
-							required></input> <br> <br>
+								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
+								<input id="question4" name="projectTargetAmount"
+									class="questioninput" value="${project.projectTargetAmount}"
+									required></input> <br> <br>
 
-						<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
-					<%-- 	<c:choose>
+								<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
+								<%-- 	<c:choose>
 							<c:when test="${ empty project.projectStatus }"> --%>
 								<select id="question5" name="projectCategory"
 									class="questioninput" required>
@@ -289,9 +277,8 @@
 									<option value="us" selected>공연컬쳐</option>
 									<option value="eu">영국</option>
 
-								</select>
-								<br>
-					<%-- 		</c:when>
+								</select> <br>
+								<%-- 		</c:when>
 							<c:otherwise>
 								<select id="question5" name="projectCategory"
 									class="questioninput">
@@ -303,45 +290,44 @@
 								<br>
 							</c:otherwise>
 						</c:choose> --%>
-						<br>
+								<br>
 
-						<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
-						<label for="upfile">첨부파일</label> <input type="file" id="upfile"
-							class="form-control-file border" name="uploadFile" required>
-						<c:choose>
-							<c:when test="${ !empty project.originName }">
+								<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
+								<label for="upfile">첨부파일</label> <input type="file" id="upfile"
+									class="form-control-file border" name="uploadFile" required>
+								<c:choose>
+									<c:when test="${ !empty project.originName }">
 	                        	업로드된파일:<a
-									href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${project.changeName}"
-									download="${ project.originName }">${ project.originName }</a>
-							</c:when>
-							<c:otherwise>
+											href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${project.changeName}"
+											download="${ project.originName }">${ project.originName }</a>
+									</c:when>
+									<c:otherwise>
 	                                                        첨부파일이 없습니다.
                         	</c:otherwise>
-						</c:choose>
-						<h1 class="grey">
-							3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트 및
-							로고 삽입 금지
-						</h1>
-						<br>
+								</c:choose>
+								<h1 class="grey">
+									3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트
+									및 로고 삽입 금지
+								</h1>
+								<br>
 
 
-						<%-- <c:choose>
+								<%-- <c:choose>
 							<c:when test="${ empty project.projectStatus }">
  --%>
 								<h6 class="m-0 font-weight-bold text-primary" required>프로젝트
 									시작일</h6>
 								<input type="date" id="startDate" name="projectStartDate">
 								<h1 class="grey">리워드를 설계하기 위해 프로젝트 시작일을 선택하세요.</h1>
-								${project.projectStartDate}
-								<br>
+								${project.projectStartDate} <br>
 
 
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
 								<input type="date" id="finishDate" name="projectFinishDate"
 									required>
 								<h1 class="grey">리워드를 설계하기 위해 프로젝트 종료일을 선택하세요.</h1>
-									${project.projectFinishDate}
-						<%-- 	</c:when>
+								${project.projectFinishDate}
+								<%-- 	</c:when>
 							<c:otherwise>
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트 시작일</h6>
 								
@@ -353,37 +339,37 @@
 						</c:choose> --%>
 
 
-						<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
-						<input id="tag" name="hhsh" class="questioninput"
-							value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
-						<br> <br>
+								<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
+								<input id="tag" name="hhsh" class="questioninput"
+									value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
+								<br> <br>
 
-						<!-- <div class="btn btn-info btn-icon-split">
+								<!-- <div class="btn btn-info btn-icon-split">
 							<span class="text">사망 X</span>
 						</div>
 						<div class="btn btn-info btn-icon-split">
 							<span class="text">사아망 X</span>
 						</div> -->
-					</div>
-				</div>
+							</div>
+						</div>
 
 
-				<br> <br>
+						<br> <br>
 
-				<div class="card shadow mb-4" style="width: 1000px;">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
-					</div>
-					<div class="card-body">
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
+							</div>
+							<div class="card-body">
 
-						<textarea id="summernote" name="projectContent" required>${project.projectContent}</textarea>
-					</div>
-				</div>
+								<textarea id="summernote" name="projectContent" required>${project.projectContent}</textarea>
+							</div>
+						</div>
 
-				<br>
+						<br>
 
 
-		
+
 						<div class="col-auto">
 
 							<div class="btns">
@@ -391,15 +377,15 @@
 									style="width: 200px;">수정하기</button>
 							</div>
 						</div>
-					
 
-			</form>
 
-		</div>
-	</div>
-</c:otherwise>
+					</form>
 
-</c:choose>
+				</div>
+			</div>
+		</c:otherwise>
+
+	</c:choose>
 
 
 	<script>

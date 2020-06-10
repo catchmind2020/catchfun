@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
@@ -148,6 +149,11 @@ public class ProjectAdminDao {
 	public ArrayList<Option> selectOptionList(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectOptionList");
+	}
+	
+	public ArrayList<Category> selectCategoryList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectCategoryList");
 	}
 	
 	public int insertMaker(SqlSessionTemplate sqlSession, ProjectMaker maker) {

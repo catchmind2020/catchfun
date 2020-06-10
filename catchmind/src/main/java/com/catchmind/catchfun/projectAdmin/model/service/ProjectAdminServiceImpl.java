@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.dao.ProjectAdminDao;
+import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
@@ -100,6 +101,8 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 		return paDao.selectOptionList(sqlSession);
 	}
 
+	
+	
 	@Override
 	public int insertMaker(ProjectMaker maker) {
 		// TODO Auto-generated method stub
@@ -237,6 +240,12 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 	public int deleteNews(News news) {
 		// TODO Auto-generated method stub
 		return paDao.deleteNews(sqlSession, news);
+	}
+
+	@Override
+	public ArrayList<Category> selectCategoryList() {
+		// TODO Auto-generated method stub
+		return paDao.selectCategoryList(sqlSession);
 	}
 
 

@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.File" alias="File" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Funding" alias="Funding2" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.News" alias="News2" />
-		
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Category" alias="Category2" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.FundSum" alias="FundSum" />
 		
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Faq" alias="Faq" />

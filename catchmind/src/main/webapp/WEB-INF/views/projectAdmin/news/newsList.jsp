@@ -112,24 +112,25 @@
 			
 			<c:forEach items="${ newsList }" var="b">
 		
-				<c:if test="${ b.projectNo eq project.projectNo }">
+				
 	                    <tr>
 	                        <td>${ b.newsNo }</td>
 	                        <td>${ b.newsTitle }</td>
 	                        <td>${ b.newsDate }</td>
 	                       
 	                    </tr>
-	                </c:if>
+	              
                  </c:forEach>
                     
             </tbody>
           </table>
+          <br>
              	<a href="<%=contextPath%>/newsEnroll.pa">
 								<button type="button" class="btn btn-primary">등록하기</button>
 							</a>
 
    	<br><br>
-   			<div id="pagingArea">
+   			<div id="pagingArea " style="margin-right: 30%;">
                 <ul class="pagination">
                 	
                 	<c:choose>

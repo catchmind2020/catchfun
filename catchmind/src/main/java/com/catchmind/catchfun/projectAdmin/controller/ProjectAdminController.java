@@ -19,11 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
-import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.service.ProjectAdminService;
+import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
+import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.vo.Option;
 import com.catchmind.catchfun.projectAdmin.model.vo.Project;
 import com.catchmind.catchfun.projectAdmin.model.vo.ProjectBasic;
@@ -73,10 +74,12 @@ public class ProjectAdminController {
 
 		Project pro = (Project) session.getAttribute("projectUser");
 
+		
+		ArrayList<Category> categoryList = paService.selectCategoryList();
 		Project project = paService.selectProject(pro);
 		System.out.println(project);
 		session.setAttribute("project", project);
-
+		session.setAttribute("categoryList", categoryList);
 		mv.setViewName("projectAdmin/projectEnroll/stroyproject");
 
 		return mv;
@@ -100,7 +103,7 @@ public class ProjectAdminController {
 		System.out.println(listCount);
 		ArrayList<Funding> fundingList = paService.selectFundingList(pi, project.getProjectNo());
 
-		
+		System.out.println(fundingList);
 		
 		String fundDayMoney = "";
 		String fundDayDate = "";
@@ -312,7 +315,7 @@ public class ProjectAdminController {
 	@RequestMapping("ptest.pa")
 	public ModelAndView ploginMember(ModelAndView mv, HttpSession session, Model model) {
 
-		Project projectUser = new Project("PR11", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); // 아이디만을 가지고
+		Project projectUser = new Project("PR12", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); // 아이디만을 가지고
 																											// 조회한 결과
 
 		session.setAttribute("projectUser", projectUser);

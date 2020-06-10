@@ -119,6 +119,13 @@
 		<result column="NEWS_COUNT" property="newsCount" />
 		<result column="NEWS_STATUS" property="newsStatus" />
 	</resultMap>
+	<resultMap id="categoryResultSet" type="Category2">
+		<id column="PROJECT_CATEGORY" property="categoryNo" />
+		<result column="PROJECT_CATEGORY_NAME" property="categoryName" />
+
+	</resultMap>
+
+
 	<resultMap id="fundingListResultSet" type="Funding2">
 		<id column="FUNDING_NO" property="fundingNo" />
 		<result column="REWARD_NO" property="rewardNo" />
@@ -131,9 +138,9 @@
 		<result column="PAYMENT_METHOD" property="paymentMethod" />
 		<result column="PROJECT_NUMBER" property="projectNo" />
 		<result column="REWARD_TITLE" property="rewardTitle" />
-		
+
 	</resultMap>
-	
+
 	<!-- <select id="selectListCount" resultType="_int"> select count(*) from 
 		board where status='S' </select> <select id="selectList" resultMap="boardResultSet"> 
 		select * from board where status='S' order by board_no desc </select> -->
@@ -146,8 +153,6 @@
 		where PROJECT_NUMBER=#{projectNo}
 		and status='S'
 	</select>
-
-
 
 
 	<select id="basicInformation" parameterType="Project2"
@@ -164,7 +169,8 @@
 		from PROJECT_MAKER
 		where PROJECT_NUMBER=#{projectNo}
 	</select>
-	<select id="selectNews" parameterType="string" resultMap="newsResultSet">
+	<select id="selectNews" parameterType="string"
+		resultMap="newsResultSet">
 		select *
 		from NEWS
 		where NEWS_NO=#{nno}
@@ -175,7 +181,8 @@
 		SUM(FUNDING_COST*FUNDING_QUANTITY) as
 		fund_sum , count(*) as fund_count
 		FROM FUNDING_LIST
-		where PROJECT_NUMBER=#{projectNo}
+		where PROJECT_NUMBER=#{projectNo} and
+		FUNDING_STATUS='N'
 		GROUP BY
 		PROJECT_NUMBER
 	</select>
@@ -184,14 +191,17 @@
 
 
 		SELECT PROJECT_NUMBER as Project_no,
-		TO_CHAR(FUNDING_DATE,'YY/MM/DD') as fund_date, SUM(FUNDING_COST*FUNDING_QUANTITY)
+		TO_CHAR(FUNDING_DATE,'YY/MM/DD') as fund_date,
+		SUM(FUNDING_COST*FUNDING_QUANTITY)
 		as fund_sum , count(*) as fund_count
 		FROM FUNDING_LIST
-		where PROJECT_NUMBER=#{projectNo} and FUNDING_DATE between sysdate-10 and sysdate
-		GROUP BY PROJECT_NUMBER,TO_CHAR(FUNDING_DATE,'YY/MM/DD')
+		where PROJECT_NUMBER=#{projectNo} and FUNDING_DATE
+		between sysdate-20 and sysdate and FUNDING_STATUS='N'
+		GROUP BY
+		PROJECT_NUMBER,TO_CHAR(FUNDING_DATE,'YY/MM/DD')
 		order by fund_date
 	</select>
-	
+
 
 	<select id="todayfundSum" parameterType="string"
 		resultMap="fundSumResultSet">
@@ -203,7 +213,8 @@
 		FROM FUNDING_LIST
 		where PROJECT_NUMBER=#{projectNo} and
 		TO_CHAR(FUNDING_DATE,'YY/MM/DD') =
-		TO_CHAR(SYSDATE, 'YY/MM/DD')
+		TO_CHAR(SYSDATE, 'YY/MM/DD') and
+		FUNDING_STATUS='N'
 		GROUP BY
 		PROJECT_NUMBER
 
@@ -229,15 +240,17 @@
 	</insert>
 	<insert id="insertNews" parameterType="News2">
 		insert into NEWS
-		values('NE'||SEQ_NENO.nextval, #{projectNo}, #{newsTitle}, #{newsContent},
+		values('NE'||SEQ_NENO.nextval, #{projectNo}, #{newsTitle},
+		#{newsContent},
 		sysdate,0, 'N')
 	</insert>
-	
-	
+
+
 	<update id="updateProject" parameterType="Project2">
 
 		update PROJECT
-		set PROJECT_NUMBER=#{projectNo} ,
+		set
+		PROJECT_NUMBER=#{projectNo} ,
 		PROJECT_NAME=#{projectName} ,
 		PROJECT_TARGET_AMOUNT=#{projectTargetAmount} ,
 		PROJECT_CATEGORY=#{projectCategory} ,
@@ -245,20 +258,22 @@
 		PROJECT_FINISHDATE=#{projectFinishDate} ,
 		HASHTAGS=#{hhsh},
 		PROJECT_STATUS='S', PROJECT_CONTENT=#{projectContent}
-		where PROJECT_NUMBER=#{projectNo}
+		where
+		PROJECT_NUMBER=#{projectNo}
 	</update>
-	
+
 	<update id="updateNews" parameterType="News2">
 
 		update NEWS
-		set NEWS_TITLE=#{newsTitle} ,
-		NEWS_CONTENT=#{newsContent} 
-		
+		set
+		NEWS_TITLE=#{newsTitle} ,
+		NEWS_CONTENT=#{newsContent}
+
 		where NEWS_STATUS='N' and NEWS_NO=#{newsNo}
 	</update>
-	
-	
-	
+
+
+
 	<update id="updateBasic" parameterType="string">
 		update PROJECT_BASIC
 		set
@@ -279,41 +294,43 @@
 		CHECK4=#{check4}
 		where PROJECT_NUMBER=#{projectNo}
 	</update>
-	
-	
-		<select id="selectfundListCount" parameterType="string"
+
+
+	<select id="selectfundListCount" parameterType="string"
 		resultType="_int">
-			select count(*)
-		  from FUNDING_LIST
-		 where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		select count(*)
+		from FUNDING_LIST
+		where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
 
 	</select>
-	
-		<select id="selectNewsListCount" parameterType="string"
+
+	<select id="selectNewsListCount" parameterType="string"
 		resultType="_int">
-			select count(*)
-		  from NEWS
-		 where NEWS_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		select count(*)
+		from NEWS
+		where NEWS_STATUS='N' and PROJECT_NUMBER=#{projectNo}
 
 	</select>
-	
-	
-	<select id="selectFundingList" resultMap="fundingListResultSet">
-		select * 
-		  from FUNDING_LIST
-		  JOIN REWARD R USING(PROJECT_NUMBER) 
-		 where  FUNDING_STATUS='N'
-		 order by FUNDING_DATE desc
+
+
+	<select id="selectFundingList" parameterType="string"
+		resultMap="fundingListResultSet">
+		select *
+		from FUNDING_LIST
+		JOIN REWARD R USING(PROJECT_NUMBER)
+		where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		order by FUNDING_DATE desc
 	</select>
-	
-		<select id="selectNewsList" resultMap="newsResultSet">
-		select * 
-		  from NEWS
-		  JOIN REWARD R USING(PROJECT_NUMBER) 
-		 where  NEWS_STATUS='N'
-		 order by NEWS_DATE desc
+
+	<select id="selectNewsList" parameterType="string"
+		resultMap="newsResultSet">
+		select *
+		from NEWS
+		JOIN REWARD R USING(PROJECT_NUMBER)
+		where NEWS_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		order by NEWS_DATE desc
 	</select>
-	
+
 	<update id="updateMaker2" parameterType="Maker2">
 		update PROJECT_MAKER
 		set
@@ -366,9 +383,11 @@
 	</insert>
 	<update id="updateFile" parameterType="Project2">
 		update ATTACHMENT
-		set ORIGIN_NAME=#{originName} ,
+		set
+		ORIGIN_NAME=#{originName} ,
 		CHANGE_NAME=#{changeName}
-		where REF_NO=#{projectNo}
+		where
+		REF_NO=#{projectNo}
 	</update>
 
 
@@ -388,13 +407,14 @@
 		set status='Y'
 		where PROJECT_NUMBER=#{projectNo} and ITEM_NO=#{itemNo}
 	</update>
-	
+
 	<update id="deleteNews" parameterType="News2">
 		update News
-		set NEWS_STATUS='Y'
+		set
+		NEWS_STATUS='Y'
 		where NEWS_NO=#{newsNo}
 	</update>
-	
+
 
 	<update id="deleteReward" parameterType="Reward">
 		update REWARD
@@ -421,6 +441,13 @@
 		USING (REWARD_NO)
 		where status='S'
 	</select>
+
+	<select id="selectCategoryList" parameterType="string"
+		resultMap="categoryResultSet">
+		select *
+		from CATEGORY_TYPE
+	</select>
+
 
 	<select id="selectRewardList" parameterType="string"
 		resultMap="rewardResultSet">
