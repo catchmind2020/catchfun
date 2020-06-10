@@ -97,27 +97,8 @@ body, input, textarea, select, button, table {
      <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp" />
     <div class="wrap">
-        <div id="header">
-            
-            <div class="header-area">
-                <div class="header">
-                    <img src="images/catchfun_logo.png">
-                </div>
-                <div class="header">카테고리</div>
-                <div class="header">오픈예정</div>
-                <div class="header">프로젝트오픈</div>
-                <div class="header">공지</div>
-                <div class="header"></div>
-                <div class="header login">
-                <img src="images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="images/usericon32.png"></div>
-        
-            </div>
-        
-         
-         </script>
-        </div>
 
         <div id="content">
             <div id="content_2">

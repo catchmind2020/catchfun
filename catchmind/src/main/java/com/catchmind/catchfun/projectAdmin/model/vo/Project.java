@@ -22,7 +22,10 @@ public class Project {
 	private String projectContent;
 	private String projectTargetAmount;
 	private String projectReport;
-	private String HashTags;
+	private String hhsh;
 	private String projectStatus;
 	private String statusStory;
+	private String originName;
+	private String changeName;
+	
 }

@@ -107,7 +107,7 @@
 				
 				<br>
 			<div class="row" style="width: 100%; ">	
-				<c:forEach items="${ list }" var="i">
+				<c:forEach items="${ ilist }" var="i">
 				
 	                	<div class="card mb-5" style="width: 320px;  margin-left: 1%;">
 							<div class="card-header py-3">
@@ -132,9 +132,12 @@
 				
 			  </div>  
 				
-				<div class="btns">
-					<button class="btn btn-primary btn-user btn-block" style="width: 200px;" >저장하기</button>
-				</div>
+				<a href="<%=contextPath%>/home.pa">
+								<button type="button" class="btn btn-primary">홈으로</button>
+							</a>
+				
+				
+				
 			</div>
 
 		
@@ -153,8 +156,8 @@
                 <div class="modal-body">
                 
                 
-                	<table style= "margin-top:6px;">
-						<tr>
+                	<table style= "margin-top:6px;"
+							<tr>
 							<td class="blackmodal" width="400px" height="50px">아이템</td>
 							<td><input type="text" name="itemName" id="itemName" required></td>
 						

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
+import com.catchmind.catchfun.admin.model.vo.PayTotal;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 
@@ -161,6 +162,15 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.categoryList");
 	}
 	
+	
+	public PayTotal payList(SqlSessionTemplate sqlSession, String pr) {
+		System.out.println("pr dao : " + pr);
+		return sqlSession.selectOne("adminMapper.payList", pr);
+	}
+	
+	public ArrayList<String> prList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminMapper.prList");
+	}
 	
 	// 주혁 끝
 }

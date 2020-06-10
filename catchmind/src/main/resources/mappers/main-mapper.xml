@@ -16,6 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="TOTALCOST" property="fundingTotalCost" /> 
 		<result column="DDAY" property="projectDday" />
 		<result column="PROJECT_STATUS" property="projectStatus" /> 
+		<result column="PROJECT_CATEGORY" property="categoryNo" />
+		<result column="COMINGSOONDATE" property="comingsoonDate" />
+		<result column="PROJECT_STARTDATE" property="projectStartDate" />
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate" />
 	</resultMap>
 
 	<select id="mainSpotlightList" resultMap="mainResultSet" parameterType="Main">
@@ -32,6 +36,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          				  MAKER_NAME, PROJECT_CATEGORY_NAME, CEIL(PROJECT_FINISHDATE-SYSDATE)
 					ORDER BY TOTALCOST DESC NULLS LAST)
 					<![CDATA[WHERE ROWNUM <= 9]]>
+	</select>
+	
+	<select id="mainComingsoonList" resultMap="mainResultSet" parameterType="Main">
+		SELECT PROJECT_NUMBER, PROJECT_NAME, CHANGE_NAME, PROJECT_STATUS, MAKER_NAME, PROJECT_STARTDATE,
+               PROJECT_CATEGORY_NAME, TO_CHAR(PROJECT_STARTDATE, 'MON DD') AS COMINGSOONDATE
+		  FROM PROJECT
+		  JOIN PROJECT_MAKER USING(PROJECT_NUMBER)
+		  JOIN CATEGORY_TYPE USING(PROJECT_CATEGORY)
+	 LEFT JOIN ATTACHMENT ON (PROJECT_NUMBER = REF_NO)
+		 WHERE PROJECT_STATUS='Y' AND PROJECT_STARTDATE > SYSDATE
 	</select>
 	
 </mapper>

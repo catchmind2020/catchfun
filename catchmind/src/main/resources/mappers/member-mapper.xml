@@ -124,12 +124,38 @@
 		where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N'
 	</select>
 	
-	<update id="deleteMessage" parameterType="_int">
+	<update id="deleteMessage" parameterType="string">
 		update PERSON_QUESTION
 		  set QUESTION_STATUS='Y'
 		where A_QUESTION_NO=#{qno} 
 	</update>
-	  
+	
+	<select id="messageUpdateForm" parameterType="string" resultMap="projectQuestionResultSet">
+		select A_QUESTION_NO, user_id, QUESTION_TYPE, QUESTION_TITLE, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, ANS_TITLE, ANS_CONTENT, ANS_DATE, ANS_NO, COUNSELING 
+		from PERSON_QUESTION
+		join MEMBER using (user_no)
+		where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N'
+	</select>
+
+	<update id="updateMessage" parameterType="Question">
+		update PERSON_QUESTION
+		  set QUESTION_TITLE=#{questionTitle},
+		  	  QUESTION_CONTENT=#{questionContent}
+		where A_QUESTION_NO=#{questionNo} 
+	</update>
+	
+	<select id="selectReplyList" parameterType="string" resultMap="projectQuestionResultSet">
+		select *
+		 from PERSON_QUESTION
+		 where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N'
+		 
+	</select>
+	
+	<update id="insertReply" parameterType="Question">
+		update PERSON_QUESTION
+		set ANS_CONTENT=#{ansContent}, QUESTION_YN='Y'
+		where A_QUESTION_NO=#{questionNo}
+	</update>
 	  
 	  <!-- 이메일!! -->
 	  

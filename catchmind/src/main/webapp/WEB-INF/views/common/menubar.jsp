@@ -198,8 +198,8 @@
 /* 로그인 부분*/
 .login { position: relative; display: table-cell; font-size: 15px;
 	color: gray; padding-left: 160px; padding-right: 0px; }
-a { text-decoration:none !important } 
-a:hover { text-decoration:none !important }
+a { text-decoration:none !important; color:black;} 
+a:hover { text-decoration:none !important; color:black; }
 
 /* 아이유 전용 스타일 */
 
@@ -286,10 +286,10 @@ a:hover { text-decoration:none !important }
 	<div class="header-area vertical-container">
 
 		<div style="margin-right:40px;">
-			<img src="resources/images/catchfun_logo.png">
+			<a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/catchfun_logo.png"></a>
 		</div>
 		<div class="header">카테고리</div>
-		<div class="header">오픈예정</div>
+		<div class="header"><a href="comingsoon.mu">오픈예정</a></div>
 		<div class="header">프로젝트오픈</div>
 		<div class="header">공지</div>
 		<div class="header"></div>
@@ -300,9 +300,9 @@ a:hover { text-decoration:none !important }
 				<!-- 로그인 후 -->
 		 		<div class="header login  header-img loginnext">
 		 		
-					<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="dropdown">
   						<button onclick="myFunction()" class="dropbtn">
+							<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
   						</button>
   							<div id="myDropdown" class="dropdown-content">
@@ -324,7 +324,7 @@ a:hover { text-decoration:none !important }
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
 					        </tr>
 					        <tr>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
 					        </tr>
 					      

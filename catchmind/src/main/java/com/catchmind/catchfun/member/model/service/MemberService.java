@@ -44,12 +44,33 @@ public interface MemberService {
 	Question sellerMessageAnswer(String qno);
 
 	// 7. 메세지삭제용 서비스  ///
-	int deleteMessage(int pno);
+	int deleteMessage(String pno);
 
+
+	/*
+	 * 게시글 수정용 서비스 int updateMessage(Question q);
+	 */
 
 	int updateMessage(Question q);
 
-	Question selectMessage(int qno);
+	Question selectMessage(String qno);
+
+	Question updateMessage(String qno);
+
+	Question messageUpdateForm(String qno);
+
+	
+	// 해당 게시글에 딸려있는 댓글 리스트 조회용 서비스
+	//ArrayList<Question> selectReplyList(String qno);
+	Question selectReplyList(String qno);
+
+	// 댓글 작성용 서비스
+	int insertReply(Question q);
+	
+
+
+	
+	
 
 
 
