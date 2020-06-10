@@ -201,6 +201,11 @@
 a { text-decoration:none !important; color:black;} 
 a:hover { text-decoration:none !important; color:black; }
 
+.input::placeholder {
+  color: gray;
+  font-size:12px;
+}
+
 /* 아이유 전용 스타일 */
 
 .dropbtn {
@@ -342,8 +347,8 @@ a:hover { text-decoration:none !important; color:black; }
 				<!-- 로그인 전 -->
 				<div class="login">
 					 <!-- 검색바 애니메이션 -->
-					<form id="header_searchbar">
-						<input type="text" name="input" class="input" id="search-input">
+					<form id="header_searchbar" action="mainSearch.mu">
+						<input type="text" name="keyword" class="input" id="search-input">
 						<button type="reset" class="search" id="search-btn"></button>
 					</form>
 					
@@ -373,8 +378,10 @@ a:hover { text-decoration:none !important; color:black; }
    			$(".input").toggleClass("square");
    			if ($('.search').hasClass('close')) {
    				$('input').focus();
+   				$('input').attr('placeholder','　　프로젝트, 메이커 검색');
    			} else {
    				$('input').blur();
+   				$('input').attr('placeholder','');
    			}
    		}
    		$('button').on('click', expand);

@@ -121,4 +121,50 @@ public class MainController {
 		return "mainMenu/comingsoon";
 	}
 
+	
+	/**
+	 * 메뉴바 검색바 --> 검색
+	 */
+	@RequestMapping("mainSearch.mu")
+	public String mainSearch(String keyword, Model model) {
+							
+		model.addAttribute("keyword", keyword);
+		return "mainMenu/mainSearchPage";
+	}
+	
+	/**
+	 * 검색결과 페이지 Ajax
+	 */
+	@RequestMapping(value="mainSearchAjax.mu", produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String mainSearchAjax(String keyword, Param param, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	    Gson gson = new Gson();
+	    try {
+	    	
+			
+	        int totalCnt = maService.getListCnt();  	
+	        int page = param.getPage();  	
+	        
+	        if (page==1){
+	            param.setStartNum(1);
+	            param.setEndNum(6);  					
+	        }else{
+	            param.setStartNum(page+(5*(page-1)));  		
+	            param.setEndNum(page*6);					
+	        }
+	        
+	        
+	        //위에서 구한, 데이터를 가져온 startNum 과 endNum 값을 같이  보냄. 이 사이의 데이터를 조회
+	        ArrayList<Main> list = maService.mainSearchAjax(keyword, param); 
+	 
+	        param.setRows(list);
+	        param.setTotCnt(totalCnt);
+	        param.setResultCode(200);
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return gson.toJson(param);
+	}
+	
 }
