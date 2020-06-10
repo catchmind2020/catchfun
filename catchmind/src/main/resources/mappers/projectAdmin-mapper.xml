@@ -401,7 +401,7 @@
 	<insert id="insertFile" parameterType="Project2">
 		insert into attachment
 		values( 'AT'||SEQ_ATNO.nextval, #{projectNo}, #{originName},
-		#{changeName},#{projectNo},sysdate,default,#{projectNo})
+		#{changeName},'resources/images',sysdate,default,#{projectNo})
 	</insert>
 	<update id="updateFile" parameterType="Project2">
 		update ATTACHMENT
@@ -411,7 +411,6 @@
 		where
 		REF_NO=#{projectNo}
 	</update>
-
 
 	<insert id="insertReward" parameterType="Reward">
 		insert into REWARD

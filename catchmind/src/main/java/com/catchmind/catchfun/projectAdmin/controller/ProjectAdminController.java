@@ -90,7 +90,7 @@ public class ProjectAdminController {
 	@RequestMapping("fund.pa")
 	public ModelAndView selectfund(HttpSession session, ModelAndView mv, int currentPage, Model model) {
 
-		Project project = (Project) session.getAttribute("project");
+		Project project = (Project) session.getAttribute("projectUser");
 
 		FundSum fundSum = paService.fundSum(project.getProjectNo());
 		FundSum todayfundSum = paService.todayfundSum(project.getProjectNo());
@@ -130,7 +130,7 @@ public class ProjectAdminController {
 	@RequestMapping("news.pa")
 	public ModelAndView selectNewsList(HttpSession session, ModelAndView mv, int currentPage, Model model) {
 
-		Project project = (Project) session.getAttribute("project");
+		Project project = (Project) session.getAttribute("projectUser");
 
 	
 		int listCount = paService.selectNewsListCount(project.getProjectNo());
@@ -226,9 +226,9 @@ public class ProjectAdminController {
 	@RequestMapping("insertProject.pa")
 	public ModelAndView insertProject(Project project, ModelAndView mv, HttpSession session) {
 		
-		Member member = new Member("M1","");
+	
 		
-//		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
+		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
 		
 		
 		project.setUserNo(member.getUserNo()); 
@@ -252,9 +252,9 @@ public class ProjectAdminController {
 	@RequestMapping("projectList.pa")
 	public String selectProjectList(Model model, HttpSession session) {
 
-	Member member = new Member("M1","");
+	
 		
-//		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
+		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
 		
 		
 		ArrayList<Project> projectList = paService.selectProjectList(member.getUserNo());

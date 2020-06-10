@@ -191,7 +191,7 @@
           <!-- Topbar button logout-->
           <ul class="navbar-nav ml-auto">
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
+            <li class="nav-item dropdown  no-arrow">
               <button class="btn btn-primary" onclick="location.href='<%=contextPath%>/logout.me'">logout</button>
             </li>
             

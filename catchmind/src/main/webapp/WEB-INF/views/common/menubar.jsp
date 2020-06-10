@@ -300,7 +300,7 @@ a:hover { text-decoration:none !important; color:black; }
 				<!-- 로그인 후 -->
 		 		<div class="header login  header-img loginnext">
 		 		
-					<div class="dropdown">
+					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
 							<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
@@ -320,7 +320,7 @@ a:hover { text-decoration:none !important; color:black; }
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
 					        </tr>
 					        <tr>
