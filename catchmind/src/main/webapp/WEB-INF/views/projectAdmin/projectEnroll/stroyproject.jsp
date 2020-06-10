@@ -130,7 +130,7 @@
 
 									
 									<c:forEach items="${ categoryList }" var="c">
-										<option value="${ c.categoryName}">${ c.categoryName}</option>
+										<option value="${ c.categoryNo}">${ c.categoryName}</option>
 
 
 									</c:forEach>

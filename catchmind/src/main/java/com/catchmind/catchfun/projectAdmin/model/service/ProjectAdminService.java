@@ -43,9 +43,13 @@ public interface ProjectAdminService {
 	Project ploginMember(int projectNo);
 
 	ArrayList<Item> selectItemList(String projectNo);
-
+	ArrayList<Project> selectProjectList(String projectNo);
+	
+	
 	int insertItem(Item item);
 
+	int insertProject(Project project);
+	
 	int deleteItem(Item item);
 	
 	int deleteNews(News news);
