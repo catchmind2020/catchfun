@@ -15,4 +15,7 @@ public class MainDao {
 	}
 	
 
+	public ArrayList<Main> mainComingsoonList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("mainMapper.mainComingsoonList");
+	}
 }

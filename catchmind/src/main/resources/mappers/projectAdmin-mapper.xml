@@ -3,211 +3,453 @@
 <mapper namespace="projectAdminMapper">
 
 	<resultMap id="boardResultSet" type="Board">
-		<id column="board_no" property="boardNo"/>
-		<result column="board_title" property="boardTitle"/>
-		<result column="board_writer" property="boardWriter"/>
-		<result column="board_content" property="boardContent"/>
-		<result column="origin_name" property="originName"/>
-		<result column="change_name" property="changeName"/>
-		<result column="count" property="count"/>
-		<result column="create_date" property="createDate"/>
-		<result column="status" property="status"/>
+		<id column="board_no" property="boardNo" />
+		<result column="board_title" property="boardTitle" />
+		<result column="board_writer" property="boardWriter" />
+		<result column="board_content" property="boardContent" />
+		<result column="origin_name" property="originName" />
+		<result column="change_name" property="changeName" />
+		<result column="count" property="count" />
+		<result column="create_date" property="createDate" />
+		<result column="status" property="status" />
 	</resultMap>
-	
+
 	<resultMap id="replyResultSet" type="Reply">
-		<id column="reply_no" property="replyNo"/>
-		<result column="reply_content" property="replyContent"/>
-		<result column="ref_bno" property="refBoardNo"/>
-		<result column="reply_writer" property="replyWriter"/>
-		<result column="create_date" property="createDate"/>
-		<result column="status" property="status"/>
+		<id column="reply_no" property="replyNo" />
+		<result column="reply_content" property="replyContent" />
+		<result column="ref_bno" property="refBoardNo" />
+		<result column="reply_writer" property="replyWriter" />
+		<result column="create_date" property="createDate" />
+		<result column="status" property="status" />
 	</resultMap>
-	
+
 	<resultMap id="basicResultSet" type="Basic">
-		<id column="PROJECT_BASIC_NO" property="projectBasicNo"/>
-		<result column="PROJECT_NUMBER" property="projectNo"/>
-		<result column="ANSWER1" property="answer1"/>
-		<result column="ANSWER2" property="answer2"/>
-		<result column="ANSWER3" property="answer3"/>
-		<result column="ANSWER4" property="answer4"/>
-		<result column="check1" property="check1"/>
-		<result column="check2" property="check2"/>
-		<result column="check3" property="check3"/>
-		<result column="check4" property="check4"/>
-		<result column="STATUS" property="status"/>
+		<id column="PROJECT_BASIC_NO" property="projectBasicNo" />
+		<result column="PROJECT_NUMBER" property="projectNo" />
+		<result column="ANSWER1" property="answer1" />
+		<result column="ANSWER2" property="answer2" />
+		<result column="ANSWER3" property="answer3" />
+		<result column="ANSWER4" property="answer4" />
+		<result column="check1" property="check1" />
+		<result column="check2" property="check2" />
+		<result column="check3" property="check3" />
+		<result column="check4" property="check4" />
+		<result column="STATUS" property="status" />
 	</resultMap>
-	
-	
+
+
 	<resultMap id="projectResultSet" type="Project2">
-		<id column="PROJECT_NUMBER" property="projectNo"/>
-		<result column="PROJECT_CATEGORY" property="projectCategory"/>
-		<result column="USER_NO" property="userNo"/>
-		<result column="PROJECT_NAME" property="projectName"/>
-		<result column="PROJECT_DATE" property="projectDate"/>
-		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
-		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
-		<result column="PROJECT_CONTENT" property="projectContent"/>
-		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
-		<result column="PROJECT_REPORT" property="projectReport"/>
-		<result column="HASHTAGS" property="HashTags"/>
-		<result column="PROJECT_STATUS" property="projectStatus"/>
-		<result column="STATUS_STORY" property="statusStory"/>
+		<id column="PROJECT_NUMBER" property="projectNo" />
+		<result column="PROJECT_CATEGORY" property="projectCategory" />
+		<result column="USER_NO" property="userNo" />
+		<result column="PROJECT_NAME" property="projectName" />
+		<result column="PROJECT_DATE" property="projectDate" />
+		<result column="PROJECT_STARTDATE" property="projectStartDate" />
+		<result column="PROJECT_FINISHDATE"
+			property="projectFinishDate" />
+		<result column="PROJECT_CONTENT" property="projectContent" />
+		<result column="PROJECT_TARGET_AMOUNT"
+			property="projectTargetAmount" />
+		<result column="PROJECT_REPORT" property="projectReport" />
+		<result column="HASHTAGS" property="hhsh" />
+		<result column="PROJECT_STATUS" property="projectStatus" />
+		<result column="STATUS_STORY" property="statusStory" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
 	</resultMap>
-	
-	
+
+
 	<resultMap id="itemResultSet" type="Item">
-		<id column="ITEM_NO" property="itemNo"/>
-		<result column="ITEM_NAME" property="itemName"/>
-		<result column="PROJECT_NUMBER" property="projectNo"/>
-		<result column="STATUS" property="status"/>
-		<result column="ITEM_CONTENT" property="itemContent"/>
+		<id column="ITEM_NO" property="itemNo" />
+		<result column="ITEM_NAME" property="itemName" />
+		<result column="PROJECT_NUMBER" property="projectNo" />
+		<result column="STATUS" property="status" />
+		<result column="ITEM_CONTENT" property="itemContent" />
 	</resultMap>
-	
-		<resultMap id="optionResultSet" type="Option">
-		<id column="REWARD_NO" property="rewardNo"/>
-		<id column="ITEM_NO" property="itemNo"/>
-		<result column="ITEM_NAME" property="itemName"/>
-		<result column="REWARD_TITLE" property="rewardTitle"/>
-		<result column="ITEM_QUANTITY" property="itemQuantity"/>
-		<result column="status" property="status"/>
+
+	<resultMap id="optionResultSet" type="Option">
+		<id column="REWARD_NO" property="rewardNo" />
+		<id column="ITEM_NO" property="itemNo" />
+		<result column="ITEM_NAME" property="itemName" />
+		<result column="REWARD_TITLE" property="rewardTitle" />
+		<result column="ITEM_QUANTITY" property="itemQuantity" />
+		<result column="status" property="status" />
 	</resultMap>
-	
+
 	<resultMap id="rewardResultSet" type="Reward">
-		<id column="REWARD_NO" property="rewardNo"/>
-		<result column="PROJECT_NUMBER" property="projectNo"/>
-		<result column="REWARD_TITLE" property="rewardTitle"/>
-		<result column="REWARD_CONTENT" property="rewardContent"/>
-		<result column="REWARD_COST" property="rewardCost"/>
-		<result column="REWARD_REMAINING_QUANTITY" property="rewardRemainingQuantity"/>
-		<result column="REWARD_DELIVERY_COST" property="rewarDeliveryCost"/>
-		<result column="REWARD_STATUS" property="rewardStatus"/>
+		<id column="REWARD_NO" property="rewardNo" />
+		<result column="PROJECT_NUMBER" property="projectNo" />
+		<result column="REWARD_TITLE" property="rewardTitle" />
+		<result column="REWARD_CONTENT" property="rewardContent" />
+		<result column="REWARD_COST" property="rewardCost" />
+		<result column="REWARD_REMAINING_QUANTITY"
+			property="rewardRemainingQuantity" />
+		<result column="REWARD_DELIVERY_COST"
+			property="rewarDeliveryCost" />
+		<result column="REWARD_STATUS" property="rewardStatus" />
 	</resultMap>
-<!-- 	<select id="selectListCount" resultType="_int">
-		select count(*)
-		  from board
-		 where status='Y'
+
+	<resultMap id="makerResultSet" type="Maker2">
+		<id column="MAKER_NO" property="makerNo" />
+		<result column="PROJECT_NUMBER" property="projectNo" />
+		<result column="MAKER_NAME" property="makerName" />
+		<result column="MAKER_EMAIL" property="makerEmail" />
+		<result column="MAKER_PHONE" property="makerPhone" />
+		<result column="MAKER_HOMEPAGE" property="makerHomepage" />
+		<result column="REPRESENTATIVE_NAME" property="rName" />
+		<result column="REPRESENTATIVE_EMAIL" property="rEmail" />
+		<result column="STATUS" property="status" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+
+	</resultMap>
+
+	<resultMap id="fundSumResultSet" type="FundSum">
+		<id column="Project_no" property="projectNo" />
+		<result column="fund_sum" property="fundSum" />
+		<result column="fund_count" property="fundCount" />
+		<result column="fund_date" property="fundDate" />
+	</resultMap>
+	<resultMap id="newsResultSet" type="News2">
+		<id column="NEWS_NO" property="newsNo" />
+		<result column="PROJECT_NUMBER" property="projectNo" />
+		<result column="NEWS_TITLE" property="newsTitle" />
+		<result column="NEWS_CONTENT" property="newsContent" />
+		<result column="NEWS_DATE" property="newsDate" />
+		<result column="NEWS_COUNT" property="newsCount" />
+		<result column="NEWS_STATUS" property="newsStatus" />
+	</resultMap>
+	<resultMap id="fundingListResultSet" type="Funding2">
+		<id column="FUNDING_NO" property="fundingNo" />
+		<result column="REWARD_NO" property="rewardNo" />
+		<result column="USER_NO" property="fundingUserNo" />
+		<result column="FUNDING_PRODUCT" property="fundingProduct" />
+		<result column="FUNDING_COST" property="fundingCost" />
+		<result column="FUNDING_QUANTITY" property="fundingQuantity" />
+		<result column="FUNDING_DATE" property="fundingDate" />
+		<result column="FUNDING_STATUS" property="fundingStatus" />
+		<result column="PAYMENT_METHOD" property="paymentMethod" />
+		<result column="PROJECT_NUMBER" property="projectNo" />
+		<result column="REWARD_TITLE" property="rewardTitle" />
+		
+	</resultMap>
+	
+	<!-- <select id="selectListCount" resultType="_int"> select count(*) from 
+		board where status='S' </select> <select id="selectList" resultMap="boardResultSet"> 
+		select * from board where status='S' order by board_no desc </select> -->
+
+
+	<select id="ploginMember" resultMap="projectResultSet"
+		parameterType="_int">
+		select *
+		from PROJECT
+		where PROJECT_NUMBER=#{projectNo}
+		and status='S'
+	</select>
+
+
+
+
+	<select id="basicInformation" parameterType="Project2"
+		resultMap="basicResultSet">
+		select *
+		from PROJECT_BASIC
+		where PROJECT_NUMBER=#{projectNo}
+
+	</select>
+
+	<select id="selectMaker" parameterType="Project2"
+		resultMap="makerResultSet">
+		select *
+		from PROJECT_MAKER
+		where PROJECT_NUMBER=#{projectNo}
+	</select>
+	<select id="selectNews" parameterType="string" resultMap="newsResultSet">
+		select *
+		from NEWS
+		where NEWS_NO=#{nno}
+	</select>
+	<select id="fundSum" parameterType="string"
+		resultMap="fundSumResultSet">
+		SELECT PROJECT_NUMBER as Project_no,
+		SUM(FUNDING_COST*FUNDING_QUANTITY) as
+		fund_sum , count(*) as fund_count
+		FROM FUNDING_LIST
+		where PROJECT_NUMBER=#{projectNo}
+		GROUP BY
+		PROJECT_NUMBER
+	</select>
+	<select id="daylistfundSum" parameterType="string"
+		resultMap="fundSumResultSet">
+
+
+		SELECT PROJECT_NUMBER as Project_no,
+		TO_CHAR(FUNDING_DATE,'YY/MM/DD') as fund_date, SUM(FUNDING_COST*FUNDING_QUANTITY)
+		as fund_sum , count(*) as fund_count
+		FROM FUNDING_LIST
+		where PROJECT_NUMBER=#{projectNo} and FUNDING_DATE between sysdate-10 and sysdate
+		GROUP BY PROJECT_NUMBER,TO_CHAR(FUNDING_DATE,'YY/MM/DD')
+		order by fund_date
 	</select>
 	
-	<select id="selectList" resultMap="boardResultSet">
-		select * 
-		  from board
-		 where status='Y'
-		 order by board_no desc
-	</select> -->
-	
-	
-	 <select id="ploginMember" resultMap="projectResultSet" parameterType="_int">
-			select *
-			  from PROJECT  
-			 where PROJECT_NUMBER=#{projectNo}
-			   and status='Y'
-	  </select>
-	
-	
-	<select id="basicInformation" parameterType="Project2" resultMap="basicResultSet">
-		select * 
-		  from PROJECT_BASIC
-		 where PROJECT_NUMBER=#{projectNo}
-	
+
+	<select id="todayfundSum" parameterType="string"
+		resultMap="fundSumResultSet">
+
+
+		SELECT PROJECT_NUMBER as Project_no,
+		SUM(FUNDING_COST*FUNDING_QUANTITY) as
+		fund_sum , count(*) as fund_count
+		FROM FUNDING_LIST
+		where PROJECT_NUMBER=#{projectNo} and
+		TO_CHAR(FUNDING_DATE,'YY/MM/DD') =
+		TO_CHAR(SYSDATE, 'YY/MM/DD')
+		GROUP BY
+		PROJECT_NUMBER
+
 	</select>
-	
-	
+
+
+
+	<select id="selectProject" parameterType="Project2"
+		resultMap="projectResultSet">
+
+		select *
+		from PROJECT P
+		JOIN attachment A
+		on(A.REF_NO=P.PROJECT_NUMBER)
+		where PROJECT_NUMBER=#{projectNo}
+
+	</select>
 	<insert id="insertBasic" parameterType="Basic">
 		insert into PROJECT_BASIC
-		values('PB'||SEQ_PBNO.nextval, #{projectNo}, #{answer1}, #{answer2}, #{answer3}, #{answer4},
-			   #{check1}, #{check2},'S', #{check3}, #{check4})
+		values('PB'||SEQ_PBNO.nextval, #{projectNo}, #{answer1}, #{answer2},
+		#{answer3}, #{answer4},
+		#{check1}, #{check2},'S', #{check3}, #{check4})
+	</insert>
+	<insert id="insertNews" parameterType="News2">
+		insert into NEWS
+		values('NE'||SEQ_NENO.nextval, #{projectNo}, #{newsTitle}, #{newsContent},
+		sysdate,0, 'N')
 	</insert>
 	
 	
+	<update id="updateProject" parameterType="Project2">
+
+		update PROJECT
+		set PROJECT_NUMBER=#{projectNo} ,
+		PROJECT_NAME=#{projectName} ,
+		PROJECT_TARGET_AMOUNT=#{projectTargetAmount} ,
+		PROJECT_CATEGORY=#{projectCategory} ,
+		PROJECT_STARTDATE=#{projectStartDate} ,
+		PROJECT_FINISHDATE=#{projectFinishDate} ,
+		HASHTAGS=#{hhsh},
+		PROJECT_STATUS='S', PROJECT_CONTENT=#{projectContent}
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
 	
+	<update id="updateNews" parameterType="News2">
+
+		update NEWS
+		set NEWS_TITLE=#{newsTitle} ,
+		NEWS_CONTENT=#{newsContent} 
+		
+		where NEWS_STATUS='N' and NEWS_NO=#{newsNo}
+	</update>
+	
+	
+	
+	<update id="updateBasic" parameterType="string">
+		update PROJECT_BASIC
+		set
+		STATUS='E'
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
+
+	<update id="updateBasic2" parameterType="Basic">
+		update PROJECT_BASIC
+		set
+		ANSWER1=#{answer1} ,
+		ANSWER2=#{answer2} ,
+		ANSWER3=#{answer3} ,
+		ANSWER4=#{answer4},
+		CHECK1=#{check1},
+		CHECK2=#{check2},
+		CHECK3=#{check3},
+		CHECK4=#{check4}
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
+	
+	
+		<select id="selectfundListCount" parameterType="string"
+		resultType="_int">
+			select count(*)
+		  from FUNDING_LIST
+		 where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+
+	</select>
+	
+		<select id="selectNewsListCount" parameterType="string"
+		resultType="_int">
+			select count(*)
+		  from NEWS
+		 where NEWS_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+
+	</select>
+	
+	
+	<select id="selectFundingList" resultMap="fundingListResultSet">
+		select * 
+		  from FUNDING_LIST
+		  JOIN REWARD R USING(PROJECT_NUMBER) 
+		 where  FUNDING_STATUS='N'
+		 order by FUNDING_DATE desc
+	</select>
+	
+		<select id="selectNewsList" resultMap="newsResultSet">
+		select * 
+		  from NEWS
+		  JOIN REWARD R USING(PROJECT_NUMBER) 
+		 where  NEWS_STATUS='N'
+		 order by NEWS_DATE desc
+	</select>
+	
+	<update id="updateMaker2" parameterType="Maker2">
+		update PROJECT_MAKER
+		set
+		MAKER_NAME=#{makerName} ,
+		MAKER_EMAIL=#{makerEmail} ,
+		MAKER_PHONE=#{makerPhone} ,
+		MAKER_HOMEPAGE=#{makerHomepage},
+		REPRESENTATIVE_NAME=#{rName},
+		REPRESENTATIVE_EMAIL=#{rEmail},
+		ORIGIN_NAME=#{originName},
+		CHANGE_NAME=#{changeName}
+		where
+		PROJECT_NUMBER=#{projectNo}
+	</update>
+
+	<update id="updateStory" parameterType="string">
+		update PROJECT
+		set
+		PROJECT_STATUS='E'
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
+
+	<update id="updateMaker" parameterType="string">
+		update PROJECT_MAKER
+		set
+		STATUS='E'
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
+	<update id="updateItem" parameterType="string">
+		update Item
+		set STATUS='E'
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
+
+	<update id="updateReward" parameterType="string">
+		update Reward
+		set
+		REWARD_STATUS='E'
+		where PROJECT_NUMBER=#{projectNo}
+	</update>
 	<insert id="insertItem" parameterType="Item">
 		insert into ITEM
-		values('I'||SEQ_INO.nextval, #{itemName}, #{projectNo}, 'Y', #{itemContent})
+		values('I'||SEQ_INO.nextval, #{itemName}, #{projectNo}, 'S',
+		#{itemContent})
 	</insert>
-	
+	<insert id="insertFile" parameterType="Project2">
+		insert into attachment
+		values( 'AT'||SEQ_ATNO.nextval, #{projectNo}, #{originName},
+		#{changeName},#{projectNo},sysdate,default,#{projectNo})
+	</insert>
+	<update id="updateFile" parameterType="Project2">
+		update ATTACHMENT
+		set ORIGIN_NAME=#{originName} ,
+		CHANGE_NAME=#{changeName}
+		where REF_NO=#{projectNo}
+	</update>
+
+
 	<insert id="insertReward" parameterType="Reward">
 		insert into REWARD
-		values('R'||SEQ_RNO.nextval, #{projectNo}, #{rewardTitle}, #{rewardContent},#{rewardCost},#{rewardRemainingQuantity},#{rewarDeliveryCost},'Y')
+		values('R'||SEQ_RNO.nextval, #{projectNo}, #{rewardTitle},
+		#{rewardContent},#{rewardCost},#{rewardRemainingQuantity},#{rewarDeliveryCost},'S')
 	</insert>
-	
-		<insert id="insertOption" parameterType="Option">
+
+	<insert id="insertOption" parameterType="Option">
 		insert into TB_OPTION
 		values(#{rewardNo}, #{itemNo}, #{itemQuantity})
 	</insert>
-	
+
 	<update id="deleteItem" parameterType="Item">
-	  		update ITEM
-	  		   set status='N' 
-	  		 where PROJECT_NUMBER=#{projectNo} and ITEM_NO=#{itemNo}
-	  </update>
+		update ITEM
+		set status='Y'
+		where PROJECT_NUMBER=#{projectNo} and ITEM_NO=#{itemNo}
+	</update>
 	
+	<update id="deleteNews" parameterType="News2">
+		update News
+		set NEWS_STATUS='Y'
+		where NEWS_NO=#{newsNo}
+	</update>
+	
+
 	<update id="deleteReward" parameterType="Reward">
-	  		update REWARD
-	  		   set REWARD_STATUS='N' 
-	  		 where PROJECT_NUMBER=#{projectNo} and REWARD_NO=#{rewardNo}
-	  </update>
-	
-	<select id="selectItemList" parameterType="string" resultMap="itemResultSet">
-		select * 
-		  from ITEM
-		 where status='Y' and PROJECT_NUMBER=#{projectNo}
+		update REWARD
+		set
+		REWARD_STATUS='Y'
+		where PROJECT_NUMBER=#{projectNo} and
+		REWARD_NO=#{rewardNo}
+	</update>
+
+	<select id="selectItemList" parameterType="string"
+		resultMap="itemResultSet">
+		select *
+		from ITEM
+		where status='S' and
+		PROJECT_NUMBER=#{projectNo}
 	</select>
-	
-	<select id="selectOptionList" parameterType="string" resultMap="optionResultSet">
+
+	<select id="selectOptionList" parameterType="string"
+		resultMap="optionResultSet">
 		select *
 		from tb_option
 		join item USING (ITEM_NO)
-		join REWARD USING (REWARD_NO)
-		where status='Y'
+		join REWARD
+		USING (REWARD_NO)
+		where status='S'
 	</select>
-	
-	<select id="selectRewardList" parameterType="string" resultMap="rewardResultSet">
-		select * 
-		  from REWARD
-		 where REWARD_STATUS='Y' and PROJECT_NUMBER=#{projectNo}
-		 ORDER BY REWARD_NO
-	</select>
-	
-	
-	<!-- <update id="increaseCount" parameterType="_int">
-		update board
-		   set count = count + 1
-		 where board_no = #{bno} and status = 'Y'
-	</update>
-	
-	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
+
+	<select id="selectRewardList" parameterType="string"
+		resultMap="rewardResultSet">
 		select *
-		  from board
-		 where board_no=#{bno}
+		from REWARD
+		where REWARD_STATUS='S' and
+		PROJECT_NUMBER=#{projectNo}
+		ORDER BY REWARD_NO
 	</select>
-	
-	<update id="deleteBoard" parameterType="_int">
-		update board
-		   set status='N'
-		 where board_no=#{bno}
-	</update>
-	
-	<update id="updateBoard" parameterType="Board">
-		update board
-		   set board_title=#{boardTitle}, 
-		       board_content=#{boardContent},
-		       origin_name=#{originName},
-		       change_name=#{changeName}
-		 where board_no=#{boardNo}
-	</update>
-	
-	<select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
-		select * 
-		  from reply
-		 where ref_bno=#{bno} and status='Y'
-		 order by reply_no desc
-	</select>
-	
-	<insert id="insertReply" parameterType="Reply">
-		insert into reply
-		values(seq_rno.nextval, #{replyContent}, #{refBoardNo}, #{replyWriter}, sysdate, 'Y')
+
+	<insert id="insertMaker" parameterType="Maker2">
+		insert into project_maker
+		values(seq_pmno.nextval, #{projectNo}, #{makerName}, #{makerEmail},
+		#{makerPhone}, #{makerHomepage}, #{rName},
+		#{rEmail},'S',#{originName},#{changeName})
 	</insert>
-	 -->
+
+	<!-- <update id="increaseCount" parameterType="_int"> update board set count 
+		= count + 1 where board_no = #{bno} and status = 'S' </update> <select id="selectBoard" 
+		parameterType="_int" resultMap="boardResultSet"> select * from board where 
+		board_no=#{bno} </select> <update id="deleteBoard" parameterType="_int"> 
+		update board set status='Y' where board_no=#{bno} </update> <update id="updateBoard" 
+		parameterType="Board"> update board set board_title=#{boardTitle}, board_content=#{boardContent}, 
+		origin_name=#{originName}, change_name=#{changeName} where board_no=#{boardNo} 
+		</update> <select id="selectReplyList" parameterType="_int" resultMap="replyResultSet"> 
+		select * from reply where ref_bno=#{bno} and status='S' order by reply_no 
+		desc </select> <insert id="insertReply" parameterType="Reply"> insert into 
+		reply values(seq_rno.nextval, #{replyContent}, #{refBoardNo}, #{replyWriter}, 
+		sysdate, 'S') </insert> -->
 </mapper>
 
 

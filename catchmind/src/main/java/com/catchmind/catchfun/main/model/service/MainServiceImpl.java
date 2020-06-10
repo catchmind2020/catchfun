@@ -22,5 +22,10 @@ public class MainServiceImpl implements MainService{
 	public ArrayList<Main> mainSpotlightList() {
 		return maDao.mainSpotlightList(sqlSession);
 	}
+	
+	@Override
+	public ArrayList<Main> mainComingsoonList() {
+		return maDao.mainComingsoonList(sqlSession);
+	}
 
 }

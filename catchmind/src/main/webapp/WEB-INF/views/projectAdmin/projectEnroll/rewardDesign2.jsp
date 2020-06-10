@@ -129,7 +129,7 @@
 							<select name="itemNo"  id="itemNo">
 					            <option value="">아이템선택</option>    
 					            
-					              <c:forEach items="${ list }" var="i">                       
+					              <c:forEach items="${ ilist }" var="i">                       
 										<!-- 현재 쿼리스트링 받은 지역명이랑 총 지점리스트에서 지역명이렁 동일한 값들만 뽑아냄  -->
 										<option value="${ i.itemNo }" >${ i.itemName }</option>		 
 									
@@ -179,7 +179,6 @@
 								  	  <%-- ${op.rewardNo} <br> --%>
 									${op.itemName}  &nbsp;  ${op.itemQuantity}개<br>
 								  </c:if>
-					
 							</c:forEach>
 								
 							</div>
@@ -209,7 +208,9 @@
 					
 					
 				<div class="btns row">
-					<button class="btn btn-primary btn-user btn-block" style="width: 200px;" >저장하기</button>
+					<a href="<%=contextPath%>/home.pa">
+								<button type="button" class="btn btn-primary">홈으로</button>
+							</a>
 					&nbsp; <a href="rewardList.pa"><button class="btn btn-primary btn-user btn-block" style="width: 200px;" >리워드설계</button></a>
 				</div>
 			
