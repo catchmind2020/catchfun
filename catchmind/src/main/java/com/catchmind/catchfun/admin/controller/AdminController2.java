@@ -500,6 +500,25 @@ public class AdminController2 {
 		
 	}
 	
+	@RequestMapping("pjReportDetail.ad")
+	public String adminpjReportDetail(String rd, Model model) {
+		
+		Project pj = aService2.pjReportDetail(rd);
+		
+		model.addAttribute("pj", pj);
+		return "admin/adminPjReportDetail";
+		
+	}
+	
+	@RequestMapping("pjDelete.ad")
+	public String pjDelete(String projectNumber, Model model) {
+		
+		int result = aService2.pjDelete(projectNumber);
+		
+		return "redirect:pReport.ad?currentPage=1";
+	}
+	
+	
 	/**
 	 * 매출 통계 리스트페이지
 	 */

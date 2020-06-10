@@ -209,6 +209,14 @@ public class AdminDao2 {
 	public int reportBlack(SqlSessionTemplate sqlSession, String userNo) {
 		return sqlSession.update("adminMapper2.reportBlack", userNo);
 	}
+	
+	public Project pjReportDetail(SqlSessionTemplate sqlSession, String rd) {
+		return sqlSession.selectOne("adminMapper2.pjReportDetail", rd);
+	}
+	
+	public int pjDelete(SqlSessionTemplate sqlSession, String projectNumber) {
+		return sqlSession.update("adminMapper2.pjDelete", projectNumber);
+	}
 }
 
 

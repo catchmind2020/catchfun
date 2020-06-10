@@ -80,7 +80,6 @@
 			                <th width="150px">이메일</th>                  
 			                <th width="150px">가입일</th>
 			                <th width="100px">신고수</th>
-			                <th width="70px">상태</th>
 			              </tr>
 		              </thead>
 		              <tbody>
@@ -100,12 +99,6 @@
 				                <td>${ r.email }</td>                 
 				                <td>${ r.userEnrolldate }</td>
 				                <td>${ r.questionBanCount }</td>
-				                <td>
-				                  <select>
-				                  	  <option>활동회원</option>
-				                      <option>블랙리스트</option>
-				                  </select>
-				                </td>
 				              </tr>
 			              </c:forEach>
 		              </tbody>
