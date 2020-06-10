@@ -126,10 +126,7 @@
 							style="width: 200px;">등록하기</button>
 					</div>
 					
-					<div class="btns">
-						<button type="submit" class="btn btn-primary btn-user btn-block"
-							style="width: 200px;">등록하기</button>
-					</div>
+					
 				</div>
 
 

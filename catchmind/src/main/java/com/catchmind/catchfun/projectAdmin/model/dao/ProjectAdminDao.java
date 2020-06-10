@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
 import com.catchmind.catchfun.projectAdmin.model.vo.Item;
@@ -65,6 +66,12 @@ public class ProjectAdminDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("projectAdminMapper.daylistfundSum", projectNo);
 	}
+	
+	public ArrayList<Project> selectProjectList(SqlSessionTemplate sqlSession, String projectNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectProjectList", projectNo);
+	}
+	
 	public ArrayList<Funding> selectFundingList(SqlSessionTemplate sqlSession, PageInfo pi, String projectNo) {
 		// TODO Auto-generated method stub
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -150,11 +157,25 @@ public class ProjectAdminDao {
 		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectOptionList");
 	}
 	
+	public ArrayList<Category> selectCategoryList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("projectAdminMapper.selectCategoryList");
+	}
+	
+	
+	
+	
 	public int insertMaker(SqlSessionTemplate sqlSession, ProjectMaker maker) {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.insert("projectAdminMapper.insertMaker", maker);
 	}
+	public int insertProject(SqlSessionTemplate sqlSession, Project project) {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.insert("projectAdminMapper.insertProject", project);
+	}
+	
 	public int insertFile(SqlSessionTemplate sqlSession, Project project) {
 		// TODO Auto-generated method stub
 		

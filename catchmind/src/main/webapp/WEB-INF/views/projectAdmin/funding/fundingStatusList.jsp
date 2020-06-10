@@ -78,7 +78,7 @@
 	<!-- <div  style="position: fixed";> -->
 
 	<div class="outer">
-	
+
 	
 	<div style=" height: 700px ; margin-left: 270px;">
 
@@ -149,7 +149,7 @@
 		<br><br>
 		  <div class="card shadow mb-4" style="width: 800px; height: 500px; ">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">수익현황(10일전까지)</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">수익현황(20일전까지)</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
@@ -183,8 +183,8 @@
 			</tr> -->
 			
 			<c:forEach items="${ fundingList }" var="b">
-		
-				<c:if test="${ b.projectNo eq project.projectNo }">
+				
+				<%-- <c:if test="${ b.projectNo eq project.projectNo }"> --%>
 	                    <tr>
 	                        <td>${ b.fundingProduct }</td>
 	                        <td>${ b.rewardTitle }</td>
@@ -194,7 +194,7 @@
 	                      	<td>${ b.fundingStatus }</td>
 	                      	<td>${ b.fundingQuantity * b.fundingCost }</td>
 	                    </tr>
-	                </c:if>
+	                <%-- </c:if> --%>
                  </c:forEach>
                     
             </tbody>
@@ -202,8 +202,8 @@
              
 
    	<br><br>
-   			<div id="pagingArea">
-                <ul class="pagination">
+   			<div id="pagingArea" style="margin-right: 30%;">
+                <ul class="pagination" >
                 	
                 	<c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">

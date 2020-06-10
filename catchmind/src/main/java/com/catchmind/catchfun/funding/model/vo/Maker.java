@@ -20,7 +20,7 @@ public class Maker {
 	private String makerPhone;			// 전화번호
 	private String makerType;			// 사업자구분
 	private String representativeName;	// 대표자명
-	private String representativeEmail;	// 대표자이메일
+	private String representativeEmail;	// 대표자이메일 
 	private String status;				// 상태값
 	private String changeName;
 	private String filePath;
