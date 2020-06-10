@@ -170,6 +170,18 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<String> prList() {
 		return aDao.prList(sqlSession);
 	}
+	@Override
+	public int updateProjectPay(PayTotal p) {
+		return aDao.updateProjectPay(sqlSession, p);
+	}
+	@Override
+	public int updateAdminPay(int adminPay) {
+		return aDao.updateAdminPay(sqlSession, adminPay);
+	}
+	@Override
+	public int updateProjectStatus(PayTotal p) {
+		return aDao.updateProjectStatus(sqlSession, p);
+	}
 	
 	// 3. Category
 	

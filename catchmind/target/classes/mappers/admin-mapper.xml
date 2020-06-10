@@ -103,8 +103,8 @@
 		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
 		<result column="CATEGORY_NAME" property="categoryName"/>
 		<result column="total" property="total"/>
+		<result column="TOTAL_STATUS" property="totalStatus"/>
 	</resultMap>
-	
 	
 	<select id="selectListCount" resultType="_int">
 		select count(*)
@@ -235,6 +235,7 @@
 	</update>
 	
 	<!-- 통계!! -->
+	
 	<select id="payList" parameterType="string" resultMap="adminPayTotalResultSet">
 		select p.PROJECT_NUMBER as PROJECT_NUMBER, REWARD_NO as REWARD_NO, p.PROJECT_NAME as PROJECT_NAME, m2.user_id as user_id, FUNDING_COST as FUNDING_COST, FUNDING_QUANTITY as FUNDING_QUANTITY, PROJECT_TARGET_AMOUNT as PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_NAME as CATEGORY_NAME,
 		(select sum(FUNDING_COST*FUNDING_QUANTITY)
@@ -244,7 +245,7 @@
 		join member m on (f.user_no = m.user_no)
 		join member m2 on (p.user_no = m2.user_no)
 		where f.PROJECT_NUMBER = #{pr}
-		group by p.PROJECT_NUMBER) as total
+		group by p.PROJECT_NUMBER) as total, TOTAL_STATUS
 		from FUNDING_LIST f
 		join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
 		join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
@@ -253,10 +254,30 @@
 		where f.PROJECT_NUMBER = #{pr} and <![CDATA[rownum <= 1]]>
 	</select>
 	
+	
+	
 	<select id="prList" resultType="string">
 		select PROJECT_NUMBER
 		  from PROJECT
 	</select>
+	
+	<update id="updateProjectPay" parameterType="PayTotal">
+		update MEMBER
+		   set USER_POINT = USER_POINT + #{projectPay}
+		 where USER_ID=#{userId}
+	</update>
+	
+	<update id="updateAdminPay" parameterType="_int">
+		update MEMBER
+		   set USER_POINT= USER_POINT + #{adminPay}
+		 where USER_TYPE=3
+	</update>
+	
+	<update id="updateProjectStatus" parameterType="PayTotal">
+		update PROJECT
+		   set TOTAL_STATUS='Y'
+		 where PROJECT_NUMBER=#{projectNumber}
+	</update>
 	
 	
   	<!-- 주혁끝 -->
