@@ -86,7 +86,8 @@ table {
 }
 
 
-input[type=text], input[type=password], input[type=email], input[type=number], select {
+#userId, #certified, #userName, #repwd1, #repwd, #phone, #del_postcod,
+#del_address, #del_extraAddress, #del_detailAddress, select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -204,7 +205,7 @@ button[type=submit]:hover {
 								<div class="form-check" style="text-align: left;">
 									<input type="checkbox" id="ex_rd" name="ex_rd" value="agree">
 									<label for="ex_rd"><b>전체동의</b><br></label>
-									<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
+									<p style="font-size: 15px;">캐치펀 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
 								</div>
 							</td>
 						</tr>
@@ -219,7 +220,7 @@ button[type=submit]:hover {
 									</form>
 									
 									<form action="join_injeung.do${dice}" method="post">
-										<input type="text" id="certified" name="certified" placeholder="인증번호입력"> 
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력" required style="width: 300px;"> 
 										<button id="email_btn">인증</button>
 									</form>
 							</td>
