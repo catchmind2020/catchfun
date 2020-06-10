@@ -79,7 +79,6 @@
 	                <th width="170px">이메일</th>
 	                <th width="70px">신고수</th>
 	                <th width="70px">프로젝트 달성률</th>
-	                <th width="70px">변경하기</th>
 	              </tr>
             </thead>
             <tbody>  
@@ -93,12 +92,6 @@
 	                <td>${ pr.email }</td>
 	                <td>${ pr.projectReport }</td>
 	                <td>300%</td>
-	                <td>
-	                  <select>
-	                    <option>변경하기</option>
-	                    <option>프로젝트삭제</option>
-	                  </select>
-	                </td>
 	              </tr>
 	            </c:forEach>  
               </tbody>
@@ -147,7 +140,7 @@
 	   			var rd = $(this).children().eq(0).text();
 	   			// 상품코드 밸류값이 넘어감 
 	   			
-	 			location.href="reportDetail.ad?rd=" + rd; 
+	 			location.href="pjReportDetail.ad?rd=" + rd; 
  			});
  
    		});   

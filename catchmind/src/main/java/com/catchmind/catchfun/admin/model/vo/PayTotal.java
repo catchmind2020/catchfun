@@ -24,4 +24,6 @@ public class PayTotal {
 	private Date projectFinishDate;		// 프로젝트 종료일
 	private String categoryName;		// 프로젝트 카테고리명
 	private int total;					// 총금액
+	private String totalStatus;			// 총금액 93% 프젝한테 지급, 관리자 7% 지급
+	private int projectPay;				// 프로젝트등록자한테 93% 지급될 금액
 }

@@ -55,5 +55,10 @@ public class MainServiceImpl implements MainService{
 	public ArrayList<Main> getList(String cno, String order, Param param) {
 		return maDao.getList(sqlSession, cno, order, param);
 	}
+	
+	@Override
+	public ArrayList<Main> mainSearchAjax(String keyword, Param param) {
+		return maDao.mainSearchAjax(sqlSession, keyword, param);
+	}
 
 }

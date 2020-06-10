@@ -22,4 +22,7 @@ public interface MainService {
 	
 	// 카테고리별 list ajax 스크롤페이징 서비스
 	ArrayList<Main> getList(String cno, String order, Param param);
+	
+	// menubar 검색용 서비스 (ajax 스크롤페이징 서비스)
+	ArrayList<Main> mainSearchAjax(String keyword, Param param); 
 }

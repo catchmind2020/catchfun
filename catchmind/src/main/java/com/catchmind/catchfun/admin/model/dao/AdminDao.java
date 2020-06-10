@@ -171,6 +171,18 @@ public class AdminDao {
 	public ArrayList<String> prList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("adminMapper.prList");
 	}
+
+	public int updateProjectPay(SqlSessionTemplate sqlSession, PayTotal p) {
+		return sqlSession.update("adminMapper.updateProjectPay", p);
+	}
+
+	public int updateAdminPay(SqlSessionTemplate sqlSession, int adminPay) {
+		return sqlSession.update("adminMapper.updateAdminPay", adminPay);
+	}
+
+	public int updateProjectStatus(SqlSessionTemplate sqlSession, PayTotal p) {
+		return sqlSession.update("adminMapper.updateProjectStatus", p);
+	}
 	
 	// 주혁 끝
 }

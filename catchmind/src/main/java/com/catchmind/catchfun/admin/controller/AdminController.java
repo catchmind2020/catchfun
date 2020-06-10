@@ -585,7 +585,7 @@ public class AdminController {
 	}
 	// 결재내역
 	@RequestMapping("adminProjectPayTotal.ad")
-	public String adminProjectPayTotal(Model model) {
+	public String adminProjectPayTotal(int currentPage, Model model) {
 		
 		// 프로젝트기본키 뽑아오기
 		ArrayList<String> prn = aService.prList();
@@ -593,17 +593,15 @@ public class AdminController {
 		// 배열 미리 만들어두기
 		ArrayList<PayTotal> realPayList = new ArrayList<>();
 		
-		System.out.println(prn);
-		System.out.println("길이확인 : " + prn.size());
-		System.out.println("0번째 값 : " + prn.get(0));
-		
 		for(int i=0; i<prn.size(); i++) {
-			System.out.println(prn.get(i));
 			PayTotal payList = aService.payList(prn.get(i));
 			realPayList.add(payList);
 		}
 		
-		System.out.println("확인!!" + realPayList);
+		int listCount = realPayList.size();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
 		/* ArrayList<PayTotal>() list = aService.payList2(pr); */
 		
 		model.addAttribute("payList", realPayList);
@@ -612,38 +610,33 @@ public class AdminController {
 		return "admin/adminProjectPayTotal";
 	}
 	
-	// 통계
-	@RequestMapping("adminSales.ad")
-	public String adminSales() {
+	@ResponseBody
+	@RequestMapping("adminProjectPayUpdate.ad")
+	public String updateBoard(PayTotal p, int projectPay, int adminPay, HttpServletRequest request, Model model) {
 		
-		// 프로젝트 번호만 조회해와서 ArrayList에 담고 그걸 이용하여 selectOne문을 포문으로 길이만큼 실행
-		// 실행해온 값을 포문안에 ArrayList에 add 해준다 그걸 키 밸류로 보내서 리스트 출력을 한다.
+		p.setProjectPay(projectPay);
 		
-		ArrayList<PayTotal> list = new ArrayList<>();
-		
-		//참고 
-		/*
-		 */
-		// 리스트 미리 만들어두기!
-		ArrayList<PayTotal> ex = new ArrayList<>();
-		for(int i=0; i<10; i++) {
-			// 객체에 주섬주섬 담아서 그값을 for문 도는동안 리스트에 넣기!
+		int result = aService.updateProjectPay(p);
+		if(result > 0) {
 			
-			// 리스트에 넣는 과정
-			/*
-	        ex.add("two");
-	        ex.add("three");
-			 */
+			int result2 = aService.updateAdminPay(adminPay);
+			int result3 = aService.updateProjectStatus(p);
 			
+			if(result2*result3 > 0) {
+				return "success";
+			}else {
+				return "fail";
+			}
+			
+		}else {
+			model.addAttribute("msg", "지급 실패!!");
+			return "fail";
 		}
 		
-		// 리스트에 잘 담겼는지 확인용 
-		for(int j=0; j<ex.size(); j++){
-			System.out.println(ex.get(j));
-		}
-		
-		return "admin/adminSales";
 	}
+	
+	// 통계
+	
 	
 	// 주혁 끝
 	

@@ -51,4 +51,13 @@ public class MainDao {
 	public ArrayList<Main> mainComingsoonList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("mainMapper.mainComingsoonList");
 	}
+	
+	
+	public ArrayList<Main> mainSearchAjax(SqlSessionTemplate sqlSession, String keyword, Param param){
+        HashMap map = new HashMap();
+        map.put("keyword", keyword);
+        map.put("param", param);
+        return (ArrayList)sqlSession.selectList("mainSearchAjax",map); 
+
+ }
 }
