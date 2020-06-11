@@ -183,6 +183,19 @@ public class AdminDao {
 	public int updateProjectStatus(SqlSessionTemplate sqlSession, PayTotal p) {
 		return sqlSession.update("adminMapper.updateProjectStatus", p);
 	}
+
+	public int adminProjectPayTotalCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.adminProjectPayTotalCount");
+	}
+
+	public ArrayList<PayTotal> adminProjectPayTotalList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.adminProjectPayTotalList", null, rowBounds);
+	}
 	
 	// 주혁 끝
 }

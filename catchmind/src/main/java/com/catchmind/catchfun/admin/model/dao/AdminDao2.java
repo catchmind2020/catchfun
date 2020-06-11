@@ -217,6 +217,18 @@ public class AdminDao2 {
 	public int pjDelete(SqlSessionTemplate sqlSession, String projectNumber) {
 		return sqlSession.update("adminMapper2.pjDelete", projectNumber);
 	}
+	
+	public int projectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.projectListCount");
+	}
+	
+	public ArrayList<Project> projectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.projectList", null, rowBounds);
+	}
 }
 
 

@@ -518,6 +518,20 @@ public class AdminController2 {
 		return "redirect:pReport.ad?currentPage=1";
 	}
 	
+	@RequestMapping("projectList.ad")
+	public String projectList(int currentPage, Model model) {
+		int listCount = aService2.projectListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> plist = aService2.projectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("plist", plist);
+		
+		return "admin/adminProjectList";
+		
+	}
 	
 	/**
 	 * 매출 통계 리스트페이지

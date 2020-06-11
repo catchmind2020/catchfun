@@ -227,9 +227,9 @@ public class FundingController {
 	}
 	
 	@RequestMapping("booking.pay")
-	public ModelAndView selectBooking(String pno, FundingList fl, ModelAndView mv) {
+	public ModelAndView selectBooking(String pno, FundingList fl, ModelAndView mv, HttpSession session) {
 		
-		System.out.println(fl);
+		//System.out.println(fl);
 		
 		String rewardNo[] = fl.getRewardNo().split(",");
 		String count[] = fl.getFundingQuantity2().split(",");
@@ -253,9 +253,13 @@ public class FundingController {
 			
 			flList.add(f);
 		}
-		mv.addObject("flList", flList); // 선택한 리워드
-		mv.addObject("spon", spon); // 후원금
-		mv.addObject("sum", sum);
+		//mv.addObject("flList", flList); 	// 선택한 리워드
+		//mv.addObject("spon", spon); 		// 후원금
+		//mv.addObject("sum", sum);			// 리워드 합계
+		
+		session.setAttribute("flList", flList);
+		session.setAttribute("spon", spon);
+		session.setAttribute("sum", sum);
 		
 		Project p = fService.selectProject(pno); // 프로젝트 정보
 		Maker m = fService.selectMaker(pno); // 메이커 정보
@@ -271,4 +275,23 @@ public class FundingController {
 
 		return mv;
 	}
+	
+	
+	@RequestMapping("dopay.pay")
+	public ModelAndView payment(String pno, ModelAndView mv, HttpSession session) {
+		
+		Project p = fService.selectProject(pno); // 프로젝트 정보
+		Maker m = fService.selectMaker(pno); // 메이커 정보
+		//FundingList fl = fService.selectFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
+		ArrayList<Reward> rlist = fService.selectReward(pno); // 리워드 정보
+
+		mv.addObject("p", p);
+		mv.addObject("m", m);
+		//mv.addObject("fl", fl); // 넘어온 펀딩 내역
+		mv.addObject("rlist", rlist);
+		
+		mv.setViewName("funding/fundingPayConfirm");
+		return mv;
+	}
+	
 }

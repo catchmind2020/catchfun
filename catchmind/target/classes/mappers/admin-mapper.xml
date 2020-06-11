@@ -235,7 +235,7 @@
 	</update>
 	
 	<!-- 통계!! -->
-	
+	<!-- 
 	<select id="payList" parameterType="string" resultMap="adminPayTotalResultSet">
 		select p.PROJECT_NUMBER as PROJECT_NUMBER, REWARD_NO as REWARD_NO, p.PROJECT_NAME as PROJECT_NAME, m2.user_id as user_id, FUNDING_COST as FUNDING_COST, FUNDING_QUANTITY as FUNDING_QUANTITY, PROJECT_TARGET_AMOUNT as PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_NAME as CATEGORY_NAME,
 		(select sum(FUNDING_COST*FUNDING_QUANTITY)
@@ -253,8 +253,27 @@
 		join member m2 on (p.user_no = m2.user_no)
 		where f.PROJECT_NUMBER = #{pr} and <![CDATA[rownum <= 1]]>
 	</select>
+	 -->
+	 
+	<select id="adminProjectPayTotalCount" resultType="_int">
+		select count(sum(FUNDING_COST*FUNDING_QUANTITY))
+		from FUNDING_LIST f
+		join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		join member m on (f.user_no = m.user_no)
+		join member m2 on (p.user_no = m2.user_no)
+		group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_NAME
+	</select>
 	
-	
+	<select id="adminProjectPayTotalList" resultMap="adminPayTotalResultSet">
+		select sum(FUNDING_COST*FUNDING_QUANTITY) as total, p.PROJECT_NAME as PROJECT_NAME, p.PROJECT_NUMBER as PROJECT_NUMBER, m2.user_id as user_id, PROJECT_TARGET_AMOUNT as PROJECT_TARGET_AMOUNT,PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_NAME as CATEGORY_NAME
+		  from FUNDING_LIST f
+		  join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		  join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		  join member m on (f.user_no = m.user_no)
+		  join member m2 on (p.user_no = m2.user_no)
+		 group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_NAME
+	</select>
 	
 	<select id="prList" resultType="string">
 		select PROJECT_NUMBER

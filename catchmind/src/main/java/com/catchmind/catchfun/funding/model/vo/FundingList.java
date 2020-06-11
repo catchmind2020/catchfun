@@ -27,7 +27,10 @@ public class FundingList {
 	private String fundingStatus;	// 펀딩상태
 	private String paymentMethod;	// 결제방식
 	private int fundingSponsership;	// 후원금
+	private String shipMemo;		// 배송요청사항
 	
+	
+	// 추가 
 	private int sumPrice;			// 현재 펀딩 합계
 	private int sumSponsership;		// 현재 후원금 합계
 	private int personCount; 		// 현재 펀딩한 사람 수
@@ -36,5 +39,6 @@ public class FundingList {
 	private String fundingQuantity2;// 펀딩수량2 // int --> String
 	private String fundingTitle2;	// 펀딩 리워드 제목
 	private String fundingProduct2; // 리워드 내용
+	private int point;				// 사용될 포인트
 	
 }

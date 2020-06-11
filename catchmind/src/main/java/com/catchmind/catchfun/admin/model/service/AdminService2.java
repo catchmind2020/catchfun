@@ -107,6 +107,10 @@ public interface AdminService2 {
 	
 	int pjDelete(String projectNumber);
 	
+	int projectListCount();
+	
+	ArrayList<Project> projectList(PageInfo pi);
+	
 }
 
 

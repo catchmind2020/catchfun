@@ -182,6 +182,14 @@ public class AdminServiceImpl implements AdminService {
 	public int updateProjectStatus(PayTotal p) {
 		return aDao.updateProjectStatus(sqlSession, p);
 	}
+	@Override
+	public int adminProjectPayTotalCount() {
+		return aDao.adminProjectPayTotalCount(sqlSession);
+	}
+	@Override
+	public ArrayList<PayTotal> adminProjectPayTotalList(PageInfo pi) {
+		return aDao.adminProjectPayTotalList(sqlSession, pi);
+	}
 	
 	// 3. Category
 	

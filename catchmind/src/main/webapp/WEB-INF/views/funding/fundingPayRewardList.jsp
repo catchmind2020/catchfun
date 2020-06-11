@@ -219,7 +219,7 @@
                     <td colspan="2">
                         <p style="width:450px; text-align:left; font-size: 14px;">
                                                                후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?<br><br>
-                            <input type="number" name="fundingSponsership" id="spon" value="0" style="width:120px; height: 30px;" step="1000" min="0"> 원을 추가로 후원합니다.
+                            <input type="number" name="fundingSponsership" id="spon" value="0" style="width:120px; height: 30px; font-size:15px;" step="1000" min="0"> 원을 추가로 후원합니다.
                         </p>
                     </td>
                 </tr>
@@ -353,19 +353,34 @@
     		
 	    });
 	   
-	    	
+	    // 리워드 선택시 '다음으로'버튼 활성화
 	    $(function(){ 
 	    	
 	    	var numberOfChecked2 = parseInt($('input[name="rewardNo"]:checked').length);
 	    	
 	    	console.log(numberOfChecked2);
 	    	
+	    	$(".rcheck").click(function(){
+	    		
+				if($(this).is(":checked")){ 
+	    			
+	    			numberOfChecked2 += 1;
+
+	    		}else{
+	    			
+	    			numberOfChecked2 -= 1;
+	    		}
+	    	});
+	    	
+	    	numberOfChecked2 = parseInt($('input[name="rewardNo"]:checked').length);
+	    	console.log(numberOfChecked2);
+	    	
 	    	$("#next_btn").click(function(){ 
 	    		
-	    	
-	    		if( checkedSum2 == 0 ){
+	    		if( numberOfChecked2 == 0 ){
 	    			$("#next_btn").attr("type", "button" );
 					$("#next_btn").attr("onclick", "alert('리워드를 선택해주세요.')" );
+					alert('리워드를 선택해주세요.');
 	    		}else{
 	    			$("#next_btn").attr("type", "submit" );
 					$("#next_btn").attr("onclick", "" );
@@ -373,22 +388,9 @@
 	    		
 	    	});
 	    	
-/* 	   		// 선택한 체크박스가 1개 이상일 때 --> '다음으로' 버튼 활성화
-			if( checkedSum2 == 0 ){
-				
-				//var a = '<button type="button" id="next_btn" onclick="alert(' + '리워드를 선택해주세요.' + ');">다음단계</button>';
-				//$("#next_btn").html(a);
-				$("#next_btn").attr("type", "button" );
-				$("#next_btn").attr("onclick", "alert('리워드를 선택해주세요.')" );
-				
-			}else{
-				
-				//var b = '<button type="submit" id="next_btn" >다음단계</button>';
-				//$("#next_btn").html(b);
-				$("#next_btn").attr("type", "submit" );
-				$("#next_btn").attr("onclick", "" );
-			} */
 	    });
+	    
+	    
    		
 	</script>
 
