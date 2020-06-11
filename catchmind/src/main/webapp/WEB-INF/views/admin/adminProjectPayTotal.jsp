@@ -132,7 +132,7 @@
     			success:function(status){
     				if(status == "success"){
    						alert("발급성공!");
-    					location.href="<%=request.getContextPath()%>/adminProjectPayTotal.ad"
+    					location.href="<%=request.getContextPath()%>/adminProjectPayTotal.ad?currentPage=1"
 					}else{
 						alert("발급실패!");
 					}
