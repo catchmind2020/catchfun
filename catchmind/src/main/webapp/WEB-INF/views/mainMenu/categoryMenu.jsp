@@ -215,7 +215,6 @@ select:focus { outline:none; }
 	$(document).ready(function(){
 		
 		
-		
 		// 자바스크립트에서 주소(URL)상으로 넘어오는 인자(QueryString) 값을 쉽게 파싱해서 사용할 수있는 함수
 		function getUrlParams() {
 		    var params = {};
@@ -227,6 +226,14 @@ select:focus { outline:none; }
 
 		var cno = pp.cno;		// 카테고리넘버
 		var order = pp.order;	// 정렬값
+		// document.querySelector('#order').value = order;	
+		if (order == null){
+			$("#order").val("totalcost").prop("selected", true);
+		} else {
+			document.querySelector('#order').value = order;
+		}
+		
+		
 		
 		var page = 1;  //페이징과 같은 방식이라고 생각하면 된다. 
 /* 		var cno = $("#msgs").val();
@@ -352,7 +359,7 @@ select:focus { outline:none; }
                 // $(this).val().prop("selected", true); 
                 
                 if(category == ""){
-                	location.href = "category.mu?&order=" + order;
+                	location.href = "category.mu?order=" + order;
                 }else {
                 	location.href = "category.mu?cno=" + category + "&order=" + order;
                 	

@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     						<when test="order != null">
       							ORDER BY ${order} NULLS LAST
     						</when>
-    						<otherwise></otherwise>
+    						<otherwise>ORDER BY TOTALCOST DESC NULLS LAST</otherwise>
   						</choose>
 				)
 	</select>
@@ -130,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     										<when test="order != null">
       											ORDER BY ${order} NULLS LAST
     										</when>
-    										<otherwise></otherwise>
+    										<otherwise>ORDER BY TOTALCOST DESC NULLS LAST</otherwise>
   										</choose>
 								) A) 
 				WHERE RNUM BETWEEN #{param.startNum} AND #{param.endNum}
