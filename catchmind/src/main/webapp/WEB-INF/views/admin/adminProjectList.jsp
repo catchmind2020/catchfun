@@ -59,9 +59,10 @@
     <div id="projectList"> 
       <form action="proCategory.ad" method="POST">
         	<input type="hidden" name="currentPage" value="1">
-        	카테고리 조회<select name="proCategory">
-	        			<option value="1">승인요청</option>
-	                	<option value="2">수정요청</option>
+        	<select name="proCategory">
+        	            <option value="1">전체조회</option>
+	        			<option value="2">승인요청</option>
+	                	<option value="3">수정요청</option>
         		  </select> <button type="submit">조회</button><br>
         	</form>
         <br>
