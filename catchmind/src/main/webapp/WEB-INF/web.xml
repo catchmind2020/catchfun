@@ -9,6 +9,7 @@
 		<param-value>
 		/WEB-INF/spring/root-context.xml
 		/WEB-INF/spring/spring-security.xml
+		/WEB-INF/spring/appServlet/context-email.xml
 		</param-value>
 	</context-param>
 	
@@ -35,6 +36,7 @@
 		<url-pattern>*.bo</url-pattern>
 		<url-pattern>*.pa</url-pattern>
 		<url-pattern>*.mu</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
 	

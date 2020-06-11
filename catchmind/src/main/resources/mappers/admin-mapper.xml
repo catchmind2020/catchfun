@@ -44,7 +44,7 @@
 	   <!-- 위에 참고용 -->
 	   
   	<!-- 주혁시작 -->
-	   
+	
 	<resultMap id="adminNoticeResultSet" type="Notice">
 		<id column="NOTICE_NO" property="noticeNo"/>
 		<result column="USER_ID" property="userId"/>
@@ -104,7 +104,6 @@
 		<result column="CATEGORY_NAME" property="categoryName"/>
 		<result column="total" property="total"/>
 	</resultMap>
-	
 	
 	<select id="selectListCount" resultType="_int">
 		select count(*)
@@ -257,7 +256,6 @@
 		select PROJECT_NUMBER
 		  from PROJECT
 	</select>
-	
 	
   	<!-- 주혁끝 -->
   	

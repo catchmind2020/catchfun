@@ -28,7 +28,7 @@ import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller // 해당 이 클래스를 Controller 역할을 하는 빈으로 등록시키는 어노테이션
 public class MemberController {
@@ -426,8 +426,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberEnrollForm.me")
-	public String memberEnrollForm() {
-		return "member/memberEnrollForm";
+	public ModelAndView memberEnrollForm() {
+		
+		ModelAndView mv = new ModelAndView();
+		int ran = new Random().nextInt(900000) + 100000;
+		
+		System.out.println(ran);
+		mv.setViewName("member/memberEnrollForm");
+		mv.addObject("random", ran);
+		return mv;
+		
+		//return "member/memberEnrollForm";
 	}
 	
 	@RequestMapping("insert.me")
@@ -552,10 +561,8 @@ public class MemberController {
 			Question q = mService.messageView(qno);
 			mv.addObject("q", q);
 			mv.setViewName("member/messageView");
-
 		
 		return mv;
-		
 	}
 	
 	// 메세지 답변달기
@@ -566,29 +573,44 @@ public class MemberController {
 		mv.addObject("q", q);
 		mv.setViewName("member/sellerMessageAnswer");
 
-	
 	return mv;
-		
 		
 	}
 	// 메세지(질문) 삭제하기
 	@RequestMapping("delete.qu")
-	public String deleteMessage(String qno, Model model) { 
+	public String deleteMessage(String qno, Question q, Model model) { 
 		
 		int result = mService.deleteMessage(qno);
 		
 		
 		if(result > 0) {// 게시글 삭제 성공 
 
-			return "redirect:messageRest.me?userNo=M3&currentPage=1";
+			return "redirect:messageRest.me?userNo=" + q.getUserNo()
+			;//"redirect:messageRest.me?userNo=M3&currentPage=1";
 			
 		}else {	// 게시글 삭제 실패
 			
 			model.addAttribute("msg", "게시글 삭제 실패!!");
 			return "common/errorPage";
-			
 		}
+	}
+	
+	// (프로젝트관리자)답글 삭제하기
+	@ResponseBody
+	@RequestMapping("deleteAnswer.qu")
+	public String deleteAnswer(String qno, Model model) { 
+		
+		int result = mService.deleteAnswer(qno);
+		
+		if(result > 0) {// 게시글 삭제 성공 
 
+			//return "redirect:alist.qu?qno=" + qno;
+			return "success";
+		}else {	// 게시글 삭제 실패
+			
+			model.addAttribute("msg", "답변 삭제 실패!!");
+			return "common/errorPage";
+		}
 	}
 	
 	
@@ -661,13 +683,14 @@ public class MemberController {
 		Question list1 = mService.selectReplyList(qno);
 		System.out.println("화긴화긴 : " + list1);
 		
-		return new Gson().toJson(list1);
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(list1);
+		//return new Gson().toJson(list1);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="ainsert.qu")
 	public String insertReply(Question q, Model model) {
-		System.out.println(q);
+		System.out.println(q + "ㅇㅇㅇ");
 		int result = mService.insertReply(q);
 		System.out.println("asdasdsada : " + result);
 		

@@ -95,6 +95,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.insertReply", q);
 	}
 
+	public int deleteAnswer(SqlSessionTemplate sqlSession, String qno) {
+		return sqlSession.update("memberMapper.deleteAnswer", qno);
+	}
+
 
 
 
