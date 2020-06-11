@@ -599,7 +599,7 @@
 		                    <td align="right" style="padding-right:0px;"><button class="maker_button trigger">개설자문의</button> <button id="maker_ban_button" class="trigger2">개설자신고</button></td>
 		                    <td></td>
 		                    <td class="info_title" style="vertical-align: middle;">
-			                    <input type="button" class="side_button2" value="공유">&nbsp;&nbsp;
+			                    <input type="button" class="side_button2" value="공유">&nbsp;
 			                    <span id="zzimDir"></span>			                    
 		                    </td>
                 		</c:when>
