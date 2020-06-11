@@ -583,7 +583,9 @@ public class AdminController {
 		return changeName;
 		
 	}
+	
 	// 결재내역
+	/*
 	@RequestMapping("adminProjectPayTotal.ad")
 	public String adminProjectPayTotal(int currentPage, Model model) {
 		
@@ -603,9 +605,26 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		/* ArrayList<PayTotal>() list = aService.payList2(pr); */
-		
+	/*
 		model.addAttribute("payList", realPayList);
 		model.addAttribute("payListLength", prn.size());
+		
+		return "admin/adminProjectPayTotal";
+	}
+	*/
+	
+	@RequestMapping("adminProjectPayTotal.ad")
+	public String adminProjectPayTotal(int currentPage, Model model) {
+		
+		int listCount = aService.adminProjectPayTotalCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<PayTotal> payList = aService.adminProjectPayTotalList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("payListCount", listCount);
+		model.addAttribute("payList", payList);
 		
 		return "admin/adminProjectPayTotal";
 	}

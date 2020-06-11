@@ -410,7 +410,7 @@ public class AdminController2 {
 	@RequestMapping("adBlackUpdate.ad")
 	public String adBlackUpdate(Member m, Model model ) {
 		
-		int result = aService2.blackUpdate(m);
+		int result = aService2.black`(m);
 		
 		return "redirect:black.ad?currentPage=1";
 		

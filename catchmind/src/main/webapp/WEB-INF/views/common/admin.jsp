@@ -140,7 +140,7 @@
       </a>
       <div id="collapsediv2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="adminProjectPayTotal.ad">결제내역</a>
+          <a class="collapse-item" href="adminProjectPayTotal.ad?currentPage=1">결제내역</a>
           <a class="collapse-item" href="#">보류</a>
         </div>
       </div>
