@@ -410,7 +410,7 @@ public class AdminController2 {
 	@RequestMapping("adBlackUpdate.ad")
 	public String adBlackUpdate(Member m, Model model ) {
 		
-		int result = aService2.black`(m);
+		int result = aService2.blackUpdate(m);
 		
 		return "redirect:black.ad?currentPage=1";
 		
@@ -533,6 +533,19 @@ public class AdminController2 {
 		
 	}
 	
+	@RequestMapping("projectSearch.ad")
+	public String projectSearch(int currentPage, Model model, String proCategory) {
+		int listCount = aService2.projectSearchCount(proCategory);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> plist = aService2.projectSearch(pi, proCategory);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("plist", plist);
+		
+		return "admin/adminProjectSearch"; 
+	}
 	/**
 	 * 매출 통계 리스트페이지
 	 */

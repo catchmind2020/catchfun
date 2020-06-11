@@ -229,6 +229,18 @@ public class AdminDao2 {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper2.projectList", null, rowBounds);
 	}
+	
+	public int projectSearchCount(SqlSessionTemplate sqlSession, String proCategory) {
+		return sqlSession.selectOne("adminMapper2.projectSearchCount", proCategory);
+	}
+	
+	public ArrayList<Project> projectSearch(SqlSessionTemplate sqlSession, PageInfo pi, String proCategory){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.projectSearch", proCategory, rowBounds);
+	}
 }
 
 

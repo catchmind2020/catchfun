@@ -62,9 +62,9 @@
         			<select name="proCategory">
 	        			<option value="Y">승인요청</option>
 	                	<option value="B">수정요청</option>
-        		    </select> <button type="submit">조회</button><br>
+        		    </select> <button type="submit">조회</button>
+   	  <button type="button" onclick="location.href='projectList.ad?currentPage=1'">전체조회</button>
    	  </form>
-   	  
         <br>
         프로젝트 수 : <input type="text" style="border: unset;" value="${ pi.listCount }" readonly>
         <br>
@@ -112,7 +112,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
 		             </c:when>
 		             <c:otherwise>
-		            		<li class="page-item"><a class="page-link" href="proejectList.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            		<li class="page-item"><a class="page-link" href="projectSearch.ad?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		            
@@ -122,7 +122,7 @@
 		             		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 		             	</c:when>
 		             	<c:otherwise>
-		             		<li class="page-item"><a class="page-link" href="projectList.ad?currentPage=${ p }">${ p }</a></li>
+		             		<li class="page-item"><a class="page-link" href="projectSearch.ad?currentPage=${ p }">${ p }</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -132,7 +132,7 @@
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 		             </c:when>
 		             <c:otherwise>
-		             	<li class="page-item"><a class="page-link" href="projectList.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		             	<li class="page-item"><a class="page-link" href="projectSearch.ad?currentPage=${ pi.currentPage+1 }">Next</a></li>
 		            	</c:otherwise>
 		            </c:choose>
 		        </ul>

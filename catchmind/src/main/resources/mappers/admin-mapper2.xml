@@ -218,15 +218,31 @@
     	select count(*)
     	  from project p
     	  join member m on(p.user_no = m.user_no)
-    	 where p.project_status='Y' 
+    	 where p.project_status='Y' or p.project_status='B'
     </select>
     
     <select id="projectList" resultMap="adminProReportResultSet">
     	select *
     	  from project p
     	  join member m on(p.user_no = m.user_no)
-    	 where p.project_status='Y' 
+    	 where p.project_status='Y' or p.project_status='B'
     </select>
+    
+    <select id="projectSearchCount" resultType="_int" parameterType="string">
+    	select count(*)
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status=#{proCategory}
+    </select>
+    
+    <select id="projectSearch" resultMap="adminProReportResultSet" parameterType="string">
+    	select *
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status=#{proCategory}
+    </select>
+    
+    
     
 
 

@@ -111,6 +111,10 @@ public interface AdminService2 {
 	
 	ArrayList<Project> projectList(PageInfo pi);
 	
+	int projectSearchCount(String proCategory);
+	
+	ArrayList<Project> projectSearch(PageInfo pi, String proCategory);
+	
 }
 
 
