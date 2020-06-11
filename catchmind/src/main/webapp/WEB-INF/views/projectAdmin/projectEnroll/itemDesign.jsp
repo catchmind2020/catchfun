@@ -156,7 +156,7 @@
                 <div class="modal-body">
                 
                 
-                	<table style= "margin-top:6px;"
+                	<table style= "margin-top:6px;">
 							<tr>
 							<td class="blackmodal" width="400px" height="50px">아이템</td>
 							<td><input type="text" name="itemName" id="itemName" required></td>
