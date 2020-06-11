@@ -121,7 +121,7 @@ select:focus { outline:none; }
 				<div class="categoryList">
 				<br>
 				   				 
-   				 <div id="list" class="stList">
+   				<div id="list" class="stList">
 
 				</div>
 				<div id="busStopList" class="stList">
@@ -171,6 +171,9 @@ select:focus { outline:none; }
 		            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
 		                  $("#list").html(""); 
 		            }
+		            if (returnData.totCnt == 0) {
+		            	html += "<br><br><h4 align='center'>해당 검색 결과가 없습니다.</h4>";
+		            }
 		            if (returnData.startNum<=returnData.totCnt){
 		                if(data.length>0){
 		   					for(var i in data){
@@ -215,6 +218,16 @@ select:focus { outline:none; }
 		       }
 		    }) 
 		}
+		
+	    /* 펀딩프로젝트 상세보기 페이지 이동 */
+       	$(function(){
+    		$(".list").click(function(){
+    			var pno = $(this).children().eq(0).val();
+    			location.href = "detail.pro?pno=" + pno;
+    		});
+    		
+    	});
+	    
     });
     
 		</script>

@@ -18,11 +18,14 @@ public interface MainService {
 	ArrayList<Main> mainComingsoonList();
 
 	// 모든게시물 카운트
-	int getListCnt();
+	int getListCnt(String cno, String order);
 	
 	// 카테고리별 list ajax 스크롤페이징 서비스
 	ArrayList<Main> getList(String cno, String order, Param param);
 	
 	// menubar 검색용 서비스 (ajax 스크롤페이징 서비스)
 	ArrayList<Main> mainSearchAjax(String keyword, Param param); 
+	
+	// menubar 검색 게시물 카운트
+	int searchListCnt(String keyword);
 }
