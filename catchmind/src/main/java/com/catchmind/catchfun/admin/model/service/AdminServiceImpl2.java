@@ -108,6 +108,14 @@ public class AdminServiceImpl2 implements AdminService2 {
 	public int pjDelete(String projectNumber) {
 		return aDao2.pjDelete(sqlSession, projectNumber);
 	}
+	@Override
+	public int projectListCount() {
+		return aDao2.projectListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Project> projectList(PageInfo pi) {
+		return aDao2.projectList(sqlSession, pi);
+	}
 
 	/*
 	@Override
