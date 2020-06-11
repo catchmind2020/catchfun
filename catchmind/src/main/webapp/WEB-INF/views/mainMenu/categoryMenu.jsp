@@ -91,7 +91,7 @@ select {
 width: 120px;
 height:50px;
 padding: 8px;
-font-size:15px;
+font-size:15px !important;
 font-family: inherit;
 background: url('https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716') no-repeat 95% 50%;
 border-radius: 0px;
@@ -289,7 +289,18 @@ select:focus { outline:none; }
 									"<span class='dday'>" + 
 									"<img src='${pageContext.servletContext.contextPath}/resources/images/time.png'>&nbsp;" + data[i].projectDday + "일 남음</span></div>" +
 									"</div>";
-
+									
+									
+		   					    /* 펀딩프로젝트 상세보기 페이지 이동 */
+		   				       	$(function(){
+		   				    		$(".list").click(function(){
+		   				    			console.log("클릭");
+		   				    			var pno = $(this).children().eq(0).val();
+		   				    			location.href = "detail.pro?pno=" + pno;
+		   				    		});
+		   				    		
+		   				    	});
+		   					    
 		   					}
 		                } else {
 		                //데이터가 없을경우
@@ -350,18 +361,6 @@ select:focus { outline:none; }
             });
             
         });
-		 
-	    /* 펀딩프로젝트 상세보기 페이지 이동 */
-       	$(function(){
-    		$(".list").click(function(){
-    			console.log("클릭");
-    			var pno = $(this).children().eq(0).val();
-    			location.href = "detail.pro?pno=" + pno;
-    		});
-    		
-    	});
-	    
-	    
 		
 	});
 	</script>

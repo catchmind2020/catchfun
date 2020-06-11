@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mainNoticeMapper">
+
+	<resultMap id="mainNoticeResultSet" type="MainNotice">
+		<id column="NOTICE_NO" property="noticeNo"/>
+		<result column="USER_NO" property="noticeWriter"/>
+		<result column="NOTICE_TITLE" property="noticeTitle"/>
+		<result column="NOTICE_CONTENT" property="noticeContent"/>
+		<result column="NOTICE_DATE" property="noticeDate"/>
+		<result column="NOTICE_COUNT" property="noticeCount"/>
+		<result column="NOTICE_STATUS" property="noticeStatus"/>
+	</resultMap>
+	
+	<resultMap id="MainQuesionResultSet" type="MainQuesion">
+		<id column="A_QUESTION_NO" property="cqNo"/>
+		<result column="USER_NAME" property="cqWriter"/>
+		<result column="QUESTION_TYPE" property="cqType"/>
+		<result column="QUESTION_TITLE" property="cqTitle"/>
+		<result column="QUESTION_CONTENT" property="cqContent"/>
+		<result column="QUESTION_DATE" property="cqDate"/>
+		<result column="QUESTION_YN" property="cqYn"/>
+		<result column="QUESTION_STATUS" property="cqStatus"/>
+		<result column="ANS_TITLE" property="ansTitle"/>
+		<result column="ANS_CONTENT" property="ansContent"/>
+		<result column="ANS_DATE" property="ansDate"/>
+	</resultMap>
+
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM NOTICE_TEMP
+		 WHERE NOTICE_STATUS = 'N'
+	</select>
+	
+	<select id="selectList" resultMap="mainNoticeResultSet">
+		SELECT * 
+		  FROM NOTICE_TEMP
+		 WHERE NOTICE_STATUS = 'N'
+		 ORDER BY NOTICE_NO DESC
+	</select>
+
+	
+	<update id="increaseCount" parameterType="string">
+		UPDATE NOTICE_TEMP
+		   SET NOTICE_COUNT = NOTICE_COUNT + 1
+		 WHERE NOTICE_NO = #{nno} AND NOTICE_STATUS = 'N'
+	</update>
+	
+	<select id="selectNotice" parameterType="string" resultMap="mainNoticeResultSet">
+		SELECT *
+		  FROM NOTICE_TEMP
+		 WHERE NOTICE_no = #{nno}
+	</select>
+	
+	
+	
+	
+	
+	<!-- CatchfunQuesion -->
+	
+	
+	<select id="cqselectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM PERSON_QUESTION
+		 WHERE QUESTION_STATUS = 'N'
+	</select>
+	
+	<select id="cqselectList" resultMap="MainQuesionResultSet">
+		SELECT * 
+		  FROM PERSON_QUESTION
+		 WHERE QUESTION_STATUS = 'N'
+		 ORDER BY A_QUESTION_NO DESC
+	</select>
+	
+	<select id="selectCatchfunQu" parameterType="string" resultMap="MainQuesionResultSet">
+		SELECT *
+		  FROM PERSON_QUESTION
+		 WHERE A_QUESTION_NO = #{qno}
+	</select>
+	
+	<insert id="insertCatchfunQuestion" parameterType="MainQuesion">
+		INSERT INTO PERSON_QUESTION
+		values(seq_bno.nextval, #{boardTitle}, #{boardWriter}, #{boardContent}, 
+			   #{originName}, #{changeName}, default, default, default)
+	</insert>
+	
+	<update id="deleteCatchfunQuestion" parameterType="string">
+		UPDATE PERSON_QUESTION
+		   SET QUESTION_STATUS='Y'
+		 WHERE A_QUESTION_NO = #{qno}
+	</update>
+	
+</mapper>
