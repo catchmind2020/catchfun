@@ -42,9 +42,9 @@
 					<tr>
 						<th width="200px">프로젝트명</th>
 						<th width="150px">등록자ID</th>
-						<th width="150px">목표액</th>
+						<th width="130px">목표액</th>
 						<th width="150px">펀딩액(달성률)</th>
-						<th width="100px">종료일</th>
+						<th width="150px">종료일</th>
 						<th width="100px">카테고리</th>
 						<th width="150px">포인트 예상금액(93%)</th>
 						<th width="150px">포인트 발급 상태</th>
@@ -53,7 +53,11 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${ payList }" var="p">
+						
 		                    <tr>
+		                    	<td style="display: none"><fmt:formatNumber value="${ p.total * 0.93 }" pattern="###" /></td>
+		                    	<td style="display: none"><fmt:formatNumber value="${ p.total * 0.07 }" pattern="###" /></td>
+		                    	<td style="display: none">${p.projectNumber}</td>
 								<td>${ p.projectName }</td>
 								<td>${ p.userId }</td>
 								<td><fmt:formatNumber value="${ p.projectTargetAmount }" pattern="#,###" />원</td>
@@ -61,14 +65,54 @@
 								<td>${ p.projectFinishDate }</td>
 								<td>${ p.categoryName }</td>
 								<td><fmt:formatNumber value="${ p.total * 0.93 }" pattern="#,###" />원</td>
-								<td>미발급 (컬럼추가예정)</td>
-								<td><button type="button">발급하기</button></td>
+								<c:choose>
+									<c:when test="${ p.totalStatus eq 'N'}">
+										<td>미발급</td>
+										<td><button type="button" class="mBtn">발급하기</button></td>
+									</c:when>
+									<c:otherwise>
+										<td>발급</td>
+										<td><button type="button" class="mBtn" disabled="disabled">발급하기</button></td>
+									</c:otherwise>
+								</c:choose>
 		                    </tr>
+	                    
                     </c:forEach>
 				</tbody>
 			</table>
 		</center>
 	</div>
 
+	<script>
+		$(".mBtn").click(function(){
+			var projectPay = $(this).parent().parent().children().eq(0).text();
+			var adminPay = $(this).parent().parent().children().eq(1).text();
+			var projectNumber = $(this).parent().parent().children().eq(2).text();
+			var projectId = $(this).parent().parent().children().eq(4).text();
+			
+			/* ajax 시작 */
+			$.ajax({
+    			url:"adminProjectPayUpdate.ad",
+    			data:{projectPay:projectPay,
+    				  adminPay:adminPay,
+    				  projectNumber:projectNumber,
+    				  userId:projectId},
+    			success:function(status){
+    				if(status == "success"){
+   						alert("발급성공!");
+    					location.href="<%=request.getContextPath()%>/adminProjectPayTotal.ad"
+					}else{
+						alert("발급실패!");
+					}
+    			},error:function(){
+    				console.log("Pay지급 ajax 통신실패!!");	
+    			}
+    		});
+			
+			/* ajax 끝 */
+			
+		});
+	</script>
+	
 </body>
 </html>

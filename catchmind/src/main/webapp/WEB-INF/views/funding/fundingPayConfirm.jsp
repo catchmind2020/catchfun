@@ -203,7 +203,7 @@
 
 
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px; ">결제 정보</b> <button class="btn">결제 정보 변경</button>
+            <b style="font-size: 20px; ">결제 정보</b>&nbsp;&nbsp;&nbsp;<button class="btn">결제 정보 변경</button>
         </div>
         
 
@@ -221,7 +221,7 @@
 
 
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px; ">리워드 배송지</b> <button class="btn">리워드 배송지 변경</button>
+            <b style="font-size: 20px; ">리워드 배송지</b>&nbsp;&nbsp;&nbsp;<button class="btn">리워드 배송지 변경</button>
         </div>
 
         <table id="payAddress">

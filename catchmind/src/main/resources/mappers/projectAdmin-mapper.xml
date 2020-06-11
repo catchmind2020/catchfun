@@ -269,7 +269,8 @@
 		NEWS_TITLE=#{newsTitle} ,
 		NEWS_CONTENT=#{newsContent}
 
-		where NEWS_STATUS='N' and NEWS_NO=#{newsNo}
+		where
+		NEWS_STATUS='N' and NEWS_NO=#{newsNo}
 	</update>
 
 
@@ -300,7 +301,8 @@
 		resultType="_int">
 		select count(*)
 		from FUNDING_LIST
-		where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		where FUNDING_STATUS='N'
+		and PROJECT_NUMBER=#{projectNo}
 
 	</select>
 
@@ -308,7 +310,8 @@
 		resultType="_int">
 		select count(*)
 		from NEWS
-		where NEWS_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		where NEWS_STATUS='N' and
+		PROJECT_NUMBER=#{projectNo}
 
 	</select>
 
@@ -319,17 +322,30 @@
 		from FUNDING_LIST
 		JOIN REWARD R USING(PROJECT_NUMBER)
 		where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
-		order by FUNDING_DATE desc
+		order by
+		FUNDING_DATE desc
 	</select>
 
 	<select id="selectNewsList" parameterType="string"
 		resultMap="newsResultSet">
 		select *
 		from NEWS
-		JOIN REWARD R USING(PROJECT_NUMBER)
+
 		where NEWS_STATUS='N' and PROJECT_NUMBER=#{projectNo}
-		order by NEWS_DATE desc
+		order by NEWS_DATE
+		desc
 	</select>
+
+	<select id="selectProjectList" parameterType="string"
+		resultMap="projectResultSet">
+		select *
+		from PROJECT
+
+		where  USER_NO=#{userNo}
+		order by PROJECT_DATE
+		desc
+	</select>
+
 
 	<update id="updateMaker2" parameterType="Maker2">
 		update PROJECT_MAKER
@@ -376,10 +392,16 @@
 		values('I'||SEQ_INO.nextval, #{itemName}, #{projectNo}, 'S',
 		#{itemContent})
 	</insert>
+	<insert id="insertProject" parameterType="Project2">
+		insert into PROJECT
+		values('PR'||SEQ_PRNO.nextval, 'C1', #{userNo},
+		#{projectName},default,default,default,default,default,default,default,default,default,default)
+	</insert>
+
 	<insert id="insertFile" parameterType="Project2">
 		insert into attachment
 		values( 'AT'||SEQ_ATNO.nextval, #{projectNo}, #{originName},
-		#{changeName},#{projectNo},sysdate,default,#{projectNo})
+		#{changeName},'resources/images',sysdate,default,#{projectNo})
 	</insert>
 	<update id="updateFile" parameterType="Project2">
 		update ATTACHMENT
@@ -389,7 +411,6 @@
 		where
 		REF_NO=#{projectNo}
 	</update>
-
 
 	<insert id="insertReward" parameterType="Reward">
 		insert into REWARD

@@ -119,7 +119,6 @@
             <a class="collapse-item" href="<%=contextPath%>/fund.pa?currentPage=1">펀딩현황</a>
             <a class="collapse-item" href="<%=contextPath%>/news.pa?currentPage=1">새소식</a>
              
-            <a class="collapse-item" href="<%=contextPath%>/adList.brno?currentPage=1">가맹점 공지사항</a> 
          	
           </div>
         </div>
@@ -192,7 +191,7 @@
           <!-- Topbar button logout-->
           <ul class="navbar-nav ml-auto">
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
+            <li class="nav-item dropdown  no-arrow">
               <button class="btn btn-primary" onclick="location.href='<%=contextPath%>/logout.me'">logout</button>
             </li>
             

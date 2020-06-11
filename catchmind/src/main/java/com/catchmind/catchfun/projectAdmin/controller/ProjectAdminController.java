@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
+import com.catchmind.catchfun.member.model.vo.Member;
 import com.catchmind.catchfun.projectAdmin.model.service.ProjectAdminService;
 import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
@@ -89,7 +90,7 @@ public class ProjectAdminController {
 	@RequestMapping("fund.pa")
 	public ModelAndView selectfund(HttpSession session, ModelAndView mv, int currentPage, Model model) {
 
-		Project project = (Project) session.getAttribute("project");
+		Project project = (Project) session.getAttribute("projectUser");
 
 		FundSum fundSum = paService.fundSum(project.getProjectNo());
 		FundSum todayfundSum = paService.todayfundSum(project.getProjectNo());
@@ -129,23 +130,24 @@ public class ProjectAdminController {
 	@RequestMapping("news.pa")
 	public ModelAndView selectNewsList(HttpSession session, ModelAndView mv, int currentPage, Model model) {
 
-		Project project = (Project) session.getAttribute("project");
+		Project project = (Project) session.getAttribute("projectUser");
 
-
+	
 		int listCount = paService.selectNewsListCount(project.getProjectNo());
 		// 카운트 24 함수 만들어서 추가하면 끝
+		
+		
+
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 
 		
 		
 		ArrayList<News> newsList = paService.selectNewsList(pi, project.getProjectNo());
 
-		
-		
-	
+		mv.addObject("pi", pi);
+		mv.addObject("newsList", newsList);
 
-		model.addAttribute("pi", pi);
-		model.addAttribute("newsList", newsList);
+		System.out.println(newsList);
 		
 		mv.setViewName("projectAdmin/news/newsList");
 
@@ -159,7 +161,7 @@ public class ProjectAdminController {
 
 	@RequestMapping("basic.pa")
 	public String basicInformation() {
-		return "projectAdmin/projectEnroll/basicInformation";
+		return "projectAdmin/projectEnroll/projectList";
 	}
 
 	@RequestMapping("story.pa")
@@ -180,6 +182,11 @@ public class ProjectAdminController {
 	@RequestMapping("newsEnroll.pa")
 	public String newsEnroll() {
 		return "projectAdmin/news/newsEnroll";
+	}
+	
+	@RequestMapping("projectEnroll.pa")
+	public String projectEnroll() {
+		return "projectAdmin/projectEnroll/projectEnroll";
 	}
 
 	@RequestMapping("home.pa")
@@ -215,6 +222,51 @@ public class ProjectAdminController {
 		return mv;
 
 	}
+	
+	@RequestMapping("insertProject.pa")
+	public ModelAndView insertProject(Project project, ModelAndView mv, HttpSession session) {
+		
+	
+		
+		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
+		
+		
+		project.setUserNo(member.getUserNo()); 
+
+		int result = paService.insertProject(project); 
+
+		if (result > 0) {
+
+			mv.setViewName("redirect:projectList.pa");
+
+		} else {
+
+			System.out.println("실패");
+			
+		}
+		return mv;
+
+	}
+	
+	
+	@RequestMapping("projectList.pa")
+	public String selectProjectList(Model model, HttpSession session) {
+
+	
+		
+		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
+		
+		
+		ArrayList<Project> projectList = paService.selectProjectList(member.getUserNo());
+
+
+
+		session.setAttribute("projectList", projectList);
+
+		return "projectAdmin/projectEnroll/projectList";
+	}
+	
+	
 
 	@RequestMapping("insertItem.pa")
 	public String insertItem(Item item, Model model, HttpSession session) {
@@ -259,6 +311,9 @@ public class ProjectAdminController {
 		}
 
 	}
+	
+	
+	
 	@RequestMapping("newDetail.pa")
 	public ModelAndView selectNews(String nno, ModelAndView mv,HttpSession session) {
 		
@@ -313,16 +368,16 @@ public class ProjectAdminController {
 	}
 
 	@RequestMapping("ptest.pa")
-	public ModelAndView ploginMember(ModelAndView mv, HttpSession session, Model model) {
+	public ModelAndView ploginMember(Project project, ModelAndView mv, HttpSession session, Model model) {
 
-		Project projectUser = new Project("PR12", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); // 아이디만을 가지고
+		//Project projectUser = new Project("PR13", "", "", "", "", "", "", "", "", "", "", "", "", "", ""); // 아이디만을 가지고
 																											// 조회한 결과
 
-		session.setAttribute("projectUser", projectUser);
-		System.out.println(projectUser);
+		session.setAttribute("projectUser", project);
+		System.out.println(project);
 
-		home(model, session, mv);
-		mv.setViewName("projectAdmin/projectEnroll/home");
+		mv.setViewName("redirect:home.pa");
+		
 
 		return mv;
 	}

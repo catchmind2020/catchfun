@@ -163,7 +163,7 @@
 										
 									</div>
 								</c:when>
-								<c:when test="${ !empty project.projectStatus }">
+								<c:when test="${ !empty project.projectContent }">
 								작성완료&nbsp;&nbsp;&nbsp;
 									<div class="col-auto">
 

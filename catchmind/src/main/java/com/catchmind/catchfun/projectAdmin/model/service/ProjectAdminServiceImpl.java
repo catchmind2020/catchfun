@@ -248,6 +248,18 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 		return paDao.selectCategoryList(sqlSession);
 	}
 
+	@Override
+	public int insertProject(Project project) {
+		// TODO Auto-generated method stub
+		return paDao.insertProject(sqlSession, project);
+	}
+
+	@Override
+	public ArrayList<Project> selectProjectList(String projectNo) {
+		// TODO Auto-generated method stub
+		return paDao.selectProjectList(sqlSession,projectNo);
+	}
+
 
 
 

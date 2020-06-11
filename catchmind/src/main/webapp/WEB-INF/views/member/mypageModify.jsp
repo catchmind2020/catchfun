@@ -44,16 +44,7 @@ body, input, textarea, select, button, table {
 	line-height: 1.5;
 }
 
-/* 로그인 부분*/
-.login {
-	position: relative;
-	bottom: -6px;
-	display: table-cell;
-	font-size: 15px;
-	color: gray;
-	padding-left: 220px;
-	padding-right: 0px;
-}
+
 /*회원정보수정페이지*/
 #enrollmodify {
 	width: 1000px;

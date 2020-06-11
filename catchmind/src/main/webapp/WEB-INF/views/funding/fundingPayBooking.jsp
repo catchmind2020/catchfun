@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <title>Document</title>
 </head>
 <style>
@@ -112,6 +113,7 @@
         border-radius: 5px;
         color: white;
         border: 1px solid rgb(31, 205, 211);
+        cursor: pointer;
     }
     #cancel_btn{
         width: 150px;
@@ -121,8 +123,17 @@
         border-radius: 5px;
         color: white;
         border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
     }
     .btn{
+        height: 30px;
+        background-color:  rgb(190, 190, 190);
+        border-radius: 2px;
+        border: 1px solid rgb(202, 202, 202);
+        color: white;
+        cursor: pointer;
+    }
+    #addressBtn{
         height: 30px;
         background-color:  rgb(190, 190, 190);
         border-radius: 2px;
@@ -138,6 +149,9 @@
 	<br>
     
     <div id="outer">
+    
+   <%--  <form action="dopay.pay?pno=${p.projectNumber}" method="post">  --%>
+    
         <table id="rewardArea">
 
             <thead>
@@ -195,58 +209,212 @@
                 <td class="payContent"><fmt:formatNumber value="${ sum }" pattern="#,###" />월</td>
             </tr>
             <tr>
-                <td>후원금</td>
-                <td class="payContent"><fmt:formatNumber value="${ spon }" pattern="#,###" />원</td>
-            </tr>
-            <tr>
                 <td>배송비</td>
                 <td class="payContent">3,000원</td>
             </tr>
             <tr>
+                <td>후원금</td>
+                <td class="payContent"><fmt:formatNumber value="${ spon }" pattern="#,###" />원</td>
+            </tr>
+            <tr>
                 <td>포인트 사용</td>
                 <td class="payContent">
-                    <input type="number" style="width:120px;" step="1000"><br>
-                    <input type="checkbox" ><span style="font-size: 12px;">모든 포인트 사용</span>
+                    <input type="number" style="width:120px; height: 30px; font-size: 15px;" step="1000" min="0" max="${ loginUser.point }" value="0" id="pointArea" name="point"><br>
+                    <input type="checkbox" id="allPoint"><span style="font-size: 12px;">모든 포인트 사용</span>
                 </td>
             </tr>
             <tr>
                 <th>최종결제금액</th>
-                <th class="payContent" style="font-size: 20px; color:rgb(31, 205, 211)">36,000원</th>
+                <th class="payContent" style="font-size: 20px; color:rgb(31, 205, 211)"><b id="finalSum">0</b>원</th>
             </tr>
         </table>
         <br><br>
 
+
+		<!-- 배송지 -->
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px;">리워드 배송지</b>
+            <b style="font-size: 20px;">리워드 배송지</b>&nbsp;&nbsp;&nbsp;<button id="addressBtn">주소변경</button>
         </div>
         
         <!-- <h2 style="text-align: left;">리워드 배송지</h2> -->
         <table id="payAddress">
             <tr>
                 <td width="200px">이름</td>
-                <td><input type="text"></td>
+                <%-- <td><input type="text" value="${ loginUser.userName }"></td> --%>
+                <td><b>${ loginUser.userName }</b></td>
             </tr>
             <tr>
                 <td width="200px">휴대폰 번호</td>
-                <td><input type="text"></td>
+                <%-- <td><input type="text" value="${ loginUser.phone }"></td> --%>
+                <td><b>${ loginUser.phone }</b></td>
             </tr>
             <tr>
                 <td width="200px">주소</td>
-                <td><button class="btn">우편번호 검색</button><br><input type="text"></td>
+                <%-- <td><button class="btn">우편번호 검색</button><br><input type="text" value="${ loginUser.address }"></td> --%>
+            	<td><b>${ loginUser.address }</b></td>
             </tr>
             <tr>
-                <td width="200px">배송시 요청사항 (선택)</td>
-                <td><textarea cols="55" rows="3"style="resize: none;"></textarea></td>
+                <td width="200px">배송시 요청사항<br>(선택)</td>
+                <td><textarea cols="50" rows="3" style="resize: none; font-size:15px;" id="ship_memo" name="shipMemo"></textarea></td>
             </tr>
         </table>
 
-
-
         <br>
-        <button type="submit" id="next_btn">결제하기</button>
-        <button type="reset" id="cancel_btn">취소</button>
+        
+        
+        <form id="resultForm" action="dopay.pay" method="post">
+        	<!-- 결제 테이블에서 쓸 정보-->
+			<input hidden id="payNo" name="payNo" value="">
+			<input hidden name="userId" value= "${ loginUser.userId }">
+			<input hidden name="payName" value="${ loginUser.userName }">
+			<input hidden name="payEmail" value="${ loginUser.email }">
+			<input hidden name="payPhone" value="${ loginUser.phone }">
+			<input hidden id="reserveNo" name="reserveNo" value="">
+	 
+ 
+	        <!-- <button type="submit" id="next_btn">결제하기</button> -->
+	        <button type="button" id="next_btn">결제하기</button>
+	        <button type="reset" id="cancel_btn">취소</button>
+        </form>
+        
+        <!-- </form> -->
     </div>
     <br><br><br><br><br><br>
+    
+    <input type="hidden" id="sum" value=${ sum }> 
+    <input type="hidden" id="spon" value=${ spon }>
+    <input type="hidden" id="point" value=${ loginUser.point }> 
+
+
+<script>
+
+	$(function(){ 
+				
+		var sum = parseInt($("#sum").val()); 		// 총액
+		var spon = parseInt($("#spon").val()); 	 	// 후원금
+		var fSum = sum + spon + 3000;				// 총액 + 후원금 + 배송비
+		var finalSum = 0;							// 사용할 포인트
+		//console.log(finalSum);
+		$("#finalSum").text(fSum);
+		
+		// 포인트 input 숫자에 따라 결제총합 변경
+		$("#pointArea").bind('click keyup', function(){
+			
+			$("#allPoint").prop("checked", false); // 체크박스 해지
+			var usePoint = $("#pointArea").val();
+			
+			finalSum = fSum - usePoint;
+			$("#finalSum").text(finalSum);
+		});
+		
+		
+		var point = parseInt($("#point").val());
+		
+		// 체크박스 클릭시, 모든 포인트 사용
+		$("#allPoint").click(function(){
+			
+ 			if($(this).is(":checked")){ 
+ 				
+ 				finalSum = fSum - point;
+			 	$("#pointArea").val(point);
+			 	$("#finalSum").text(finalSum);
+			 	
+			 	$("#pointArea").bind('click keyup', function(){
+			 		$("#allPoint").attr("checked", false);
+			 	});
+			 	
+			}else{
+				
+				finalSum = fSum;
+				$("#pointArea").val(0);
+				$("#finalSum").text(finalSum);
+			} 			 
+		});
+    	
+
+	});
+	
+/*     // 예매하기 : 희영
+	$(function paymentStart(){
+		
+		if( $("#point").val() != null) { // 로그인이 되어있으면
+			
+			var result = window.open("payment.show?pno=", "payment", "width = 870, height = 520, top = 100, left= 200, location = no");
+			
+		} 
+    }); */
+
+    
+    
+ 	// 결제 api
+	var IMP = window.IMP;
+	IMP.init('imp76288443'); 
+	
+	
+	
+	$('#next_btn').click(function(){
+		
+		IMP.request_pay({
+	   	    pg : 'inicis', // version 1.1.0부터 지원.				// 결제방식
+	   	    pay_method : 'card',								// 결제수단
+	   	    merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
+	   	    name : '${ p.projectName }',						// 주문명 // order 테이블에 들어갈 주문명 혹은 주문 번호
+	   	    amount : 100,										// 결제금액
+	   	    buyer_email : '${ loginUser.email }',				// 구매자 email
+	   	    buyer_name : '${ loginUser.userName }',				// 구매자 이름
+	   	    buyer_tel : '${ loginUser.phone}',					// 구매자 전화번호
+	   	    buyer_addr : '${ loginUser.address}',				// 구매자 주소
+	   	    buyer_postcode : '${ loginUser.addressNum }',		// 구매자 우편번호
+	   	    m_redirect_url : 'dopay.pay'  						// 결제 완료 후 보낼 컨트롤러의 메소드명
+	   	    
+   	}, function(rsp) {
+   		
+   	    if ( rsp.success ) {	// 성공시
+   	        var msg = '결제가 완료되었습니다.';
+   	        msg += '고유ID : ' + rsp.imp_uid;
+   	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+   	        msg += '결제 금액 : ' + rsp.paid_amount;
+   	        msg += '카드 승인번호 : ' + rsp.apply_num;
+   	        
+   	        $('#payNo').val(rsp.imp_uid);
+   	        $('#reserveNo').val('R-' +  rsp.imp_uid);
+   	        
+   	        // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
+   	        $("#resultForm").submit();
+   	        
+   	    } else {	// 실패시
+   	        var msg = '결제에 실패하였습니다.';
+   	        msg += '에러내용 : ' + rsp.error_msg;
+   	    }
+   	    alert(msg);
+   	});
+	});
+
+	
+/* 	//리셋버튼   
+   $('#reset').click(function(){
+       $('.lavel').removeClass('clickseat');
+       $("#seat").html("");
+       $("#price").html("");
+   });
+
+
+   // 결제방식선택 폼체인지
+   $('input:radio[name=payment]').click(function(){ 
+       if($(this).val() == "creditcard"){
+           $(".detail").children().removeClass("displayOn");
+           $("#creditcard").addClass("displayOn");
+       } else if($(this).val() == "bankbook"){
+           $(".detail").children().removeClass("displayOn");
+           $("#bankbook").addClass("displayOn");
+       } else if($(this).val() == "kakao"){
+           $(".detail").children().removeClass("displayOn");
+           $("#kakao").addClass("displayOn");
+       }
+   }); */
+
+</script>
+
 
 </body>
 </html>
