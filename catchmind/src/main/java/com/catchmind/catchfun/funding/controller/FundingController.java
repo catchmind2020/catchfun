@@ -47,7 +47,6 @@ public class FundingController {
 		// mv.addObject("rCountlist", rCountlist);
 		
 		mv.addObject("nlist", nlist);
-		
 
 		mv.setViewName("funding/fundingDetail");
 
@@ -182,7 +181,6 @@ public class FundingController {
 			return "add";
 		}
 		
-		
 		/*
 		int result = fService.insertWishlist(w);
 		//System.out.println(w);
@@ -190,9 +188,6 @@ public class FundingController {
 		if(result > 0) { 
 			
 			session.setAttribute("msg", "찜하기 추가 완료. 마이페이지에서 확인해보세요.");
-			
-			
-			
 			
 		}else {
 			
@@ -205,7 +200,6 @@ public class FundingController {
 		*/
 		
 	}
-	
 	
 	@RequestMapping("rewardList.pay")
 	public ModelAndView selectReward(String pno, String rno, ModelAndView mv) {
