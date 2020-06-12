@@ -178,7 +178,7 @@
                         <div class="rewardCheckbox" style="margin-top:50px">
                         
                         	<c:forEach items="${ flList }" var ="fl">
-                        		<div><b>${ fl.fundingTitle2 } (${ fl.fundingProduct2 })</b><span><fmt:formatNumber value="${ fl.fundingCost2 }" pattern="#,###" />원 (수량 ${ fl.fundingQuantity2 }개)</span></div>
+                        		<div><b>${ fl.fundingTitle2 } (${ fl.fundingProduct })</b><span><fmt:formatNumber value="${ fl.fundingCost }" pattern="#,###" />원 (수량 ${ fl.fundingQuantity }개)</span></div>
                             	<hr>
                         	</c:forEach>
                         	
@@ -202,11 +202,14 @@
             </tbody>
         </table>
         <br>
-
+        
+		<form id="resultForm" action="dopay.pay?pno=${p.projectNumber}" method="post">
+		
+		
         <table id="payArea">
             <tr>
                 <td>펀딩금액</td>
-                <td class="payContent"><fmt:formatNumber value="${ sum }" pattern="#,###" />월</td>
+                <td class="payContent"><fmt:formatNumber value="${ sum }" pattern="#,###" />원</td>
             </tr>
             <tr>
                 <td>배송비</td>
@@ -219,7 +222,7 @@
             <tr>
                 <td>포인트 사용</td>
                 <td class="payContent">
-                    <input type="number" style="width:120px; height: 30px; font-size: 15px;" step="1000" min="0" max="${ loginUser.point }" value="0" id="pointArea" name="point"><br>
+                    <input type="number" style="width:120px; height: 30px; font-size: 15px;" step="1000" min="0" max="${ loginUser.point }" value="0" id="pointArea" name="usePoint"><br>
                     <input type="checkbox" id="allPoint"><span style="font-size: 12px;">모든 포인트 사용</span>
                 </td>
             </tr>
@@ -233,7 +236,7 @@
 
 		<!-- 배송지 -->
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px;">리워드 배송지</b>&nbsp;&nbsp;&nbsp;<button id="addressBtn">주소변경</button>
+            <b style="font-size: 20px;">리워드 배송지</b>&nbsp;&nbsp;<button id="addressBtn">주소변경</button>
         </div>
         
         <!-- <h2 style="text-align: left;">리워드 배송지</h2> -->
@@ -262,28 +265,29 @@
         <br>
         
         
-        <form id="resultForm" action="dopay.pay" method="post">
+        
         	<!-- 결제 테이블에서 쓸 정보-->
-			<input hidden id="payNo" name="payNo" value="">
-			<input hidden name="userId" value= "${ loginUser.userId }">
+			<input hidden id="payNo" name="paymentMethod" value="">
+			<%-- <input hidden name="userId" value= "${ loginUser.userId }">
 			<input hidden name="payName" value="${ loginUser.userName }">
 			<input hidden name="payEmail" value="${ loginUser.email }">
-			<input hidden name="payPhone" value="${ loginUser.phone }">
-			<input hidden id="reserveNo" name="reserveNo" value="">
-	 
- 
+			<input hidden name="payPhone" value="${ loginUser.phone }"> --%>
+			<input hidden name="finalSum" value="0" id="fs">
+	 		<input hidden name="pno" value="${ p.projectNumber }">
+		    <input type="hidden" id="sum" value=${ sum }> 
+		    <input type="hidden" id="spon" value=${ spon }>
+		    <input type="hidden" name="currentPoint" id="point" value=${ loginUser.point }> 
+		    
+		    
 	        <!-- <button type="submit" id="next_btn">결제하기</button> -->
-	        <button type="button" id="next_btn">결제하기</button>
+	        <button type="submit" id="next_btn">결제하기</button>
 	        <button type="reset" id="cancel_btn">취소</button>
         </form>
         
         <!-- </form> -->
     </div>
     <br><br><br><br><br><br>
-    
-    <input type="hidden" id="sum" value=${ sum }> 
-    <input type="hidden" id="spon" value=${ spon }>
-    <input type="hidden" id="point" value=${ loginUser.point }> 
+   
 
 
 <script>
@@ -293,9 +297,11 @@
 		var sum = parseInt($("#sum").val()); 		// 총액
 		var spon = parseInt($("#spon").val()); 	 	// 후원금
 		var fSum = sum + spon + 3000;				// 총액 + 후원금 + 배송비
-		var finalSum = 0;							// 사용할 포인트
+		var finalSum = 0;		
+		// 사용할 포인트
 		//console.log(finalSum);
 		$("#finalSum").text(fSum);
+		$("#fs").val(fSum);
 		
 		// 포인트 input 숫자에 따라 결제총합 변경
 		$("#pointArea").bind('click keyup', function(){
@@ -305,6 +311,7 @@
 			
 			finalSum = fSum - usePoint;
 			$("#finalSum").text(finalSum);
+			$("#fs").val(finalSum);
 		});
 		
 		
@@ -318,6 +325,7 @@
  				finalSum = fSum - point;
 			 	$("#pointArea").val(point);
 			 	$("#finalSum").text(finalSum);
+			 	$("#fs").val(finalSum);
 			 	
 			 	$("#pointArea").bind('click keyup', function(){
 			 		$("#allPoint").attr("checked", false);
@@ -328,9 +336,10 @@
 				finalSum = fSum;
 				$("#pointArea").val(0);
 				$("#finalSum").text(finalSum);
+				$("#fs").val(finalSum);
 			} 			 
 		});
-    	
+		
 
 	});
 	
@@ -345,12 +354,10 @@
     }); */
 
     
-    
+    /*
  	// 결제 api
 	var IMP = window.IMP;
 	IMP.init('imp76288443'); 
-	
-	
 	
 	$('#next_btn').click(function(){
 		
@@ -371,25 +378,24 @@
    		
    	    if ( rsp.success ) {	// 성공시
    	        var msg = '결제가 완료되었습니다.';
-   	        msg += '고유ID : ' + rsp.imp_uid;
-   	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-   	        msg += '결제 금액 : ' + rsp.paid_amount;
-   	        msg += '카드 승인번호 : ' + rsp.apply_num;
+   	        msg += ' 고유ID : ' + rsp.imp_uid;
+   	        msg += ' 상점 거래ID : ' + rsp.merchant_uid;
+   	        msg += ' 결제 금액 : ' + rsp.paid_amount;
+   	        msg += ' 카드 승인번호 : ' + rsp.apply_num;
    	        
    	        $('#payNo').val(rsp.imp_uid);
    	        $('#reserveNo').val('R-' +  rsp.imp_uid);
    	        
-   	        // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
-   	        $("#resultForm").submit();
+   	        $("#resultForm").submit(); // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음 
    	        
-   	    } else {	// 실패시
+   	    } else {	// 실패시 
    	        var msg = '결제에 실패하였습니다.';
    	        msg += '에러내용 : ' + rsp.error_msg;
    	    }
-   	    alert(msg);
-   	});
+   	    	alert(msg);
+   		});
 	});
-
+*/
 	
 /* 	//리셋버튼   
    $('#reset').click(function(){

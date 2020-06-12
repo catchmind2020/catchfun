@@ -152,7 +152,6 @@
 	                                </c:choose>
 	                                
 	                                <input type="hidden" class="a" name="fundingCost2" value="${ r.rewardCost }">
-	                                <%-- <input type="hidden" name="userNo" value="${ loginUser.userNo }"> --%>
 	                                <span><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" /></span>원 펀딩 &nbsp;
 	                                <span class="reward_amount">수량 : 
 	                                	<input type="number" name="fundingQuantity2" value="1" style="width: 40px; height: 20px;" class="amount" min="0">
@@ -162,7 +161,7 @@
 	                            <p class="reward_name">${ r.rewardTitle }<br></p>
 	                            <input type="hidden" name="fundingTitle2" value="${ r.rewardTitle }">
 	                            <p>${ r.rewardContent }<br></p>
-	                            <input type="hidden" name="fundingProduct2" value="${ r.rewardContent }">
+	                            <input type="hidden" name="fundingProduct" value="${ r.rewardContent }">
 	                            <button class="reward_sum">${ r.rewardFundingCount }명</button> 참여하였습니다. (전체수량  ${ r.rewardRemainingQuantity }개남음)
 	                        </div>         
 	                    </td>
@@ -235,11 +234,15 @@
                 
             </tbody>
         </table>
+        
+        <input type="hidden" name="userNo" value="${ loginUser.userNo }">
+        
         <button type="submit" id="next_btn" >다음단계</button>     
         <button type="reset" id="next_btn2" >취소</button>
         </form>
         
         <input type="hidden" value="${ rno }" id="rno2" >
+        
         
 		
     </div>
@@ -358,7 +361,7 @@
 	    	
 	    	var numberOfChecked2 = parseInt($('input[name="rewardNo"]:checked').length);
 	    	
-	    	console.log(numberOfChecked2);
+	    	//console.log(numberOfChecked2);
 	    	
 	    	$(".rcheck").click(function(){
 	    		
@@ -373,7 +376,6 @@
 	    	});
 	    	
 	    	numberOfChecked2 = parseInt($('input[name="rewardNo"]:checked').length);
-	    	console.log(numberOfChecked2);
 	    	
 	    	$("#next_btn").click(function(){ 
 	    		
