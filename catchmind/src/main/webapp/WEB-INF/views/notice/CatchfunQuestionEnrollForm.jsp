@@ -53,15 +53,13 @@
 
     .content{
            
-        width:80%;
+        width:800px;
         margin:auto;
        }
        
      .innerOuter{
-        border:1px solid lightgray;
-        width:90%;
+        width:800px;
         margin:auto;
-        padding:5% 15%;
         background:white;
        }
 
@@ -77,28 +75,37 @@
 
         table *{margin:5px;}
         table{width:100%;}
+        
+/* 서브메뉴 영역 CSS */
+a{color:black;  text-decoration:none !important }
+a:hover{color:#28d7d7;  text-decoration:none !important }
+.submenu{width:140px; font-size:15px; font-weight: 900; display:table-cell; padding-top:10px; padding-bottom: 20px;}
+.submenu:hover { color:#28d7d7; cursor: pointer;}
+.choice{border-bottom: 3px solid rgb(31, 205, 211); padding-bottom: 5px;}
+#hr{width:auto; margin:0px; color:gray; margin-top:-10px;}
+
     </style>
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
+	<br><br><br>
+    
+    <!-- 서브메뉴 영역 -->
+    <div align="center" style="height:60px;">
+        <div class="submenu" id="notice"><a href="list.no?currentPage=1">공지사항</a></div>
+        <div class="submenu" id="guide"><a href="guide.gu">이용가이드</a></div>
+        <div class="submenu choice" id="question"><a href="list.cq?currentPage=1">캐치펀 1:1문의</a></div>
+    </div>
+ 		<hr id="hr">
+ 		
 <div class="content">
         <br><br>
         <div class="innerOuter" style="background-color: rgb(243, 242, 242);">
-            <h2>캐치펀에게  문의하기</h2>
-            <br>
-            
-          
-            <br><br>
+		<form action="insert.cq" method="post">
             <table id="contentArea" align="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3"><input type="text" id="title" class="form-control" name="boardTitle" required></td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td><input type="text" id="title" class="form-control" name="boardTitle" required></td>
-                    <th>작성일</th>
-                    <td><input type="text" id="title" class="form-control" name="boardTitle" required></td>
+                    <td colspan="3"><input type="text" id="cqTitle" class="form-control" name="cqTitle"></td>
                 </tr>
 
                 <tr>
@@ -107,16 +114,16 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <textarea class="form-control" required name="boardContent" id="content" rows="10" style="resize:none;"></textarea>
+                        <textarea class="form-control" name="cqContent" id="cqContent" rows="10" style="resize:none;"></textarea>
                     </td>
                 </tr>
             </table>
             <center>
-                <button class="button button2" >취소하기</button>
-                <button class="button button3" >문의하기</button>
+                <button class="button button2" onClick="history.back();">취소하기</button>
+                <button type="submit" class="button button3">문의하기</button>
             </center>
             <br>
-
+</form>
 
  
         </div>
