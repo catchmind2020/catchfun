@@ -116,6 +116,14 @@ public class AdminServiceImpl2 implements AdminService2 {
 	public ArrayList<Project> projectList(PageInfo pi) {
 		return aDao2.projectList(sqlSession, pi);
 	}
+	@Override
+	public int projectSearchCount(String proCategory) {
+		return aDao2.projectSearchCount(sqlSession, proCategory);
+	}
+	@Override
+	public ArrayList<Project> projectSearch(PageInfo pi, String proCategory) {
+		return aDao2.projectSearch(sqlSession, pi, proCategory);
+	}
 
 	/*
 	@Override

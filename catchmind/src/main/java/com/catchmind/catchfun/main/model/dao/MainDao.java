@@ -34,8 +34,11 @@ public class MainDao {
 
  }
 	
-	public int getListCnt(SqlSessionTemplate sqlSession){
-		return sqlSession.selectOne("mainMapper.getListCnt");
+	public int getListCnt(SqlSessionTemplate sqlSession, String cno, String order){
+        HashMap map = new HashMap();
+        map.put("cno", cno);
+        map.put("order", order);
+        return (int)sqlSession.selectOne("mainMapper.getListCnt",map); 
 	}
 	
 	public ArrayList<Main> getList(SqlSessionTemplate sqlSession, String cno, String order, Param param){
@@ -60,4 +63,8 @@ public class MainDao {
         return (ArrayList)sqlSession.selectList("mainSearchAjax",map); 
 
  }
+	
+	public int searchListCnt(SqlSessionTemplate sqlSession, String keyword){
+		return sqlSession.selectOne("mainMapper.getSearchListCnt", keyword);
+	}
 }

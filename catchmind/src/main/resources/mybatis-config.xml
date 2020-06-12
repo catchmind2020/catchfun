@@ -31,6 +31,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Main" alias="Main" />
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Category" alias="MainCategory" />
+		<typeAlias type="com.catchmind.catchfun.notice.model.vo.Notice" alias="MainNotice" />
+		<typeAlias type="com.catchmind.catchfun.notice.model.vo.CatchfunQuestion" alias="MainQuesion" />
 		
 		
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Project" alias="Project5" />
@@ -59,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mappers/admin-mapper2.xml"/>
 		<mapper resource="mappers/main-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml" />
 	</mappers>
 	
 	

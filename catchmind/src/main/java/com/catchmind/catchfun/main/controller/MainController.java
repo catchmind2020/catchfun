@@ -79,7 +79,7 @@ public class MainController {
 			 String order = param.getOrder();	// 정렬값
 			 
 	    	
-	        int totalCnt = maService.getListCnt();  	//데이터의 전체 갯수
+	        int totalCnt = maService.getListCnt(cno, order);  	//데이터의 전체 갯수
 	        int page = param.getPage();  				//현재페이지수
 	        
 	        if (page==1){
@@ -95,7 +95,6 @@ public class MainController {
 	        //System.out.println(cno);
 	        //System.out.println(order);
 	        ArrayList<Main> list = maService.getList(cno, order, param); 
-	 
 	        param.setRows(list);
 	        param.setTotCnt(totalCnt);
 	        param.setResultCode(200);
@@ -142,7 +141,7 @@ public class MainController {
 	    try {
 	    	
 			
-	        int totalCnt = maService.getListCnt();  	
+	        int totalCnt = maService.searchListCnt(keyword);	
 	        int page = param.getPage();  	
 	        
 	        if (page==1){

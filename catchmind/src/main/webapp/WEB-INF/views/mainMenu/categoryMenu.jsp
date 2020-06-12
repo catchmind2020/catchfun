@@ -91,7 +91,7 @@ select {
 width: 120px;
 height:50px;
 padding: 8px;
-font-size:15px;
+font-size:15px !important;
 font-family: inherit;
 background: url('https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716') no-repeat 95% 50%;
 border-radius: 0px;
@@ -155,8 +155,7 @@ select:focus { outline:none; }
 					<!-- 드롭다운2  -->
 					<div class="orderSelect">
 						<select name="order" id="order" onchange="order()">
-							<option value="totalcost" >추천순 </option>
-							<option value="totalcost">모금액순</option>
+							<option value="totalcost">펀딩금액순</option>
 							<option value="project_startdate">최신순</option>
 							<option value="project_finishdate">마감임박순</option>
 						</select>
@@ -215,6 +214,7 @@ select:focus { outline:none; }
 	<script>
 	$(document).ready(function(){
 		
+		
 		// 자바스크립트에서 주소(URL)상으로 넘어오는 인자(QueryString) 값을 쉽게 파싱해서 사용할 수있는 함수
 		function getUrlParams() {
 		    var params = {};
@@ -226,6 +226,14 @@ select:focus { outline:none; }
 
 		var cno = pp.cno;		// 카테고리넘버
 		var order = pp.order;	// 정렬값
+		// document.querySelector('#order').value = order;	
+		if (order == null){
+			$("#order").val("totalcost").prop("selected", true);
+		} else {
+			document.querySelector('#order').value = order;
+		}
+		
+		
 		
 		var page = 1;  //페이징과 같은 방식이라고 생각하면 된다. 
 /* 		var cno = $("#msgs").val();
@@ -261,6 +269,9 @@ select:focus { outline:none; }
 		            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
 		                  $("#list").html(""); 
 		            }
+		            if (returnData.totCnt == 0) {
+		            	html += "<br><br><h4 align='center'>해당 카테고리의 프로젝트가 없습니다.</h4>";
+		            }
 		            if (returnData.startNum<=returnData.totCnt){
 		                if(data.length>0){
 		   					for(var i in data){
@@ -285,12 +296,22 @@ select:focus { outline:none; }
 									"<span class='dday'>" + 
 									"<img src='${pageContext.servletContext.contextPath}/resources/images/time.png'>&nbsp;" + data[i].projectDday + "일 남음</span></div>" +
 									"</div>";
-
+									
+									
+		   					    /* 펀딩프로젝트 상세보기 페이지 이동 */
+		   				       	$(function(){
+		   				    		$(".list").click(function(){
+		   				    			console.log("클릭");
+		   				    			var pno = $(this).children().eq(0).val();
+		   				    			location.href = "detail.pro?pno=" + pno;
+		   				    		});
+		   				    		
+		   				    	});
+		   					    
 		   					}
 		                } else {
 		                //데이터가 없을경우
 		                 // console.log("데이터없음");
-		                 html += "검색결과가 없습니다.";
 		                }
 		            }
 		             html = html.replace(/%20/gi, " ");
@@ -329,7 +350,6 @@ select:focus { outline:none; }
 	    
         $(function(){
         	
-        	
             $("#order").change(function(){
             	
     			var category = $("#msgs").val();
@@ -339,7 +359,7 @@ select:focus { outline:none; }
                 // $(this).val().prop("selected", true); 
                 
                 if(category == ""){
-                	location.href = "category.mu?&order=" + order;
+                	location.href = "category.mu?order=" + order;
                 }else {
                 	location.href = "category.mu?cno=" + category + "&order=" + order;
                 	
@@ -348,17 +368,7 @@ select:focus { outline:none; }
             });
             
         });
-		 
 		
-	    /* 펀딩프로젝트 상세보기 페이지 이동 */
-       	$(function(){
-    		$(".list").click(function(){
-    			var pno = $(this).children().eq(0).val();
-    			location.href = "detail.pro?pno=" + pno;
-    		});
-    		
-    	});
-	    
 	});
 	</script>
 	
