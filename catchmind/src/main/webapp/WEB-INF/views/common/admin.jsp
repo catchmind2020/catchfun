@@ -126,7 +126,7 @@
       </a>
       <div id="collapsediv1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="#">펀딩리스트</a>
+          <a class="collapse-item" href="projectList.ad?currentPage=1">프로젝트 리스트</a>
           <a class="collapse-item" href="#">보류(결제내역)</a>
         </div>
       </div>
@@ -140,7 +140,7 @@
       </a>
       <div id="collapsediv2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="adminProjectPayTotal.ad">결제내역</a>
+          <a class="collapse-item" href="adminProjectPayTotal.ad?currentPage=1">결제내역</a>
           <a class="collapse-item" href="#">보류</a>
         </div>
       </div>

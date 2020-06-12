@@ -121,7 +121,7 @@ select:focus { outline:none; }
 				<div class="categoryList">
 				<br>
 				   				 
-   				 <div id="list" class="stList">
+   				<div id="list" class="stList">
 
 				</div>
 				<div id="busStopList" class="stList">
@@ -171,6 +171,9 @@ select:focus { outline:none; }
 		            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
 		                  $("#list").html(""); 
 		            }
+		            if (returnData.totCnt == 0) {
+		            	html += "<br><br><h4 align='center'>해당 검색 결과가 없습니다.</h4>";
+		            }
 		            if (returnData.startNum<=returnData.totCnt){
 		                if(data.length>0){
 		   					for(var i in data){
@@ -185,7 +188,7 @@ select:focus { outline:none; }
 		   						html +=
 		   							"<div class='list'>" + 
 		   							"<input type='hidden' value='" + data[i].projectNo + "'>" + 
-		   							"<div><img src='${pageContext.servletContext.contextPath}/resources/images/projectimages/" + data[i].projectImg + "'></div>" +
+		   							"<div><img src='${pageContext.servletContext.contextPath}/resources/images/uploadFiles/" + data[i].projectImg + "'></div>" +
 		   							"<div><h4 style='height:60px;'><b>" + data[i].projectName + "</b></h4></div>" +
 		   							"<div class='maker'>" + data[i].projectCategory + " | " + data[i].makerName + "</div>" + 
 		   							"<div><progress value='" + data[i].fundingTotalCost / data[i].projectTargetAmount * 100 + "' max='100'></progress></div>" +
@@ -195,6 +198,14 @@ select:focus { outline:none; }
 									"<img src='${pageContext.servletContext.contextPath}/resources/images/time.png'>&nbsp;" + data[i].projectDday + "일 남음</span></div>" +
 									"</div>";
 
+									
+		   					    /* 펀딩프로젝트 상세보기 페이지 이동 */
+		   				       	$(function(){
+		   				    		$(".list").click(function(){
+		   				    			var pno = $(this).children().eq(0).val();
+		   				    			location.href = "detail.pro?pno=" + pno;
+		   				    		});
+		   				    	});
 		   					}
 		                }else{
 		                //데이터가 없을경우
@@ -215,6 +226,7 @@ select:focus { outline:none; }
 		       }
 		    }) 
 		}
+	    
     });
     
 		</script>

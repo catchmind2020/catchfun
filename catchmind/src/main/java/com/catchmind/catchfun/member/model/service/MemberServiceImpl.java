@@ -135,6 +135,11 @@ public class MemberServiceImpl implements MemberService {
 	public int insertReply(Question q) {
 		return mDao.insertReply(sqlSession, q);
 	}
+
+	@Override
+	public int deleteAnswer(String qno) {
+		return mDao.deleteAnswer(sqlSession, qno);
+	}
 	
 
 

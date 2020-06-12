@@ -57,6 +57,17 @@
         color: white;
         }
 
+    .button4 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid black;
+        margin-top: 20px;
+        }
+
+    .button4:hover {
+        background-color: #f44336;
+        color: white;
+        }
     .content{
            
         width:80%;
@@ -139,15 +150,12 @@
              <table id="replyArea" class="table" align="center">
                 <thead>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                             <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
                         </td>
-                        <td><button class="button button3" id="addReply">등록</button></td>
+                        <td><button class="button button3" id="addReply">등록</button>
+                        <td><button class="button button4" id="btnReplyDelete">삭제</button></td>
                     </tr>
-                    <tr>
-                    	<td colspan="3">댓글(<span id="rcount"></span>) </td>
-                    </tr>
-                   
                 </thead>
                 <tbody>
 
@@ -167,7 +175,8 @@
         				url:"ainsert.qu",
         				data:{ansContent:$("#content").val(),
         					questionNo:"${q.questionNo}",
-        					ansNo:"${loginUser.userId}"},
+        					ansNo:"${loginUser.userId}"
+        					},
         				type:"post",
         				success:function(status){
         					if(status == "success"){
@@ -220,8 +229,6 @@
         		});
         	}
         	 */
-        	 
-        	// JH
         	function selectReplyList(){
 					$.ajax({
 		    			url:"alist.qu",
@@ -230,7 +237,7 @@
 		    			success:function(list){
 		    				console.log("성공!");
 		        					var value = "<tr>" +
-		        								"<td>" + list.userId +"<td>" +
+		        								"<td>" + list.ansNo +"<td>" +
 		        								"<td>" + list.ansContent +"<td>" +
 		        								"<td>" + list.ansDate +"<td>" +
 		        							"<tr>";
@@ -242,10 +249,26 @@
 		    			}
 		    		});
         	 }
-        	
-        	
         </script>
         
+       <!--  댓글삭제 -->
+        <script>
+        $("#btnReplyDelete").click(function(){
+        	if(confirm("답변을 삭제하시겠습니까?")){
+        		$.ajax({
+        			url: "deleteAnswer.qu",
+        			data: {qno:"${q.questionNo}"}, 
+        			type: "post",
+        			success:function(result){
+        				if(result == "success"){
+                            alert("삭제성공!");
+                          location.href="<%=request.getContextPath()%>/sellerMessageAnswer.me?qno=${q.questionNo}"
+        				}
+        			}
+        		});
+        	}
+        });
+        </script>
         
         
         

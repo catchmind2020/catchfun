@@ -10,43 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>
 <style>
-/* 메뉴바 영역 */
-.header-area {
-	width: 1200px;
-	margin-left: 40px;
-	color: gray;
-	padding-top: 10px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	margin: auto;
-}
 
-/* 메뉴 */
-.header {
-	display: table-cell; /* width:200px; */
-	padding-right: 40px;
-	height: 35px;
-	text-align: center;
-	vertical-align: bottom;
-	font-size: 25px;
-	font-weight: 900;
-	color: black;
-}
-
-/* 로그인 부분*/
-.login {
-	position: relative;
-	bottom: -6px;
-	display: table-cell;
-	font-size: 15px;
-	color: gray;
-	padding-left: 220px;
-	padding-right: 0px;
-}
 /* 폰트 초기화*/
 body, input, textarea, select, button, table {
 	font-family: 'Nanum Gothic', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕',
@@ -86,7 +50,8 @@ table {
 }
 
 
-input[type=text], input[type=password], input[type=email], input[type=number], select {
+#userId, #certified, #userName, #repwd1, #repwd, #phone, #del_postcod,
+#del_address, #del_extraAddress, #del_detailAddress, select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -189,6 +154,7 @@ button[type=submit]:hover {
 <jsp:include page="../common/menubar.jsp" />
 	<div class="wrap">
 		
+		
 
 		<div id="content">
 			<div id="content_2">
@@ -204,22 +170,27 @@ button[type=submit]:hover {
 								<div class="form-check" style="text-align: left;">
 									<input type="checkbox" id="ex_rd" name="ex_rd" value="agree">
 									<label for="ex_rd"><b>전체동의</b><br></label>
-									<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
+									<p style="font-size: 15px;">캐치펀 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<div class="form-group" style="text-align: left;">
-									<form action="auth.do" method="post">
+									<!-- <form action="auth.do" method="post"> -->
 										<input type="email" id="userId" name="userId" placeholder="이메일" required style="width: 300px;">
-										<button id="email_btn1">보내기</button>
+										<button type="button" class="btn btn-info" id="email_btn1">발송</button>
 										 <div id="checkResult" style="display:none; font-size:0.8em"></div>
 										<label for="email"><p style="text-align: left;">위 이메일로 인증번호가 발송됩니다.</p></label>
-									</form>
 									
-									<form action="join_injeung.do${dice}" method="post">
+									<%-- <form action="join_injeung.do${dice}" method="post"> --%>
 										<input type="text" id="certified" name="certified" placeholder="인증번호입력"> 
+										<button type="button" class="btn btn-info" id="email_btn">인증</button>
+									</div>
+									<input type="hidden" path="random" id="random" value="${random}" />
+								</td>
+									<form action="join_injeung.do${dice}" method="post">
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력" required style="width: 300px;"> 
 										<button id="email_btn">인증</button>
 									</form>
 							</td>
@@ -263,6 +234,8 @@ button[type=submit]:hover {
 			</div>
 		</div>
 	<script>
+	
+	
     function del_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -482,8 +455,113 @@ button[type=submit]:hover {
            
         }
     }
+    </script>
+    <script> // ajax로 이메일발송과 인증함수!!
+    
+      $(function(){
+    	/* 이메일 인증 버튼 클릭시 발생하는 이벤트  */
+    	$(document).on("click", "#email_btn1", function(){
+    		
+    		/* 이메일 중복 체크 후 메일 발송! 비동기처리 */
+    		$.ajax({
+    			type:"post",
+    			url : "createEmailCheck.do",
+    			data :{ userId: $("#userId").val()},
+    			
+    			//data: "userId="+encodeURIComponent($('#userId').val()),
+    			/*  encodeURIComponent
+    			예를들어, http: a.com?name=egoing&job=programmer 에서 &job=programmer
+    			중 '&'는 하나의 파라미터가 끝나고 다음 파라미터가 온다는 의미이다.
+    			그런데 다음과 같이 job의 값에 &가 포함된다면 시스템은 job의 값을 제대로 인식할수 없게 된다.  */
+    			
+    			success : function(data){
+    				if(data != "fail"){
+    					alert("사용가능한 이메일입니다. 인증번호가 발송되었습니다.");
+    				}else{
+    					alert("이메일 발송 실패!");
+    				}
+    			},
+    			error: function(){
+    				alert("에러가 발생했습니다.");
+    				return false;
+    			}
 
-    </script> 
+    		})
+    	})  
+    	
+    	/* 이메일 인증번호 입력 후, 인증버튼 클릭 이벤트 !!! */
+    	$(document).on("click", "#email_btn", function(){
+    		
+    		//var certifi = document.getElementById("certified");
+    		console.log(${random});
+    		$.ajax({
+    			
+    			type:"post",
+    			url:"emailAuth.do",
+    			data:{authCode:$("#certified").val(), random:${random}},
+    			success:function(data){
+    				
+    				console.log(data);
+    				
+	    			if(data=="complete"){
+	    				alert("인증이 완료되었습니다.");
+	    			}else if(data == "false"){
+	    				alert("인증번호를 잘못 입력하셨습니다.")
+	    			}
+    			},
+    			
+    			error:function(){
+    				alert("에러가 발생했습니다.");
+    			}
+    		});
+    	});
+     });
+    
+   </script>
+   
+   <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
+    	 function check(){
+    			 var authCode = data;
+                var certifi = document.getElementById("certified");
+                
+                
+    			/* var username = $("#userName").val();
+    			var Birthday = $("#birthday").val();
+    		
+    			var firstnumber = $("#firstnumber").val();
+    			var phonenum = $("#verification").val();
+    			var UserId = $("#userId").val();
+    			var UserPwd = $("#userPwd1").val();
+    			var email = $("#email").val(); */
+    			
+    			console.log(username);
+    			
+    			if(randomKey != certifi.value){
+                	alert("인증에 실패하였습니다.");
+                	randomKey = "";
+                	certifi.focus();
+                	return false;
+              	}else{
+              		alert("인증 성공하였습니다.");
+    				//$("#defaultOpen4").removeAttr("disabled").click();
+              		
+    				/* $("#userName2").val(username);
+    				$("#birthday2").val(Birthday);
+    				$("#firstnumber2").val(firstnumber);
+    				$("#verification2").val(phonenum);
+    				$("#userId2").val(UserId);
+    				$("#userPwd12").val(UserPwd);
+    				$("#email2").val(email);
+    				
+    				$("#enroll_final").submit();
+    				 */
+              	
+              	}
+       	 	}
+   
+    
+
+    
  
 </body>
 </html>

@@ -431,6 +431,8 @@ public class AdminController {
 			String refNo = aService.refNoCategory();
 			c.setRefNo(refNo);
 			
+			System.out.println("curernt : " + refNo);
+			
 			int result2 = aService.insertAttachment(c);
 			
 			if(result2 > 0) {
@@ -583,7 +585,9 @@ public class AdminController {
 		return changeName;
 		
 	}
+	
 	// 결재내역
+	/*
 	@RequestMapping("adminProjectPayTotal.ad")
 	public String adminProjectPayTotal(int currentPage, Model model) {
 		
@@ -603,9 +607,26 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		/* ArrayList<PayTotal>() list = aService.payList2(pr); */
-		
+	/*
 		model.addAttribute("payList", realPayList);
 		model.addAttribute("payListLength", prn.size());
+		
+		return "admin/adminProjectPayTotal";
+	}
+	*/
+	
+	@RequestMapping("adminProjectPayTotal.ad")
+	public String adminProjectPayTotal(int currentPage, Model model) {
+		
+		int listCount = aService.adminProjectPayTotalCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<PayTotal> payList = aService.adminProjectPayTotalList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("payListCount", listCount);
+		model.addAttribute("payList", payList);
 		
 		return "admin/adminProjectPayTotal";
 	}
@@ -615,12 +636,18 @@ public class AdminController {
 	public String updateBoard(PayTotal p, int projectPay, int adminPay, HttpServletRequest request, Model model) {
 		
 		p.setProjectPay(projectPay);
+		System.out.println("project : " + projectPay);
+		System.out.println("admin : " + adminPay);
 		
 		int result = aService.updateProjectPay(p);
 		if(result > 0) {
 			
+			// result2 문제
 			int result2 = aService.updateAdminPay(adminPay);
 			int result3 = aService.updateProjectStatus(p);
+			
+			System.out.println(result2);
+			System.out.println(result3);
 			
 			if(result2*result3 > 0) {
 				return "success";

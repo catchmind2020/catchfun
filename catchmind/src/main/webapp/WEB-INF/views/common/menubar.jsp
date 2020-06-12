@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>CATCHFUN</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap"
 	rel="stylesheet">
@@ -18,6 +18,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
 
 <!-- alertifyJS 라이브러리 -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -59,8 +60,8 @@
 /* margin-left: 1050px; 1920 1080 */
 /* margin-left: 1700px; qhd */
 #header_searchbar {
-	margin-left:-20px;
-	margin-top: 37px; /* 위치설정 이거*/
+	margin-left:440px;
+	margin-top: 51px; /* 위치설정 이거*/
 	position: absolute;
 	height: 50px;
 	width: 5px;
@@ -197,7 +198,7 @@
 
 /* 로그인 부분*/
 .login { position: relative; display: table-cell; font-size: 15px;
-	color: gray; padding-left: 160px; padding-right: 0px; }
+	color: gray; padding-right: 0px; }
 a { text-decoration:none !important; color:black;} 
 a:hover { text-decoration:none !important; color:black; }
 
@@ -269,7 +270,7 @@ a:hover { text-decoration:none !important; color:black; }
           justify-content: center;
 }
  
-/* div{border:1px solid black;} */
+/*  div{border:1px solid black;}  */
 
 </style>
 
@@ -296,15 +297,26 @@ a:hover { text-decoration:none !important; color:black; }
 		<div class="header"><a href="category.mu">카테고리</a></div>
 		<div class="header"><a href="comingsoon.mu">오픈예정</a></div>
 		<div class="header">프로젝트오픈</div>
-		<div class="header">공지</div>
+		<div class="header"><a href="list.no?currentPage=1">공지</a></div>
 		<div class="header"></div>
 		<div class="header"></div>
+		<div class="header"></div>
+		<div class="header"></div>
+		<div class="header"></div>
+		<div class="header"></div>
+		
+		<!-- 검색바 애니메이션 -->
+		<form id="header_searchbar" action="mainSearch.mu">
+			<input type="text" name="keyword" class="input" id="search-input">
+			<button type="reset" class="search" id="search-btn"></button>
+		</form>
+		
 		
 		<c:choose>
 			<c:when test="${!empty loginUser}">
 				<!-- 로그인 후 -->
-		 		<div class="header login  header-img loginnext">
-		 		
+				
+		 		<div class=" login  header-img">
 					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
 							<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -325,7 +337,7 @@ a:hover { text-decoration:none !important; color:black; }
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
 					        </tr>
 					        <tr>
@@ -346,12 +358,6 @@ a:hover { text-decoration:none !important; color:black; }
 	 			
 				<!-- 로그인 전 -->
 				<div class="login">
-					 <!-- 검색바 애니메이션 -->
-					<form id="header_searchbar" action="mainSearch.mu">
-						<input type="text" name="keyword" class="input" id="search-input">
-						<button type="reset" class="search" id="search-btn"></button>
-					</form>
-					
 					<a href="loginGo.me">로그인 ｜</a>
 				    <a href="memberEnrollForm.me">회원가입</a>
 				</div>
@@ -378,13 +384,11 @@ a:hover { text-decoration:none !important; color:black; }
    			$(".input").toggleClass("square");
    			if ($('.search').hasClass('close')) {
    				$('input').focus();
-   				$('input').attr('placeholder','　　프로젝트, 메이커 검색');
    			} else {
    				$('input').blur();
-   				$('input').attr('placeholder','');
    			}
    		}
-   		$('button').on('click', expand);
+   		$('.search').on('click', expand);
    	</script>
 	
 	<!-- 사이드메뉴바 스크립트 -->

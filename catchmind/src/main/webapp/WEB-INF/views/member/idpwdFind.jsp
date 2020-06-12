@@ -11,30 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-/* 메뉴바 영역 */
-.header-area {width: 1200px; margin-left: 40px; color: gray; padding-top: 10px; margin-top: 20px; margin-bottom: 10px;
-	top: 0; right: 0; bottom: 0; left: 0; margin: auto;
-}
 
-/* 메뉴 */
-.header { display: table-cell; /* width:200px; */ padding-right: 40px; height: 35px; text-align: center; vertical-align: bottom;
-	font-size: 25px; font-weight: 900; color: black; }
-
-/* 검색바 */
-#header_searchbar { margin-left: 1400px; margin-top: 10px; position : absolute; height: 50px; width: 5px;
-	transform: translate(-50%, -50%); position: absolute; }
-
-
-/* 로그인 부분*/
-.login {
-	position: relative;
-	bottom:-6px;
-	display: table-cell;
-	font-size: 15px;
-	color: gray;
-	padding-left: 220px;
-	padding-right: 0px;
-}
 
 /* 아이디발송요청 Buttom*/
 .userid_request{
@@ -152,7 +129,7 @@ height: 40px;
                     </tr>
                     <tr>
                         <td colsapn="2" style="font-size:20px; text-align: left;">
-                            포인트 적립, 사용내역입니다.
+                         
                         </td>
                     </tr>
                 </table>
@@ -177,16 +154,16 @@ height: 40px;
                     <table id="id_table">
                     <tr>
                         <td>
-                            <form action="/action_page.php">
-                            <input type="email" id="email" name="email" placeholder="이메일">
-                            <label for="email">
-                                <p style="text-align:left;">
-                                    와디즈는 이메일을 아이디로 사용합니다. <br>
-                                    소유하고 계신 계정을 입력해보세요. <br>
-                                    가입여부를 확인해드립니다. <br>
-                                </p></label>
-                                <input type="submit" value="완료">
-                        </td>
+                            <form action="#">
+	                            <label for="email">
+	                                <p style="text-align:left;">
+		                                	<h4>가입정보로 확인</h4><br>
+												* 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
+												아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
+	                                </p></label>
+	                              <input type="email" id="email" name="email" placeholder="이메일">
+                            	 <input type="submit" value="완료">
+                        	</td>
                         <td>  
                         </td>
                     </tr>

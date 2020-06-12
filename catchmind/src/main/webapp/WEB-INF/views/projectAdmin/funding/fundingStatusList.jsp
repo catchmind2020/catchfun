@@ -173,14 +173,23 @@
                 <th width="150px">펀딩일</th>
                 <th width="150px">펀딩상태</th>
                 <th width="150px">펀딩총액</th>
+                <th width="100px">환불현황</th>
               </tr>
             </thead>
             <tbody>
             
 		
-			<!-- tr>
-				<td colspan="6">존재하는 공지사항이 없습니다.</td>
-			</tr> -->
+		<c:choose>
+						<c:when test="${ empty fundingList }">
+
+							<tr>
+								<td colspan="8">펀딩내역이 존재하지 않습니다.</td>
+
+
+							</tr>
+						</c:when>
+						<c:otherwise>
+			
 			
 			<c:forEach items="${ fundingList }" var="b">
 				
@@ -193,10 +202,29 @@
 	                        <td>${ b.fundingDate }</td>
 	                      	<td>${ b.fundingStatus }</td>
 	                      	<td>${ b.fundingQuantity * b.fundingCost }</td>
+	                      	<td>
+	                      	<c:choose>
+	                      	<c:when test="${b.fundingStatus eq 'E' }">
+	                      	
+	                      	
+	                      	<form action="<%=contextPath%>/deleteItem.pa" method="post">
+								<input type="hidden" name="itemNo" value="${ b.fundingNo }">
+									<div class="col-auto text-right">
+			                     <button type="submit"  class="btn btn-danger ">환불수락</button>
+			                    </div>
+							</form>	
+	                      	
+	                      	</c:when>
+	                      	<c:otherwise>
+	                      	<td>${ b.fundingStatus }</td>
+	                      	</c:otherwise>
+	                      	</c:choose>
+	                      	</td>
 	                    </tr>
 	                <%-- </c:if> --%>
                  </c:forEach>
-                    
+                 </c:otherwise> 
+                 </c:choose>  
             </tbody>
           </table>
              

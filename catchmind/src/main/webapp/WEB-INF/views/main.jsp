@@ -65,7 +65,7 @@ img { border: none; vertical-align: top; }
 .title { font-size: 25px; font-weight: 900; height: 45px; }
 
 progress { width: 370px; height: 10px; background-color: #2ed5d5; }
-progress::-webkit-progress-bar { background-color: white; }
+progress::-webkit-progress-bar { background-color: lightgray; }
 progress::-webkit-progress-value { background-color: #2ed5d5; }
 </style>
 </head>
@@ -130,7 +130,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 										<div class="lists">
 											<input type="hidden" value="${p.projectNo}">
 											<div>
-												<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
+												<img src="${pageContext.servletContext.contextPath}/resources/uploadFiles/${p.projectImg }">
 											</div>
 											<div>
 												<h4 style="height:60px;">

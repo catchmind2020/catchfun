@@ -282,76 +282,7 @@ button[type=submit]:hover {
        	 }); */
  </script>
  <script> /*본인인증 및 회원가입버튼 클릭시*/
-    	function next(){
-            if($("input:checkbox[id='ex_rd']").is(":checked") == true ) { // 약관동의에 체크 되었을 경우
-            	//$("#enrollBtn").attr("disabled", false); // 활성화
-            	//$("#first_agree_btn").click(function(){ // '모두동의'버튼 클릭시
-					//$("#defaultOpen2").click();	// 다음페이지로 이동
-				//});
-            }else{//체크 안되었을 경우
-                alert("약관동의에 체크해주세요.");
-                //$("#enrollBtn").attr("disabled", true); // 비활성화
-                return false;
-            }
-            
-         // 유효성 검사할 각각의 "input 요소"들 변수에 받아두기
-            var id = document.getElementById("userId");
-            var rpwd1 = document.getElementById("repwd1");
-            var rpwd = document.getElementById("repwd");
-            var name = document.getElementById("userName");
-            var veri = document.getElementById("phone"); // 전화번호
-
-            // 1) 이름 검사
-            //    한글로만 2글자 이상
-            regExp = /^[가-힣]{2,}$/; 
-            if(!regExp.test(name.value)){
-                alert("유효한 이름을 입력하세요");
-                name.value = "";
-                name.focus();
-                return false;               
-            }
-            
-         // 5_1) 비밀번호 검사
-            //    특수문자(!@#$%^&*) 또는 영문자 또는 숫자 포함 총 8자~15자
-            regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
-            if(!regExp.test(rpwd1.value)){
-                alert("유효한 비밀번호를 입력하세요!!");
-                rpwd1.value="";
-                rpwd1.focus();
-                return false;
-            }
-			
-            // 5_2) 비밀번호 일치 확인
-            // 비밀번호값과 비밀번호 확인값이 일치하는지 검사
-            if(rpwd1.value != rpwd.value){
-                alert("동일한 비밀번호 확인값을 입력하세요!!");
-                rpwd.value = "";
-                rpwd1.focus();
-                return false;
-            }
-           
-          /*   
-            // 3) 전화번호검사
-            //    숫자!!로만 7글자 이상, 8글자 이하
-            regExp = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g
-            if(!regExp.test(veri.value)){
-                alert("유효한 전화번호를 입력하세요");
-                veri.value = "";
-                veri.focus();
-                return false;
-            }
-             */
-
-            // 4) 아이디 검사(이메일형식)
-            // 영문자 또는 숫자 포함해서 총 4~12자로 입력 (단, 첫글자는 반드시 영문자로)
-              var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-               if (!emailRegExp.test(id.value)) {
-                   alert("아이디를 이메일형식으로 적어주세요!");
-                   form.id.value = "";
-                   form.id.focus();
-                   return false;
-                }            
-        }
+    	
  </script>
 
   <script>
@@ -359,28 +290,7 @@ button[type=submit]:hover {
     	// 아이디 중복체크 후 사용불가능한 아이디일 경우 : "중복아이디 존재 사용불가능" 메세지 보여짐, 버튼 비활성화 
     	// 아이디 중복체크 후 사용가능한 아이디일 경우 : "사용 가능하나 아이디임" 메세지 보여짐, 버튼 활성화
     	
-    	    function idCheckValidate(num){
-    		
-    		if(num == 1){	// 아이디 중복체크를 아직 안하는 경우 : 메세지 보여지지 않음 버튼 비활성화
-    			
-    			$("#checkResult").hide();
-    			$("#enrollBtn").attr("disabled", true);
-    			
-    		}else if(num == 2){
-    			
-    			$("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다. 사용이 불가능합니다.");
-    			$("#checkResult").show();
-    			$("enrollBtn").attr("disabled", true);
-    			
-    		}else{ // 아이디 중복체크 후 사용가능한 아이디일 경우 : "사용 가능하나 아이디임" 메세지 보여짐, 버튼 활성화
-    			
-    			$("#checkResult").css("color", "green").text("사용가능한 아이디입니다.");
-    			$("#checkResult").show();
-    			$("#enrollBtn").removeAttr("disabled");
-    			$("enrollBtn").attr("disabled", false);
-    			
-    		}
-    	}
+    	 
 
    	$(function(){  // 이벤트 걸고자 하는 input 요소 변수에 기록해놓기
            

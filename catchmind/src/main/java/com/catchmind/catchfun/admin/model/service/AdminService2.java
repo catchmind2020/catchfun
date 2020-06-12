@@ -6,6 +6,10 @@ import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.funding.model.vo.FundingList;
+import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.News;
+import com.catchmind.catchfun.funding.model.vo.Reward;
 
 /**
  * @author 도현
@@ -106,6 +110,36 @@ public interface AdminService2 {
 	Project pjReportDetail(String rd);
 	
 	int pjDelete(String projectNumber);
+	
+	int projectListCount();
+	
+	ArrayList<Project> projectList(PageInfo pi);
+	
+	int projectSearchCount(String proCategory);
+	
+	ArrayList<Project> projectSearch(PageInfo pi, String proCategory);
+
+	// 프로젝트 정보 조회
+	Project selectProject(String pno);
+	
+	// 메이커 정보 조회
+	Maker selectMaker(String pno);
+	
+	// 펀딩 내역 정보 조회 (현재 펀딩금액, 수량 파악)
+	FundingList selectFunding(String pno);
+	
+	// 새소식 리스트 조회
+	ArrayList<News> selectNews(String pno);
+	
+	// 리워드 리스트 조회
+	ArrayList<Reward> selectReward(String pno);
+	
+	int updateProject(String pno); // 프로젝트 정보
+	int updateMaker(String pno); // 메이커 정보
+	int updateFunding(String pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
+	int updateReward(String pno); // 리워드 정보
+	int updateNews(String pno); // 새소식 정보
+	
 	
 }
 

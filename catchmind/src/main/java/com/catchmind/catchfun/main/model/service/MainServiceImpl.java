@@ -46,8 +46,8 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	@Override
-	public int getListCnt() {
-		return maDao.getListCnt(sqlSession);
+	public int getListCnt(String cno, String order) {
+		return maDao.getListCnt(sqlSession, cno, order);
 	}
 
 
@@ -59,6 +59,12 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public ArrayList<Main> mainSearchAjax(String keyword, Param param) {
 		return maDao.mainSearchAjax(sqlSession, keyword, param);
+	}
+
+
+	@Override
+	public int searchListCnt(String keyword) {
+		return maDao.searchListCnt(sqlSession, keyword);
 	}
 
 }

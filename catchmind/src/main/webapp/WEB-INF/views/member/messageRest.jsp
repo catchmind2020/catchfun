@@ -11,30 +11,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     
     <style>
- /* 메뉴바 영역 */
-.header-area {width: 1200px; margin-left: 40px; color: gray; padding-top: 10px; margin-top: 20px; margin-bottom: 10px;
-	top: 0; right: 0; bottom: 0; left: 0; margin: auto;
-}
 
-/* 메뉴 */
-.header { display: table-cell; /* width:200px; */ padding-right: 40px; height: 35px; text-align: center; vertical-align: bottom;
-	font-size: 25px; font-weight: 900; color: black; }
 
 /* 폰트 초기화*/
 body, input, textarea, select, button, table {
     font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
     color: #222; font-size: 18px; line-height: 1.5;} 
 
-/* 로그인 부분*/
-.login {
-	position: relative;
-	bottom:-6px;
-	display: table-cell;
-	font-size: 15px;
-	color: gray;
-	padding-left: 220px;
-	padding-right: 0px;
-}
         .content{
            
             width:80%;

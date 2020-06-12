@@ -11,6 +11,10 @@ import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.funding.model.vo.FundingList;
+import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.News;
+import com.catchmind.catchfun.funding.model.vo.Reward;
 
 @Service("aService2")
 public class AdminServiceImpl2 implements AdminService2 {
@@ -107,6 +111,62 @@ public class AdminServiceImpl2 implements AdminService2 {
 	@Override
 	public int pjDelete(String projectNumber) {
 		return aDao2.pjDelete(sqlSession, projectNumber);
+	}
+	@Override
+	public int projectListCount() {
+		return aDao2.projectListCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Project> projectList(PageInfo pi) {
+		return aDao2.projectList(sqlSession, pi);
+	}
+	@Override
+	public int projectSearchCount(String proCategory) {
+		return aDao2.projectSearchCount(sqlSession, proCategory);
+	}
+	@Override
+	public ArrayList<Project> projectSearch(PageInfo pi, String proCategory) {
+		return aDao2.projectSearch(sqlSession, pi, proCategory);
+	}
+	@Override
+	public Project selectProject(String pno) {
+		return aDao2.selectProject(sqlSession, pno);
+	}
+	@Override
+	public Maker selectMaker(String pno) {
+		return aDao2.selectMaker(sqlSession, pno);
+	}
+	@Override
+	public FundingList selectFunding(String pno) {
+		return aDao2.selectFunding(sqlSession, pno);
+	}
+	@Override
+	public ArrayList<News> selectNews(String pno) {
+		return aDao2.selectNews(sqlSession, pno);
+	}
+	@Override
+	public ArrayList<Reward> selectReward(String pno) {
+		return aDao2.selectReward(sqlSession, pno);
+	}
+	@Override
+	public int updateProject(String pno) {
+		return aDao2.updateProject(sqlSession, pno);
+	}
+	@Override
+	public int updateMaker(String pno) {
+		return aDao2.updateMaker(sqlSession, pno);
+	}
+	@Override
+	public int updateFunding(String pno) {
+		return aDao2.updateFunding(sqlSession, pno);
+	}
+	@Override
+	public int updateReward(String pno) {
+		return aDao2.updateReward(sqlSession, pno);
+	}
+	@Override
+	public int updateNews(String pno) {
+		return aDao2.updateNews(sqlSession, pno);
 	}
 
 	/*

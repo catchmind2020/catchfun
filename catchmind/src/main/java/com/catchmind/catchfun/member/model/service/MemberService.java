@@ -66,6 +66,9 @@ public interface MemberService {
 
 	// 댓글 작성용 서비스
 	int insertReply(Question q);
+
+	// 답글 삭제 서비스
+	int deleteAnswer(String qno);
 	
 
 

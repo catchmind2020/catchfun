@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="resources/admin/js/jquery-3.4.1.js"></script>
 <script src="resources/admin/js/jquery-3.4.1.min.js"></script>
+
 <style>
   .outer {
 	text-align: left;
@@ -61,9 +62,9 @@
     <br>
    
       <div id="sales">
-        <form action="" method="">
+        <form action="salesSearch.ad" method="get">
           <div class="k_btn">
-            <input type="date" name="sDate"> <button type="button" class="mybtn">조회</button>
+            <input type="date" name="sDate"> <button type="submit" class="mybtn">조회</button>
           </div>
           <br>
         </form>

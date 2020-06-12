@@ -26,7 +26,7 @@
 	height: 20%;
 }
 
-form {
+#loginForm {
 	margin: 0 auto;
 	border: 3px solid #f1f1f1;
 	width: 400px;
@@ -37,7 +37,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-input[type=text], input[type=password] {
+#userId,#userPwd {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -46,7 +46,7 @@ input[type=text], input[type=password] {
 	box-sizing: border-box;
 }
 
-button {
+.loginbtn {
 	background-color: #28d7d7;
 	color: white;
 	padding: 14px 20px;
@@ -137,15 +137,15 @@ span.uname {
 					<div class="container" style="background-color: #f1f1f1">
 						<label> <input type="checkbox" checked="checked"
 							name="remember">아이디 저장하기
-						</label> <span class="psw"><a href="#">/비밀번호찾기</a></span> <span
-							class="uname"><a href="#">아이디찾기</a></span>
+						</label> <span class="psw"><a href="idpwdFind.me">/비밀번호찾기</a></span> <span
+							class="uname"><a href="idpwdFind.me">아이디찾기</a></span>
 					</div>
 
-					<button type="submit">Login</button>
+					<button class="loginbtn" type="submit">Login</button>
 
 					<center>
 						아직계정이 없나요? &nbsp;
-						<button type="button" class="cancelbtn">회원가입</button>
+						<button type="button" class="cancelbtn loginbtn">회원가입</button>
 					</center>
 		</form>
 	</div>

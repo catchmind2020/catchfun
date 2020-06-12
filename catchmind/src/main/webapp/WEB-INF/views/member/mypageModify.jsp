@@ -8,32 +8,7 @@
 <title>마이페이지_메인</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-/* 메뉴바 영역 */
-.header-area {
-	width: 1200px;
-	margin-left: 40px;
-	color: gray;
-	padding-top: 10px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	margin: auto;
-}
 
-/* 메뉴 */
-.header {
-	display: table-cell; /* width:200px; */
-	padding-right: 40px;
-	height: 35px;
-	text-align: center;
-	vertical-align: bottom;
-	font-size: 25px;
-	font-weight: 900;
-	color: black;
-}
 
 /* 폰트 초기화*/
 body, input, textarea, select, button, table {
@@ -44,16 +19,7 @@ body, input, textarea, select, button, table {
 	line-height: 1.5;
 }
 
-/* 로그인 부분*/
-.login {
-	position: relative;
-	bottom: -6px;
-	display: table-cell;
-	font-size: 15px;
-	color: gray;
-	padding-left: 220px;
-	padding-right: 0px;
-}
+
 /*회원정보수정페이지*/
 #enrollmodify {
 	width: 1000px;
