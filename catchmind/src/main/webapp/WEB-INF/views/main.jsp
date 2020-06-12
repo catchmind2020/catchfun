@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script
@@ -55,18 +56,20 @@ img { border: none; vertical-align: top; }
 .listCarousel .view .list>li ul li.a2 { margin-left: 0; margin-right: 45px; }
 .listCarousel .view .list>li ul li.a3 { margin-left: 0; margin-right: 0px; }
 
-.list { width: 370px; height: 300px; display: inline-block; box-sizing: border-box; }
+.list { width: 370px; height: 310px; display: inline-block; box-sizing: border-box; }
 .lists img { width: 370px; height: 200px; }
 .lists h4 { margin: 0px; }
 .dday { float: right; }
 .dday>img { width: 17px; height: 17px; vertical-align: text-bottom; }
 .maker { color: darkgray; font-weight: 800; font-size: 13px; }
-.icon { float: right; margin-top: 20px; }
-.title { font-size: 25px; font-weight: 900; height: 45px; }
+.icon { float: right; margin-top: 10px; }
+.title { font-size: 25px; font-weight: 900; height: 45px; vertical-align:middle;}
 
 progress { width: 370px; height: 10px; background-color: #2ed5d5; }
 progress::-webkit-progress-bar { background-color: lightgray; }
 progress::-webkit-progress-value { background-color: #2ed5d5; }
+
+
 </style>
 </head>
 <body>
@@ -116,7 +119,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 			<div class="listCarousel">
 				<div class="view">
 					<div class="title">
-						주목할만한 프로젝트 
+						주목할만한 프로젝트
 						<span class="prev icon"><img src="${pageContext.servletContext.contextPath}/resources/images/arrow_right16.png"></span> 
 						<span class="prev icon">　　</span> 
 						<span class="next icon"><img src="${pageContext.servletContext.contextPath}/resources/images/arrow_left16.png"></span>
@@ -210,11 +213,6 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 				</div>
 			</div>
 			
-			<!-- 인기프로젝트 -->
-
-
-
-
 		</div>
 	</div>
 	
@@ -228,6 +226,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	            $('.list').css({'margin-left':'-1200px'});
 	        });
 	    });
+	    
 	    $('.next').click(function(){
 	        $('.list').stop().animate({'margin-left':'0px'},function(){
 	            $('.list>li').eq(2).prependTo('.list');

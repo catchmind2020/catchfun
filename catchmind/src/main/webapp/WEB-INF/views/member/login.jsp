@@ -33,10 +33,6 @@
 	height: 400px;
 }
 
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 #userId,#userPwd {
 	width: 100%;
 	padding: 12px 20px;
@@ -99,20 +95,7 @@ span.uname {
 		width: 100%;
 	}
 }
-/* 메뉴바 영역 */
-.header-area {
-	width: 1200px;
-	margin-left: 40px;
-	color: gray;
-	padding-top: 10px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	margin: auto;
-}
+
 </style>
 
 </head>

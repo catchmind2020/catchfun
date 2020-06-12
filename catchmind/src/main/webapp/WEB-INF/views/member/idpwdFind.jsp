@@ -35,7 +35,7 @@
     margin-top: 25px;
     margin-bottom: 10px;
 } 
-input[type=text],input[type=password],input[type=email], select {
+#email, select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
