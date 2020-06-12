@@ -116,7 +116,7 @@
 
 
 		<li class="nav-item"><c:choose>
-				<c:when test="${ project.projectStatus eq 'S' }">
+				<c:when test="${ project.projectStatus eq 'Y' }">
 					<a class="nav-link collapsed" href="#" data-toggle="collapse"
 						data-target="#collapsePages" aria-expanded="true"
 						aria-controls="collapsePages"> <i class="fas fa-fw fa-list"></i>

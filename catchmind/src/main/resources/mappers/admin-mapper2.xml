@@ -12,7 +12,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ENROLLDATE" property="userEnrolldate"/>
 		<result column="ADDRESS" property="address"/>
 		<result column="ADDRESSNUM" property="addressNum"/>
 		<result column="USER_POINT" property="userPoint"/>
@@ -32,7 +32,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ENROLLDATE" property="userEnrolldate"/>
 		<result column="REPORT_CONTENT" property="reportContent"/>
 		<result column="RNO" property="userNo"/>
 		<result column="PNO" property="userNo1"/>
@@ -60,25 +60,13 @@
 		<result column="PROJECT_CATEGORY" property="projectCategory"/>
 		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
 		<result column="USER_ID" property="userId"/>
-	</resultMap>
-	
-	<resultMap id="projectResultSet" type="Project5">
-		<id column="PROJECT_NUMBER" property="projectNumber"/>
-		<result column="PROJECT_CATEGORY_NAME" property="projectCategory"/>
-		<result column="USER_NO" property="userNo"/>
-		<result column="PROJECT_NAME" property="projectName"/>
 		<result column="PROJECT_DATE" property="projectDate"/>
-		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
-		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
-		<result column="PROJECT_CONTENT" property="projectContent"/>
-		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
-		<result column="PROJECT_REPORT" property="projectReport"/>
 		<result column="HASHTAGS" property="hashtags"/>
-		<result column="PROJECT_STATUS" property="projectStatus"/>
 		<result column="STATUS_STORY" property="statusStory"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
 	</resultMap>
+	
 	
 	<resultMap id="makerResultSet" type="Maker5">
 		<id column="MAKER_NO" property="makerNo"/>
@@ -264,7 +252,7 @@
     
     <select id="rpReportDetail" parameterType="string" resultMap="adminReportResultSet">
         select P_QUESTION_NO, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, QUESTION_BAN_COUNT, USER_ID, REPORT_CONTENT,
-               USER_TYPE, USER_NAME, EMAIL, PHONE, USER_ENROLLDATE, r.user_no as RNO, p.user_no as PNO
+               USER_TYPE, USER_NAME, EMAIL, PHONE, ENROLLDATE, r.user_no as RNO, p.user_no as PNO
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
           join report p on (r.P_QUESTION_NO = p.REPORT_NO)
@@ -317,46 +305,46 @@
     	 where p.project_status=#{proCategory}
     </select>
    
-    <select id="selectProject" parameterType="string" resultMap="projectResultSet">
-		SELECT PROJECT_NUMBER, CT.PROJECT_CATEGORY_NAME, USER_NO, P.PROJECT_NAME, PROJECT_FINISHDATE, PROJECT_CONTENT, 
+    <select id="selectProject" parameterType="string" resultMap="adminProReportResultSet">
+		SELECT PROJECT_NUMBER, USER_NO, P.PROJECT_NAME, PROJECT_FINISHDATE, PROJECT_CONTENT, 
 		               PROJECT_TARGET_AMOUNT, PROJECT_REPORT, HASHTAGS, PROJECT_STATUS, STATUS_STORY, CHANGE_NAME, FILE_PATH
 		  FROM PROJECT P
 		  JOIN CATEGORY_TYPE CT USING (PROJECT_CATEGORY)
 		  JOIN ATTACHMENT A ON (A.REF_NO = P.PROJECT_NUMBER)
-	     WHERE PROJECT_NUMBER = #{pno} AND PROJECT_STATUS = 'Y'
+	     WHERE PROJECT_NUMBER = #{pno} AND PROJECT_STATUS = 'E'
    </select>
    
    <select id="selectMaker" parameterType="string" resultMap="makerResultSet">
    		SELECT PM.*, CHANGE_NAME, FILE_PATH
 		  FROM PROJECT_MAKER PM
 		  JOIN ATTACHMENT A ON (A.REF_NO = PM.MAKER_NO)
-		 WHERE PROJECT_NUMBER = #{pno} AND PM.STATUS = 'Y'
+		 WHERE PROJECT_NUMBER = #{pno} AND PM.STATUS = 'E'
    </select>
    
    <select id="selectFunding" parameterType="string" resultMap="fundingResultSet">
    		SELECT SUM(FUNDING_COST) AS SUMPRICE, SUM(FUNDING_SPONSERSHIP) AS SUMSPONSERSHIP, COUNT(DISTINCT USER_NO) AS PERSONCOUNT
 		FROM FUNDING_LIST
-		WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'Y'
+		WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'E'
    </select>
    
    <select id="selectNews" parameterType="string" resultMap="newsResultSet">
 	   SELECT *
 	     FROM NEWS
-	    WHERE PROJECT_NUMBER=#{pno} AND NEWS_STATUS = 'N'
+	    WHERE PROJECT_NUMBER=#{pno} AND NEWS_STATUS = 'E'
 	    ORDER BY NEWS_NO
    </select>
    
    <select id="selectReward" parameterType="string" resultMap="rewardResultSet">
 	   SELECT *
 	     FROM REWARD
-	    WHERE PROJECT_NUMBER=#{pno} AND REWARD_STATUS = 'Y'
+	    WHERE PROJECT_NUMBER=#{pno} AND REWARD_STATUS = 'E'
 	    ORDER BY REWARD_NO
    </select>
    
    <select id="selectReward2" parameterType="string" resultMap="rewardResultSet">
 		SELECT COUNT(REWARD_NO) AS RCOUNT
 		  FROM FUNDING_LIST
-		 WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'Y'
+		 WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'E'
 		 GROUP BY REWARD_NO
 		 ORDER BY REWARD_NO
    </select>

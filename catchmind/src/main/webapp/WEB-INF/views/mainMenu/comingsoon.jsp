@@ -85,25 +85,13 @@ tr { box-sizing: border-box; }
 			<form>
 				<div class="categoryList">
 				<br>
-					<c:choose>
-						<c:when test="${ empty list}">
-							<br><br><h4 align='center'>
-							오픈예정인 프로젝트가 없습니다. <br></h4>
-						</c:when>
-						 <c:otherwise>
-							<c:forEach items="${ list }" var="p">
-								<div class="list">
-								<input type="hidden" value="${p.projectNo}">
-									<div>
-										<img src="${pageContext.servletContext.contextPath}/resources/images/uploadFiles/${p.projectImg }">
-									</div>
-									<div>
-										<h4 style="height:60px;">
-												<b>${p.projectName}</b>
-											</h4>
-									</div>
-									<div class="maker">${p.projectCategory} | ${p.makerName}</div>
-									<div class="openDate">${p.comingsoonDate}일 오픈예정</div>
+					
+					<c:forEach items="${ list }" var="p">
+						
+							<div class="list">
+							<input type="hidden" value="${p.projectNo}">
+								<div>
+									<img src="${pageContext.servletContext.contextPath}/resources/uploadFiles/${p.projectImg }">
 								</div>
 							</c:forEach>
 						</c:otherwise>

@@ -467,9 +467,13 @@
          transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
      } 
 	/* popup css */
+	#content1 img{
+		width: 500px;
+		max-width: 550px;
+	}
     
 </style>
-
+<!-- 
 <script>
 
     // 600px;
@@ -499,7 +503,7 @@
     }); 
 
 </script>
-
+ -->
 <body>
 
 	<jsp:include page="../common/menubar.jsp"/>
@@ -586,7 +590,7 @@
 
                 <tr>
                     <td style="width: 70px;">
-                    	<img src="${ m.filePath }/${ m.changeName }" id="maker_img">
+                    	<img src="resources/uploadFiles/${ m.makerChangeName }" id="maker_img">
                     </td>
                     <td>
                         ${ m.makerName } <a href="${ m.makerType }" target="_blank"><img src="resources/images/maker_homepage.png" id="maker_detail"></a>
@@ -785,7 +789,7 @@
             
             
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>	
+        <br><br><br><br><br><br><br><br><br><br><br><br>	
 
     </div>
 

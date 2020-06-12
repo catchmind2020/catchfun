@@ -24,4 +24,7 @@ public class Maker {
 	private String status;				// 상태값
 	private String changeName;
 	private String filePath;
+	
+	private String makerOriginName;
+	private String makerChangeName;
 }
