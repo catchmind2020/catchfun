@@ -584,7 +584,7 @@ public class AdminController {
 		
 	}
 	
-	// 결재내역
+	// 결제내역
 	/*
 	@RequestMapping("adminProjectPayTotal.ad")
 	public String adminProjectPayTotal(int currentPage, Model model) {

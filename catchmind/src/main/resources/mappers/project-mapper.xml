@@ -112,7 +112,7 @@
    </select>
    
    <select id="selectFunding" parameterType="string" resultMap="fundingResultSet">
-   		SELECT SUM(FUNDING_COST) AS SUMPRICE, SUM(FUNDING_SPONSERSHIP) AS SUMSPONSERSHIP, COUNT(DISTINCT USER_NO) AS PERSONCOUNT
+   		SELECT SUM(FUNDING_COST * FUNDING_QUANTITY) AS SUMPRICE, SUM(FUNDING_SPONSERSHIP) AS SUMSPONSERSHIP, COUNT(DISTINCT USER_NO) AS PERSONCOUNT
 		FROM FUNDING_LIST
 		WHERE PROJECT_NUMBER=#{pno} 
    </select>
@@ -134,7 +134,7 @@
    <select id="selectReward2" parameterType="string" resultMap="rewardResultSet">
 		SELECT COUNT(REWARD_NO) AS RCOUNT
 		  FROM FUNDING_LIST
-		 WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'Y'
+		 WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'N'
 		 GROUP BY REWARD_NO
 		 ORDER BY REWARD_NO
    </select>
@@ -224,7 +224,7 @@
    
    <update id="updateItemQuantity" parameterType="FundingList5">
 		update TB_OPTION
-		   set ITEM_QUANTITY = ITEM_QUANTITY - #{fundingQuantity} 
+		   set ITEM_QUANTITY = ITEM_QUANTITY - ${fundingQuantity} 
 		 where reward_no = #{rewardNo}
    </update>
    
@@ -234,5 +234,17 @@
 		 JOIN REWARD R ON(FL.REWARD_NO = R.REWARD_NO)
 		WHERE FL.USER_NO = #{userNo} AND FL.PROJECT_NUMBER = #{projectNumber}
    </select>
+   
+   <update id="updateRewardQuantity" parameterType="FundingList5">
+		update REWARD
+		   set REWARD_REMAINING_QUANTITY = REWARD_REMAINING_QUANTITY - ${fundingQuantity} 
+		 where reward_no = #{rewardNo}
+   </update>
+   
+   <update id="requestCancel" parameterType="FundingList5">
+		update FUNDING_LIST
+		   set FUNDING_STATUS = 'E'
+		 where PROJECT_NUMBER = #{projectNumber} AND USER_NO = #{userNo} AND REWARD_NO = #{rewardNo} AND FUNDING_STATUS = 'N'
+   </update>
    
 </mapper>

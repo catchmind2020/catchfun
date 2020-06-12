@@ -162,7 +162,7 @@
 	                            <input type="hidden" name="fundingTitle2" value="${ r.rewardTitle }">
 	                            <p>${ r.rewardContent }<br></p>
 	                            <input type="hidden" name="fundingProduct" value="${ r.rewardContent }">
-	                            <button class="reward_sum">${ r.rewardFundingCount }명</button> 참여하였습니다. (전체수량  ${ r.rewardRemainingQuantity }개남음)
+	                            <button class="reward_sum">${ r.rewardFundingCount }명</button> 참여하였습니다. (전체 수량  ${ r.rewardRemainingQuantity }개 남음)
 	                        </div>         
 	                    </td>
 	                </tr> 
