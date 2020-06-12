@@ -93,17 +93,9 @@ tr { box-sizing: border-box; }
 								<div>
 									<img src="${pageContext.servletContext.contextPath}/resources/uploadFiles/${p.projectImg }">
 								</div>
-								<div>
-									<h4 style="height:60px;">
-											<b>${p.projectName}</b>
-										</h4>
-								</div>
-								<div class="maker">${p.projectCategory} | ${p.makerName}</div>
-								<div class="openDate">${p.comingsoonDate}일 오픈예정</div>
-							</div>
-						
-						</c:forEach>
-					
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</form>
 
