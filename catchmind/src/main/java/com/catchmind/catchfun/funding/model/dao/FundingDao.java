@@ -120,12 +120,30 @@ public class FundingDao {
 	}
 	
 	public int deleteWishlist(SqlSessionTemplate sqlSession, Wishlist w) {
-		//System.out.println("dkd");
-		//System.out.println(w);
+
 		return sqlSession.delete("projectMapper.deleteWishlist", w);
 	}
 	
-	
+	public int insertFundingList(SqlSessionTemplate sqlSession, FundingList f) {
+		
+		return sqlSession.insert("projectMapper.insertFundingList", f);
+	}
 
+	public int updatePoint(SqlSessionTemplate sqlSession, FundingList f) {
+		
+		return sqlSession.update("projectMapper.updatePoint", f);
+	}
+	
+	public int updateItemQuantity(SqlSessionTemplate sqlSession, FundingList f) {
+		
+		return sqlSession.update("projectMapper.updateItemQuantity", f);
+	}
+	
+	public ArrayList<FundingList> selectConfirmFunding(SqlSessionTemplate sqlSession, FundingList f){
+		
+		ArrayList<FundingList> list = (ArrayList)sqlSession.selectList("projectMapper.selectConfirmFunding", f);
+		return list;
+
+	}
 	
 }

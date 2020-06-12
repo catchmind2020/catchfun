@@ -44,7 +44,7 @@
 	   <!-- 위에 참고용 -->
 	   
   	<!-- 주혁시작 -->
-	   
+	
 	<resultMap id="adminNoticeResultSet" type="Notice">
 		<id column="NOTICE_NO" property="noticeNo"/>
 		<result column="USER_ID" property="userId"/>

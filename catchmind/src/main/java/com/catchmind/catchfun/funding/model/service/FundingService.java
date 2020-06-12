@@ -64,4 +64,16 @@ public interface FundingService {
 	
 	int deleteWishlist(Wishlist w);
 	
+	// 프로젝트 결제내역 저장
+	int insertFundingList(FundingList f);
+	
+	// 사용 포인트 차감
+	int updatePoint(FundingList f);
+	
+	// 결재된 리워드들 수량 차감
+	int updateItemQuantity(FundingList f);
+	
+	// 최종 결재 펀딩리스트 조회
+	ArrayList<FundingList> selectConfirmFunding (FundingList f);
+	
 }
