@@ -431,6 +431,8 @@ public class AdminController {
 			String refNo = aService.refNoCategory();
 			c.setRefNo(refNo);
 			
+			System.out.println("curernt : " + refNo);
+			
 			int result2 = aService.insertAttachment(c);
 			
 			if(result2 > 0) {
@@ -634,12 +636,18 @@ public class AdminController {
 	public String updateBoard(PayTotal p, int projectPay, int adminPay, HttpServletRequest request, Model model) {
 		
 		p.setProjectPay(projectPay);
+		System.out.println("project : " + projectPay);
+		System.out.println("admin : " + adminPay);
 		
 		int result = aService.updateProjectPay(p);
 		if(result > 0) {
 			
+			// result2 문제
 			int result2 = aService.updateAdminPay(adminPay);
 			int result3 = aService.updateProjectStatus(p);
+			
+			System.out.println(result2);
+			System.out.println(result3);
 			
 			if(result2*result3 > 0) {
 				return "success";
