@@ -395,7 +395,7 @@ public class MemberController {
 		
 
 			if(loginUser.getUserId().equals("admin")) {
-				mv.setViewName("admin/adminMember");
+				mv.setViewName("redirect:member.ad?currentPage=1");
 				//mv.setViewName("common/admin");
 			}else {
 				mv.setViewName("redirect:/");

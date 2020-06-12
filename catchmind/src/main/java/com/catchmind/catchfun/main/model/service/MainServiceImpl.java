@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.main.model.dao.MainDao;
+import com.catchmind.catchfun.main.model.vo.Category;
 import com.catchmind.catchfun.main.model.vo.Main;
+import com.catchmind.catchfun.main.model.vo.Param;
 
 @Service("maService")
 public class MainServiceImpl implements MainService{
@@ -21,6 +23,48 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public ArrayList<Main> mainSpotlightList() {
 		return maDao.mainSpotlightList(sqlSession);
+	}
+	
+	
+	@Override
+	public ArrayList<Category> mainCategoryList() {
+		return maDao.mainCategoryList(sqlSession);
+	}
+	
+
+
+	@Override
+	public String mainCategoryName(String cno) {
+		return maDao.mainCategoryName(sqlSession, cno);
+		
+	}
+	
+	
+	@Override
+	public ArrayList<Main> mainComingsoonList() {
+		return maDao.mainComingsoonList(sqlSession);
+	}
+	
+	@Override
+	public int getListCnt(String cno, String order) {
+		return maDao.getListCnt(sqlSession, cno, order);
+	}
+
+
+	@Override
+	public ArrayList<Main> getList(String cno, String order, Param param) {
+		return maDao.getList(sqlSession, cno, order, param);
+	}
+	
+	@Override
+	public ArrayList<Main> mainSearchAjax(String keyword, Param param) {
+		return maDao.mainSearchAjax(sqlSession, keyword, param);
+	}
+
+
+	@Override
+	public int searchListCnt(String keyword) {
+		return maDao.searchListCnt(sqlSession, keyword);
 	}
 
 }

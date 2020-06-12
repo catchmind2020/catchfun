@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.ArrayList, com.catchmind.catchfun.member.model.vo.*, com.catchmind.catchfun.common.model.vo.PageInfo"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-
+	
 %>
 
 <%--회원전체조회 화면 --%>
@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 <style>
 .area {
 	width: 300px;
@@ -52,11 +54,11 @@
 	min-width: 800px;
 }
 
-
- .black{
-	color: black; 
+.black {
+	color: black;
 	font-size: 15px;
-   }
+}
+
 .blacktool {
 	/* vertical-align: middle; */
 	width: 700px;
@@ -68,109 +70,331 @@
 }
 </style>
 
-<script src="<%=request.getContextPath()%>/resources/js/jquery-3.2.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/owl.carousel.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/jquery.marquee.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
-<!-- Custom fonts for this template-->
+<!--써머노트  -->
 
-  <link href="<%=request.getContextPath()%>/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="<%=request.getContextPath()%>/resources/admin/css/sb-admin-2.css" rel="stylesheet">
+
+
+
+
+<!-- include summernote css/js-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.0/summernote.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.0/summernote.js"></script>
+
+
+
+
 
 </head>
 
 <body>
-	<div  style="position: fixed";>
-	<%@ include file="../common/menubarIm.jsp"%>
+
+
+	<div style="position: fixed";>
+		<%@ include file="../common/menubarIm.jsp"%>
 	</div>
-	
-	<div class="outer">
-		<form style="margin-left: 270px;">
-			<div style=" height: 700px;">
-				<br>
-				<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
-				<div class="card shadow mb-4" style="width: 1000px;">
-					<div class="card-header py-3">
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요 기본
-							정보를 입력하세요.</h6>
-					</div>
+	<c:choose>
+		<c:when test="${ empty project.projectStatus }">
+			<div class="outer">
+				<div style="height: 700px; margin-left: 270px;">
+					<form action="updateProject.pa" method="post"
+						enctype="multipart/form-data">
+						<br>
+						<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
 
-					<div class="card-body">
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요
+									기본 정보를 입력하세요.</h6>
+							</div>
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
-						<input id="question3" name="question3" class="questioninput"
-							required></input> <br>
+							<div class="card-body">
+
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
+								<input id="question3" name="projectName" class="questioninput"
+									value="${project.projectName}" required></input> <br> <br>
+
+								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
+								<input id="question4" name="projectTargetAmount"
+									class="questioninput" value="${project.projectTargetAmount}"
+									required></input> <br> <br>
+
+								<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
+
+								<select id="question5" name="projectCategory"
+									class="questioninput" required>
+
+									
+									<c:forEach items="${ categoryList }" var="c">
+										<option value="${ c.categoryNo}">${ c.categoryName}</option>
+
+
+									</c:forEach>
+
+								</select> <br> <br>
+
+								<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
+								<label for="upfile">첨부파일</label> <input type="file" id="upfile"
+									class="form-control-file border" name="uploadFile" required>
+								<c:choose>
+									<c:when test="${ !empty project.originName }">
+	                        	업로드된파일:<a
+											href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${project.changeName}"
+											download="${ project.originName }">${ project.originName }</a>
+									</c:when>
+									<c:otherwise>
+	                                                        첨부파일이 없습니다.
+                        	</c:otherwise>
+								</c:choose>
+								<h1 class="grey">
+									3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트
+									및 로고 삽입 금지
+								</h1>
+								<br>
+
+
+								<%-- <c:choose>
+							<c:when test="${ empty project.projectStatus }">
+ --%>
+								<h6 class="m-0 font-weight-bold text-primary" required>프로젝트
+									시작일</h6>
+								<input type="date" id="startDate" name="projectStartDate">
+								<h1 class="grey">리워드를 설계하기 위해 프로젝트 시작일을 선택하세요.</h1>
+								${project.projectStartDate} <br>
+
+
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
+								<input type="date" id="finishDate" name="projectFinishDate"
+									required>
+								<h1 class="grey">리워드를 설계하기 위해 프로젝트 종료일을 선택하세요.</h1>
+								${project.projectFinishDate}
+								<%-- 	</c:when>
+							<c:otherwise>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트 시작일</h6>
+								
+								<br>
+								<br>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
+							
+							</c:otherwise>
+						</c:choose> --%>
+
+
+								<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
+								<input id="tag" name="hhsh" class="questioninput"
+									value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
+								<br> <br>
+
+								<!-- <div class="btn btn-info btn-icon-split">
+							<span class="text">사망 X</span>
+						</div>
+						<div class="btn btn-info btn-icon-split">
+							<span class="text">사아망 X</span>
+						</div> -->
+							</div>
+						</div>
+
+
+						<br> <br>
+
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
+							</div>
+							<div class="card-body">
+
+								<textarea id="summernote" name="projectContent" required>${project.projectContent}</textarea>
+							</div>
+						</div>
+
 						<br>
 
-						<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
-						<input id="question4" name="question4" class="questioninput"
-							required></input> <br>
-						<br>
 
-						<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
-						<select id="question5" name="question5" class="questioninput">
-							<option value="ko">한국</option>
-							<option value="us" selected>공연컬쳐</option>
-							<option value="eu">영국</option>
-						</select> <br>
-						<br>
+						<%-- <c:choose>
+					<c:when test="${ !empty project.projectStatus }">
 
-						<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
-						<button>등록하기</button>
-						<h1 class="grey">
-							3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트 및
-							로고 삽입 금지
-						</h1><br>
+						<div class="col-auto">
 
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트 시작일</h6>
-						<input type="date" id="startDate" name="startDate"><br>
-						<br>
-						<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
-						<input type="date" id="finishDate" name="finishDate"> 
-						<input
-							type="text" id="datepickerr" name="res_date" class="ipt black"
-							placeholder="날짜버튼">
-						<h1 class="grey">리워드를 설계하기 위해 프로젝트 종료일을 선택하세요.</h1>
+							<div class="btns">
+								<button type="submit" class="btn btn-primary btn-user btn-block"
+									style="width: 200px;">수정하기</button>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise> --%>
 
-						<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
-						<input id="tag" name="tag" class="questioninput"></input>
-						<br><br>
-						
-						 <div class="btn btn-info btn-icon-split">
-		                    <span class="text">사망 X</span>
-		                  </div>
-		                   <div class="btn btn-info btn-icon-split">
-		                    <span class="text">사아망 X</span>
-		                  </div>
-					</div>
-				</div>
-				
-				
-				<br><br>
-				<div class="card shadow mb-4" style="width: 1000px;">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
-					</div>
-					<div class="card-body">
-					
-						<textarea id="question1" name="question1" class="questiontext"
-							required></textarea>
-					</div>
-				</div>
-				
-					<br>
-				<div class="btns">
-					<button type="submit" class="btn btn-primary btn-user btn-block"
-						style="width: 200px;">저장하기</button>
+						<div class="col-auto">
+
+							<div class="btns">
+								<button type="submit" class="btn btn-primary btn-user btn-block"
+									style="width: 200px;">저장하기</button>
+							</div>
+						</div>
+						<%-- 
+					</c:otherwise>
+				</c:choose>
+ --%>
+					</form>
+
 				</div>
 			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="outer">
+				<div style="height: 700px; margin-left: 270px;">
+					<form action="updateProject2.pa" method="post"
+						enctype="multipart/form-data">
+						<br>
+						<h1 class="h3 text-gray-900 mb-4">기본 정보</h1>
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
 
-		</form>
-	</div>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트를 대표할 주요
+									기본 정보를 입력하세요.</h6>
+							</div>
+
+							<div class="card-body">
+
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
+								<input id="question3" name="projectName" class="questioninput"
+									value="${project.projectName}" required></input> <br> <br>
+
+								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
+								<input id="question4" name="projectTargetAmount"
+									class="questioninput" value="${project.projectTargetAmount}"
+									required></input> <br> <br>
+
+								<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
+								<%-- 	<c:choose>
+							<c:when test="${ empty project.projectStatus }"> --%>
+								<select id="question5" name="projectCategory"
+									class="questioninput" required>
+									<option value="ko">한국</option>
+									<option value="us" selected>공연컬쳐</option>
+									<option value="eu">영국</option>
+
+								</select> <br>
+								<%-- 		</c:when>
+							<c:otherwise>
+								<select id="question5" name="projectCategory"
+									class="questioninput">
+
+									<option value="${project.projectName}" selected>공연컬쳐</option>
+
+
+								</select>
+								<br>
+							</c:otherwise>
+						</c:choose> --%>
+								<br>
+
+								<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
+								<label for="upfile">첨부파일</label> <input type="file" id="upfile"
+									class="form-control-file border" name="uploadFile" required>
+								<c:choose>
+									<c:when test="${ !empty project.originName }">
+	                        	업로드된파일:<a
+											href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${project.changeName}"
+											download="${ project.originName }">${ project.originName }</a>
+									</c:when>
+									<c:otherwise>
+	                                                        첨부파일이 없습니다.
+                        	</c:otherwise>
+								</c:choose>
+								<h1 class="grey">
+									3MB 이하의 JPEG, PNG 파일<br> 사이즈 : 1200X675 픽셀 이상<br> 텍스트
+									및 로고 삽입 금지
+								</h1>
+								<br>
+
+
+								<%-- <c:choose>
+							<c:when test="${ empty project.projectStatus }">
+ --%>
+								<h6 class="m-0 font-weight-bold text-primary" required>프로젝트
+									시작일</h6>
+								<input type="date" id="startDate" name="projectStartDate">
+								<h1 class="grey">리워드를 설계하기 위해 프로젝트 시작일을 선택하세요.</h1>
+								${project.projectStartDate} <br>
+
+
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
+								<input type="date" id="finishDate" name="projectFinishDate"
+									required>
+								<h1 class="grey">리워드를 설계하기 위해 프로젝트 종료일을 선택하세요.</h1>
+								${project.projectFinishDate}
+								<%-- 	</c:when>
+							<c:otherwise>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트 시작일</h6>
+								
+								<br>
+								<br>
+								<h6 class="m-0 font-weight-bold text-primary">프로젝트 종료일</h6>
+							
+							</c:otherwise>
+						</c:choose> --%>
+
+
+								<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
+								<input id="tag" name="hhsh" class="questioninput"
+									value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
+								<br> <br>
+
+								<!-- <div class="btn btn-info btn-icon-split">
+							<span class="text">사망 X</span>
+						</div>
+						<div class="btn btn-info btn-icon-split">
+							<span class="text">사아망 X</span>
+						</div> -->
+							</div>
+						</div>
+
+
+						<br> <br>
+
+						<div class="card shadow mb-4" style="width: 1000px;">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">스토리 작성</h6>
+							</div>
+							<div class="card-body">
+
+								<textarea id="summernote" name="projectContent" required>${project.projectContent}</textarea>
+							</div>
+						</div>
+
+						<br>
+
+
+
+						<div class="col-auto">
+
+							<div class="btns">
+								<button type="submit" class="btn btn-primary btn-user btn-block"
+									style="width: 200px;">수정하기</button>
+							</div>
+						</div>
+
+
+					</form>
+
+				</div>
+			</div>
+		</c:otherwise>
+
+	</c:choose>
+
+
+	<script>
+		$('#summernote').summernote({
+			placeholder : '스토리 작성하세요!',
+			tabsize : 2,
+			height : 500
+		});
+	</script>
 
 
 	<script>
@@ -214,8 +438,9 @@
 
 		});
 
+		/*썸노  */
 	</script>
 	<!-- Bootstrap core JavaScript-->
-	
+
 </body>
 </html>

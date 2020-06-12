@@ -16,12 +16,24 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Item" alias="Item" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Reward" alias="Reward" />
 		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Option" alias="Option" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.ProjectMaker" alias="Maker2" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.File" alias="File" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Funding" alias="Funding2" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.News" alias="News2" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.Category" alias="Category2" />
+		<typeAlias type="com.catchmind.catchfun.projectAdmin.model.vo.FundSum" alias="FundSum" />
+		
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Faq" alias="Faq" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Notice" alias="Notice" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Member" alias="Member1"/>
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Project" alias="Project1"/>
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Question" alias="Question" />
+		
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Main" alias="Main" />
+		<typeAlias type="com.catchmind.catchfun.main.model.vo.Category" alias="MainCategory" />
+		<typeAlias type="com.catchmind.catchfun.notice.model.vo.Notice" alias="MainNotice" />
+		<typeAlias type="com.catchmind.catchfun.notice.model.vo.CatchfunQuestion" alias="MainQuesion" />
+		
 		
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Project" alias="Project5" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Maker" alias="Maker5" />
@@ -49,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mappers/admin-mapper2.xml"/>
 		<mapper resource="mappers/main-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml" />
 	</mappers>
 	
 	

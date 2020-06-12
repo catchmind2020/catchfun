@@ -22,7 +22,6 @@
 	
 	<resultMap id="adminReportResultSet" type="Reply1">
 		<result column="P_QUESTION_NO" property="replyNo"/>
-		<result column="USER_NO" property="userNo"/>
 		<result column="QUESTION_CONTENT" property="questionContent"/>
 		<result column="QUESTION_DATE" property="questionDate"/>
 		<result column="QUESTION_YN" property="questionYN"/>
@@ -34,6 +33,9 @@
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
 		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="RNO" property="userNo"/>
+		<result column="PNO" property="userNo1"/>
 	</resultMap>
 	
 	<resultMap id="adminProReportResultSet" type="Project1">
@@ -44,6 +46,20 @@
 		<result column="PHONE" property="phone"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PROJECT_REPORT" property="projectReport"/>
+		<result column="PROJECT_CONTENT" property="projectContent"/>
+		<result column="PROJECT_STATUS" property="projectStatus"/>
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="REPORT_CATEGORY" property="reportCategory"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_TITLE" property="reportTitle"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="PNO" property="userNo"/>
+		<result column="RNO" property="userNo1"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="PROJECT_CATEGORY" property="projectCategory"/>
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
+		<result column="USER_ID" property="userId"/>
 	</resultMap>
 	
 	<select id="memberListCount" resultType="_int">
@@ -110,67 +126,125 @@
     <select id="reportListCount" resultType="_int">
     	select count(*)
     	  from reply r
-          join member m using(user_no)
-    	 where m.status='Y' and question_status='N' 
+    	  join member m on (r.user_no = m.user_no)
+          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1' and question_status='N' 
     </select>
     
     <select id="reportList" resultMap="adminReportResultSet">
     	select *
     	  from reply r
-    	  join member m using(user_no)
-    	 where m.status='Y'     	  
+    	  join member m on (r.user_no = m.user_no)
+          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'     	  
     </select>
     
     <select id="reportSearchCount" resultType="_int">
     	select count(*)
     	  from reply r
-    	  join member m using(user_no)
-    	 where m.status='Y' and USER_ID LIKE '%' || #{keyword} || '%' 
+    	  join member m on (r.user_no = m.user_no)
+          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'and USER_ID LIKE '%' || #{keyword} || '%' 
     </select>
     
     <select id="reportSearch" resultMap="adminReportResultSet">
     	select *
     	  from reply r
-    	  join member m using(user_no)  
-    	 where m.status='Y' and m.USER_ID LIKE '%' || #{keyword} || '%'   	  
+    	  join member m on (r.user_no = m.user_no)
+          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'and m.USER_ID LIKE '%' || #{keyword} || '%'   	  
     </select>
     
     <select id="proReportListCount" resultType="_int">
     	select count(*)
 		from project p
-		join member m using(user_no) 
+   	    join member m on(m.user_no = p.user_no)
+	    join report r on(p.project_number = r.REPORT_NO)
+	   where report_category=2 and PROJECT_STATUS='Y' 		 
     </select>
     
     <select id="proReportList" resultMap="adminProReportResultSet">
 		select *
 		from project p
-		join member m using(user_no)  	  
+   	    join member m on(m.user_no = p.user_no)
+	    join report r on(p.project_number = r.REPORT_NO)
+		where report_category=2 and PROJECT_STATUS='Y' 	  
     </select>
     
     <select id="proReportSearchCount" resultType="_int">
     	select count(*)
 		from project p
-		join member m using(user_no) 
-    	 where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%' 
+   	    join member m on(m.user_no = p.user_no)
+	    join report r on(p.project_number = r.REPORT_NO)
+    	 where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%' and report_category=2 and PROJECT_STATUS='Y' 	
     </select>
     
     <select id="proReportSearch" resultMap="adminProReportResultSet">
      	select *
 		from project p
-		join member m using(user_no)  
-    	where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%'   	  
+   	    join member m on(m.user_no = p.user_no)
+	    join report r on(p.project_number = r.REPORT_NO)
+    	where p.PROJECT_NUMBER LIKE '%' || #{keyword} || '%' and report_category=2 and PROJECT_STATUS='Y' 	  	  
     </select>
     
     <select id="rpReportDetail" parameterType="string" resultMap="adminReportResultSet">
-        select *
+        select P_QUESTION_NO, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, QUESTION_BAN_COUNT, USER_ID, REPORT_CONTENT,
+               USER_TYPE, USER_NAME, EMAIL, PHONE, USER_ENROLLDATE, r.user_no as RNO, p.user_no as PNO
     	  from reply r
-    	  join member m using(user_no) 
-    	 where P_QUESTION_NO =#{rd}   
+    	  join member m on (r.user_no = m.user_no)
+          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'and P_QUESTION_NO =#{rd}   
     </select>
+    
     
     <update id="reportBlack" parameterType="string">
     	update Member set status='B' where user_no=#{userNo}
     </update>
+    
+    <select id="pjReportDetail" parameterType="string" resultMap="adminProReportResultSet">
+    	select PROJECT_NUMBER,PROJECT_NAME,PROJECT_STARTDATE,USER_NAME,PHONE,EMAIL,PROJECT_REPORT,REPORT_NO,REPORT_CATEGORY,REPORT_DATE,REPORT_TITLE,
+    	       REPORT_CONTENT, PROJECT_CONTENT, p.user_no as PNO, r.user_no as RNO
+		  from project p
+		  join member m on(m.user_no = p.user_no)
+		  join report r on(p.project_number = r.REPORT_NO)
+		 where report_category=2 and PROJECT_NUMBER=#{rd} and PROJECT_STATUS='Y'
+    </select>
+    
+    <update id="pjDelete" parameterType="string">
+    	update project set PROJECT_STATUS ='N' where PROJECT_NUMBER=#{projectNumber} 
+    </update>
+    
+    <select id="projectListCount" resultType="_int">
+    	select count(*)
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status='Y' or p.project_status='B'
+    </select>
+    
+    <select id="projectList" resultMap="adminProReportResultSet">
+    	select *
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status='Y' or p.project_status='B'
+    </select>
+    
+    <select id="projectSearchCount" resultType="_int" parameterType="string">
+    	select count(*)
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status=#{proCategory}
+    </select>
+    
+    <select id="projectSearch" resultMap="adminProReportResultSet" parameterType="string">
+    	select *
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status=#{proCategory}
+    </select>
+    
+    
+    
+
 
   <!-- 
   <resultMap id="adminResultSet" type="Board">

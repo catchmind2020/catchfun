@@ -11,30 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-/* 메뉴바 영역 */
-.header-area {width: 1200px; margin-left: 40px; color: gray; padding-top: 10px; margin-top: 20px; margin-bottom: 10px;
-	top: 0; right: 0; bottom: 0; left: 0; margin: auto;
-}
 
-/* 메뉴 */
-.header { display: table-cell; /* width:200px; */ padding-right: 40px; height: 35px; text-align: center; vertical-align: bottom;
-	font-size: 25px; font-weight: 900; color: black; }
-
-/* 검색바 */
-#header_searchbar { margin-left: 1400px; margin-top: 10px; position : absolute; height: 50px; width: 5px;
-	transform: translate(-50%, -50%); position: absolute; }
-
-
-/* 로그인 부분*/
-.login {
-	position: relative;
-	bottom:-6px;
-	display: table-cell;
-	font-size: 15px;
-	color: gray;
-	padding-left: 220px;
-	padding-right: 0px;
-}
 
 /* 아이디발송요청 Buttom*/
 .userid_request{

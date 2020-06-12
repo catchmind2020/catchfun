@@ -102,6 +102,17 @@ public interface AdminService {
 	
 	ArrayList<String> prList();
 	
+	int updateProjectPay(PayTotal p);
+	
+	int updateAdminPay(int adminPay);
+	
+	int updateProjectStatus(PayTotal p);
+	
+	// 리스트출력
+	int adminProjectPayTotalCount();
+	
+	ArrayList<PayTotal> adminProjectPayTotalList(PageInfo pi);
+	
 	// 주혁 끝
 	
 }

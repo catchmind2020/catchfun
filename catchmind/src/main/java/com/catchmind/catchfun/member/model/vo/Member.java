@@ -27,31 +27,33 @@ import lombok.ToString;
 @ToString
 //@EqualsAndHashCode
 public class Member {
-	
+
 	private String userNo;
 	private String userId;
 	private String userPwd;
 	private int userType;
 	private String userName;
+
 	private String email;
 	private String phone;
 	private Date enrollDate;
 	private String address;
 	private String addressNum;
+
 	private int point;
 	private String status;
 	private String reason;
 	private String addressDetail;
 	private String addressReference;
 	
-	
-	
-	//private String uId;
-	// getuId()  setuId()
+	public Member(String userNo, String userId) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+	}
+
+	// private String uId;
+	// getuId() setuId()
 	// ${ loginUser.uId }
-	
+
 }
-
-
-
-

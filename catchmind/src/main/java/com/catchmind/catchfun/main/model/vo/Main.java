@@ -19,7 +19,7 @@ public class Main {
 	private String projectName;			// 프로젝트이름
 	private String projectCategory;		// 프로젝트카테고리
 	private String projectCategoryImg;	// 프로젝트카테고리이미지
-
+	private String CategoryNo;
 	private String makerName;			// 메이커이름
 	private String projectImg;			// 프로젝트대표이미지
 
@@ -33,5 +33,5 @@ public class Main {
 	
 	private int wishlist;				// 프로젝트위시리스트
 
-
+	private String comingsoonDate;		// 오픈예정일자
 }

@@ -37,6 +37,9 @@
 		<url-pattern>*.pa</url-pattern>
 		<url-pattern>*.mu</url-pattern>
 		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.no</url-pattern>
+		<url-pattern>*.cq</url-pattern>
+		<url-pattern>*.gu</url-pattern>
 	</servlet-mapping>
 	
 	

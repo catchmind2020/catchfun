@@ -77,7 +77,7 @@
     .side_button2 {
         width: 109px;
         height: 40px;
-        font-size: 15px;
+        font-size: 14px;
         /* background-color: rgb(31, 205, 211, 0.2); */
         background-color: white;
         border: 1px solid darkgray;
@@ -89,7 +89,7 @@
     .side_button {
         width: 109px;
         height: 40px;
-        font-size: 17px;
+        font-size: 15px;
         background-color: white;
         border: 1px solid darkgray;
         color: black;
@@ -222,6 +222,17 @@
         padding: 20px;
         color:gray;
         font-size: 12px;
+    }
+    #rewardTable div:hover{
+        border: 1px solid darkgray;
+        width: 200px;
+        height: 130px;
+        margin-bottom: 10px;
+        padding: 20px;
+        color:gray;
+        font-size: 12px;
+        font-color:darkgray;
+        background: rgb(31, 205, 211, 0.2);
     }
 
     /* #info_text{
@@ -565,10 +576,10 @@
                 <tr>
                 	<c:choose>
 	                	<c:when test="${ !empty loginUser }"> 
-                    		<td class="info_title"><button class="main_button" style="width: 230px;" onclick="location.href='rewardList.pay?pno=${ p.projectNumber }'">참여하기</button></td>
+                    		<td class="info_title"><button class="main_button" style="width: 230px;" onclick="location.href='rewardList.pay?pno=${ p.projectNumber }&rno=0'">참여하기</button></td>
                     	</c:when>
                 		<c:otherwise>
-                			<td class="info_title"><button class="main_button" style="width: 230px;" onclick="alert('로그인 후 사용이 가능합니다.');">참여하기</button></td>
+                			<td class="info_title"><button class="main_button" style="width: 230px;" onclick="alert('로그인 후 서비스 이용이 가능합니다.');">참여하기</button></td>
                 		</c:otherwise>
                 	</c:choose>
                 </tr>
@@ -578,7 +589,7 @@
                     	<img src="${ m.filePath }/${ m.changeName }" id="maker_img">
                     </td>
                     <td>
-                        ${ m.makerName } <a href="https://www.iei.or.kr/main/main.kh" target="_blank"><img src="resources/images/maker_homepage.png" id="maker_detail"></a>
+                        ${ m.makerName } <a href="${ m.makerType }" target="_blank"><img src="resources/images/maker_homepage.png" id="maker_detail"></a>
                         <!-- <button class="maker_detail">SNS</button> --><br>
                         ${ m.makerEmail }
                     </td>
@@ -588,7 +599,7 @@
 		                    <td align="right" style="padding-right:0px;"><button class="maker_button trigger">개설자문의</button> <button id="maker_ban_button" class="trigger2">개설자신고</button></td>
 		                    <td></td>
 		                    <td class="info_title" style="vertical-align: middle;">
-			                    <input type="button" class="side_button2" value="공유">&nbsp;&nbsp;
+			                    <input type="button" class="side_button2" value="공유">&nbsp;
 			                    <span id="zzimDir"></span>			                    
 		                    </td>
                 		</c:when>
@@ -682,7 +693,7 @@
                                                     	
                                                     	<c:otherwise>                                  
                                                     		<th style="padding:0px" colspan="3">
-			                                                	<textarea  readonly rows="3" cols="60" id="replyContent" style="resize:none; padding:0">로그인한 사용자만 이용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
+			                                                	<textarea  readonly rows="3" cols="60" id="replyContent" style="resize:none; padding:0">로그인 후 댓글작성이 가능합니다.</textarea>
 			                                                </th>
                                                     		<th><button id="addReply">등록</button></th>
                                                     	</c:otherwise>                       
@@ -712,19 +723,28 @@
                                 <p>tab menu4의 내용</p>
                             </section> -->
                         </th>
+                        
+                        
+                        
+                        
                         <td class="rewardArea" >
+                        
+                        	
                             <!-- 리워드들 -->
                             <table id="rewardTable">
                             
                                 <!-- for문 -->
 	                            <c:forEach items="${ rlist }" var ="r">
 	                                <tr>
-	                                    <td><div>
-	                                        <b class="reward_money"><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" />원 펀딩</b>
-	                                        <p class="reward_name">${ r.rewardTitle }<br></p>
-	                                        <p>${ r.rewardContent }<br></p>
-	                                        <button class="reward_sum">${ r.rewardFundingCount }명</button>&nbsp;&nbsp;참여 / 수량 ${ r.rewardRemainingQuantity }개 남음
-	                                    </div></td>
+	                                    <td>
+		                                    <div>
+		                                    	<input type="hidden" name="rewardNo" value="${ r.rewardNo }" class="rno">
+		                                        <b class="reward_money"><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" />원 펀딩</b>
+		                                        <p class="reward_name">${ r.rewardTitle }<br></p>
+		                                        <p>${ r.rewardContent }<br></p>
+		                                        <button class="reward_sum">${ r.rewardFundingCount }명</button>&nbsp;&nbsp;참여 / 수량 ${ r.rewardRemainingQuantity }개 남음
+		                                    </div>
+	                                    </td>
 	                                </tr>
                                 </c:forEach>
                                 
@@ -748,6 +768,8 @@
                                  -->
                                 
                             </table>
+                            
+                            
                         </td>
                     </tr>
                 </thead>
@@ -841,16 +863,16 @@
         						
         				        value += "<tr>" +
 						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn' >수정</button> <button class='rBtn'>삭제</button>" + "</td>" +
-						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
+						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn' onclick='updateReply();'>수정</button> <button class='rBtn' key=" + list[i].replyNo + " onclick='deleteReply();'>삭제</button>" + "</td>" +
+						                    "<td width='70px'>" + list[i].replyDate + "</td>" +
 						                 "</tr>";
 			                 
         					}else{ // 동일하지않을 때
         						
         				        value += "<tr>" +
 						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBanBtn' onclick='replyBan(" + list[i].replyNo + ");'>신고</button></td>" +
-						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
+						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBanBtn' key=" + list[i].replyNo + " onclick='replyBan();'>신고</button></td>" +
+						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 						                   
 						                 "</tr>";
         					}
     						
@@ -886,23 +908,20 @@
 
     	
     	// 댓글 신고
-    	function replyBan(replyNo){ 
+    	function replyBan(){ 
     		
-    		//var userNo = $(this).parent().parent().parent().eq(0).text();
-    		//console.log(replyNo);
-
-    	/* $(".rBanBtn").click(function(replyNo){ */
+    		var replyNo = window.event.target.getAttribute("key"); 
     		
 			$.ajax({
 				url: "rBan.pro",
-				data: { replyNo: "replyNo"  },
+				data: { replyNo: replyNo  },
 				type: "post",
 				success: function(status){
 				
 					if(status == "success"){
 						
 						alert("댓글 신고 성공");
-						selectReplyList(); // 다시 댓글 조회
+						selectReplyList(); 
 						
 					}else{
 						alert("댓글 신고 실패");
@@ -914,24 +933,31 @@
 			
     	}
     	
-/*     	// 참여하기 버튼
-    	function goFunding(){
-    		
-    		var $userNo = $("#userNo").val();
-    		console.log($userNo);
-    		
-    		if( $userId != null ){
-    			
-    			location.href="rewardList.pay?pno=" + "${ p.projectNumber }";
-    			
-    		}else{
-    			
-    			alert("로그인 후 사용가능합니다.");
-    		}
-    		
-    	} */
     	
-    	
+    	// 댓글 삭제
+    	function deleteReply(){
+    		
+    		var replyNo =window.event.target.getAttribute("key"); 
+    		
+    		$.ajax({
+				url: "deleteReply.pro",
+				data: { replyNo: replyNo },
+				type: "post",
+				success: function(status){
+				
+					if(status == "success"){
+						
+						alert("댓글 삭제 성공");
+						selectReplyList(); // 다시 댓글 조회
+						
+					}else{
+						alert("댓글 삭제 실패");
+					}
+				}, error: function(){
+					alert("댓글 삭제 ajax 통신 실패");
+				}
+			});
+    	}
     	
     // 찜 불러오기
    	$(function(){
@@ -951,7 +977,7 @@
 					value = "<input type='button' class='side_button' id='addWish' onclick='addWish();' value='♡'>";
 				
 				}else{
-					value = "<input type='button' class='side_button' id='addWish' onclick='addWish();' value='♥'>";
+					value = "<input type='button' style='color:red; font-size:23px;' class='side_button' id='addWish' onclick='addWish();' value='♥'>";
 					
 				}
    				$("#zzimDir").html(value);
@@ -966,7 +992,7 @@
     // 찜 리스트 추가 및 삭제
 	function addWish(){
 		 
-		 console.log("a");
+		 //console.log("a");
 		 var projectNumber = $("#zzimNumber").val();
 		 var userNo = $("#zzimNo").val()
 		 
@@ -982,12 +1008,14 @@
     				if(status == "delete"){
     					
 							alert("찜하기가 취소되었습니다.");
-							$("#addWish").val("♡");
+							$("#addWish").val("♡");	
+							$("#addWish").css({'color':'black', 'font-size':'15px', 'cursor':'pointer'});
 
 					}else{
 						
 						alert("해당 프로젝트가 찜되었습니다. 찜목록은 마이페이지에서 확인 가능합니다.");
 						$("#addWish").val("♥");
+						$("#addWish").css({'color':'red', 'font-size':'23px', 'cursor':'pointer'});
 						
 					}
     				
@@ -997,6 +1025,28 @@
     		});
 	 }
 
+    
+    
+    <!-- 리워드 선택 -->
+   	$(function(){
+   		if( $("#dddd").val() != "" ){ // 로그인 했을 때
+	   		$("#rewardTable tr").click(function(){
+	   			
+	   			var rewardNo = $(this).children().children().children().eq(0).val();
+	   			//console.log(rewardNo);
+	   			
+	   			location.href="rewardList.pay?pno=${ p.projectNumber }&rno=" + rewardNo; //?rewardTitle=" + $(this).find(".reward_name").text();
+	   			
+	   		});
+   		
+   		}else{
+   			$("#rewardTable tr").click(function(){
+   				alert('로그인 후 서비스 이용이 가능합니다.');
+   			});
+   		}
+   	});
+   	
+    
     </script>
     
     <!--------------------------------- 팝업 ---------------------------------------------------------------->

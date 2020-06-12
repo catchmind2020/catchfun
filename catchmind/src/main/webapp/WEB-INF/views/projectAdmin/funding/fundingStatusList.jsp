@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.*" %>
+    pageEncoding="UTF-8" %>
 <%
 
-ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-PageInfo pi = (PageInfo)request.getAttribute("pi");
 
-int currentPage = pi.getCurrentPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
-int maxPage = pi.getMaxPage();
 
 %>
 
@@ -55,7 +49,7 @@ int maxPage = pi.getMaxPage();
 }
 
 .outer {
-	min-width: 1800px;
+	min-width: 800px;
 }
 
 .black {
@@ -64,6 +58,7 @@ int maxPage = pi.getMaxPage();
 }
 
 .blacktool {
+	/* vertical-align: middle; */
 	width: 700px;
 	height: 120px;
 	background-color: white;
@@ -72,16 +67,21 @@ int maxPage = pi.getMaxPage();
 	color: black;
 }
 </style>
+
+</style>
 </head>
 
 <body>
-<%@ include file="../menubarIm.jsp" %>
+	<div style="position: fixed">
+		<%@ include file="../common/menubarIm.jsp"%>
+	</div>
 	<!-- <div  style="position: fixed";> -->
 
 	<div class="outer">
+
 	
-		<form style="margin-left: 13%;">
-			<div style="width: 100%; height: 1000px; overflow: auto;">
+	<div style=" height: 700px ; margin-left: 270px;">
+
 			<br>
 			<h1 class="h3 text-gray-900 mb-4">펀딩결제현황</h1>
 			<div class="card shadow mb-4" style="width: 500px;">
@@ -90,10 +90,10 @@ int maxPage = pi.getMaxPage();
                 </div>
                 <div class="card-body">
 	                 	<h1 class="black">
-						1) 1,300,000원목표
+						1) ${project.projectTargetAmount }원목표
 						</h1>
 						<h1 class="black">
-						2) 2018.05.02~2018.06.03 자정마감
+						2) ${project.projectStartDate }~${project.projectFinishDate } 마감
 						</h1>
                 </div>
             </div>
@@ -109,8 +109,8 @@ int maxPage = pi.getMaxPage();
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 결제 예약금액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">164,000원</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 5,000원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum}원</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundSum}원</div>
                     </div>
                   
                   </div>
@@ -123,8 +123,8 @@ int maxPage = pi.getMaxPage();
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 달성률</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">12%</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 0.7%</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum / project.projectTargetAmount *100}%</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundSum /project.projectTargetAmount *100}%</div>
                     </div>
                   
                   </div>
@@ -137,8 +137,8 @@ int maxPage = pi.getMaxPage();
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 건수</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">11건</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 1건</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundCount}건</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundCount}건</div>
                     </div>
                   
                   </div>
@@ -147,9 +147,9 @@ int maxPage = pi.getMaxPage();
             </div>
 		</div>
 		<br><br>
-		  <div class="card shadow mb-4" style="width: 1000px; height: 500px; margin-left: 13%;">
+		  <div class="card shadow mb-4" style="width: 800px; height: 500px; ">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">수익현황</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">수익현황(20일전까지)</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
@@ -161,110 +161,124 @@ int maxPage = pi.getMaxPage();
               </div>
 		 <br>
 		 <h1 class="h3 text-gray-900 mb-4">펀딩내역</h1>
-		 <table class="table-bordered table-hover table-sm listArea" style="width:1300px; height: 500px;" cellspacing="0">
+		 
+		 <table class="table-bordered table-hover table-sm listArea" style="width:1000px;">
             <thead>
               <tr>
-                <th width="50px" style="text-align: center;">
-                  <div>
-                    <label><input class="checkbox " type="checkbox" name="" value="" style="vertical-align: middle; transform: scale(1.4);"></label>
-                  </div>
-                </th>
-                <th width="100px">이름</th>
+               
+                <th width="150px">이름</th>
                 <th width="400px">선택 리워드</th>
                 <th width="200px">금액</th>
                 <th width="100px">갯수</th>
                 <th width="150px">펀딩일</th>
                 <th width="150px">펀딩상태</th>
                 <th width="150px">펀딩총액</th>
+                <th width="100px">환불현황</th>
               </tr>
             </thead>
             <tbody>
             
-			<% if(list.isEmpty()){ 	// 리스트가 비어있을 경우 %>	
-			<tr>
-				<td colspan="6">존재하는 공지사항이 없습니다.</td>
-			</tr>
-			<% } else {	// 리스트가 비어있지 않을 경우 %>
+		
+		<c:choose>
+						<c:when test="${ empty fundingList }">
+
+							<tr>
+								<td colspan="8">펀딩내역이 존재하지 않습니다.</td>
+
+
+							</tr>
+						</c:when>
+						<c:otherwise>
 			
-				<% for(Notice n : list){ %>
-				<tr>
-					<td class="firsttd" style="text-align: center;"><div class="" >
-					
-                    <label>
-                    <input class="checkbox " type="checkbox" name="" value="" style="vertical-align: middle; transform: scale(1.4);"></label>
-                  </div></td>
-					<td><%= n.getNoticeNo() %></td>
-					<td><%= n.getNoticeTitle() %></td>
-					<td><%= n.getNoticeWriter() %></td>
-					<td><%= n.getNoticeCount() %></td>
-					<td><%= n.getNoticeDate() %></td>
-					<td><%= n.getNoticeCount() %></td>
-					<td><%= n.getNoticeDate() %></td>
-				</tr>	
-				<% } %>
+			
+			<c:forEach items="${ fundingList }" var="b">
 				
-			<% } %>
+				<%-- <c:if test="${ b.projectNo eq project.projectNo }"> --%>
+	                    <tr>
+	                        <td>${ b.fundingProduct }</td>
+	                        <td>${ b.rewardTitle }</td>
+	                        <td>${ b.fundingCost }</td>
+	                        <td>${ b.fundingQuantity }</td>
+	                        <td>${ b.fundingDate }</td>
+	                      	<td>${ b.fundingStatus }</td>
+	                      	<td>${ b.fundingQuantity * b.fundingCost }</td>
+	                      	<td>
+	                      	<c:choose>
+	                      	<c:when test="${b.fundingStatus eq 'E' }">
+	                      	
+	                      	
+	                      	<form action="<%=contextPath%>/deleteItem.pa" method="post">
+								<input type="hidden" name="itemNo" value="${ b.fundingNo }">
+									<div class="col-auto text-right">
+			                     <button type="submit"  class="btn btn-danger ">환불수락</button>
+			                    </div>
+							</form>	
+	                      	
+	                      	</c:when>
+	                      	<c:otherwise>
+	                      	<td>${ b.fundingStatus }</td>
+	                      	</c:otherwise>
+	                      	</c:choose>
+	                      	</td>
+	                    </tr>
+	                <%-- </c:if> --%>
+                 </c:forEach>
+                 </c:otherwise> 
+                 </c:choose>  
             </tbody>
           </table>
              
 
    	<br><br>
-   	
- 							<div class="" style="margin-right: 40%;">
-					            <ul class="pagination justify-content-center">
-						        <% if(currentPage!=1) {%>
-						              <li class="paginate_button page-item previous" id="">
-						                <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=1" class="page-link">FIRST</a>
-						              </li>
-						 		      <li class="paginate_button page-item previous" id="">
-					                  <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=currentPage-1%>" class="page-link">&lt;</a>
-					                  </li>
-						        <% } %>
-								  <%for(int p=startPage; p<=endPage; p++){ %>
-										<% if(currentPage != p){%>
-										<li class="paginate_button page-item" id="">
-					              				<a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=p%>" class="page-link"><%=p%></a>
-					             		</li>
-										<% }else { %>
-										<li class="paginate_button page-item" id="">
-					              				<a href="#" class="page-link" style="none"><%=p%></a>
-					             		</li>	
-										<% } %>
-								  <%} %>
-						  		<% if(currentPage!=maxPage) {%>
-					              <li class="paginate_button page-item next" id="">
-					                <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=currentPage+1%>" class="page-link">&gt;</a>
-					              </li>
-
-						 		  <li class="paginate_button page-item next" id="">
-					                <a href="<%=contextPath%>/bmNoticeList.qb?currentPage=<%=maxPage%>" class="page-link">LAST</a>
-					              </li>
-						  		<% } %>
-					            </ul>
-					          </div>				
+   			<div id="pagingArea" style="margin-right: 30%;">
+                <ul class="pagination" >
+                	
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+	                    </c:when>
+	                    <c:otherwise>
+	                   		<li class="page-item"><a class="page-link" href="fund.pa?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<c:choose>
+                    		<c:when test="${ p eq pi.currentPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="fund.pa?currentPage=${ p }">${ p }</a></li>
+                    		</c:otherwise>
+                    	</c:choose>
+                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="fund.pa?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                </ul>
+                
+                
+            </div>
+			
+			
+			
 			</div>
 
-		</form>
+		
 	</div>
  
  
 	     
 
 
-
 	<script>
-		$(function(){
-			$("table>tbody>tr").click(function(){
-				
-				//console.log("클릭");
 		
-				// 현재 클릭했을 때의 해당 공지사항 번호
-				var nno = $(this).children().eq(1).text();
-				
-				// 쿼리스트링을 이용해서 전달값 전달
-				 location.href="<%=contextPath%>/adDetail.no?nno=" + nno;
-			});
-		});
 		
 		
 		
@@ -303,7 +317,7 @@ int maxPage = pi.getMaxPage();
 		var myLineChart = new Chart(ctx, {
 		  type: 'line',
 		  data: {
-		    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		    labels: [${fundDayDate}],
 		    datasets: [{
 		      label: "Earnings",
 		      lineTension: 0.3,
@@ -317,7 +331,7 @@ int maxPage = pi.getMaxPage();
 		      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
 		      pointHitRadius: 10,
 		      pointBorderWidth: 2,
-		      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+		      data: [${fundDayMoney}],
 		    }],
 		  },
 		  options: {
@@ -349,7 +363,7 @@ int maxPage = pi.getMaxPage();
 		          padding: 10,
 		          // Include a dollar sign in the ticks
 		          callback: function(value, index, values) {
-		            return '$' + number_format(value);
+		            return  number_format(value)+'원';
 		          }
 		        },
 		        gridLines: {
@@ -381,7 +395,7 @@ int maxPage = pi.getMaxPage();
 		      callbacks: {
 		        label: function(tooltipItem, chart) {
 		          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-		          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+		          return datasetLabel + ': 원' + number_format(tooltipItem.yLabel);
 		        }
 		      }
 		    }

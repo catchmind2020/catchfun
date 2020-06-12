@@ -209,6 +209,38 @@ public class AdminDao2 {
 	public int reportBlack(SqlSessionTemplate sqlSession, String userNo) {
 		return sqlSession.update("adminMapper2.reportBlack", userNo);
 	}
+	
+	public Project pjReportDetail(SqlSessionTemplate sqlSession, String rd) {
+		return sqlSession.selectOne("adminMapper2.pjReportDetail", rd);
+	}
+	
+	public int pjDelete(SqlSessionTemplate sqlSession, String projectNumber) {
+		return sqlSession.update("adminMapper2.pjDelete", projectNumber);
+	}
+	
+	public int projectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.projectListCount");
+	}
+	
+	public ArrayList<Project> projectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.projectList", null, rowBounds);
+	}
+	
+	public int projectSearchCount(SqlSessionTemplate sqlSession, String proCategory) {
+		return sqlSession.selectOne("adminMapper2.projectSearchCount", proCategory);
+	}
+	
+	public ArrayList<Project> projectSearch(SqlSessionTemplate sqlSession, PageInfo pi, String proCategory){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.projectSearch", proCategory, rowBounds);
+	}
 }
 
 

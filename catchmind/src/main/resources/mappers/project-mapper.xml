@@ -38,6 +38,21 @@
 	</resultMap>
 	
 	<resultMap id="fundingResultSet" type="FundingList5">
+		<id column="FUNDING_NO" property="fundingNo" />
+		<result column="REWARD_NO" property="rewardNo" />
+		<result column="USER_NO" property="userNo" />
+		<result column="PROJECT_NUMBER" property="projectNumber" />
+		<result column="FUNDING_PRODUCT" property="fundingProduct" />
+		<result column="FUNDING_COST" property="fundingCost" />
+		<result column="FUNDING_QUANTITY" property="fundingQuantity" />
+		<result column="FUNDING_DATE" property="fundingDate" />
+		<result column="FUNDING_STATUS" property="fundingStatus" />
+		<result column="PAYMENT_METHOD" property="paymentMethod" />
+		<result column="FUNDING_SPONSERSHIP" property="fundingSponsership" />
+		<result column="SHIP_MEMO" property="shipMemo" />
+		<result column="USE_POINT" property="usePoint" />
+		<result column="REWARD_TITLE" property="fundingTitle2" />
+
 		<result column="SUMPRICE" property="sumPrice"/>
 		<result column="SUMSPONSERSHIP" property="sumSponsership"/>
 		<result column="PERSONCOUNT" property="personCount"/>
@@ -99,7 +114,7 @@
    <select id="selectFunding" parameterType="string" resultMap="fundingResultSet">
    		SELECT SUM(FUNDING_COST) AS SUMPRICE, SUM(FUNDING_SPONSERSHIP) AS SUMSPONSERSHIP, COUNT(DISTINCT USER_NO) AS PERSONCOUNT
 		FROM FUNDING_LIST
-		WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'Y'
+		WHERE PROJECT_NUMBER=#{pno} 
    </select>
    
    <select id="selectNews" parameterType="string" resultMap="newsResultSet">
@@ -137,6 +152,12 @@
 		VALUES('REP'||SEQ_REPNO.NEXTVAL, #{userNo}, #{replyContent}, SYSDATE, 'N', 'N', 0, #{projectNumber})
    </insert>
    
+   <update id="increasebanReply" parameterType="string">
+   		update REPLY
+   		   set REPLY_BAN_COUNT = REPLY_BAN_COUNT + 1
+   		 where reply_no = #{replyNo} and REPLY_STATUS = 'N'
+   </update>
+   
    <insert id="insertQuestion" parameterType="PersonQuestion5">
 		INSERT INTO PERSON_QUESTION
 		VALUES('Q'||SEQ_QNO.NEXTVAL, #{userNo}, 1, #{counseling}, #{questionTitle}, #{questionContent}, SYSDATE, 'N', 'N', null, null, null, null)
@@ -153,6 +174,17 @@
 		 where USER_NO=#{userNo} and REPORT_NO=#{reportNo}
    </select>
    
+   <update id="increasebanReport" parameterType="Report5">
+   		update PROJECT
+   		   set PROJECT_REPORT = PROJECT_REPORT + 1
+   		 where PROJECT_NUMBER = #{reportNo}
+   </update>
+   
+   <update id="deleteReply" parameterType="string">
+        update REPLY
+   		   set REPLY_STATUS = 'Y'
+   		 where reply_no = #{replyNo}
+   </update>
    
    <!-- 주혁 -->   
 <!--    <select id="selectWishlistCount" parameterType="Wishlist5" resultMap="wishlistResultSet">
@@ -176,5 +208,31 @@
 	   	delete from WISHLIST
 	     where USER_NO=#{userNo} and PROJECT_NUMBER=#{projectNumber}
    </delete>
+   
+   <insert id="insertFundingList" parameterType="FundingList5">
+  		INSERT INTO FUNDING_LIST
+		VALUES('F'||SEQ_FNO.NEXTVAL, #{rewardNo}, #{userNo}, #{projectNumber},
+		       #{fundingProduct}, #{fundingCost}, #{fundingQuantity},
+		       SYSDATE, 'N', #{paymentMethod}, #{fundingSponsership}, #{shipMemo}, #{usePoint})
+   </insert>
+   
+   <update id="updatePoint" parameterType="FundingList5">
+		update MEMBER
+		   set USER_POINT = #{usePoint}
+		 where USER_NO = #{userNo} and STATUS = 'Y'
+   </update>
+   
+   <update id="updateItemQuantity" parameterType="FundingList5">
+		update TB_OPTION
+		   set ITEM_QUANTITY = ITEM_QUANTITY - #{fundingQuantity} 
+		 where reward_no = #{rewardNo}
+   </update>
+   
+   <select id="selectConfirmFunding" parameterType="FundingList5" resultMap="fundingResultSet">
+	   SELECT FL.*, R.REWARD_TITLE, R.REWARD_CONTENT
+		 FROM FUNDING_LIST FL
+		 JOIN REWARD R ON(FL.REWARD_NO = R.REWARD_NO)
+		WHERE FL.USER_NO = #{userNo} AND FL.PROJECT_NUMBER = #{projectNumber}
+   </select>
    
 </mapper>

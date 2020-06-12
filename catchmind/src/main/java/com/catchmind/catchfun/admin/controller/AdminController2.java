@@ -500,6 +500,52 @@ public class AdminController2 {
 		
 	}
 	
+	@RequestMapping("pjReportDetail.ad")
+	public String adminpjReportDetail(String rd, Model model) {
+		
+		Project pj = aService2.pjReportDetail(rd);
+		
+		model.addAttribute("pj", pj);
+		return "admin/adminPjReportDetail";
+		
+	}
+	
+	@RequestMapping("pjDelete.ad")
+	public String pjDelete(String projectNumber, Model model) {
+		
+		int result = aService2.pjDelete(projectNumber);
+		
+		return "redirect:pReport.ad?currentPage=1";
+	}
+	
+	@RequestMapping("projectList.ad")
+	public String projectList(int currentPage, Model model) {
+		int listCount = aService2.projectListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> plist = aService2.projectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("plist", plist);
+		
+		return "admin/adminProjectList";
+		
+	}
+	
+	@RequestMapping("projectSearch.ad")
+	public String projectSearch(int currentPage, Model model, String proCategory) {
+		int listCount = aService2.projectSearchCount(proCategory);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		
+		ArrayList<Project> plist = aService2.projectSearch(pi, proCategory);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("plist", plist);
+		
+		return "admin/adminProjectSearch"; 
+	}
 	/**
 	 * 매출 통계 리스트페이지
 	 */
