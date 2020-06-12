@@ -136,6 +136,30 @@ public class FundingServiceImpl implements FundingService{
 		return fDao.deleteWishlist(sqlSession, w);
 	}
 
+	@Override
+	public int insertFundingList(FundingList f) {
+
+		return fDao.insertFundingList(sqlSession, f);
+	}
+
+	@Override
+	public int updatePoint(FundingList f) {
+
+		return fDao.updatePoint(sqlSession, f);
+	}
+
+	@Override
+	public int updateItemQuantity(FundingList f) {
+
+		return fDao.updateItemQuantity(sqlSession, f);
+	}
+
+	@Override
+	public ArrayList<FundingList> selectConfirmFunding(FundingList f) {
+
+		return fDao.selectConfirmFunding(sqlSession, f);
+	}
+
 
 
 

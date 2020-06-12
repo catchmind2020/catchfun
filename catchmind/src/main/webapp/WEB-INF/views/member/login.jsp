@@ -137,8 +137,8 @@ span.uname {
 					<div class="container" style="background-color: #f1f1f1">
 						<label> <input type="checkbox" checked="checked"
 							name="remember">아이디 저장하기
-						</label> <span class="psw"><a href="#">/비밀번호찾기</a></span> <span
-							class="uname"><a href="#">아이디찾기</a></span>
+						</label> <span class="psw"><a href="idpwdFind.me">/비밀번호찾기</a></span> <span
+							class="uname"><a href="idpwdFind.me">아이디찾기</a></span>
 					</div>
 
 					<button class="loginbtn" type="submit">Login</button>

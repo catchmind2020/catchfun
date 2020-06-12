@@ -147,15 +147,29 @@
 	<select id="selectReplyList" parameterType="string" resultMap="projectQuestionResultSet">
 		select *
 		 from PERSON_QUESTION
-		 where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N'
+		 where A_QUESTION_NO = #{qno} and QUESTION_STATUS='N' and QUESTION_YN='Y'
 		 
 	</select>
 	
 	<update id="insertReply" parameterType="Question">
 		update PERSON_QUESTION
-		set ANS_CONTENT=#{ansContent}, QUESTION_YN='Y'
+		set ANS_CONTENT=#{ansContent}, QUESTION_YN='Y', ANS_NO=#{ansNo}, ANS_DATE=default
 		where A_QUESTION_NO=#{questionNo}
 	</update>
+	  
+ 	<update id="deleteAnswer" parameterType="string">
+		update PERSON_QUESTION
+		set QUESTION_YN='N'
+		where QUESTION_YN='Y' and A_QUESTION_NO=#{qno} 
+	</update> 
+	
+	
+<!-- 	<delete id="deleteAnswer" parameterType="string">
+		delete from  PERSON_QUESTION
+		where ANS_NO=#{ansNo}  
+	</delete>  -->
+	 
+	 
 	  
 	  <!-- 이메일!! -->
 	  
