@@ -55,6 +55,11 @@
 		<result column="REPORT_CONTENT" property="reportContent"/>
 		<result column="PNO" property="userNo"/>
 		<result column="RNO" property="userNo1"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="PROJECT_CATEGORY" property="projectCategory"/>
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
+		<result column="USER_ID" property="userId"/>
 	</resultMap>
 	
 	<select id="memberListCount" resultType="_int">
@@ -208,6 +213,37 @@
     <update id="pjDelete" parameterType="string">
     	update project set PROJECT_STATUS ='N' where PROJECT_NUMBER=#{projectNumber} 
     </update>
+    
+    <select id="projectListCount" resultType="_int">
+    	select count(*)
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status='Y' or p.project_status='B'
+    </select>
+    
+    <select id="projectList" resultMap="adminProReportResultSet">
+    	select *
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status='Y' or p.project_status='B'
+    </select>
+    
+    <select id="projectSearchCount" resultType="_int" parameterType="string">
+    	select count(*)
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status=#{proCategory}
+    </select>
+    
+    <select id="projectSearch" resultMap="adminProReportResultSet" parameterType="string">
+    	select *
+    	  from project p
+    	  join member m on(p.user_no = m.user_no)
+    	 where p.project_status=#{proCategory}
+    </select>
+    
+    
+    
 
 
   <!-- 

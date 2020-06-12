@@ -8,14 +8,7 @@
     <title>에디터</title>
 
 
-<!-- include libraries(jQuery, bootstrap) -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/enrollTextAPI.css">
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
 
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 </head>
 <body>

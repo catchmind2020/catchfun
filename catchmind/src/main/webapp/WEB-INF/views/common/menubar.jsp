@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>CATCHFUN</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap"
 	rel="stylesheet">
@@ -297,7 +297,7 @@ a:hover { text-decoration:none !important; color:black; }
 		<div class="header"><a href="category.mu">카테고리</a></div>
 		<div class="header"><a href="comingsoon.mu">오픈예정</a></div>
 		<div class="header">프로젝트오픈</div>
-		<div class="header">공지</div>
+		<div class="header"><a href="list.no?currentPage=1">공지</a></div>
 		<div class="header"></div>
 		<div class="header"></div>
 		<div class="header"></div>
