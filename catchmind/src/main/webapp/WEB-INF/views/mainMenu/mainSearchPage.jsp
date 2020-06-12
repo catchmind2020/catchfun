@@ -188,7 +188,7 @@ select:focus { outline:none; }
 		   						html +=
 		   							"<div class='list'>" + 
 		   							"<input type='hidden' value='" + data[i].projectNo + "'>" + 
-		   							"<div><img src='${pageContext.servletContext.contextPath}/resources/images/projectimages/" + data[i].projectImg + "'></div>" +
+		   							"<div><img src='${pageContext.servletContext.contextPath}/resources/images/uploadFiles/" + data[i].projectImg + "'></div>" +
 		   							"<div><h4 style='height:60px;'><b>" + data[i].projectName + "</b></h4></div>" +
 		   							"<div class='maker'>" + data[i].projectCategory + " | " + data[i].makerName + "</div>" + 
 		   							"<div><progress value='" + data[i].fundingTotalCost / data[i].projectTargetAmount * 100 + "' max='100'></progress></div>" +
