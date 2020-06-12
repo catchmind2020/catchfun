@@ -12,7 +12,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ENROLLDATE" property="userEnrolldate"/>
 		<result column="ADDRESS" property="address"/>
 		<result column="ADDRESSNUM" property="addressNum"/>
 		<result column="USER_POINT" property="userPoint"/>

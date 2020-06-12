@@ -7,8 +7,8 @@
 		<result column="board_title" property="boardTitle" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_content" property="boardContent" />
-		<result column="origin_name" property="originName" />
-		<result column="change_name" property="changeName" />
+		<result column="MAKER_ORIGIN_NAME" property="originName" />
+		<result column="MAKER_CHANGE_NAME" property="changeName" />
 		<result column="count" property="count" />
 		<result column="create_date" property="createDate" />
 		<result column="status" property="status" />
@@ -54,8 +54,8 @@
 		<result column="HASHTAGS" property="hhsh" />
 		<result column="PROJECT_STATUS" property="projectStatus" />
 		<result column="STATUS_STORY" property="statusStory" />
-		<result column="ORIGIN_NAME" property="originName" />
-		<result column="CHANGE_NAME" property="changeName" />
+		<result column="MAKER_ORIGIN_NAME" property="originName" />
+		<result column="MAKER_CHANGE_NAME" property="changeName" />
 	</resultMap>
 
 
@@ -99,8 +99,8 @@
 		<result column="REPRESENTATIVE_NAME" property="rName" />
 		<result column="REPRESENTATIVE_EMAIL" property="rEmail" />
 		<result column="STATUS" property="status" />
-		<result column="ORIGIN_NAME" property="originName" />
-		<result column="CHANGE_NAME" property="changeName" />
+		<result column="MAKER_ORIGIN_NAME" property="originName" />
+		<result column="MAKER_CHANGE_NAME" property="changeName" />
 
 	</resultMap>
 
@@ -236,7 +236,7 @@
 		insert into PROJECT_BASIC
 		values('PB'||SEQ_PBNO.nextval, #{projectNo}, #{answer1}, #{answer2},
 		#{answer3}, #{answer4},
-		#{check1}, #{check2},'S', #{check3}, #{check4})
+		#{check1}, #{check2}, #{check3}, #{check4},'S')
 	</insert>
 	<insert id="insertNews" parameterType="News2">
 		insert into NEWS
@@ -356,8 +356,8 @@
 		MAKER_HOMEPAGE=#{makerHomepage},
 		REPRESENTATIVE_NAME=#{rName},
 		REPRESENTATIVE_EMAIL=#{rEmail},
-		ORIGIN_NAME=#{originName},
-		CHANGE_NAME=#{changeName}
+		MAKER_ORIGIN_NAME=#{originName},
+		MAKER_CHANGE_NAME=#{changeName}
 		where
 		PROJECT_NUMBER=#{projectNo}
 	</update>
@@ -401,13 +401,13 @@
 	<insert id="insertFile" parameterType="Project2">
 		insert into attachment
 		values( 'AT'||SEQ_ATNO.nextval, #{projectNo}, #{originName},
-		#{changeName},'resources/images',sysdate,default,#{projectNo})
+		#{changeName},'resources/uploadFiles',sysdate,default,#{projectNo})
 	</insert>
 	<update id="updateFile" parameterType="Project2">
 		update ATTACHMENT
 		set
-		ORIGIN_NAME=#{originName} ,
-		CHANGE_NAME=#{changeName}
+		MAKER_ORIGIN_NAME=#{originName} ,
+		MAKER_CHANGE_NAME=#{changeName}
 		where
 		REF_NO=#{projectNo}
 	</update>

@@ -91,7 +91,7 @@ tr { box-sizing: border-box; }
 							<div class="list">
 							<input type="hidden" value="${p.projectNo}">
 								<div>
-									<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
+									<img src="${pageContext.servletContext.contextPath}/resources/uploadFiles/${p.projectImg }">
 								</div>
 								<div>
 									<h4 style="height:60px;">
