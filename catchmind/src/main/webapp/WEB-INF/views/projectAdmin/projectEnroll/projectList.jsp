@@ -79,13 +79,13 @@
 	<jsp:include page="../../common/menubar.jsp" />
 	<div class="wrap">
 		<div id="header">
-
+<br>
 			<h1 style="font-size: 20px;">
 				<strong>프로젝트 리스트</strong>
 			</h1>
 			
 			
-
+<br>
 				<c:choose>
 					<c:when test="${ empty projectList }">
 						<h1 style="font-size: 28px; ">

@@ -41,7 +41,7 @@ table {
 }
 
 
-input[type=text], input[type=password], input[type=email], input[type=number], select {
+#projectName, select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
