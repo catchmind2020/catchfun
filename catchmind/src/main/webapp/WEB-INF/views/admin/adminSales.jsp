@@ -62,7 +62,7 @@
     <br>
    
       <div id="sales">
-        <form action="result.ad" method="get">
+        <form action="salesSearch.ad" method="get">
           <div class="k_btn">
             <input type="date" name="sDate"> <button type="submit" class="mybtn">조회</button>
           </div>
