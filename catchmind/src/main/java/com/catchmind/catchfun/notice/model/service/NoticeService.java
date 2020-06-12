@@ -34,13 +34,13 @@ public interface NoticeService {
 	int cqselectListCount();	
 	
 	// 1:1문의  리스트 조회
-	ArrayList<CatchfunQuestion> cqselectList(PageInfo pi);
+	ArrayList<CatchfunQuestion> cqselectList(PageInfo pi, String userNo);
 	
 	// 1:1문의  글 상세조회
 	CatchfunQuestion selectCatchfunQu(String qno);
 	
 	// 1:1문의  글 등록
-	int insertCatchfunQuestion(CatchfunQuestion q);
+	int insertCatchfunQuestion(CatchfunQuestion q, String userNo);
 	
 	// 1:1문의  글 삭제
 	int deleteCatchfunQuestion(String qno);

@@ -33,10 +33,6 @@
 	height: 400px;
 }
 
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 #userId,#userPwd {
 	width: 100%;
 	padding: 12px 20px;
@@ -99,20 +95,7 @@ span.uname {
 		width: 100%;
 	}
 }
-/* 메뉴바 영역 */
-.header-area {
-	width: 1200px;
-	margin-left: 40px;
-	color: gray;
-	padding-top: 10px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	margin: auto;
-}
+
 </style>
 
 </head>
@@ -137,8 +120,8 @@ span.uname {
 					<div class="container" style="background-color: #f1f1f1">
 						<label> <input type="checkbox" checked="checked"
 							name="remember">아이디 저장하기
-						</label> <span class="psw"><a href="#">/비밀번호찾기</a></span> <span
-							class="uname"><a href="#">아이디찾기</a></span>
+						</label> <span class="psw"><a href="idpwdFind.me">/비밀번호찾기</a></span> <span
+							class="uname"><a href="idpwdFind.me">아이디찾기</a></span>
 					</div>
 
 					<button class="loginbtn" type="submit">Login</button>

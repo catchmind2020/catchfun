@@ -10,6 +10,10 @@ import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.funding.model.vo.FundingList;
+import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.News;
+import com.catchmind.catchfun.funding.model.vo.Reward;
 
 @Repository("aDao2")
 public class AdminDao2 {
@@ -241,6 +245,63 @@ public class AdminDao2 {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper2.projectSearch", proCategory, rowBounds);
 	}
+	
+	public Project selectProject(SqlSessionTemplate sqlSession, String pno) {
+		
+		return sqlSession.selectOne("adminMapper2.selectProject", pno);
+	}
+	
+	public Maker selectMaker(SqlSessionTemplate sqlSession, String pno) {
+		
+		return sqlSession.selectOne("adminMapper2.selectMaker", pno);
+	}
+	
+	public FundingList selectFunding(SqlSessionTemplate sqlSession, String pno) {
+		
+		return sqlSession.selectOne("adminMapper2.selectFunding", pno);
+	}
+	
+	public ArrayList<News> selectNews(SqlSessionTemplate sqlSession, String pno) {
+		
+		return (ArrayList)sqlSession.selectList("adminMapper2.selectNews", pno);
+	}
+	
+	public ArrayList<Reward> selectReward(SqlSessionTemplate sqlSession, String pno) {
+		
+		ArrayList<Reward> list = (ArrayList)sqlSession.selectList("adminMapper2.selectReward", pno);
+		
+		ArrayList<Reward> list2 = (ArrayList)sqlSession.selectList("adminMapper2.selectReward2", pno);
+		
+		for(int i=0; i<list2.size(); i++) {
+			
+			list.get(i).setRewardFundingCount(list2.get(i).getRewardFundingCount());
+		}
+		
+		//System.out.println(list);
+		
+		return list;
+	}
+	
+	public int updateProject(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.updateProject", pno);
+	}
+	
+	public int updateMaker(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.updateMaker", pno);
+	}
+	
+	public int updateFunding(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.updateFunding", pno);
+	}
+	
+	public int updateReward(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.updateReward", pno);
+	}
+	
+	public int updateNews(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.updateNews", pno);
+	}
+	
 }
 
 

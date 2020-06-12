@@ -12,7 +12,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ENROLLDATE" property="userEnrolldate"/>
 		<result column="ADDRESS" property="address"/>
 		<result column="ADDRESSNUM" property="addressNum"/>
 		<result column="USER_POINT" property="userPoint"/>
@@ -32,7 +32,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="USER_ENROLLDATE" property="userEnrolldate"/>
+		<result column="ENROLLDATE" property="userEnrolldate"/>
 		<result column="REPORT_CONTENT" property="reportContent"/>
 		<result column="RNO" property="userNo"/>
 		<result column="PNO" property="userNo1"/>
@@ -60,7 +60,70 @@
 		<result column="PROJECT_CATEGORY" property="projectCategory"/>
 		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
 		<result column="USER_ID" property="userId"/>
+		<result column="PROJECT_DATE" property="projectDate"/>
+		<result column="HASHTAGS" property="hashtags"/>
+		<result column="STATUS_STORY" property="statusStory"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
 	</resultMap>
+	
+	
+	<resultMap id="makerResultSet" type="Maker5">
+		<id column="MAKER_NO" property="makerNo"/>
+		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="MAKER_NAME" property="makerName"/>
+		<result column="MAKER_EMAIL" property="makerEmail"/>
+		<result column="MAKER_PHONE" property="makerPhone"/>
+		<result column="MAKER_TYPE" property="makerType"/>
+		<result column="REPRESENTATIVE_NAME" property="representativeName"/>
+		<result column="REPRESENTATIVE_EMAIL" property="representativeEmail"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
+	<resultMap id="fundingResultSet" type="FundingList5">
+		<result column="SUMPRICE" property="sumPrice"/>
+		<result column="SUMSPONSERSHIP" property="sumSponsership"/>
+		<result column="PERSONCOUNT" property="personCount"/>
+	</resultMap>
+   
+   <resultMap id="newsResultSet" type="News5">
+   		<id column="NEWS_NO" property="newsNo"/>
+   		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="NEWS_TITLE" property="newsTitle"/>
+		<result column="NEWS_CONTENT" property="newsContent"/>
+		<result column="NEWS_DATE" property="newsDate"/>
+		<result column="NEWS_COUNT" property="newsCount"/>
+		<result column="NEWS_STATUS" property="newsStatus"/>
+   </resultMap>
+   
+   <resultMap id="replyResultSet" type="ReplyP5">
+   	   	<id column="REPLY_NO" property="replyNo"/>
+   		<result column="USER_ID" property="userNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_YN" property="replyYn"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="REPLY_BAN_COUNT" property="replyBanCount"/>
+		<result column="PROJECT_NUMBER" property="projectNumber"/>
+   </resultMap>
+   
+   <resultMap id="rewardResultSet" type="Reward5">
+   	   	<id column="REWARD_NO" property="rewardNo"/>
+   		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="REWARD_TITLE" property="rewardTitle"/>
+		<result column="REWARD_CONTENT" property="rewardContent"/>
+		<result column="REWARD_COST" property="rewardCost"/>
+		<result column="REWARD_REMAINING_QUANTITY" property="rewardRemainingQuantity"/>
+		<result column="REWARD_DELIVERY_COST" property="rewardDeliveryCost"/>
+		<result column="REWARD_STATUS" property="rewardStatus"/>
+		<result column="RCOUNT" property="rewardFundingCount"/>
+   </resultMap>
+   
+   <resultMap id="wishlistResultSet" type="Wishlist5">
+		<result column="count" property="count"/>
+   </resultMap>
 	
 	<select id="memberListCount" resultType="_int">
 		select count(*)
@@ -189,7 +252,7 @@
     
     <select id="rpReportDetail" parameterType="string" resultMap="adminReportResultSet">
         select P_QUESTION_NO, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, QUESTION_BAN_COUNT, USER_ID, REPORT_CONTENT,
-               USER_TYPE, USER_NAME, EMAIL, PHONE, USER_ENROLLDATE, r.user_no as RNO, p.user_no as PNO
+               USER_TYPE, USER_NAME, EMAIL, PHONE, ENROLLDATE, r.user_no as RNO, p.user_no as PNO
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
           join report p on (r.P_QUESTION_NO = p.REPORT_NO)
@@ -211,21 +274,21 @@
     </select>
     
     <update id="pjDelete" parameterType="string">
-    	update project set PROJECT_STATUS ='N' where PROJECT_NUMBER=#{projectNumber} 
+    	update project set PROJECT_STATUS ='F' where PROJECT_NUMBER=#{projectNumber} 
     </update>
     
     <select id="projectListCount" resultType="_int">
     	select count(*)
     	  from project p
     	  join member m on(p.user_no = m.user_no)
-    	 where p.project_status='Y' or p.project_status='B'
+    	 where p.project_status='E' or p.project_status='B'
     </select>
     
     <select id="projectList" resultMap="adminProReportResultSet">
     	select *
     	  from project p
     	  join member m on(p.user_no = m.user_no)
-    	 where p.project_status='Y' or p.project_status='B'
+    	 where p.project_status='E' or p.project_status='B'
     </select>
     
     <select id="projectSearchCount" resultType="_int" parameterType="string">
@@ -241,6 +304,70 @@
     	  join member m on(p.user_no = m.user_no)
     	 where p.project_status=#{proCategory}
     </select>
+   
+    <select id="selectProject" parameterType="string" resultMap="adminProReportResultSet">
+		SELECT PROJECT_NUMBER, USER_NO, P.PROJECT_NAME, PROJECT_FINISHDATE, PROJECT_CONTENT, 
+		               PROJECT_TARGET_AMOUNT, PROJECT_REPORT, HASHTAGS, PROJECT_STATUS, STATUS_STORY, CHANGE_NAME, FILE_PATH
+		  FROM PROJECT P
+		  JOIN CATEGORY_TYPE CT USING (PROJECT_CATEGORY)
+		  JOIN ATTACHMENT A ON (A.REF_NO = P.PROJECT_NUMBER)
+	     WHERE PROJECT_NUMBER = #{pno} AND PROJECT_STATUS = 'E'
+   </select>
+   
+   <select id="selectMaker" parameterType="string" resultMap="makerResultSet">
+   		SELECT PM.*, CHANGE_NAME, FILE_PATH
+		  FROM PROJECT_MAKER PM
+		  JOIN ATTACHMENT A ON (A.REF_NO = PM.MAKER_NO)
+		 WHERE PROJECT_NUMBER = #{pno} AND PM.STATUS = 'E'
+   </select>
+   
+   <select id="selectFunding" parameterType="string" resultMap="fundingResultSet">
+   		SELECT SUM(FUNDING_COST) AS SUMPRICE, SUM(FUNDING_SPONSERSHIP) AS SUMSPONSERSHIP, COUNT(DISTINCT USER_NO) AS PERSONCOUNT
+		FROM FUNDING_LIST
+		WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'E'
+   </select>
+   
+   <select id="selectNews" parameterType="string" resultMap="newsResultSet">
+	   SELECT *
+	     FROM NEWS
+	    WHERE PROJECT_NUMBER=#{pno} AND NEWS_STATUS = 'E'
+	    ORDER BY NEWS_NO
+   </select>
+   
+   <select id="selectReward" parameterType="string" resultMap="rewardResultSet">
+	   SELECT *
+	     FROM REWARD
+	    WHERE PROJECT_NUMBER=#{pno} AND REWARD_STATUS = 'E'
+	    ORDER BY REWARD_NO
+   </select>
+   
+   <select id="selectReward2" parameterType="string" resultMap="rewardResultSet">
+		SELECT COUNT(REWARD_NO) AS RCOUNT
+		  FROM FUNDING_LIST
+		 WHERE PROJECT_NUMBER=#{pno} AND FUNDING_STATUS = 'E'
+		 GROUP BY REWARD_NO
+		 ORDER BY REWARD_NO
+   </select>
+   
+   <update id="updateProject" parameterType="string" >
+		update project set project_status='Y' where project_number=#{pno}   
+   </update>
+   
+   <update id="updateMaker" parameterType="string" >
+		update project_maker set project_status='Y' where project_number=#{pno}   
+   </update>
+   
+   <update id="updateFunding" parameterType="string" >
+		update funding_list set project_status='Y' where project_number=#{pno}   
+   </update>
+   
+   <update id="updateReward" parameterType="string" >
+		update reward set project_status='Y' where project_number=#{pno}   
+   </update>
+   
+   <update id="updateNews" parameterType="string" >
+		update news set project_status='Y' where project_number=#{pno}   
+   </update>
     
     
     

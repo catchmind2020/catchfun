@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap id="MainQuesionResultSet" type="MainQuesion">
 		<id column="A_QUESTION_NO" property="cqNo"/>
-		<result column="USER_NAME" property="cqWriter"/>
+		<result column="USER_NO" property="cqWriter"/>
 		<result column="QUESTION_TYPE" property="cqType"/>
 		<result column="QUESTION_TITLE" property="cqTitle"/>
 		<result column="QUESTION_CONTENT" property="cqContent"/>
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cqselectList" resultMap="MainQuesionResultSet">
 		SELECT * 
 		  FROM PERSON_QUESTION
-		 WHERE QUESTION_STATUS = 'N'
+		 WHERE QUESTION_STATUS = 'N' AND USER_NO = #{userNo}
 		 ORDER BY A_QUESTION_NO DESC
 	</select>
 	
@@ -81,16 +81,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE A_QUESTION_NO = #{qno}
 	</select>
 	
-	<insert id="insertCatchfunQuestion" parameterType="MainQuesion">
+	<insert id="insertCatchfunQuestion" parameterType="java.util.HashMap">
 		INSERT INTO PERSON_QUESTION
-		values(seq_bno.nextval, #{boardTitle}, #{boardWriter}, #{boardContent}, 
-			   #{originName}, #{changeName}, default, default, default)
+		values('Q'||SEQ_QNO.nextval, #{userNo}, 2, NULL, #{cqTitle}, #{cqContent}, SYSDATE,
+			  default,default, NULL, NULL, NULL, NULL)
 	</insert>
 	
 	<update id="deleteCatchfunQuestion" parameterType="string">
 		UPDATE PERSON_QUESTION
 		   SET QUESTION_STATUS='Y'
-		 WHERE A_QUESTION_NO = #{qno}
+		 WHERE A_QUESTION_NO = #{qno} AND USER_NO = #{cqWriter}
 	</update>
 	
 </mapper>

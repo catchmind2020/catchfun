@@ -25,10 +25,11 @@ public class Project {
 	private String projectContent;
 	private int projectTargetAmount;
 	private int projectReport;
-	private String hashTags;
+	private String hashtags;
 	private String projectStatus;
 	private String statusStory;
 	
+	private String filePath;
 	private String userName;
 	private String email;
 	private String phone;

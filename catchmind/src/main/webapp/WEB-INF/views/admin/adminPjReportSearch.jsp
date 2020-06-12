@@ -78,7 +78,6 @@
 	                <th width="150px">등록자 연락처</th>
 	                <th width="170px">이메일</th>
 	                <th width="70px">신고수</th>
-	                <th width="70px">프로젝트 달성률</th>
 	              </tr>
             </thead>
             <tbody>  
@@ -91,7 +90,6 @@
 	                <td>${ pr.phone }</td>
 	                <td>${ pr.email }</td>
 	                <td>${ pr.projectReport }</td>
-	                <td>300%</td>
 	              </tr>
 	            </c:forEach>  
               </tbody>
