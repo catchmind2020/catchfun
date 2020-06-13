@@ -30,10 +30,9 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
 
 #boardList{text-align: center;}
 #boardList>tbody>tr:hover{cursor:pointer; background-color: rgb(179, 230, 253);}
-#pagingArea{width:100%; margin: 30px; text-align: center;}
 #searchForm{width:80%; margin:auto;}
 #searchForm>*{float:left;margin:5px;}
-
+#pagingArea{width:fit-content;margin:auto;}
 .select{width:20%;}
 .text{width:53%;}
 .searchBtn{Width:15%; background-color:cornflowerblue;}
@@ -146,7 +145,7 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
             
 
                 <div id="pagingArea">
-                <ul class="pagination">
+                <ul class="pagination" align="center">
                 	
                 	<c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">
@@ -182,22 +181,6 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
            
             <br clear="both"><br>
             
-
-
-            <form id="searchForm" action="" method="Get" align="center">
-                <div class="select">
-                    <select class="custom-select" name="condition">
-                        <option value="writer">작성자</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                </div>
-                <div class="text">
-                    <input type="text" class="form-control" name="keyword">
-                </div>
-                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-            </form>
-            <br><br>
         </div>
         <br><br>
     </div>

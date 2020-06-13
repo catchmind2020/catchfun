@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * 
 		  FROM NOTICE_TEMP
 		 WHERE NOTICE_STATUS = 'N'
-		 ORDER BY NOTICE_NO DESC
+		 ORDER BY NOTICE_DATE DESC
 	</select>
 
 	

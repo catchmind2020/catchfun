@@ -16,7 +16,7 @@
 </head>
 <style>
 .profile:hover { border: 1px solid white; }
-
+.list:hover {cursor:pointer; background-color:#F4FFFE; }
 .profile {
 	width: 100%;
 	height: 100%;

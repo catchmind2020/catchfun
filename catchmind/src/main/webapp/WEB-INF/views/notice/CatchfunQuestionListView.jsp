@@ -30,7 +30,7 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
         #boardList{text-align: center;}
         #boardList>tbody>tr:hover{cursor:pointer; background-color: rgb(179, 230, 253);}
 
-        #pagingArea{width:100%; margin: 30px; text-align: center;}
+		#pagingArea{width:fit-content;margin:auto;}
        
         #searchForm{
             width:80%;
@@ -114,7 +114,6 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
         <div class="submenu choice" id="question"><a href="list.cq?currentPage=1">캐치펀 1:1문의</a></div>
     </div>
  		<hr id="hr">
-    
     <div class="content">
         <br>
         <div class="innerOuter" style="padding:5% 10%;">
@@ -204,5 +203,6 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
         </div>
         <br><br>
     </div>
+    
 </body>
 </html>
