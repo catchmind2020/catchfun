@@ -104,7 +104,7 @@ public class NoticeController {
 		if(loginUser != null) {
 		
 		String userNo = loginUser.getUserNo();
-		int listCount = ntService.cqselectListCount();	// 게시판 글갯수 조회용
+		int listCount = ntService.cqselectListCount(userNo);	// 게시판 글갯수 조회용
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<CatchfunQuestion> list = ntService.cqselectList(pi, userNo);
 		

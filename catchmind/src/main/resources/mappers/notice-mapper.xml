@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap id="mainNoticeResultSet" type="MainNotice">
 		<id column="NOTICE_NO" property="noticeNo"/>
-		<result column="USER_NO" property="noticeWriter"/>
+		<result column="USER_ID" property="noticeWriter"/>
 		<result column="NOTICE_TITLE" property="noticeTitle"/>
 		<result column="NOTICE_CONTENT" property="noticeContent"/>
 		<result column="NOTICE_DATE" property="noticeDate"/>
@@ -36,8 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectList" resultMap="mainNoticeResultSet">
-		SELECT * 
+		SELECT NOTICE_NO, USER_ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_COUNT, NOTICE_STATUS 
 		  FROM NOTICE_TEMP
+		  join member using (user_no)
 		 WHERE NOTICE_STATUS = 'N'
 		 ORDER BY NOTICE_DATE DESC
 	</select>
@@ -52,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectNotice" parameterType="string" resultMap="mainNoticeResultSet">
 		SELECT *
 		  FROM NOTICE_TEMP
-		 WHERE NOTICE_no = #{nno}
+		 WHERE NOTICE_NO = #{nno}
 	</select>
 	
 	
@@ -65,13 +66,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cqselectListCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM PERSON_QUESTION
-		 WHERE QUESTION_STATUS = 'N'
+		 WHERE QUESTION_STATUS = 'N' AND USER_NO = #{userNo} AND QUESTION_TYPE = 2
 	</select>
 	
 	<select id="cqselectList" resultMap="MainQuesionResultSet">
 		SELECT * 
 		  FROM PERSON_QUESTION
-		 WHERE QUESTION_STATUS = 'N' AND USER_NO = #{userNo}
+		 WHERE QUESTION_STATUS = 'N' AND USER_NO = #{userNo} AND QUESTION_TYPE = 2
 		 ORDER BY A_QUESTION_NO DESC
 	</select>
 	
@@ -90,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="deleteCatchfunQuestion" parameterType="string">
 		UPDATE PERSON_QUESTION
 		   SET QUESTION_STATUS='Y'
-		 WHERE A_QUESTION_NO = #{qno} AND USER_NO = #{cqWriter}
+		 WHERE A_QUESTION_NO = #{qno}
 	</update>
 	
 </mapper>

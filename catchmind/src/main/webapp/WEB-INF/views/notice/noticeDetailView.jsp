@@ -15,86 +15,79 @@
  
 
         /*버튼*/
-    .button {
-        background-color: #4CAF50; /* Green */
+    #btn {
+        background-color: gray;
         border: none;
         color: white;
-        padding: 16px 32px;
+        padding: 6px 8px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 4px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
         }
 
-    .button2 {
-        background-color: white; 
-        color: black; 
-        border: 2px solid #008CBA;
-        }
-
-    .button2:hover {
-        background-color: #008CBA;
+    #btn:hover {
+        background-color: #28d7d7;
         color: white;
         }
 
-    .content{
-           
-        width:80%;
-        margin:auto;
-       }
-       
-     .innerOuter{
-        border:1px solid lightgray;
-        width:90%;
-        margin:auto;
-        padding:5% 15%;
-        background:white;
-       }
+.content{ width:800px; margin:auto;}
+.innerOuter{
+    width:800px;
+    margin:auto;
+    background:white; }
 
 
         table *{margin:5px;}
         table{width:100%;}
+        
+        /* 서브메뉴 영역 CSS */
+.submenu>a{color:black;  text-decoration:none !important; }
+.submenu>a:hover{color:#28d7d7;  text-decoration:none important!; }
+.submenu{width:140px; font-size:15px; font-weight: 900; display:table-cell; padding-top:10px; padding-bottom: 20px;}
+.submenu:hover { color:#28d7d7; cursor: pointer;}
+.choice{border-bottom: 3px solid rgb(31, 205, 211); padding-bottom: 5px;}
+#hr{width:auto; margin:0px; color:gray; margin-top:-10px;}
+        
     </style>
 <body>
 <jsp:include page="../common/menubar.jsp" />
+	<br><br><br>
+    
+    <!-- 서브메뉴 영역 -->
+    <div align="center" style="height:60px;">
+        <div class="submenu choice" id="notice"><a href="list.no?currentPage=1">공지사항</a></div>
+        <div class="submenu" id="guide"><a href="guide.gu">이용가이드</a></div>
+        <div class="submenu" id="question"><a href="list.cq?currentPage=1">캐치펀 1:1문의</a></div>
+    </div>
+ 		<hr id="hr">
     <div class="content">
         <br><br>
         <div class="innerOuter">
-            <h2>공지사항</h2>
-            <br>
-            
-          
             <br><br>
             <table id="contentArea" align="center" class="table">
                 <tr>
-                    <th width="100">제목</th>
-                    <td colspan="3">${ n.noticeTitle }</td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>${ n.noticeWriter }</td>
-                    <th>작성일</th>
-                    <td>${ n.noticeDate }</td>
+                    <th width="70px;">제목</th>
+                    <td width="350px;">${ n.noticeTitle }</td>
+               		<th width="70px;">작성일</th>
+                    <td width="100px;">${ n.noticeDate }</td>
                 </tr>
 
-                <tr>
-                    <th>내용</th>
-                    <td colspan="3"></td>
-                </tr>
                 <tr>
                     <td colspan="4"><p style="height:150px">${ n.noticeContent }</p></td>
                 </tr>
             </table>
-            <center><button class="button button2" >목록으로</button></center>
+            <center>
+            <input type=button id="btn" value="목록으로" onclick="location.href='${pageContext.servletContext.contextPath}/list.no?currentPage=1';">
+            </center>
             <br>
-
-
+			
+			
  
         </div>
-        <br><br>
+  
     </div>
 </body>
 </html>

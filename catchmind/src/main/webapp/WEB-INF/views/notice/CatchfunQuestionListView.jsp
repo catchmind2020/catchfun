@@ -13,8 +13,8 @@
     
 <style>
 /* 서브메뉴 영역 CSS */
-a{color:black;  text-decoration:none !important }
-a:hover{color:#28d7d7;  text-decoration:none !important }
+.submenu>a{color:black;  text-decoration:none !important; }
+.submenu>a:hover{color:#28d7d7;  text-decoration:none important!; }
 .submenu{width:140px; font-size:15px; font-weight: 900; display:table-cell; padding-top:10px; padding-bottom: 20px;}
 .submenu:hover { color:#28d7d7; cursor: pointer;}
 .choice{border-bottom: 3px solid rgb(31, 205, 211); padding-bottom: 5px;}
@@ -28,7 +28,7 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
     background:white; }
 
         #boardList{text-align: center;}
-        #boardList>tbody>tr:hover{cursor:pointer; background-color: rgb(179, 230, 253);}
+        #boardList>tbody>tr:hover{cursor:pointer; background-color: #F4FFFE;}
 
 		#pagingArea{width:fit-content;margin:auto;}
        
@@ -74,8 +74,8 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
            width: 100px;
            height: 30px;
         }
-        .button {
-        background-color: #4CAF50; /* Green */
+       .btn {
+        background-color: #28d7d7;
         border: none;
         color: white;
         padding: 3px 32px;
@@ -90,15 +90,15 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
         }
 
         
-        .button4 {
+       .btn {
         background-color: white;
         color: black;
-        border: 2px solid #e7e7e7;
+        border: 1px solid #28d7d7;
         margin-top: 10px;
         float: right;
         }
 
-        .button4:hover {background-color: #e7e7e7;}
+        .btn:hover {background-color: #28d7d7;}
 
         
     </style>
@@ -115,18 +115,19 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
     </div>
  		<hr id="hr">
     <div class="content">
-        <br>
-        <div class="innerOuter" style="padding:5% 10%;">
+        <br>  <br>
+        <div class="innerOuter">
             <table id="boardList" class="table table-hover" align="center">
             <c:if test="${ !empty loginUser }">
-                <button class="button button4" onclick="location.href='enrollForm.cq'">글쓰기</button>
+                <button class="btn" onclick="location.href='enrollForm.cq'">글쓰기</button>
             </c:if>
+            
                 <thead>
                   <tr>
-                  	<th>글번호</th>
-                    <th rowspan="2">제목</th>
-                    <th>작성일</th>
-                    <th>답변상태</th>
+                  	<th width="100px;">글번호</th>
+                    <th width="360px;">제목</th>
+                    <th width="100px;">작성일</th>
+                    <th width="120px;">답변상태</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -167,10 +168,10 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
                 	
                 	<c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+	                    	<li class="page-item disabled"><a class="page-link" href="#">＜</a></li>     
 	                    </c:when>
 	                    <c:otherwise>
-	                   		<li class="page-item"><a class="page-link" href="list.cq?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+	                   		<li class="page-item"><a class="page-link" href="list.cq?currentPage=${ pi.currentPage-1 }">＜</a></li>
                     	</c:otherwise>
                     </c:choose>
                     
@@ -187,10 +188,10 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
                     
                     <c:choose>
                     	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	                    	<li class="page-item disabled"><a class="page-link" href="#">＞</a></li>
 	                    </c:when>
 	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cq?currentPage=${ pi.currentPage+1 }">Next</a></li>
+	                    	<li class="page-item"><a class="page-link" href="list.cq?currentPage=${ pi.currentPage+1 }">＞</a></li>
                     	</c:otherwise>
                     </c:choose>
                 </ul>

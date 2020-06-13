@@ -46,8 +46,8 @@ public class NoticeDao {
 	 ********************************************************************************/
 	
 	
-	public int cqselectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("mainNoticeMapper.cqselectListCount");
+	public int cqselectListCount(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("mainNoticeMapper.cqselectListCount",userNo);
 	}
 	
 	public ArrayList<CatchfunQuestion> cqselectList(SqlSessionTemplate sqlSession, PageInfo pi, String userNo){
