@@ -1,5 +1,6 @@
 package com.catchmind.catchfun.admin.model.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -301,6 +302,27 @@ public class AdminDao2 {
 	public int updateNews(SqlSessionTemplate sqlSession, String pno) {
 		return sqlSession.update("adminMapper2.updateNews", pno);
 	}
+	
+	public int sales1(SqlSessionTemplate sqlSession, Date sDate) {
+		return sqlSession.selectOne("adminMapper2.sales1", sDate);
+	}
+	
+	public int sales2(SqlSessionTemplate sqlSession, Date sDate) {
+		return sqlSession.selectOne("adminMapper2.sales2", sDate);
+	}
+	
+	public int sales3(SqlSessionTemplate sqlSession, Date sDate) {
+		return sqlSession.selectOne("adminMapper2.sales3", sDate);
+	}
+	
+	public int sales4(SqlSessionTemplate sqlSession, Date sDate) {
+		return sqlSession.selectOne("adminMapper2.sales4", sDate);
+	}
+	
+	public int sales5(SqlSessionTemplate sqlSession, Date sDate) {
+		return sqlSession.selectOne("adminMapper2.sales5", sDate);
+	}
+	
 	
 }
 

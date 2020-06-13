@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <title>Document</title>
-</head>
+</head>q
 <style>
     #outer{
         margin: auto;
@@ -203,6 +203,7 @@
         </table>
         <br>
         
+        
 		<form id="resultForm" action="dopay.pay?pno=${p.projectNumber}" method="post">
 		
 		
@@ -222,7 +223,16 @@
             <tr>
                 <td>포인트 사용</td>
                 <td class="payContent">
-                    <input type="number" style="width:120px; height: 30px; font-size: 15px;" step="1000" min="0" max="${ loginUser.point }" value="0" id="pointArea" name="usePoint"><br>
+                    <input type="number" style="width:120px; height: 30px; font-size: 15px;" step="1000" min="0" max=
+	                    <c:choose>
+			                <c:when test="${ loginUser.point > sum + spon + 3000 }">           
+		                    	"${ sum + spon + 3000 }"
+		                    </c:when>
+		                    <c:otherwise>
+		                    	"${ loginUser.point }"
+		                    </c:otherwise>
+	                    </c:choose>
+                     value="0" id="pointArea" name="usePoint"><br>
                     <input type="checkbox" id="allPoint"><span style="font-size: 12px;">모든 포인트 사용</span>
                 </td>
             </tr>
@@ -236,7 +246,7 @@
 
 		<!-- 배송지 -->
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px;">리워드 배송지</b>&nbsp;&nbsp;<button id="addressBtn">주소변경</button>
+            <b style="font-size: 20px;">리워드 배송지</b>&nbsp;&nbsp;<input type="button" id="addressBtn" onclick="location.href='mypageModify.me'" value="배송지 변경">
         </div>
         
         <!-- <h2 style="text-align: left;">리워드 배송지</h2> -->
@@ -273,14 +283,14 @@
 			<input hidden name="payEmail" value="${ loginUser.email }">
 			<input hidden name="payPhone" value="${ loginUser.phone }"> --%>
 			<input hidden name="finalSum" value="0" id="fs">
-	 		<input hidden name="pno" value="${ p.projectNumber }">
+	 		<%-- <input hidden name="pno" value="${ p.projectNumber }"> --%>
 		    <input type="hidden" id="sum" value=${ sum }> 
 		    <input type="hidden" id="spon" value=${ spon }>
 		    <input type="hidden" name="currentPoint" id="point" value=${ loginUser.point }> 
 		    
 		    
 	        <!-- <button type="submit" id="next_btn">결제하기</button> -->
-	        <button type="submit" id="next_btn">결제하기</button>
+	        <button type="button" id="next_btn">결제하기</button>
 	        <button type="reset" id="cancel_btn">취소</button>
         </form>
         
@@ -293,16 +303,19 @@
 <script>
 
 	$(function(){ 
+	
 				
 		var sum = parseInt($("#sum").val()); 		// 총액
 		var spon = parseInt($("#spon").val()); 	 	// 후원금
 		var fSum = sum + spon + 3000;				// 총액 + 후원금 + 배송비
-		var finalSum = 0;		
+		var finalSum = 0;							// 최종 결제액
+		var point = parseInt($("#point").val());	// 보유 포인트
+		
 		// 사용할 포인트
 		//console.log(finalSum);
 		$("#finalSum").text(fSum);
 		$("#fs").val(fSum);
-		
+				
 		// 포인트 input 숫자에 따라 결제총합 변경
 		$("#pointArea").bind('click keyup', function(){
 			
@@ -313,22 +326,31 @@
 			$("#finalSum").text(finalSum);
 			$("#fs").val(finalSum);
 		});
-		
-		
-		var point = parseInt($("#point").val());
-		
+				
 		// 체크박스 클릭시, 모든 포인트 사용
 		$("#allPoint").click(function(){
 			
  			if($(this).is(":checked")){ 
  				
- 				finalSum = fSum - point;
-			 	$("#pointArea").val(point);
-			 	$("#finalSum").text(finalSum);
-			 	$("#fs").val(finalSum);
-			 	
-			 	$("#pointArea").bind('click keyup', function(){
-			 		$("#allPoint").attr("checked", false);
+	 				// 포인트 사용시 조건 (결제금액 < 포인트 --> max 포인트 = 결제금액)
+	 				if(point > fSum){
+	 					
+	 					point = fSum;
+	 					//$("#pointArea").attr("max" , fSum); 
+	 				}
+	 				
+	 				finalSum = fSum - point;
+				 	$("#pointArea").val(point);
+				 	$("#finalSum").text(finalSum);
+				 	$("#fs").val(finalSum);
+				 	
+				$("#pointArea").bind('click keyup', function(){
+					
+					if($("#pointArea").val() == fSum){
+				 		$("#allPoint").prop("checked", true);
+					}else{
+						$("#allPoint").attr("checked", false);
+					}
 			 	});
 			 	
 			}else{
@@ -340,21 +362,12 @@
 			} 			 
 		});
 		
-
-	});
 	
-/*     // 예매하기 : 희영
-	$(function paymentStart(){
-		
-		if( $("#point").val() != null) { // 로그인이 되어있으면
-			
-			var result = window.open("payment.show?pno=", "payment", "width = 870, height = 520, top = 100, left= 200, location = no");
-			
-		} 
-    }); */
+	});
 
-    /* 
+     
     
+ 
  	// 결제 api
 	var IMP = window.IMP;
 	IMP.init('imp76288443'); 
@@ -378,13 +391,13 @@
    		
    	    if ( rsp.success ) {	// 성공시
    	        var msg = '결제가 완료되었습니다.';
-   	        msg += ' 고유ID : ' + rsp.imp_uid;
-   	        msg += ' 상점 거래ID : ' + rsp.merchant_uid;
-   	        msg += ' 결제 금액 : ' + rsp.paid_amount;
-   	        msg += ' 카드 승인번호 : ' + rsp.apply_num;
+   	        msg += ' (고유ID : ' + rsp.imp_uid + ")";
+   	        //msg += ' 상점 거래ID : ' + rsp.merchant_uid;
+   	        //msg += ' 결제 금액 : ' + rsp.paid_amount;
+   	        //msg += ' 카드 승인번호 : ' + rsp.apply_num;
    	        
    	        $('#payNo').val(rsp.imp_uid);
-   	        $('#reserveNo').val('R-' +  rsp.imp_uid);
+   	        //$('#reserveNo').val('R-' +  rsp.imp_uid);
    	        
    	        $("#resultForm").submit(); // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음 
    	        
@@ -392,9 +405,9 @@
    	        var msg = '결제에 실패하였습니다.';
    	        msg += '에러내용 : ' + rsp.error_msg;
    	    }
-   	    alert(msg);
-   	});
-	}); */
+   	    	alert(msg);
+   		});
+	});
 
 	
 /* 	//리셋버튼   

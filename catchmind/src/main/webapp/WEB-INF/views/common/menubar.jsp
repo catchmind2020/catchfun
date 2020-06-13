@@ -383,9 +383,9 @@ a:hover { text-decoration:none !important; color:black; }
    			$(".search").toggleClass("close");
    			$(".input").toggleClass("square");
    			if ($('.search').hasClass('close')) {
-   				$('input').focus();
+   				$('.input').focus();
    			} else {
-   				$('input').blur();
+   				$('.input').blur();
    			}
    		}
    		$('.search').on('click', expand);

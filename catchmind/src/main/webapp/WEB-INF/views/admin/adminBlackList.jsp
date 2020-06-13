@@ -85,7 +85,13 @@
 	                <tr>
 	                    <td>${ b.userNo }</td>
 	                    <td>${ b.userId }</td>
-	                    <td>${ b.userType }</td>
+	                    <td>
+	                    <c:choose>
+	                    	<c:when test="${ b.userType eq '1' }">일반회원</c:when>
+	                    	<c:when test="${ b.userType eq '2' }">프로젝트 등록자</c:when>
+	                    	<c:when test="${ b.userType eq '3' }">관리자</c:when>
+	                    </c:choose>	
+	                    </td>
 	                    <td>그냥그냥</td>
 	                    <td>2020-05-24</td>
 	                    <td>

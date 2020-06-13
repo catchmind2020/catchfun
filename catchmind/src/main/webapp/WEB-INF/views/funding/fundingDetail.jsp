@@ -574,7 +574,7 @@
                 <tr>
                     <td class="info_title">
                         <b>남은기간</b><br>
-                        <span style="font-size: 25px;" id="dday"></span>일 남음 
+                        <span style="font-size: 25px;" id="dday"></span>일 남음 (${ p.projectFinishDate }일 마감)
                     </td>
                 </tr>
                 <tr>
@@ -699,7 +699,7 @@
                                                     		<th style="padding:0px" colspan="3">
 			                                                	<textarea  readonly rows="3" cols="60" id="replyContent" style="resize:none; padding:0">로그인 후 댓글작성이 가능합니다.</textarea>
 			                                                </th>
-                                                    		<th><button id="addReply">등록</button></th>
+                                                    		<th><button id="addReply" onclick="alert('로그인 후 댓글 작성이 가능합니다.');">등록</button></th>
                                                     	</c:otherwise>                       
                                                     </c:choose>
                                                 </tr>

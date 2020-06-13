@@ -119,7 +119,9 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
         <br>
         <div class="innerOuter" style="padding:5% 10%;">
             <table id="boardList" class="table table-hover" align="center">
-                <button class="button button4">글쓰기</button>
+            <c:if test="${ !empty loginUser }">
+                <button class="button button4" onclick="location.href='enrollForm.cq'">글쓰기</button>
+            </c:if>
                 <thead>
                   <tr>
                   	<th>글번호</th>
@@ -129,13 +131,15 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
                   </tr>
                 </thead>
                 <tbody>
+                <c:if test="${ !empty loginUser }">
 	            <c:forEach items="${ list }" var="q">
 	                    <tr>
+	                    	<%-- <td>${ q.cqWriter }</td> --%>
 	                        <td>${ q.cqNo }</td>
 	                        <td>${ q.cqTitle }</td>
 	                        <td>${ q.cqDate }</td>
 	                        <c:choose>
-	                        	<c:when test="${ q.cqYn eq 'N' } ==">
+	                        	<c:when test="${ q.cqYn eq 'N' }">
 	                        		<td>답변대기</td>
 	                        	</c:when>
 	                        	<c:otherwise>
@@ -144,9 +148,10 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
 	                        </c:choose>
                         </tr>
 				</c:forEach>
+				</c:if>
 				</tbody>
-
             </table>
+            
             
              <script>
             	$(function(){

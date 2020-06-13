@@ -1,5 +1,6 @@
 package com.catchmind.catchfun.admin.model.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -167,6 +168,26 @@ public class AdminServiceImpl2 implements AdminService2 {
 	@Override
 	public int updateNews(String pno) {
 		return aDao2.updateNews(sqlSession, pno);
+	}
+	@Override
+	public int sales1(Date sDate) {
+		return aDao2.sales1(sqlSession, sDate);
+	}
+	@Override
+	public int sales2(Date sDate) {
+		return aDao2.sales2(sqlSession, sDate);
+	}
+	@Override
+	public int sales3(Date sDate) {
+		return aDao2.sales3(sqlSession, sDate);
+	}
+	@Override
+	public int sales4(Date sDate) {
+		return aDao2.sales4(sqlSession, sDate);
+	}
+	@Override
+	public int sales5(Date sDate) {
+		return aDao2.sales5(sqlSession, sDate);
 	}
 
 	/*

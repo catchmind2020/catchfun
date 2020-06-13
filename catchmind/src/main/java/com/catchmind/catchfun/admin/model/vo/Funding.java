@@ -1,4 +1,4 @@
-package com.catchmind.catchfun.funding.model.vo;
+package com.catchmind.catchfun.admin.model.vo;
 
 import java.sql.Timestamp;
 
@@ -13,8 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class FundingList {
-
+public class Funding {
 	
 	private String fundingNo;		// 펀딩번호
 	private String rewardNo;		// 리워드번호
@@ -29,15 +28,5 @@ public class FundingList {
 	private int fundingSponsership;	// 후원금
 	private String shipMemo;		// 배송요청사항
 	private int usePoint;			// 사용 포인트
-	
-	// 추가 
-	private int sumPrice;			// 현재 펀딩 합계
-	private int sumSponsership;		// 현재 후원금 합계
-	private int personCount; 		// 현재 펀딩한 사람 수
-	
-	private String fundingCost2;	// 펀딩금액2 // int --> String
-	private String fundingQuantity2;// 펀딩수량2 // int --> String
-	private String fundingTitle2;	// 펀딩 리워드 제목
-	private int point;				// 사용될 포인트
 	
 }

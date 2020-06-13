@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Member" alias="Member1"/>
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Project" alias="Project1"/>
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Question" alias="Question" />
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Funding" alias="Funding"/>
 		
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Main" alias="Main" />
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Category" alias="MainCategory" />

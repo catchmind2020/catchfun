@@ -13,11 +13,8 @@
 
 /* 폰트 초기화*/
 body, input, textarea, select, button, table {
-	font-family: 'Nanum Gothic', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕',
-		'dotum', '돋움', sans-serif;
 	color: #222;
 	font-size: 18px;
-	line-height: 1.5;
 }
 
 /* 아이디찾기완료, 비밀번호찾기완료 CSS페이지*/
@@ -50,8 +47,7 @@ table {
 }
 
 
-#userId, #certified, #userName, #repwd1, #repwd, #phone, #del_postcod,
-#del_address, #del_extraAddress, #del_detailAddress, select {
+input[type=text], input[type=password], input[type=email], input[type=number], select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -170,7 +166,7 @@ button[type=submit]:hover {
 								<div class="form-check" style="text-align: left;">
 									<input type="checkbox" id="ex_rd" name="ex_rd" value="agree">
 									<label for="ex_rd"><b>전체동의</b><br></label>
-									<p style="font-size: 15px;">캐치펀 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
+									<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
 								</div>
 							</td>
 						</tr>
@@ -184,15 +180,15 @@ button[type=submit]:hover {
 										<label for="email"><p style="text-align: left;">위 이메일로 인증번호가 발송됩니다.</p></label>
 									
 									<%-- <form action="join_injeung.do${dice}" method="post"> --%>
-										<input type="text" id="certified" name="certified" placeholder="인증번호입력"> 
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력" style="width: 300px;"> 
 										<button type="button" class="btn btn-info" id="email_btn">인증</button>
 									</div>
 									<input type="hidden" path="random" id="random" value="${random}" />
 								</td>
-									<form action="join_injeung.do${dice}" method="post">
+						<%-- 			<form action="join_injeung.do${dice}" method="post">
 										<input type="text" id="certified" name="certified" placeholder="인증번호입력" required style="width: 300px;"> 
 										<button id="email_btn">인증</button>
-									</form>
+									</form> --%>
 							</td>
 							<td></td>
 						</tr>

@@ -103,7 +103,7 @@
             </table>
 
             <br>
-             <!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->
+            <c:if test="${ q.cqYn ne 'N'}">
              <table id="replyArea" class="table" align="center">
                 
                 <tbody>
@@ -116,7 +116,7 @@
 
                 </tbody>
             </table>
-
+			</c:if>
  
         </div>
         <br><br>
