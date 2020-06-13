@@ -399,9 +399,9 @@
     </select>
     
     <select id="sales5" parameterType="date" resultMap="adminProReportResultSet">
-    	SELECT *
+    	SELECT COUNT(*)
 		  FROM PROJECT
-		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> #{sDate} +7
+		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> SYSDATE +7
     </select>
     
     
