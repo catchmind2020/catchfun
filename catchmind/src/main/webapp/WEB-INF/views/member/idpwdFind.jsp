@@ -155,18 +155,19 @@ height: 40px;
                     <tr>
                         <td>
                             <form action="#">
-	                            <label for="email">
-	                                <p style="text-align:left;">
-		                                	<h4>가입정보로 확인</h4><br>
-												* 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
-												아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
-	                                </p></label>
-	                              <input type="email" id="email" name="email" placeholder="이메일">
-                            	 <input type="submit" value="완료">
-                        	</td>
-                        <td>  
-                        </td>
-                    </tr>
+                            	<div id="idfind1" style="width:300px;">
+		                            <label for="email">
+		                                <p style="text-align:left;">
+			                                	<h4>가입정보로 확인</h4><br>
+													* 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
+													아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
+		                                </p></label>
+		                              <input type="text" id="userName" name="userName" placeholder="이름">
+		                              <input type="text" id="phone" name="phone" placeholder="휴대폰번호'-'없이 입력">
+	                            	  <input type="submit" value="완료">
+	                        	</td>
+                        	</div>
+                    	</tr>
                     </center>
                    </table>
                 </div>
@@ -176,14 +177,18 @@ height: 40px;
                     <table id="id_table">
                     <tr>
                         <td>
-                            <form action="/action_page.php">
-                            <input type="email" id="email" name="email" placeholder="이메일">
-                            <label for="email">
-                                <p style="text-align:left;">
-                                    회원가입한 이메일을 입력하시면. <br>
-                                    이메일로 비밀번호를 발송해드립니다. <br>
-                                </p></label>
-                                <input type="submit" value="완료">
+                            <form action="">
+                            	<div id="passwordfind1" style="width:300px;">
+                            		<input type="text" id="userId" name="userId" placeholder="아이디">
+		                             <input type="text" id="userName" name="userName" placeholder="이름">
+		                              <input type="text" id="phone" name="phone" placeholder="휴대폰번호'-'없이 입력">
+		                            <label for="email">
+		                                <p style="text-align:left;">
+							                                    회원가입한 이메일을 입력하시면. <br>
+							                                    이메일로 비밀번호를 발송해드립니다. <br>
+		                                </p></label>
+		                                <input type="submit" value="완료">
+		                           </div>
                         </td>
                         <td>  
                         </td>
