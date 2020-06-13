@@ -119,6 +119,13 @@
         border: 1px solid rgb(202, 202, 202);
         color: white;
     }
+    .btn2{
+        height: 30px;
+        background-color:   rgb(31, 205, 211);
+        border-radius: 2px;
+        border: 1px solid  rgb(31, 205, 211);
+        color: white;
+    }
 </style>
 <body>
     
@@ -193,12 +200,25 @@
 					</td>
                 </tr>
                 <tr>
-                	<form id="resultForm" action="requestCancel.pro?cfl=${ cfl }" method="post">
-                    	<td colspan="2"><button type="button" class="btn" style="width: 100%; height: 40px;" onclick="requestCancel();">결제 예약 취소</button></td>
+                	<form id="resultForm" action="requestCancel.pro?" method="post">
+                		<input type="hidden" value="${ cfl }" id="originCfl">
+                		<input type="hidden" name="fundingNo" value="${fundingNo }" >
+                		<input type="hidden" name="pno" value="${ p.projectNumber }" >
+                    	<td colspan="2">
+                    		<c:choose>
+                    			<c:when test="${ f0.fundingStatus eq 'N' }">
+                    				<button type="button" class="btn2" style="width: 100%; height: 40px;" onclick="requestCancel();">결제 예약 취소</button>
+                    			</c:when>
+                    			<c:otherwise>
+                    				<button type="button" disabled class="btn" style="width: 100%; height: 40px;" onclick="requestCancel();">결제 예약 취소</button>
+                    			</c:otherwise>
+                    		</c:choose>
+                    	</td>
                 	</form>
+                	
                 </tr>
             </tbody>
-
+			
         </table>
         <br>
         
@@ -208,12 +228,15 @@
         //결제 취소
         function requestCancel(){
         	
-        	var result = alert("정말로 결제를 취소하시겠습니까?");
+        	alert("정말로 결제를 취소하시겠습니까?");
         	
-        	if(result == true){
-        		
-        		$("#resultForm").submit();
-        	}
+        	var originCfl = $("#originCfl").val(); 
+        	//console.log(originCfl);
+        	//var newCfl = encodeURI(originCfl);
+        	
+        	//$("#newCfl").val(newCfl);
+			$("#resultForm").submit();
+
         }
         </script>
         
@@ -230,7 +253,7 @@
             </tr>
             <tr>
                 <td>펀딩금액</td>
-                <td class="payContent" id="fSum"><fmt:formatNumber value="${ sum }" pattern="#,###"/></td>
+                <td class="payContent" id="fSum"><fmt:formatNumber value="${ sum }" pattern="#,###"/>원</td>
             </tr>
             <tr>
                 <td>후원금</td>
