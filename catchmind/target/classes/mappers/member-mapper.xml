@@ -164,6 +164,13 @@
 	</update> 
 	
 	
+	<select id="idFindMember" resultMap="memberResultSet">
+		select USER_ID
+		 from MEMBER
+		 where USER_NAME = #{userName} and phone = {phone} and STATUS='Y'
+	</select>
+	
+	
 <!-- 	<delete id="deleteAnswer" parameterType="string">
 		delete from  PERSON_QUESTION
 		where ANS_NO=#{ansNo}  

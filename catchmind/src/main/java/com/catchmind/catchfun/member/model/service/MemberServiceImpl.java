@@ -140,6 +140,11 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteAnswer(String qno) {
 		return mDao.deleteAnswer(sqlSession, qno);
 	}
+
+	@Override
+	public ArrayList<Member> idFindMember(Member m) {
+		return mDao.idFindMember(sqlSession, m);
+	}
 	
 
 
