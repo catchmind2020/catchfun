@@ -601,23 +601,35 @@ public class AdminController2 {
 	 * 매출 통계 리스트페이지
 	 */
 	@RequestMapping("sales.ad")
-	public String adminSales() {
+	public String adminSales(Model model) {
+		
+		int sales6 = aService2.sales6();
+		int sales7 = aService2.sales7();
+		int sales8 = aService2.sales8();
+		int sales9 = aService2.sales9();
+		int sales10 = aService2.sales10();
+		
+		model.addAttribute("sales6", sales6);
+		model.addAttribute("sales7", sales7);
+		model.addAttribute("sales8", sales8);
+		model.addAttribute("sales9", sales9);
+		model.addAttribute("sales10", sales10);
 		return "admin/adminSales";
 	}
 	
 	@RequestMapping("salesSearch.ad")
-	public String adminSalesSearch(Date sDate, Model model) {
-		
+	public String adminSalesSearch(String sDate, Model model) {
+
 		int sales1 = aService2.sales1(sDate);
 		int sales2 = aService2.sales2(sDate);
 		int sales3 = aService2.sales3(sDate);
 		int sales4 = aService2.sales4(sDate);
 		int sales5 = aService2.sales5(sDate);
-		System.out.println(sales1);
-		System.out.println(sales2);
-		System.out.println(sales3);
-		System.out.println(sales4);
-		System.out.println(sales5);
+		model.addAttribute("sales1", sales1);
+		model.addAttribute("sales2", sales2);
+		model.addAttribute("sales3", sales3);
+		model.addAttribute("sales4", sales4);
+		model.addAttribute("sales5", sales5);
 		return "admin/adminSalesSearch";
 	}
 	

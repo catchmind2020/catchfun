@@ -370,15 +370,15 @@
 		update news set project_status='Y' where project_number=#{pno}   
    </update>
     
-    <select id="sales1" parameterType="date"  resultMap="adminFundingResultSet">
-    	SELECT SUM(TOTAL) 
+    <select id="sales1" parameterType="string"  resultType="_int">
+    	SELECT NVL(SUM(TOTAL),0) 
     	  FROM (SELECT ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
 			      FROM(SELECT *
 				         FROM FUNDING_LIST
 				        WHERE FUNDING_DATE=#{sDate}))
     </select>
     
-    <select id="sales2" parameterType="date" resultMap="adminFundingResultSet">
+    <select id="sales2" parameterType="string" resultType="_int">
     	SELECT COUNT(*) 
 	      FROM (SELECT FUNDING_NO, ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
 		          FROM(SELECT *
@@ -386,19 +386,53 @@
 		                WHERE FUNDING_DATE=#{sDate}))
     </select>
     
-    <select id="sales3" parameterType="date" resultMap="adminProReportResultSet">
+    <select id="sales3" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
 	   	  FROM PROJECT
 		 WHERE PROJECT_STARTDATE <![CDATA[ <= ]]> #{sDate} AND project_finishdate <![CDATA[ > ]]> #{sDate} AND PROJECT_STATUS='Y'
     </select>
     
-    <select id="sales4" parameterType="date" resultMap="adminProReportResultSet">
+    <select id="sales4" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
 	      FROM PROJECT
 		 WHERE PROJECT_FINISHDATE <![CDATA[ < ]]> #{sDate}
     </select>
     
-    <select id="sales5" parameterType="date" resultMap="adminProReportResultSet">
+    <select id="sales5" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+		  FROM PROJECT
+		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> SYSDATE +7
+    </select>
+    
+     <select id="sales6" parameterType="string"  resultType="_int">
+    	SELECT NVL(SUM(TOTAL),0) 
+    	  FROM (SELECT ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
+			      FROM(SELECT *
+				         FROM FUNDING_LIST
+				        WHERE FUNDING_DATE=SYSDATE))
+    </select>
+    
+    <select id="sales7" parameterType="string" resultType="_int">
+    	SELECT COUNT(*) 
+	      FROM (SELECT FUNDING_NO, ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
+		          FROM(SELECT *
+		                 FROM FUNDING_LIST
+		                WHERE FUNDING_DATE=SYSDATE))
+    </select>
+    
+    <select id="sales8" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+	   	  FROM PROJECT
+		 WHERE PROJECT_STARTDATE <![CDATA[ <= ]]> SYSDATE AND project_finishdate <![CDATA[ > ]]> SYSDATE AND PROJECT_STATUS='Y'
+    </select>
+    
+    <select id="sales9" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+	      FROM PROJECT
+		 WHERE PROJECT_FINISHDATE <![CDATA[ < ]]> SYSDATE
+    </select>
+    
+    <select id="sales10" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
 		  FROM PROJECT
 		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> SYSDATE +7

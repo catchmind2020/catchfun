@@ -303,24 +303,41 @@ public class AdminDao2 {
 		return sqlSession.update("adminMapper2.updateNews", pno);
 	}
 	
-	public int sales1(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales1(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales1", sDate);
+	
 	}
 	
-	public int sales2(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales2(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales2", sDate);
 	}
 	
-	public int sales3(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales3(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales3", sDate);
 	}
 	
-	public int sales4(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales4(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales4", sDate);
 	}
 	
-	public int sales5(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales5(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales5", sDate);
+	}
+	
+	public int sales6(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales6");
+	}
+	public int sales7(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales7");
+	}
+	public int sales8(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales8");
+	}
+	public int sales9(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales9");
+	}
+	public int sales10(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales10");
 	}
 	
 	
