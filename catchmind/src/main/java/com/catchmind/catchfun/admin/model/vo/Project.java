@@ -41,5 +41,6 @@ public class Project {
 	private String reportTitle;
 	private String reportContent; 
 	private String userNo1;
+	private String changeName;
 
 }

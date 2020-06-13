@@ -99,6 +99,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteAnswer", qno);
 	}
 
+	public ArrayList<Member> idFindMember(SqlSessionTemplate sqlSession, Member m) {
+		return (ArrayList)sqlSession.selectList("memberMapper.idFindMember", m);
+	}
+
 
 
 

@@ -1,5 +1,6 @@
 package com.catchmind.catchfun.admin.model.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
@@ -139,6 +140,18 @@ public interface AdminService2 {
 	int updateFunding(String pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 	int updateReward(String pno); // 리워드 정보
 	int updateNews(String pno); // 새소식 정보
+	
+	int sales1(String sDate);
+	int sales2(String sDate);
+	int sales3(String sDate);
+	int sales4(String sDate);
+	int sales5(String sDate);
+	
+	int sales6();
+	int sales7();
+	int sales8();
+	int sales9();
+	int sales10();
 	
 	
 }

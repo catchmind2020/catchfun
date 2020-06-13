@@ -549,30 +549,16 @@
                     	<img src="${ p.filePath }/${ p.changeName }" id="imgArea">
                     </td>
                     <td class="info_title" colspan="2">
-                        <b>모인금액</b><br>
-                        <span style="font-size: 30px;"><fmt:formatNumber value="${ fl.sumPrice + fl.sumSponsership }" pattern="#,###" /></span>원 모금
+                        <b>목표금액</b><br>
+                        <span style="font-size: 30px;"><fmt:formatNumber value="${ p.projectTargetAmount }" pattern="#,###" /></span>원 
                     </td>
 
                 </tr>
                 <tr>
-                    <td class="info_title" style="border-color:chartreuse; text-align:right" colspan="2">
-                        <!-- <hr> -->
-                        <progress value="${ (fl.sumPrice + fl.sumSponsership) / p.projectTargetAmount * 100}" 
-                                  max="100" id="percent"></progress>
-                        <span><fmt:formatNumber value="${ (fl.sumPrice + fl.sumSponsership) / p.projectTargetAmount * 100 }" pattern="0" />%</span>
-                    </td>
                 </tr>
                 <tr>
-                    <td class="info_title" colspan="2">
-                        <b>참여인원</b><br>
-                        <span style="font-size: 25px;">${ fl.personCount }</span>명 참여
-                    </td>
                 </tr>
                 <tr>
-                    <td class="info_title" colspan="2">
-                        <b>남은기간</b><br>
-                        <span style="font-size: 25px;" id="dday"></span>일 남음 
-                    </td>
                     
                 </tr>
                 <tr>
@@ -742,7 +728,6 @@
 		                                        <b class="reward_money"><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" />원 펀딩</b>
 		                                        <p class="reward_name">${ r.rewardTitle }<br></p>
 		                                        <p>${ r.rewardContent }<br></p>
-		                                        <button class="reward_sum">${ r.rewardFundingCount }명</button>&nbsp;&nbsp;참여 / 수량 ${ r.rewardRemainingQuantity }개 남음
 		                                    </div>
 	                                    </td>
 	                                </tr>
@@ -834,28 +819,6 @@
     
     <!--------------------------------- 팝업 ---------------------------------------------------------------->
 	<!-- 개설자 문의 popup -->
-	<div class="modal"> 
-		 <div class="modal-content2" style="width: 500px !important;"> 
-		     <span class="close-button">&times;</span> 
-		     <h1 class="title">개설자 문의</h1> 
-		     <h4>프로젝트 : ${ p.projectName }</h4>
-		     
-		     <form action="qinsert.pro?pno=${ p.projectNumber }" method="POST"> 
-		       <!-- <label for="text">제목</label>  -->
-		       <input hidden id="zzimNumber" value="${ p.projectNumber }">
-		       <input type="text" id="zzimNo" name="userNo" style="display:none" value="${ loginUser.userNo }">
-		       <input type="text" name="counseling" style="display:none" value="${ p.userNo }">
-		       <input type="text" name="questionTitle" placeholder="제목" required="required"> 
-		       <label></label> 
-		       <textarea name="questionContent" placeholder="내용" required="required" style="resize:none"></textarea>
-		            
-	          <div align="center">
-	           	<input type="submit" id="submit" value="보내기"> 
-	            <input type="button" id="cancel" value="취소"> 
-	           </div>
-	         </form> 
-	     </div> 
-	 </div>
 	 
 	 
 	<!-- 개설자 신고 popup -->
@@ -868,7 +831,7 @@
 	        <form action="projectReturn.ad" method="get"> 
 	          <input type="hidden" name="pno" value="${ pno }"> 
 	          <label></label> 
-	          <textarea name="reportContent" placeholder="반려 내용" required="required" style="resize:none"></textarea>
+	          <textarea name="returnContent" placeholder="반려 내용" required="required" style="resize:none"></textarea>
 	            	
 	           <div align="center">
 	           	   <input type="submit" id="submit2" value="보내기"> 
@@ -885,27 +848,6 @@
 	
 		window.onload = function(){
 		
-			<!-- 개설자 문의 popup -->
-		    var modal = document.querySelector(".modal"); 
-		    var trigger = document.querySelector(".trigger"); 
-		    var closeButton = document.querySelector(".close-button"); 
-		    var cancelButton = document.querySelector("#cancel");
-		
-		   function toggleModal() { 
-		        modal.classList.toggle("show-modal"); 
-		    }
-		
-		   function windowOnClick(event) { 
-		        if (event.target === modal) { 
-		            toggleModal(); 
-		        } 
-		    }
-		
-		    trigger.addEventListener("click", toggleModal); 
-		    closeButton.addEventListener("click", toggleModal); 
-		    cancel.addEventListener("click", toggleModal); 
-		    window.addEventListener("click", windowOnClick);
-			<!-- 개설자 문의 popup 끝 -->	
 	
 			
 			<!-- 개설자 신고 popup -->	
