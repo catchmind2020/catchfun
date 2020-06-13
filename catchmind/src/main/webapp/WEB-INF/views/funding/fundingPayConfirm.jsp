@@ -128,8 +128,8 @@
         
         <table id="rewardArea">
             
-            <h1>펀딩 완료</h1>
-
+            <!-- <h1>펀딩 완료</h1> -->
+			<br><br>
             <thead id="resultArea">
                 <tr>
                     <td colspan="2" style="font-size: 12px;">리워드/악세사리</td>
@@ -148,11 +148,21 @@
             <tbody>
                 <tr>
                     <td>펀딩번호</td>
-                    <td class="resultContent">${ cfl.fundingNo }</td>
+                    <td class="resultContent">
+                    	${ fundingNo }
+                    	<%-- <c:forEach items="${ cfl }" var ="fl">
+	                    	<c:choose>
+	                    		<c:when test="">
+	                    			${ fl.fundingNo }&nbsp;&nbsp;
+	                    		</c:when>
+	                    		<c:otherwise></c:otherwise>
+	                    	</c:choose>
+                    	</c:forEach> --%>
+                    </td>
                 </tr>
                 <tr>
                     <td>펀딩 날짜</td>
-                    <td class="resultContent">${ f0.fundingDate }</td>
+                    <td class="resultContent"><fmt:formatDate value="${ f0.fundingDate }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
                 </tr>
                 <tr>
                     <td>펀딩 마감일</td>
@@ -161,15 +171,16 @@
                 <tr>
                     <td>펀딩 상태</td>
                     <td class="resultContent" style="font-size: 20px; color:rgb(31, 205, 211)">
+                    	<b>
 						<c:choose>
 							<c:when test="${ f0.fundingStatus eq 'N' }">
-								결제예약
+								결제 예약
 							</c:when>
 							<c:when test="${ f0.fundingStatus eq 'E' }">
-								결제취소신청
+								결제 취소 대기
 							</c:when>
 							<c:when test="${ f0.fundingStatus eq 'C' }">
-								결제취소완료
+								결제 취소 완료
 							</c:when>
 							<c:when test="${ f0.fundingStatus eq 'S' }">
 								결제성공
@@ -178,15 +189,34 @@
 								결제실패
 							</c:otherwise>
 						</c:choose>
+						</b>
 					</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><button class="btn" style="width: 100%;">결제 예약 취소</button></td>
+                	<form id="resultForm" action="requestCancel.pro?cfl=${ cfl }" method="post">
+                    	<td colspan="2"><button type="button" class="btn" style="width: 100%; height: 40px;" onclick="requestCancel();">결제 예약 취소</button></td>
+                	</form>
                 </tr>
             </tbody>
 
         </table>
         <br>
+        
+        
+        <script>
+        
+        //결제 취소
+        function requestCancel(){
+        	
+        	var result = alert("정말로 결제를 취소하시겠습니까?");
+        	
+        	if(result == true){
+        		
+        		$("#resultForm").submit();
+        	}
+        }
+        </script>
+        
 
         <table id="payArea">
             <tr>
@@ -200,7 +230,7 @@
             </tr>
             <tr>
                 <td>펀딩금액</td>
-                <td class="payContent" id="fSum"></td>
+                <td class="payContent" id="fSum"><fmt:formatNumber value="${ sum }" pattern="#,###"/></td>
             </tr>
             <tr>
                 <td>후원금</td>
@@ -216,7 +246,7 @@
             </tr>
             <tr>
                 <th>최종결제금액</th>
-                <th class="payContent" style="font-size: 20px; color:rgb(31, 205, 211)"><fmt:formatNumber value="${ finalSum }" pattern="#,###" />원</th>
+                <th class="payContent" style="font-size: 20px; color:rgb(31, 205, 211)"><fmt:formatNumber value="${ sum + f0.fundingSponsership + 3000 - f0.usePoint }" pattern="#,###" />원</th>
             </tr>
         </table>
         
@@ -224,7 +254,7 @@
 
 
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px; ">결제 정보</b>&nbsp;&nbsp;<button class="btn">결제 정보 변경</button>
+            <b style="font-size: 20px; ">결제 정보</b>&nbsp;&nbsp;<!-- <button class="btn">결제 정보 변경</button> -->
         </div>
         
 
@@ -237,7 +267,7 @@
                 <td width="200px">결제방식</td>
                 <td>신용(체크)카드</td>
             </tr>
-<!--        <tr>
+	   <!-- <tr>
                 <td width="200px">카드번호</td>
                 <td>************1111</td>
             </tr> -->
@@ -246,7 +276,7 @@
 
 
         <div style="text-align: left; margin-bottom: 10px;">
-            <b style="font-size: 20px; ">리워드 배송지</b>&nbsp;&nbsp;<button class="btn">리워드 배송지 변경</button>
+            <b style="font-size: 20px; ">리워드 배송지</b>&nbsp;&nbsp;<button class="btn" onclick="location.href='mypageModify.me'">배송지 변경</button>
         </div>
 
         <table id="payAddress">
@@ -273,33 +303,11 @@
 
 
         <br>
-        <button type="submit" id="next_btn">나의 펀딩 목록으로</button>
+        <button type="button" id="next_btn">나의 펀딩 목록으로</button>
     </div>
     <br><br><br><br><br><br>
-    
-    <c:forEach items="${ cfl }" var ="fl" varStatus="status">
-    	<input type="hidden" id="sum${status.index}" value="${ fl.fundingCost * fl.fundingQuantity }">
-    	<input type="hidden" id="last" value="${status.end}">
-    </c:forEach>
 
-	<script>
-		
-		$(function(){
-			
-			var fSum = 0;
-			
-			for(var i=0; i<$("#last").val(); i++){
-				
-				var a = "#sum" + i;
-				var sum = $("a").val; // 리워드 가격 * 구매갯수
-				
-				fSum += sum
-			}
-			fSum = fSum + "원";
-			$("#fSum").val(fSum);
-			
-		});
-	
-	</script>
+
+
 </body>
 </html>

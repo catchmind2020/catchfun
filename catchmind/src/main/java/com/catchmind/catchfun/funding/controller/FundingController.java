@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.funding.model.service.FundingService;
@@ -21,6 +20,7 @@ import com.catchmind.catchfun.funding.model.vo.Reply;
 import com.catchmind.catchfun.funding.model.vo.Report;
 import com.catchmind.catchfun.funding.model.vo.Reward;
 import com.catchmind.catchfun.funding.model.vo.Wishlist;
+import com.catchmind.catchfun.member.model.vo.Member;
 import com.google.gson.GsonBuilder;
 
 @Controller
@@ -34,6 +34,7 @@ public class FundingController {
 		
 		Project p = fService.selectProject(pno); // 프로젝트 정보
 		Maker m = fService.selectMaker(pno); // 메이커 정보
+		
 		FundingList fl = fService.selectFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 		ArrayList<Reward> rlist = fService.selectReward(pno); // 리워드 정보
 		// ArrayList<Reward> rCountlist = fService.selectRewardCount(pno); // 리워드별 합계 정보
@@ -47,7 +48,7 @@ public class FundingController {
 		// mv.addObject("rCountlist", rCountlist);
 		
 		mv.addObject("nlist", nlist);
-		
+		//System.out.println(p);
 
 		mv.setViewName("funding/fundingDetail");
 
@@ -182,7 +183,6 @@ public class FundingController {
 			return "add";
 		}
 		
-		
 		/*
 		int result = fService.insertWishlist(w);
 		//System.out.println(w);
@@ -190,9 +190,6 @@ public class FundingController {
 		if(result > 0) { 
 			
 			session.setAttribute("msg", "찜하기 추가 완료. 마이페이지에서 확인해보세요.");
-			
-			
-			
 			
 		}else {
 			
@@ -205,7 +202,6 @@ public class FundingController {
 		*/
 		
 	}
-	
 	
 	@RequestMapping("rewardList.pay")
 	public ModelAndView selectReward(String pno, String rno, ModelAndView mv) {
@@ -283,25 +279,34 @@ public class FundingController {
 	
 	
 	@RequestMapping("dopay.pay")
-	public ModelAndView payment(String pno, int finalSum, String shipMemo, int currentPoint, int usePoint, String paymentMethod, ModelAndView mv, HttpSession session) {
+	public ModelAndView payment(String pno, String shipMemo, int currentPoint, int usePoint, String paymentMethod, ModelAndView mv, HttpSession session) {
 		
 		//System.out.println(pno + " " + finalSum + " " + shipMemo + " " + currentPoint + " " + usePoint + " " + paymentMethod);
+		
 		Project p = fService.selectProject(pno); // 프로젝트 정보
-		Maker m = fService.selectMaker(pno); // 메이커 정보
+		Maker m = fService.selectMaker(pno); 	 // 메이커 정보
+		
 		//FundingList fl = fService.selectFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 		//ArrayList<Reward> rlist = fService.selectReward(pno); // 리워드 정보
+		//System.out.println(p);
+		//System.out.println(m);
+		
 		mv.addObject("p", p);
-		mv.addObject("m", m);
+		mv.addObject("m", m);		
+		
 		
 		// 1. 펀딩 내역 insert 
 		// --> for문으로 여러개 저장 (PL-SQL로)--> 벗, 사용포인트, 후원금은 한번만 저장
 		ArrayList<FundingList> flList = (ArrayList<FundingList>)(session.getAttribute("flList"));
+		//System.out.println("1 : " + flList);
+		//System.out.println(flList.size());
 		
 		int spon = (int)session.getAttribute("spon");
 
 		//System.out.println(flList);
 		int[] result = new int[flList.size()];
 		int count = 0;
+		//System.out.println(result);
 		
 		for(int i=0; i<flList.size(); i++) {	
 			
@@ -323,7 +328,6 @@ public class FundingController {
 				
 			}
 			
-			//System.out.println(f);
 			result[i] = fService.insertFundingList(f);
 			
 			if(result[i] > 0) { // insert 성공
@@ -331,34 +335,44 @@ public class FundingController {
 			}else { // 실패
 				count = count;
 			}
-		
+			//System.out.println("1");
+			//System.out.println("2 : " + f + "<br>");
 		}
 		
 		
 		// insert 모두 성공시
-		if(count == flList.size()) { 
+		if(count == flList.size()) {
 			
 			// 2-1. 사용한 포인트 차감 (차감된포인트, userNo 필요)
+			//System.out.println("2-1");
 			int newPoint = currentPoint - usePoint;
 			FundingList f = flList.get(0);
 			f.setUsePoint(newPoint); 
 			
 			int pointResult = fService.updatePoint(f);
+			//System.out.println(pointResult);
 			
-			
-			// 2-2. 결재된 리워드 아이템 수량 차감 (rewardNo, fundingQuantity 필요)
+			// 2-2. 결제된 리워드 아이템 수량 차감 (rewardNo, fundingQuantity 필요) 
+			// 2_3. 리워드 수량 차감 (rewardNo, fundingQuantity 필요) 
 			int itemQuantityCut = 0;
+			int rewardQuantityCut = 0;
 			
 			for(int i=0; i<flList.size(); i++) {
 				
+				//System.out.println("2-2");
 				FundingList f2 = flList.get(i);
-
+				//System.out.println(f2);
+				
 				itemQuantityCut = fService.updateItemQuantity(f2);
+				rewardQuantityCut = fService.updateRewardQuantity(f2);
+				
 			}
 			
 
-			// 둘다 성공시
-			if(pointResult > 0 && itemQuantityCut > 0) {
+			// 모두 성공시
+			if(pointResult > 0 && itemQuantityCut > 0 && rewardQuantityCut > 0 ) {
+				
+				//System.out.println("3");
 				
 				// DB에서 가져오기
 				FundingList f2 = flList.get(0);
@@ -368,9 +382,26 @@ public class FundingController {
 				
 				mv.addObject("f0", f0);
 				mv.addObject("cfl", confirmFlList); 
-				System.out.println(confirmFlList);
-				System.out.println(f0);
-							
+				
+				//System.out.println(confirmFlList);
+				//System.out.println(f0);
+					
+				int sum = 0;
+				String fundingNo = "";
+				
+				for(int i=0; i<confirmFlList.size(); i++) {
+					sum += (confirmFlList.get(i).getFundingCost() * confirmFlList.get(i).getFundingQuantity());
+				}
+				mv.addObject("sum", sum);
+				
+				for(int i=0; i<confirmFlList.size(); i++) {
+					if(i == 0) {
+						fundingNo += confirmFlList.get(i).getFundingNo();
+					}else {
+						fundingNo += ", " + confirmFlList.get(i).getFundingNo();
+					}
+				}
+				mv.addObject("fundingNo", fundingNo);
 			}			
 		
 			//mv.addObject("rlist", rlist);
@@ -380,15 +411,47 @@ public class FundingController {
 			//mv.addObject("usePoint", usePoint);
 			
 			mv.setViewName("funding/fundingPayConfirm");
+			session.setAttribute("flList", null);
+			//session.invalidate();
 			return mv;
 			
 			
 		}else {	// 하나라도 실패시 
-			session.setAttribute("msg", "펀딩 결재에 실패하였습니다. 다시 시도해주세요.");
+			session.setAttribute("msg", "펀딩 결제에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("redirect:booking.pay?pno=" + pno);
+			session.setAttribute("flList", null);
+			//session.invalidate();
 			return mv;
 		}
 
 	}
 	
+	@RequestMapping("requestCancel.pro")
+	public String requestCancel(ArrayList<FundingList> cfl, HttpSession session) {
+		
+		int count = 0;
+		
+		for(int i=0; i<cfl.size(); i++) {	
+			
+			int result = fService.requestCancel(cfl.get(i));
+			count++;
+		}
+		
+		if(count == cfl.size()) { 
+			
+			session.setAttribute("msg", "결제예약이 취소되었습니다.");
+			return "funding/fundingPayConfirm";
+			
+		}else {
+			
+			session.setAttribute("msg", "결제예약 취소가 실패하였습니다. 다시 시도해주세요.");
+			return "funding/fundingPayConfirm";
+		} 
+	}
+
+/*	@RequestMapping("requestCancel.pro")
+	public ModelAndView detailPay(String pno, ModelAndView mv, HttpSession session) {
+	
+	
+	}*/
 }

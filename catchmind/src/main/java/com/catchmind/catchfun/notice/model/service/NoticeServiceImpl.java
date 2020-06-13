@@ -59,8 +59,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public ArrayList<CatchfunQuestion> cqselectList(PageInfo pi) {
-		return ntDao.cqselectList(sqlSession, pi);
+	public ArrayList<CatchfunQuestion> cqselectList(PageInfo pi, String userNo) {
+		return ntDao.cqselectList(sqlSession, pi, userNo);
 	}
 
 	@Override
@@ -69,8 +69,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int insertCatchfunQuestion(CatchfunQuestion q) {
-		return ntDao.insertCatchfunQuestion(sqlSession, q);
+	public int insertCatchfunQuestion(CatchfunQuestion q, String userNo) {
+		return ntDao.insertCatchfunQuestion(sqlSession, q, userNo);
 	}
 
 	@Override

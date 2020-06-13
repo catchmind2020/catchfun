@@ -56,8 +56,9 @@
 	
     .info_title {
         padding-left: 20px;
-        width: 230px;
+        width:110px;
         font-size: 12px;
+        
     }
 
     /* 참여하기 버튼 */
@@ -435,7 +436,7 @@
          transform: scale(1.1); 
          transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
      } 
-     .modal-content { 
+     .modal-content2 { 
          position: absolute; 
          top: 50%; 
          left: 50%; 
@@ -443,7 +444,7 @@
          background-color: white; 
          padding: 1rem 1.5rem; 
          width: 500px; 
-         height: 450px; 
+         height: 350px; 
          border-radius: 0.5rem; 
      } 
      .close-button, .close-button2 { 
@@ -467,14 +468,10 @@
          transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
      } 
 	/* popup css */
-	#content1 img{
-		width: 500px;
-		max-width: 550px;
-	}
     
 </style>
-<!-- 
-<script>
+
+<!-- <script>
 
     // 600px;
 	// tap 고정
@@ -502,14 +499,14 @@
 
     }); 
 
-</script>
- -->
+</script> -->
+
 <body>
 
-	<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../common/admin.jsp"/>
+	<%-- <jsp:include page="../common/menubar.jsp"/> --%>
 	<br><br>
 	<hr>
-	<br>
 	
     <div id="outer">
         <br>
@@ -548,17 +545,17 @@
         <div style="text-align: left;">
             <table style="margin: auto;">
                 <tr>
-                    <td id="imgArea" rowspan="5" colspan="4"> <!-- 대표이미지 -->
+                    <td id="imgArea" rowspan="5" colspan="5"> <!-- 대표이미지 -->
                     	<img src="${ p.filePath }/${ p.changeName }" id="imgArea">
                     </td>
-                    <td class="info_title">
+                    <td class="info_title" colspan="2">
                         <b>모인금액</b><br>
                         <span style="font-size: 30px;"><fmt:formatNumber value="${ fl.sumPrice + fl.sumSponsership }" pattern="#,###" /></span>원 모금
                     </td>
 
                 </tr>
                 <tr>
-                    <td class="info_title" style="border-color:chartreuse; text-align:right">
+                    <td class="info_title" style="border-color:chartreuse; text-align:right" colspan="2">
                         <!-- <hr> -->
                         <progress value="${ (fl.sumPrice + fl.sumSponsership) / p.projectTargetAmount * 100}" 
                                   max="100" id="percent"></progress>
@@ -566,31 +563,30 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="info_title">
+                    <td class="info_title" colspan="2">
                         <b>참여인원</b><br>
                         <span style="font-size: 25px;">${ fl.personCount }</span>명 참여
                     </td>
                 </tr>
                 <tr>
-                    <td class="info_title">
+                    <td class="info_title" colspan="2">
                         <b>남은기간</b><br>
-                        <span style="font-size: 25px;" id="dday"></span>일 남음 (${ p.projectFinishDate }일 마감)
+                        <span style="font-size: 25px;" id="dday"></span>일 남음 
                     </td>
+                    
                 </tr>
                 <tr>
-                	<c:choose>
-	                	<c:when test="${ !empty loginUser }"> 
-                    		<td class="info_title"><button class="main_button" style="width: 230px;" onclick="location.href='rewardList.pay?pno=${ p.projectNumber }&rno=0'">참여하기</button></td>
-                    	</c:when>
-                		<c:otherwise>
-                			<td class="info_title"><button class="main_button" style="width: 230px;" onclick="alert('로그인 후 서비스 이용이 가능합니다.');">참여하기</button></td>
-                		</c:otherwise>
-                	</c:choose>
+	                <form action="projectApproval.ad" method="POST">
+	                    <input type="hidden" name="pno" value="${pno}">
+	                    <td class="info_title"><button class="main_button" style="width: 110px;" type="submit">승인확인</button></td>
+	                </form>
+	                
+	                	<td class="info_title"><button class="main_button trigger2" style="width: 110px;" >반려하기</button></td>
+	                
                 </tr>
-
                 <tr>
                     <td style="width: 70px;">
-                    	<img src="resources/uploadFiles/${ m.makerChangeName }" id="maker_img">
+                    	<img src="${ m.filePath }/${ m.changeName }" id="maker_img">
                     </td>
                     <td>
                         ${ m.makerName } <a href="${ m.makerType }" target="_blank"><img src="resources/images/maker_homepage.png" id="maker_detail"></a>
@@ -598,12 +594,12 @@
                         ${ m.makerEmail }
                     </td>
                     
-                    <c:choose>
+            <c:choose>
 	                	<c:when test="${ !empty loginUser }">  
-		                    <td align="right" style="padding-right:0px;"><button class="maker_button trigger">개설자문의</button> <button id="maker_ban_button" class="trigger2">개설자신고</button></td>
+		                    <td align="right" style="padding-right:0px;"><input type="hidden" class="maker_button trigger"></input> <input type="hidden" id="maker_ban_button" class="trigger2"></input></td>
 		                    <td></td>
 		                    <td class="info_title" style="vertical-align: middle;">
-			                    <input type="button" class="side_button2" value="공유">&nbsp;
+			                    <input type="hidden" class="side_button2" value="공유">&nbsp;
 			                    <span id="zzimDir"></span>			                    
 		                    </td>
                 		</c:when>
@@ -612,7 +608,7 @@
                 			<td></td>
                 			<td></td>
                 		</c:otherwise>
-                	</c:choose>
+                	</c:choose> 
 
                 	
                 </tr>
@@ -632,11 +628,11 @@
                             <input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
                             <label for="tab1">소개</label>
                         
-                            <input id="tab2" type="radio" name="tabs">
+                            <!-- <input id="tab2" type="radio" name="tabs">
                             <label for="tab2">새소식</label>
-                        
-                            <input id="tab3" type="radio" name="tabs">
-                            <label for="tab3">응원댓글</label>
+                         -->
+                           <!--  <input id="tab3" type="radio" name="tabs">
+                            <label for="tab3">응원댓글</label> -->
                         
                             <!-- <input id="tab4" type="radio" name="tabs">
                             <label for="tab4">tab menu4</label> -->
@@ -654,7 +650,7 @@
                             </section>
                         
                         
-                        	<!-- 새소식 -->
+                        	<%-- <!-- 새소식 -->
                             <section id="content2">
                             	<div style="word-break:break-all;">
                                 <table id="noTable">
@@ -677,11 +673,11 @@
                                     
                                 </table>
                                 </div>
-                            </section>
+                            </section> --%>
                         
                         
                         	<!-- 응원댓글 -->
-                            <section id="content3">
+                            <%-- <section id="content3">
                                     <!--  댓글 관련 영역 -->
                                     <div>
                                         <table align="center" id="replyArea">
@@ -699,7 +695,7 @@
                                                     		<th style="padding:0px" colspan="3">
 			                                                	<textarea  readonly rows="3" cols="60" id="replyContent" style="resize:none; padding:0">로그인 후 댓글작성이 가능합니다.</textarea>
 			                                                </th>
-                                                    		<th><button id="addReply" onclick="alert('로그인 후 댓글 작성이 가능합니다.');">등록</button></th>
+                                                    		<th><button id="addReply">등록</button></th>
                                                     	</c:otherwise>                       
                                                     </c:choose>
                                                 </tr>
@@ -721,7 +717,7 @@
                                         </table>
                                         <br><br><br><br><br>
                                     </div>
-                            </section>
+                            </section> --%>
                         
                             <!-- <section id="content4">
                                 <p>tab menu4의 내용</p>
@@ -789,7 +785,7 @@
             
             
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br>	
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>	
 
     </div>
 
@@ -813,224 +809,7 @@
 		});
 		
 		
-		// 댓글 등록
-		$(function(){
-    		selectReplyList(); // 댓글 조회
-    		
-    		$("#addReply").click(function(){
-    			
-    			$.ajax({
-    				url: "rinsert.pro",
-    				data: { userNo: "${ loginUser.userNo }", 					    
-    						replyContent: $("#replyContent").val(),
-    						projectNumber: "${p.projectNumber}"
-    					    },
-    				type: "post",
-    				success: function(status){
-    					
-    					if(status == "success"){
-    						$("#replyContent").val(""); // 칸 비우기
-    						
-    						selectReplyList(); // 다시 댓글 조회
-    						
-    					}else{
-    						alert("댓글 등록 실패");
-    					}
-    					
-    				}, error: function(){
-    					console.log("댓글 작성용 ajax 통신 실패");
-    				}
-    			});
-    			
-    		});
-    		
-    	}); 
-    	
-    	// 댓글 출력
-    	function selectReplyList(){
-    						
-    		$.ajax({
-    			url: "rlist.pro",
-    			data: { pno:"${ p.projectNumber }" },
-    			success: function(list){
-    				
-    				//$("#rcount").text(list.length); // 댓글 수
-    				
-    				var value = "";
-    				
-    				
-    				for(var i in list){ // Gson 기본 포맷에 맞게 날짜가 나옴 
-    					
-     					if( $("#dddd").val() != "" ){ // 로그인 했을 때
-    						
-        					if( $("#dddd").val() == list[i].userNo ){ // 로그인한 id와 동일할 때 --> 신고 x, 삭제/수정 o
-        						
-        				        value += "<tr>" +
-						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn' onclick='updateReply();'>수정</button> <button class='rBtn' key=" + list[i].replyNo + " onclick='deleteReply();'>삭제</button>" + "</td>" +
-						                    "<td width='70px'>" + list[i].replyDate + "</td>" +
-						                 "</tr>";
-			                 
-        					}else{ // 동일하지않을 때
-        						
-        				        value += "<tr>" +
-						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBanBtn' key=" + list[i].replyNo + " onclick='replyBan();'>신고</button></td>" +
-						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 						                   
-						                 "</tr>";
-        					}
-    						
-    					}else{	// 로그인 안했을 때
-    						
-    				        value += "<tr>" +
-    				        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-					                    "<td width='330px' colspan='2'>" + list[i].replyContent + "</td>" +
-					                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
-					                 "</tr>";
-    					}
-    					
-
-    				 
-    				 
-    				/* //var a = "list[i].replyNo";
-    				 
-			        value += "<tr>" +
-			        				"<td style='display:none'>" + list[i].replyNo + "</td>" +
-				        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-				                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn'>수정</button> <button class='rBtn'>삭제</button>" + "<button class='rBanBtn' onclick='replyBan(\'" + list[i].replyNo + "\');'>신고</button></td>" +
-				                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
-				                 "</tr>"; 
-    				 */
-    				}
-    				$("#replyArea tbody").html(value);
-    				
-    			}, error: function(){
-    				console.log("댓글 리스트 조회용 ajax 통신 실패!!");
-    			}
-    		});
-    	}
-
-    	
-    	// 댓글 신고
-    	function replyBan(){ 
-    		
-    		var replyNo = window.event.target.getAttribute("key"); 
-    		
-			$.ajax({
-				url: "rBan.pro",
-				data: { replyNo: replyNo  },
-				type: "post",
-				success: function(status){
-				
-					if(status == "success"){
-						
-						alert("댓글 신고 성공");
-						selectReplyList(); 
-						
-					}else{
-						alert("댓글 신고 실패");
-					}
-				}, error: function(){
-					alert("댓글 신고 ajax 통신 실패");
-				}
-			});
-			
-    	}
-    	
-    	
-    	// 댓글 삭제
-    	function deleteReply(){
-    		
-    		var replyNo =window.event.target.getAttribute("key"); 
-    		
-    		$.ajax({
-				url: "deleteReply.pro",
-				data: { replyNo: replyNo },
-				type: "post",
-				success: function(status){
-				
-					if(status == "success"){
-						
-						alert("댓글 삭제 성공");
-						selectReplyList(); // 다시 댓글 조회
-						
-					}else{
-						alert("댓글 삭제 실패");
-					}
-				}, error: function(){
-					alert("댓글 삭제 ajax 통신 실패");
-				}
-			});
-    	}
-    	
-    // 찜 불러오기
-   	$(function(){
-   		
-		var projectNumber = $("#zzimNumber").val();
-		var userNo = $("#zzimNo").val()
-		 
-   		$.ajax({
-   			url:"selectWishlist.pro",
-			data:{projectNumber:projectNumber,
-				  userNo:userNo},
-		    type:"post",
-   			
-   			success:function(status){
-   				
-   				if(status == "no"){
-					value = "<input type='button' class='side_button' id='addWish' onclick='addWish();' value='♡'>";
-				
-				}else{
-					value = "<input type='button' style='color:red; font-size:23px;' class='side_button' id='addWish' onclick='addWish();' value='♥'>";
-					
-				}
-   				$("#zzimDir").html(value);
-   				
-   			},error:function(){
-   				console.log("ajax 통신실패!!");	
-   			}
-   		});
-   		
-   	});	
-    		
-    // 찜 리스트 추가 및 삭제
-	function addWish(){
-		 
-		 //console.log("a");
-		 var projectNumber = $("#zzimNumber").val();
-		 var userNo = $("#zzimNo").val()
-		 
-		 
-		 $.ajax({
-    			url:"updateWish.pro",
-    			data:{projectNumber:projectNumber,
-    				  userNo:userNo},
-    			type:"post",
-    			
-    			success:function(status){
-    				
-    				if(status == "delete"){
-    					
-							alert("찜하기가 취소되었습니다.");
-							$("#addWish").val("♡");	
-							$("#addWish").css({'color':'black', 'font-size':'15px', 'cursor':'pointer'});
-
-					}else{
-						
-						alert("해당 프로젝트가 찜되었습니다. 찜목록은 마이페이지에서 확인 가능합니다.");
-						$("#addWish").val("♥");
-						$("#addWish").css({'color':'red', 'font-size':'23px', 'cursor':'pointer'});
-						
-					}
-    				
-    			},error:function(){
-    				console.log("ajax 통신실패!!");	
-    			}
-    		});
-	 }
-
-    
-    
+		
     <!-- 리워드 선택 -->
    	$(function(){
    		if( $("#dddd").val() != "" ){ // 로그인 했을 때
@@ -1056,7 +835,7 @@
     <!--------------------------------- 팝업 ---------------------------------------------------------------->
 	<!-- 개설자 문의 popup -->
 	<div class="modal"> 
-		 <div class="modal-content"> 
+		 <div class="modal-content2" style="width: 500px !important;"> 
 		     <span class="close-button">&times;</span> 
 		     <h1 class="title">개설자 문의</h1> 
 		     <h4>프로젝트 : ${ p.projectName }</h4>
@@ -1077,20 +856,20 @@
 	         </form> 
 	     </div> 
 	 </div>
-	 <!-- 개설자 신고 popup -->
+	 
+	 
+	<!-- 개설자 신고 popup -->
 	<div class="modal2"> 
-	    <div class="modal-content"> 
+	    <div class="modal-content2"> 
 	        <span class="close-button2">&times;</span> 
-	        <h1 class="title">개설자 신고</h1> 
-	        <h4>프로젝트 : ${ p.projectName }</h4>
+	        <h1 class="title" style="padding:0">반려 하기</h1> 
+	        <h4 style="padding:0">프로젝트 : ${ p.projectName }</h4>
 	        
-	        <form action="binsert.pro" method="POST"> 
-	          <input type="text" name="userNo" style="display:none" value="${ loginUser.userNo }"> <!-- 신고한 사람 -->
-	          <input type="text" name="reportNo" style="display:none" value="${ p.projectNumber }"> <!-- 신고 프로젝트 -->
-	          <input type="text" name="reportTitle" placeholder="제목" required="required"> 
+	        <form action="projectReturn.ad" method="get"> 
+	          <input type="hidden" name="pno" value="${ pno }"> 
 	          <label></label> 
-	          <textarea name="reportContent" placeholder="신고 내용" required="required" style="resize:none"></textarea>
-	            
+	          <textarea name="reportContent" placeholder="반려 내용" required="required" style="resize:none"></textarea>
+	            	
 	           <div align="center">
 	           	   <input type="submit" id="submit2" value="보내기"> 
 	            <input type="button" id="cancel2" value="취소"> 
@@ -1122,7 +901,7 @@
 		        } 
 		    }
 		
-		   trigger.addEventListener("click", toggleModal); 
+		    trigger.addEventListener("click", toggleModal); 
 		    closeButton.addEventListener("click", toggleModal); 
 		    cancel.addEventListener("click", toggleModal); 
 		    window.addEventListener("click", windowOnClick);
@@ -1149,7 +928,7 @@
 		    closeButton2.addEventListener("click", toggleModal2); 
 		    cancel2.addEventListener("click", toggleModal2); 
 		    window.addEventListener("click", windowOnClick2); 
-		    <!-- 개설자 신고 popup 끝 -->	
+		    <!-- 개설자 신고 popup 끝 -->
 		}
 		
 	</script>

@@ -190,7 +190,7 @@ textarea{
 								<tr>
 			                        <td width="100px" style="height: 50px;">${ c.refNo }</td>
 			                        <td width="100px" style="height: 50px;">${ c.projectName }</td>
-			                        <td width="200px"><img class="category-imgs" src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${c.changeName}" style="width: 80px;"></td>
+			                        <td width="200px"><img class="category-imgs" src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${c.changeName}" style="width: 80px; height: 80px"></td>
 			                        <td width="150px"><button type="button" class="categoryUpdate">수정</button>&nbsp;&nbsp;<button type="button" class="trigger categoryDelete">삭제</button></td>
 			                    </tr>
 							</c:forEach>

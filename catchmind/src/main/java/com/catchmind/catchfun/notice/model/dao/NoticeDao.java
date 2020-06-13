@@ -1,6 +1,7 @@
 package com.catchmind.catchfun.notice.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -49,19 +50,23 @@ public class NoticeDao {
 		return sqlSession.selectOne("mainNoticeMapper.cqselectListCount");
 	}
 	
-	public ArrayList<CatchfunQuestion> cqselectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<CatchfunQuestion> cqselectList(SqlSessionTemplate sqlSession, PageInfo pi, String userNo){
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("mainNoticeMapper.cqselectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("mainNoticeMapper.cqselectList", userNo, rowBounds);
 	}
 	
 	public CatchfunQuestion selectCatchfunQu(SqlSessionTemplate sqlSession, String qno) {
 		return sqlSession.selectOne("mainNoticeMapper.selectCatchfunQu", qno);
 	}
 	
-	public int insertCatchfunQuestion(SqlSessionTemplate sqlSession, CatchfunQuestion q) {
-		return sqlSession.update("mainNoticeMapper.insertCatchfunQuestion", q);
-	}
+	public int insertCatchfunQuestion(SqlSessionTemplate sqlSession, CatchfunQuestion q, String userNo) {
+        HashMap map = new HashMap();
+        map.put("q", q);
+        map.put("userNo", userNo);
+		return sqlSession.update("mainNoticeMapper.insertCatchfunQuestion",map);
+	}	
+	
 	
 	public int deleteCatchfunQuestion(SqlSessionTemplate sqlSession, String qno) {
 		return sqlSession.update("mainNoticeMapper.deleteCatchfunQuestion", qno);

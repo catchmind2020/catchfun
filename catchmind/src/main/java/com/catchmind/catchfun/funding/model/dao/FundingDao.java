@@ -146,4 +146,13 @@ public class FundingDao {
 
 	}
 	
+	public int updateRewardQuantity(SqlSessionTemplate sqlSession, FundingList f) {
+		
+		return sqlSession.update("projectMapper.updateRewardQuantity", f);
+	}
+	
+	public int requestCancel(SqlSessionTemplate sqlSession, FundingList f) {
+		
+		return sqlSession.update("projectMapper.requestCancel", f);
+	}
 }

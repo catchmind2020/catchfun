@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>CATCHFUN</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap"
 	rel="stylesheet">
@@ -383,9 +383,9 @@ a:hover { text-decoration:none !important; color:black; }
    			$(".search").toggleClass("close");
    			$(".input").toggleClass("square");
    			if ($('.search').hasClass('close')) {
-   				$('input').focus();
+   				$('.input').focus();
    			} else {
-   				$('input').blur();
+   				$('.input').blur();
    			}
    		}
    		$('.search').on('click', expand);

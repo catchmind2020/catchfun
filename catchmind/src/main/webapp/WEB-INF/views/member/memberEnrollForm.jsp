@@ -13,11 +13,8 @@
 
 /* 폰트 초기화*/
 body, input, textarea, select, button, table {
-	font-family: 'Nanum Gothic', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕',
-		'dotum', '돋움', sans-serif;
 	color: #222;
 	font-size: 18px;
-	line-height: 1.5;
 }
 
 /* 아이디찾기완료, 비밀번호찾기완료 CSS페이지*/
@@ -183,11 +180,16 @@ button[type=submit]:hover {
 										<label for="email"><p style="text-align: left;">위 이메일로 인증번호가 발송됩니다.</p></label>
 									
 									<%-- <form action="join_injeung.do${dice}" method="post"> --%>
-										<input type="text" id="certified" name="certified" placeholder="인증번호입력"> 
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력" style="width: 300px;"> 
 										<button type="button" class="btn btn-info" id="email_btn">인증</button>
 									</div>
 									<input type="hidden" path="random" id="random" value="${random}" />
 								</td>
+						<%-- 			<form action="join_injeung.do${dice}" method="post">
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력" required style="width: 300px;"> 
+										<button id="email_btn">인증</button>
+									</form> --%>
+							</td>
 							<td></td>
 						</tr>
 						

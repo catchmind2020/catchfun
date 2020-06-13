@@ -60,7 +60,7 @@
       <form action="projectSearch.ad" method="POST">
         	<input type="hidden" name="currentPage" value="1">
         			<select name="proCategory">
-	        			<option value="Y">승인요청</option>
+	        			<option value="E">승인요청</option>
 	                	<option value="B">수정요청</option>
         		    </select> <button type="submit">조회</button>
    	  <button type="button" onclick="location.href='projectList.ad?currentPage=1'">전체조회</button>
@@ -94,8 +94,8 @@
 	                    <td>${ p.projectCategory }</td>
 	                    <td>
 	                    <c:choose>
-	                    	<c:when test="${ p.projectStatus eq 'Y'}">수정요청</c:when>
-	                    	<c:when test="${ p.projectStatus eq 'B'}">등록요청</c:when>
+	                    	<c:when test="${ p.projectStatus eq 'B'}">수정요청</c:when>
+	                    	<c:when test="${ p.projectStatus eq 'E'}">등록요청</c:when>
 	                    </c:choose>
 	                    </td>	
 	                </tr>

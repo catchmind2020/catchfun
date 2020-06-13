@@ -2,10 +2,13 @@ package com.catchmind.catchfun.admin.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 import com.catchmind.catchfun.admin.model.vo.Member;
@@ -13,6 +16,10 @@ import com.catchmind.catchfun.admin.model.vo.Project;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
+import com.catchmind.catchfun.funding.model.vo.FundingList;
+import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.News;
+import com.catchmind.catchfun.funding.model.vo.Reward;
 
 @Controller
 public class AdminController2 {
@@ -546,6 +553,45 @@ public class AdminController2 {
 		
 		return "admin/adminProjectSearch"; 
 	}
+	
+	@RequestMapping("projectDetail.ad")
+	public ModelAndView selectProject(String pno, ModelAndView mv, HttpSession session) {
+		
+		Project p = aService2.selectProject(pno); // 프로젝트 정보
+		Maker m = aService2.selectMaker(pno); // 메이커 정보
+		FundingList fl = aService2.selectFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
+		ArrayList<Reward> rlist = aService2.selectReward(pno); // 리워드 정보
+		// ArrayList<Reward> rCountlist = fService.selectRewardCount(pno); // 리워드별 합계 정보
+		
+		ArrayList<News> nlist = aService2.selectNews(pno); // 새소식 정보
+
+		mv.addObject("p", p);
+		mv.addObject("m", m);
+		mv.addObject("fl", fl);
+		mv.addObject("rlist", rlist);
+		mv.addObject("pno", pno);
+		// mv.addObject("rCountlist", rCountlist);
+		mv.addObject("nlist", nlist);
+		System.out.println(p);
+
+		mv.setViewName("admin/adminProjectDetail");
+
+		return mv;
+	}
+	
+	@RequestMapping("projectApproval.ad")
+	public String projectApproval(String pno, Model model) {
+		
+		aService2.updateProject(pno); // 프로젝트 정보
+		aService2.updateMaker(pno); // 메이커 정보
+		aService2.updateFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
+		aService2.updateReward(pno); // 리워드 정보
+		aService2.updateNews(pno); // 새소식 정보
+		
+		return "redirect:projectList.ad?currentPage=1";
+		
+	}
+	
 	/**
 	 * 매출 통계 리스트페이지
 	 */
@@ -553,6 +599,14 @@ public class AdminController2 {
 	public String adminSales() {
 		return "admin/adminSales";
 	}
+	
+	/*
+	 * @RequestMapping("salesSearch.ad") public String adminSalesSearch(String
+	 * sDate, Model model) {
+	 * 
+	 * }
+	 */
+
 	
 	
 }

@@ -70,10 +70,16 @@ public interface FundingService {
 	// 사용 포인트 차감
 	int updatePoint(FundingList f);
 	
-	// 결재된 리워드들 수량 차감
+	// 결제된 아이템들 수량 차감
 	int updateItemQuantity(FundingList f);
 	
-	// 최종 결재 펀딩리스트 조회
+	// 결제된 리워드 수량 차감
+	int updateRewardQuantity(FundingList f);
+	
+	// 최종 결제 펀딩리스트 조회
 	ArrayList<FundingList> selectConfirmFunding (FundingList f);
+	
+	// 결제 예약 취소 
+	int requestCancel (FundingList f);
 	
 }

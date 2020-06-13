@@ -160,6 +160,18 @@ public class FundingServiceImpl implements FundingService{
 		return fDao.selectConfirmFunding(sqlSession, f);
 	}
 
+	@Override
+	public int updateRewardQuantity(FundingList f) {
+
+		return fDao.updateRewardQuantity(sqlSession, f);
+	}
+
+	@Override
+	public int requestCancel(FundingList f) {
+
+		return fDao.requestCancel(sqlSession, f);
+	}
+
 
 
 
