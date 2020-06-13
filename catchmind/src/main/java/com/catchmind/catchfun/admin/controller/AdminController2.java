@@ -1,5 +1,6 @@
 package com.catchmind.catchfun.admin.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -573,7 +574,11 @@ public class AdminController2 {
 		// mv.addObject("rCountlist", rCountlist);
 		mv.addObject("nlist", nlist);
 		System.out.println(p);
-
+		System.out.println(m);
+		System.out.println(fl);
+		System.out.println(rlist);
+		System.out.println(pno);
+		
 		mv.setViewName("admin/adminProjectDetail");
 
 		return mv;
@@ -598,6 +603,22 @@ public class AdminController2 {
 	@RequestMapping("sales.ad")
 	public String adminSales() {
 		return "admin/adminSales";
+	}
+	
+	@RequestMapping("salesSearch.ad")
+	public String adminSalesSearch(Date sDate, Model model) {
+		
+		int sales1 = aService2.sales1(sDate);
+		int sales2 = aService2.sales2(sDate);
+		int sales3 = aService2.sales3(sDate);
+		int sales4 = aService2.sales4(sDate);
+		int sales5 = aService2.sales5(sDate);
+		System.out.println(sales1);
+		System.out.println(sales2);
+		System.out.println(sales3);
+		System.out.println(sales4);
+		System.out.println(sales5);
+		return "admin/adminSalesSearch";
 	}
 	
 	/*
