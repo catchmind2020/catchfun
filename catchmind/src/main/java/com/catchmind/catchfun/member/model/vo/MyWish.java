@@ -19,5 +19,5 @@ public class MyWish {
 	private String projectCategoryName;
 	private String makerName;
 	private String changeName;
-	
+	   
 }
