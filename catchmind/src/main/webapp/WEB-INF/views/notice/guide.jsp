@@ -23,7 +23,7 @@
 
 
 
-        .div{
+        .div1{
             width:700px;         
             border-left: 0.25rem solid #28d7d7 !important;
             padding: 15px;position: relative;
@@ -78,6 +78,23 @@
     padding:5% 15%;
     background:white; }
     </style>
+            <script>
+        $(function(){
+            $(".div1").click(function(){
+                // $(this).next().slideDown();
+
+                var p = $(this).next();
+
+                if(p.css("display") == "none"){
+                    $(this).siblings("p").slideUp();
+                    p.slideDown();
+                }else{
+                    p.slideUp();
+                }
+            });
+        });
+
+    </script>
     </head>
 
               
@@ -94,27 +111,13 @@
     </div>
  		<hr id="hr">
  		
- 		            <script>
-        $(function(){
-            $("div").click(function(){
-                // $(this).next().slideDown();
-                var p = $(this).next();
-                if(p.css("display") == "none"){
-                    $(this).siblings("p").slideUp();
-                    p.slideDown();
-                }else{
-                    p.slideUp();
-                }
-            });
-        });
-    </script>
     <br><br><br>
 
 <div class="body">
 
 
     <div class="contentbody">
-        <div class="div"><span class="icon_funding">펀딩하기</span> 펀딩하는 방법이 궁금하다면
+        <div class="div1"><span class="icon_funding">펀딩하기</span> 펀딩하는 방법이 궁금하다면
         </div>
         <p class="content">
            
@@ -129,7 +132,7 @@ A : 와디즈는 결제하고 바로 배송하는 쇼핑몰이 아닙니다 :) �
 
         
 
-    <div class="div"><span class="icon_funding">펀딩하기</span>후원을 했는데 언제 결제되나요?</div>
+    <div class="div1"><span class="icon_funding">펀딩하기</span>후원을 했는데 언제 결제되나요?</div>
     <p class="content">프로젝트가 펀딩에 성공하면 마감일 다음날 오후 중으로 결제가 진행됩니다.<br><br>
 
         결제 예정일 오전에 미리 알림을 드리고, 혹시 결제와 관련하여 문제가 발생했을 때에도 문자, 메일로 알림을 드리니 안심하시고 기다리셔도 좋습니다.</p>
@@ -137,7 +140,7 @@ A : 와디즈는 결제하고 바로 배송하는 쇼핑몰이 아닙니다 :) �
 
 
 
-    <div class="div"><span class="icon_project">프로젝트오픈</span> 프로젝트를 올리려면 어떻게 해야 하나요?</div>
+    <div class="div1"><span class="icon_project">프로젝트오픈</span> 프로젝트를 올리려면 어떻게 해야 하나요?</div>
     <p class="content">캐치펀에서는 만들고자 하는 창작 아이디어만 있다면 누구나 쉽고 간단하게 프로젝트를 선보일 수 있습니다. <br>
         미리 모든 계획이 서 있지 않더라도, 프로젝트를 작성해 나가면서 필요한 사항들에 대한 안내를 확인하고 준비할 수 있습니다. <br>
         올리기 전에 텀블벅 프로젝트 규칙을 꼭 확인해 주세요.<br><br>
@@ -160,7 +163,7 @@ A : 와디즈는 결제하고 바로 배송하는 쇼핑몰이 아닙니다 :) �
 
 
 
-        <div class="div"><span class="icon_project">프로젝트오픈</span> 펀딩 수수료는 얼마인가요?</div>
+        <div class="div1"><span class="icon_project">프로젝트오픈</span> 펀딩 수수료는 얼마인가요?</div>
         <p class="content">
 
             펀딩 성공 후 발생하는 수수료에는 플랫폼 수수료와 후원금액의 집금 대행으로 발생하는 결제 및 송금 처리 수수료가 있습니다.<br>
@@ -186,14 +189,14 @@ A : 와디즈는 결제하고 바로 배송하는 쇼핑몰이 아닙니다 :) �
 
 
     
-    <div class="div"><span class="icon_site">사이트이용</span><span>비밀번호는 어떻게 바꾸나요?</span></div>
+    <div class="div1"><span class="icon_site">사이트이용</span><span>비밀번호는 어떻게 바꾸나요?</span></div>
     <p class="content">
 
         텀블벅 메인화면 우측 상단의 로그인/회원가입을 클릭하시면 로그인 페이지로 이동합니다.
         로그인 상자 하단의 혹시 비밀번호를 잊으셨나요?를 클릭하시면 비밀번호를 재설정하실 수 있습니다.
     </p>
 
-    <div class="div"><span class="icon_site">사이트이용</span><span>계정 삭제는 어떻게 하나요? (탈퇴)</span></div>
+    <div class="div1"><span class="icon_site">사이트이용</span><span>계정 삭제는 어떻게 하나요? (탈퇴)</span></div>
     <p class="content">
 
      마이페이지에서 탈퇴하기 하시면 됩니다.
