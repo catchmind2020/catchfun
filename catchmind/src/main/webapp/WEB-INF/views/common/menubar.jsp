@@ -317,6 +317,7 @@ a:hover { text-decoration:none !important; color:black; }
 				<!-- 로그인 후 -->
 				
 		 		<div class=" login  header-img">
+		 	
 					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
@@ -340,10 +341,14 @@ a:hover { text-decoration:none !important; color:black; }
 					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->
 					        </tr>
 					        <tr>
+					            <td colspan="2" style="padding:15px;">포인트 ${ loginUser.point }</td>
+					        </tr>
+					        <tr>
 					            <td colspan="2"><button class="button button4" style="width:200px; height:30px;" onclick="location.href='logout.me'">로그아웃</button></td>
 					        </tr>
 					      </table>
 					    </div>
+					    
 					  </div>
 					</div>
 				

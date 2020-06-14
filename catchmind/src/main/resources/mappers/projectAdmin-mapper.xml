@@ -121,7 +121,7 @@
 	</resultMap>
 	<resultMap id="categoryResultSet" type="Category2">
 		<id column="PROJECT_CATEGORY" property="categoryNo" />
-		<result column="PROJECT_CATEGOTY_NAME" property="categoryName" />
+		<result column="PROJECT_CATEGORY_NAME" property="categoryName" />
 
 	</resultMap>
 
