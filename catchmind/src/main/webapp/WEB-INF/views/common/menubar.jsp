@@ -296,7 +296,7 @@ a:hover { text-decoration:none !important; color:black; }
 		</div>
 		<div class="header"><a href="category.mu">카테고리</a></div>
 		<div class="header"><a href="comingsoon.mu">오픈예정</a></div>
-		<div class="header">프로젝트오픈</div>
+		<div class="header"><a href="projectList.pa">프로젝트오픈</a></div>
 		<div class="header"><a href="list.no?currentPage=1">공지</a></div>
 		<div class="header"></div>
 		<div class="header"></div>
