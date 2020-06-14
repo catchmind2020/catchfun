@@ -40,7 +40,7 @@
 		<!-- Sidebar - Brand -->
 		<a
 			class="sidebar-brand d-flex align-items-center justify-content-center"
-			href="<%=contextPath%>/menubarIm.ad">
+			href="main.mu">
 			<div class="sidebar-brand-icon rotate-n-15">
 				<i class="fas fa-laugh-wink"></i>
 			</div>
