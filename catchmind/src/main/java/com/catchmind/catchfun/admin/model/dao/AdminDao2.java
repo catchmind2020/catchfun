@@ -1,6 +1,5 @@
 package com.catchmind.catchfun.admin.model.dao;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectDetail;
+import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.funding.model.vo.FundingList;
@@ -247,7 +248,7 @@ public class AdminDao2 {
 		return (ArrayList)sqlSession.selectList("adminMapper2.projectSearch", proCategory, rowBounds);
 	}
 	
-	public Project selectProject(SqlSessionTemplate sqlSession, String pno) {
+	public ProjectDetail selectProject(SqlSessionTemplate sqlSession, String pno) {
 		
 		return sqlSession.selectOne("adminMapper2.selectProject", pno);
 	}
@@ -303,26 +304,66 @@ public class AdminDao2 {
 		return sqlSession.update("adminMapper2.updateNews", pno);
 	}
 	
-	public int sales1(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales1(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales1", sDate);
+	
 	}
 	
-	public int sales2(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales2(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales2", sDate);
 	}
 	
-	public int sales3(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales3(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales3", sDate);
 	}
 	
-	public int sales4(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales4(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales4", sDate);
 	}
 	
-	public int sales5(SqlSessionTemplate sqlSession, Date sDate) {
+	public int sales5(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales5", sDate);
 	}
 	
+	public int sales6(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales6");
+	}
+	public int sales7(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales7");
+	}
+	public int sales8(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales8");
+	}
+	public int sales9(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales9");
+	}
+	public int sales10(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper2.sales10");
+	}
+	
+	public int returnProject(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnProject", pno);
+	}
+	
+	public int returnMaker(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnMaker", pno);
+	}
+	
+	public int returnFunding(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnFunding", pno);
+	}
+	
+	public int returnReward(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnReward", pno);
+	}
+	
+	public int returnNews(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnNews", pno);
+	}
+	
+	public int insertReturn(SqlSessionTemplate sqlSession, ProjectReturn p) {
+		return sqlSession.insert("adminMapper2.insertReturn", p);
+	}
 	
 }
 

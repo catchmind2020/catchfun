@@ -40,7 +40,7 @@
 		<!-- Sidebar - Brand -->
 		<a
 			class="sidebar-brand d-flex align-items-center justify-content-center"
-			href="<%=contextPath%>/menubarIm.ad">
+			href="main.mu">
 			<div class="sidebar-brand-icon rotate-n-15">
 				<i class="fas fa-laugh-wink"></i>
 			</div>
@@ -66,7 +66,7 @@
             </svg>
 				</div>
 				<div align="center" style="font-size: small;">
-					<br> ${  projectUser.userNo }님<br> 환영합니다.
+					<br> ${  projectUser.projectName }님<br> 환영합니다.
 
 				</div>
 		</a></li>

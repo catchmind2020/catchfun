@@ -58,7 +58,7 @@
 }
 
 progress { width: 370px; height: 10px; background-color: #2ed5d5; }
-progress::-webkit-progress-bar { background-color: white; }
+progress::-webkit-progress-bar { background-color: lightgray;}
 progress::-webkit-progress-value { background-color: #2ed5d5; }
 
 .dday { float: right; }
@@ -85,7 +85,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 .list:nth-child(3n) { margin-right: 0px; margin-left:0px; back-ground:orange;}
 .categoryList { box-sizing: border-box;  border-collapse: collapse; }
 .orderSelect{ float:right; }
-
+.list:hover {cursor:pointer; background-color:#F4FFFE; }
 
 select {
 width: 120px;
@@ -121,7 +121,7 @@ select:focus { outline:none; }
 				<div class="categoryList">
 				<br>
 				   				 
-   				<div id="list" class="stList">
+   				<div id="lists" class="stList">
 
 				</div>
 				<div id="busStopList" class="stList">
@@ -169,7 +169,7 @@ select:focus { outline:none; }
 		            // console.log(data);
 		            var html = "";
 		            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
-		                  $("#list").html(""); 
+		                  $("#lists").html(""); 
 		            }
 		            if (returnData.totCnt == 0) {
 		            	html += "<br><br><h4 align='center'>해당 검색 결과가 없습니다.</h4>";
@@ -188,7 +188,7 @@ select:focus { outline:none; }
 		   						html +=
 		   							"<div class='list'>" + 
 		   							"<input type='hidden' value='" + data[i].projectNo + "'>" + 
-		   							"<div><img src='${pageContext.servletContext.contextPath}/resources/images/uploadFiles/" + data[i].projectImg + "'></div>" +
+		   							"<div><img src='${pageContext.servletContext.contextPath}/resources/uploadFiles/" + data[i].projectImg + "'></div>" +
 		   							"<div><h4 style='height:60px;'><b>" + data[i].projectName + "</b></h4></div>" +
 		   							"<div class='maker'>" + data[i].projectCategory + " | " + data[i].makerName + "</div>" + 
 		   							"<div><progress value='" + data[i].fundingTotalCost / data[i].projectTargetAmount * 100 + "' max='100'></progress></div>" +
@@ -214,7 +214,7 @@ select:focus { outline:none; }
 		            }
 		             html = html.replace(/%20/gi, " ");
 		            if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
-		                $("#list").html(html); 
+		                $("#lists").html(html); 
 		            }else{ 
 		                $("#busStopList").append(html);
 		            }

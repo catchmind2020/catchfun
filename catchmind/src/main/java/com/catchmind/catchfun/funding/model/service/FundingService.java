@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.MyFunding;
 import com.catchmind.catchfun.funding.model.vo.News;
 import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
@@ -38,6 +39,13 @@ public interface FundingService {
 	// 댓글 신고 카운트 증가
 	int increasebanReply(String replyNo);
 	
+	// 댓글 신고 내역 확인
+	int selectBanReply(Report r);
+	
+	// 댓글 신고 내용 정리
+	int insertbanReply(Report r);
+	
+	// 댓글 삭제
 	int deleteReply(String replyNo);
 	
 	// 개설자 문의
@@ -80,6 +88,10 @@ public interface FundingService {
 	ArrayList<FundingList> selectConfirmFunding (FundingList f);
 	
 	// 결제 예약 취소 
-	int requestCancel (FundingList f);
+	int requestCancel (String fNo);
+	
+	// 펀딩 내역 조회
+	ArrayList<MyFunding> selectBookingList(String userNo);
+
 	
 }

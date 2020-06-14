@@ -12,30 +12,15 @@
     
     <style>
 
-
-/* 폰트 초기화*/
-body, input, textarea, select, button, table {
-    font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
-    color: #222; font-size: 18px; line-height: 1.5;} 
-
-        .content{
-           
-            width:80%;
-            margin:auto;
-        }
-        
-        .innerOuter{
-            border:1px solid lightgray;
-            width:90%;
-            margin:auto;
-            padding:5% 15%;
-            background:white;
-        }
-
+.content{ width:800px; margin:auto;}
+.innerOuter{
+    width:800px;
+    margin:auto;
+    background:white; }
         #boardList{text-align: center;}
         #boardList>tbody>tr:hover{cursor:pointer;}
 
-        #pagingArea{width:100%; margin:auto; text-align: center;}
+        #pagingArea{width:fit-content;margin:auto;}
        
         #searchForm{
             width:80%;
@@ -49,10 +34,6 @@ body, input, textarea, select, button, table {
         .text{width:53%;}
         .searchBtn{Width:20%;}
 
-        .pagination {
-       
-        display: inline-block;
-        }
 
         .pagination a {
         color: black;
@@ -80,11 +61,11 @@ body, input, textarea, select, button, table {
 <body>
     <jsp:include page="../common/menubar.jsp" />
     <div class="content">
-        <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
-            <h2>메세지함</h2>
+        <br><br><br>
+        <div class="innerOuter">
+            <h3>메세지함</h3><br>
             <c:if test="${ loginUser.userType eq 3 }" >
-            	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button>
+            	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button><br><br>
             </c:if>
             <table id="questionList" class="table table-hover" align="center">
                 <thead>
@@ -150,8 +131,10 @@ body, input, textarea, select, button, table {
 		        </ul>
 		    </div>
            
-            <br clear="both"><br>
+            <br clear="both"><br><br>
 
+           
+            <br><br>
         </div>
         <br><br>
     </div>

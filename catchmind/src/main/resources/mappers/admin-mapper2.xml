@@ -21,12 +21,12 @@
 	</resultMap>
 	
 	<resultMap id="adminReportResultSet" type="Reply1">
-		<result column="P_QUESTION_NO" property="replyNo"/>
-		<result column="QUESTION_CONTENT" property="questionContent"/>
-		<result column="QUESTION_DATE" property="questionDate"/>
-		<result column="QUESTION_YN" property="questionYN"/>
-		<result column="QUESTION_STATUS" property="questionStatus"/>
-		<result column="QUESTION_BAN_COUNT" property="questionBanCount"/>
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_YN" property="replyYN"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="REPLY_BAN_COUNT" property="replyBanCount"/>
 		<result column="USER_ID" property="userId"/>
 		<result column="USER_TYPE" property="userType"/>
 		<result column="USER_NAME" property="userName"/>
@@ -65,6 +65,35 @@
 		<result column="STATUS_STORY" property="statusStory"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
+	<resultMap id="adminProDetailResultSet" type="Detail">
+		<id column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PROJECT_REPORT" property="projectReport"/>
+		<result column="PROJECT_CONTENT" property="projectContent"/>
+		<result column="PROJECT_STATUS" property="projectStatus"/>
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="REPORT_CATEGORY" property="reportCategory"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_TITLE" property="reportTitle"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="PROJECT_CATEGORY" property="projectCategory"/>
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PROJECT_DATE" property="projectDate"/>
+		<result column="HASHTAGS" property="hashtags"/>
+		<result column="STATUS_STORY" property="statusStory"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="PROJECT_DATE" property="projectDate"/>
 	</resultMap>
 	
 	
@@ -139,7 +168,7 @@
 		 where status='Y'
 		 order by user_no asc
 	</select>
-	
+	 
 	<select id="blackListCount" resultType="_int">
 		select count(*)
 		  from member
@@ -191,15 +220,15 @@
     	select count(*)
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1' and question_status='N' 
+          join report p on (r.reply_no = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'
     </select>
     
     <select id="reportList" resultMap="adminReportResultSet">
     	select *
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+          join report p on (r.reply_no = p.REPORT_NO)
     	  where m.status='Y' and p.report_category='1'     	  
     </select>
     
@@ -207,15 +236,15 @@
     	select count(*)
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1'and USER_ID LIKE '%' || #{keyword} || '%' 
+          join report p on (r.reply_no = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'and USER_ID LIKE '%' || #{keyword} || '%'  
     </select>
     
     <select id="reportSearch" resultMap="adminReportResultSet">
     	select *
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+          join report p on (r.reply_no = p.REPORT_NO)
     	  where m.status='Y' and p.report_category='1'and m.USER_ID LIKE '%' || #{keyword} || '%'   	  
     </select>
     
@@ -252,12 +281,12 @@
     </select>
     
     <select id="rpReportDetail" parameterType="string" resultMap="adminReportResultSet">
-        select P_QUESTION_NO, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, QUESTION_BAN_COUNT, USER_ID, REPORT_CONTENT,
+        select reply_NO, reply_CONTENT, reply_DATE, reply_YN, reply_STATUS, reply_BAN_COUNT, USER_ID, REPORT_CONTENT,
                USER_TYPE, USER_NAME, EMAIL, PHONE, ENROLLDATE, r.user_no as RNO, p.user_no as PNO
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1'and P_QUESTION_NO =#{rd}   
+          join report p on (r.reply_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'and reply_NO =#{rd}   
     </select>
     
     
@@ -306,7 +335,7 @@
     	 where p.project_status=#{proCategory}
     </select>
    
-    <select id="selectProject" parameterType="string" resultMap="adminProReportResultSet">
+    <select id="selectProject" parameterType="string" resultMap="adminProDetailResultSet">
 		SELECT p.PROJECT_NUMBER, p.USER_NO, p.PROJECT_NAME, p.PROJECT_FINISHDATE, p.PROJECT_CONTENT, 
 		               p.PROJECT_TARGET_AMOUNT, p.PROJECT_REPORT, p.HASHTAGS, p.PROJECT_STATUS, p.STATUS_STORY, A.CHANGE_NAME, A.FILE_PATH
 		  FROM PROJECT p
@@ -355,30 +384,30 @@
    </update>
    
    <update id="updateMaker" parameterType="string" >
-		update project_maker set project_status='Y' where project_number=#{pno}   
+		update project_maker set status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateFunding" parameterType="string" >
-		update funding_list set project_status='Y' where project_number=#{pno}   
+		update funding_list set funding_status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateReward" parameterType="string" >
-		update reward set project_status='Y' where project_number=#{pno}   
+		update reward set reward_status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateNews" parameterType="string" >
-		update news set project_status='Y' where project_number=#{pno}   
+		update news set news_status='Y' where project_number=#{pno}   
    </update>
     
-    <select id="sales1" parameterType="date"  resultMap="adminFundingResultSet">
-    	SELECT SUM(TOTAL) 
+    <select id="sales1" parameterType="string"  resultType="_int">
+    	SELECT NVL(SUM(TOTAL),0) 
     	  FROM (SELECT ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
 			      FROM(SELECT *
 				         FROM FUNDING_LIST
 				        WHERE FUNDING_DATE=#{sDate}))
     </select>
     
-    <select id="sales2" parameterType="date" resultMap="adminFundingResultSet">
+    <select id="sales2" parameterType="string" resultType="_int">
     	SELECT COUNT(*) 
 	      FROM (SELECT FUNDING_NO, ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
 		          FROM(SELECT *
@@ -386,24 +415,82 @@
 		                WHERE FUNDING_DATE=#{sDate}))
     </select>
     
-    <select id="sales3" parameterType="date" resultMap="adminProReportResultSet">
+    <select id="sales3" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
 	   	  FROM PROJECT
 		 WHERE PROJECT_STARTDATE <![CDATA[ <= ]]> #{sDate} AND project_finishdate <![CDATA[ > ]]> #{sDate} AND PROJECT_STATUS='Y'
     </select>
     
-    <select id="sales4" parameterType="date" resultMap="adminProReportResultSet">
+    <select id="sales4" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
 	      FROM PROJECT
 		 WHERE PROJECT_FINISHDATE <![CDATA[ < ]]> #{sDate}
     </select>
     
-    <select id="sales5" parameterType="date" resultMap="adminProReportResultSet">
+    <select id="sales5" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
 		  FROM PROJECT
 		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> SYSDATE +7
     </select>
     
+     <select id="sales6" parameterType="string"  resultType="_int">
+    	SELECT NVL(SUM(TOTAL),0) 
+    	  FROM (SELECT ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
+			      FROM(SELECT *
+				         FROM FUNDING_LIST
+				        WHERE FUNDING_DATE=SYSDATE))
+    </select>
+    
+    <select id="sales7" parameterType="string" resultType="_int">
+    	SELECT COUNT(*) 
+	      FROM (SELECT FUNDING_NO, ((FUNDING_COST * FUNDING_QUANTITY) + FUNDING_SPONSERSHIP) AS TOTAL 
+		          FROM(SELECT *
+		                 FROM FUNDING_LIST
+		                WHERE FUNDING_DATE=SYSDATE))
+    </select>
+    
+    <select id="sales8" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+	   	  FROM PROJECT
+		 WHERE PROJECT_STARTDATE <![CDATA[ <= ]]> SYSDATE AND project_finishdate <![CDATA[ > ]]> SYSDATE AND PROJECT_STATUS='Y'
+    </select>
+    
+    <select id="sales9" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+	      FROM PROJECT
+		 WHERE PROJECT_FINISHDATE <![CDATA[ < ]]> SYSDATE
+    </select>
+    
+    <select id="sales10" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+		  FROM PROJECT
+		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> SYSDATE +7
+    </select>
+    
+   <update id="returnProject" parameterType="string" >
+		update project set project_status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnMaker" parameterType="string" >
+		update project_maker set status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnFunding" parameterType="string" >
+		update funding_list set funding_status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnReward" parameterType="string" >
+		update reward set reward_status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnNews" parameterType="string" >
+		update news set news_status='N' where project_number=#{pno}   
+   </update>
+    
+   <insert id="insertReturn" parameterType="Return">
+  	    insert into project_return 
+  	    values('REF'||SEQ_RETURN.nextval, #{projectNumber}, sysdate, #{returnContent}, 'N')
+   </insert> 
     
 
 

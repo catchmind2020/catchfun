@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.MyFunding;
 import com.catchmind.catchfun.funding.model.vo.News;
 import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
@@ -151,8 +152,24 @@ public class FundingDao {
 		return sqlSession.update("projectMapper.updateRewardQuantity", f);
 	}
 	
-	public int requestCancel(SqlSessionTemplate sqlSession, FundingList f) {
+	public int requestCancel(SqlSessionTemplate sqlSession, String fNo) {
 		
-		return sqlSession.update("projectMapper.requestCancel", f);
+		return sqlSession.update("projectMapper.requestCancel", fNo);
+	}
+	
+	public int insertbanReply(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.insert("projectMapper.insertbanReply", r);
+	}
+	
+	public int selectBanReply(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.selectOne("projectMapper.selectBanReply", r);
+	}
+	
+	public ArrayList<MyFunding> selectBookingList(SqlSessionTemplate sqlSession, String userNo) {
+		
+		ArrayList<MyFunding> list = (ArrayList)sqlSession.selectList("projectMapper.selectBookingList", userNo);
+		return list;
 	}
 }

@@ -17,6 +17,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,12 +26,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.admin.model.vo.Category;
+import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
 import com.catchmind.catchfun.member.model.service.MailService;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 import com.google.gson.GsonBuilder;
 
 @Controller // 해당 이 클래스를 Controller 역할을 하는 빈으로 등록시키는 어노테이션
@@ -996,6 +999,37 @@ public class MemberController {
 	
 	    return mv;
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("idFind.me")
+	public String idFindMember(Member m, Model model) {
+		
+		ArrayList<Member> findId = mService.idFindMember(m);
+		
+		model.addAttribute("findId", findId);
+		
+		if(findId != null) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping(value="myWish.me")
+	public ModelAndView noticeDetail(String userNo, ModelAndView mv) {
+		
+		System.out.println("name : " + userNo);
+		
+		ArrayList<MyWish> list = mService.myWishList(userNo);
+		
+		System.out.println("제발! : " + list);
+		
+		mv.addObject("myWish", list);
+		mv.setViewName("member/mypage");
+		
+		return mv;
 	}
 	
 	

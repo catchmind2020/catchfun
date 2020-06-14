@@ -35,6 +35,13 @@
 		<result column="ANS_NO" property="ansNo"/>
 		<result column="COUNSELING" property="counseling"/>
 	</resultMap>
+	
+	<resultMap id="myWishResultSet" type="MyWish">
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="MAKER_NAME" property="makerName"/>
+		<result column="PROJECT_CATEGORY_NAME" property="projectCategoryName"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+	</resultMap>
 		
   
 	  <select id="loginMember" resultMap="memberResultSet" parameterType="Member">
@@ -162,6 +169,23 @@
 		set QUESTION_YN='N'
 		where QUESTION_YN='Y' and A_QUESTION_NO=#{qno} 
 	</update> 
+	
+	
+	<select id="idFindMember" resultMap="memberResultSet">
+		select USER_ID
+		 from MEMBER
+		 where USER_NAME = #{userName} and phone = {phone} and STATUS='Y'
+	</select>
+	
+	<select id="myWishList" parameterType="string" resultMap="myWishResultSet">
+		 select CHANGE_NAME, MAKER_NAME, PROJECT_CATEGORY_NAME, PROJECT_NAME
+		 from WISHLIST W
+		 join PROJECT P on (W.PROJECT_NUMBER=P.PROJECT_NUMBER)
+		 join CATEGORY_TYPE using (PROJECT_CATEGORY)
+		 join PROJECT_MAKER PM on (P.PROJECT_NUMBER=PM.PROJECT_NUMBER) 
+		 join ATTACHMENT on (W.PROJECT_NUMBER=REF_NO)
+		 where W.user_no=#{userNo}
+	 </select>
 	
 	
 <!-- 	<delete id="deleteAnswer" parameterType="string">

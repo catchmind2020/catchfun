@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>1
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +14,7 @@
 	margin-left: 250px;
 	margin-top: 50px;
 	min-width: 1200px;
+	max-width: 1200px;
 }
 .tb tr{
 	text-align: center;
@@ -285,6 +286,19 @@ textarea{
 	margin-left: 200px;
 }
 
+.conArea2{
+	    width: 800px;
+	    height: 106px;
+	    padding-right: 2px;
+	    border-right-width: 2px;
+	    border-top-width: 2px;
+	    border-left-width: 2px;
+	    border-bottom-width: 2px;
+	    padding-bottom: 1px;
+	    padding-top: 1px;
+	    padding-left: 2px;
+}
+
 </style>
 </head>
 <body>
@@ -293,19 +307,15 @@ textarea{
 	<div class="outer">
 	<h2>공지사항 관리</h2><br>
 	<label>공지사항을 등록/수정/삭제합니다.</label>
-	
-	<div class="k_btn">
-		<input type="text" name="keyword" placeholder="키워드 입력"> <button type="button">조회</button>
-	</div>
 	<br><br>
-			<table class="tb tb-area" border="1">
+			<table class="tb tb-area table-hover" border="1">
 				<thead>
-					<tr>
-						<th width="100px">글번호</th>
-						<th width="350px">제목</th>
-						<th width="100px">작성자</th>
-						<th width="150px">작성일</th>
-						<th width="150px"><button type="button" class="createBtn">글쓰기</button></th>
+					<tr >
+						<th width="100px" style="text-align: center">글번호</th>
+						<th width="350px" style="text-align: center">제목</th>
+						<th width="100px" style="text-align: center">작성자</th>
+						<th width="150px" style="text-align: center">작성일</th>
+						<th width="230px" style="text-align: center"><button type="button" class="createBtn j-btn">글쓰기</button></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -315,17 +325,16 @@ textarea{
 							<td>${ n.noticeTitle }</td>
 							<td>${ n.userId }</td>
 							<td>${ n.noticeDate }</td>
-							<td><button class="updateNotice" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger deleteNotice">삭제</button></td>
+							<td><button class="updateNotice j-btn" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger deleteNotice j-btn">삭제</button></td>
 	                    </tr>
                     </c:forEach>
 				</tbody>
 			</table>
 
-
 		<!-- 공지 등록 및 수정 -->
 		<!-- <form id="noticeFormEvent" method="post" action="insertNotice.ad"> -->
 			<input hidden name="userId" value="${ loginUser.userId }">
-			<div id="noticeEvent">
+			<div id="noticeEvent" style="margin-left: 250px;">
 			<br>
 			<!-- 제목 -->
 				<div class="faq_input_title relative mtop20">
@@ -340,7 +349,7 @@ textarea{
 				<br><br>
 			<!-- 내용 -->
 				<div class="faq_input relative mtop20">
-					<textarea id="noticeContent" name="noticeContent" placeholder="내용을 입력해주세요" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
+					<textarea id="noticeContent" name="noticeContent" placeholder="내용을 입력해주세요" class="width100 p10 f_666 conArea2" id="text_con" maxlength="4000"></textarea><br>
 					<!-- <div style="width:800px; text-align:right" required><span id="text_counter">0</span> / 4000</div> -->
 					<br>
 
@@ -348,8 +357,8 @@ textarea{
 
 				<div class="text-center">
 					<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
-					<button class="enrollBtn" type="button">등록하기</button>
-					<a class="cancelBtn" href="#">취소</a>
+					<button class="j-btn enrollBtn1" type="button">등록하기</button>
+					<button class="j-btn cancelBtn1" href="#">취소</button>
 					
 				</div>
 			</div>
@@ -358,7 +367,7 @@ textarea{
 	<br><br>
 	
 	<div id="pagingArea">
-        <ul class="pagination">
+        <ul class="pagination" style="padding-left: 0px;">
         	
         	 <c:choose>
         		<c:when test="${ pi.currentPage eq 1 }">
@@ -449,7 +458,7 @@ textarea{
 			$(".startDate").val("");
 			$(".endDate").val("");
 
-			$(".enrollBtn").click(function(){
+			$(".enrollBtn1").click(function(){
 				
 				if(nno == "글번호"){
 					$.ajax({
@@ -481,7 +490,7 @@ textarea{
 		
 		
 		
-		$(".cancelBtn").click(function(){
+		$(".cancelBtn1").click(function(){
 
 			$('#noticeEvent').css("display", "none");   
 			
@@ -509,7 +518,7 @@ textarea{
 			/* 업데이트 ajax 시작 */
 			
 			if(nno != "" && nno != null){
-				$(".enrollBtn").click(function(){
+				$(".enrollBtn1").click(function(){
 					$.ajax({
 		    			url:"noticeUpdateIn.ad",
 		    			data:{noticeNo:nno,
@@ -551,7 +560,7 @@ textarea{
     			data:{nno:nno},
     			success:function(status){
     				if(status == "success"){
-    					location.href="<%=request.getContextPath()%>/notice.ad?currentPage=1"
+    					location.href="${pageContext.servletContext.contextPath}/notice.ad?currentPage=1"
 					}else{
 						alert("공지등록실패!!");
 					}

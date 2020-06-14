@@ -13,8 +13,8 @@
 <style>
 
 /* 서브메뉴 영역 CSS */
-a{color:black;  text-decoration:none !important }
-a:hover{color:#28d7d7;  text-decoration:none !important }
+.submenu>a{color:black;  text-decoration:none !important; }
+.submenu>a:hover{color:#28d7d7;  text-decoration:none important!; }
 .submenu{width:140px; font-size:15px; font-weight: 900; display:table-cell; padding-top:10px; padding-bottom: 20px;}
 .submenu:hover { color:#28d7d7; cursor: pointer;}
 .choice{border-bottom: 3px solid rgb(31, 205, 211); padding-bottom: 5px;}
@@ -29,11 +29,10 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
     background:white; }
 
 #boardList{text-align: center;}
-#boardList>tbody>tr:hover{cursor:pointer; background-color: rgb(179, 230, 253);}
-#pagingArea{width:100%; margin: 30px; text-align: center;}
+#boardList>tbody>tr:hover{cursor:pointer; background-color:#F4FFFE;}
 #searchForm{width:80%; margin:auto;}
 #searchForm>*{float:left;margin:5px;}
-
+#pagingArea{width:fit-content;margin:auto;}
 .select{width:20%;}
 .text{width:53%;}
 .searchBtn{Width:15%; background-color:cornflowerblue;}
@@ -67,33 +66,6 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
            width: 100px;
            height: 30px;
         }
-        .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 3px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        height: 50px;
-        }
-
-        
-        .button4 {
-        background-color: white;
-        color: black;
-        border: 2px solid #e7e7e7;
-        margin-top: 20px;
-        float: right;
-        }
-
-        .button4:hover {background-color: #e7e7e7;}
-        
-        
 
 </style>
 <body>
@@ -115,11 +87,11 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
                   <tr>
-                    <th>글번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>조회수</th>
+                    <th style="width:70px;">글번호</th>
+                    <th style="width:350px;">제목</th>
+                    <th style="width:80px;">작성자</th>
+                    <th style="width:100px;">작성일</th>
+                    <th style="width:70px;">조회수</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,14 +99,14 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
 	                    <tr>
 	                        <td>${ n.noticeNo }</td>
 	                        <td>${ n.noticeTitle }</td>
-	                        <td>${ n.noticeWriter }</td>
+	                        <td>관리자</td>
 	                        <td>${ n.noticeDate }</td>
 	                        <td>${ n.noticeCount }</td>
                         </tr>
 				</c:forEach>
 				</tbody>
             </table>
-            <br>
+            <br><br>
             
             <script>
             	$(function(){
@@ -145,59 +117,43 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
             </script>
             
 
-                <div id="pagingArea">
-                <ul class="pagination">
-                	
-                	<c:choose>
-                		<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
-	                    </c:when>
-	                    <c:otherwise>
-	                   		<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                    
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    	<c:choose>
-                    		<c:when test="${ p eq pi.currentPage }">
-	                    		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
-	                    	</c:when>
-	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.no?currentPage=${ p }">${ p }</a></li>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
+<div id="pagingArea">
+		        <ul class="pagination">
+		        	
+		        	 <c:choose>
+		        		<c:when test="${ pi.currentPage eq 1 }">
+		             		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+		             	</c:when>
+		             	<c:otherwise>
+		            		<li class="page-item"><a class="page-link" href="MessageRest.me?userNo=${ loginUser.userNo }&currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		            
+		            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		            	<c:choose>
+		            		<c:when test="${ p eq pi.currentPage }">
+		             			<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+		             		</c:when>
+		             		<c:otherwise>
+		             			<li class="page-item"><a class="page-link" href="MessageRest.me?userNo=${ loginUser.userNo }&currentPage=${ p }">${ p }</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:forEach>
+		            
+		            <c:choose>
+		            	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+		             </c:when>
+		             <c:otherwise>
+		             	<li class="page-item"><a class="page-link" href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=${ pi.currentPage+1 }">Next</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		        </ul>
+		    </div>
            
            
             <br clear="both"><br>
             
-
-
-            <form id="searchForm" action="" method="Get" align="center">
-                <div class="select">
-                    <select class="custom-select" name="condition">
-                        <option value="writer">작성자</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                </div>
-                <div class="text">
-                    <input type="text" class="form-control" name="keyword">
-                </div>
-                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-            </form>
-            <br><br>
         </div>
         <br><br>
     </div>

@@ -15,6 +15,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <style>
+
 	.btn{border:0px;}
 </style>
 <style>
@@ -103,7 +104,7 @@ appearance: none;
 
 select::-ms-expand { display: none; }
 select:focus { outline:none; }
-
+.list:hover {cursor:pointer; background-color:#F4FFFE; }
 </style>
 <body>
 
@@ -197,7 +198,7 @@ select:focus { outline:none; }
 						 </c:forEach> --%>
 			<!-- 	<div  id="list" class="stList list"> -->
    				 
-   				 <div id="list" class="stList">
+   				 <div id="lists" class="stList">
 
 				</div>
 				<div id="busStopList" class="stList">
@@ -267,7 +268,7 @@ select:focus { outline:none; }
 		            // console.log(data);
 		            var html = "";
 		            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
-		                  $("#list").html(""); 
+		                  $("#lists").html(""); 
 		            }
 		            if (returnData.totCnt == 0) {
 		            	html += "<br><br><h4 align='center'>해당 카테고리의 프로젝트가 없습니다.</h4>";
@@ -297,7 +298,7 @@ select:focus { outline:none; }
 									"<img src='${pageContext.servletContext.contextPath}/resources/images/time.png'>&nbsp;" + data[i].projectDday + "일 남음</span></div>" +
 									"</div>";
 									
-									
+
 		   					    /* 펀딩프로젝트 상세보기 페이지 이동 */
 		   				       	$(function(){
 		   				    		$(".list").click(function(){
@@ -316,7 +317,7 @@ select:focus { outline:none; }
 		            }
 		             html = html.replace(/%20/gi, " ");
 		            if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
-		                $("#list").html(html); 
+		                $("#lists").html(html); 
 		            }else{ 
 		                $("#busStopList").append(html);
 		            }

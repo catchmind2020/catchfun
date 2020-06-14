@@ -39,8 +39,8 @@ img { border: none; vertical-align: top; }
 }
 
 .listCarousel .view .list {
-	width: 3600px;
-	margin-left: 0px;
+	width: 2400px;
+	margin-left: -1200px;
 }
 
 .listCarousel .view .list:after {
@@ -69,7 +69,7 @@ progress { width: 370px; height: 10px; background-color: #2ed5d5; }
 progress::-webkit-progress-bar { background-color: lightgray; }
 progress::-webkit-progress-value { background-color: #2ed5d5; }
 
-
+.lists:hover {cursor:pointer; background-color:#F4FFFE; }
 </style>
 </head>
 <body>
@@ -90,9 +90,13 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 
 				<!-- The slideshow -->
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="resources/images/mainimage03.jpg" width="1200px"
-							height="400px">
+					<div class="carousel-item active"  style="position: relative;"><a href="">
+						<img src="resources/images/mainimage05.jpg" width="1200px"
+							height="400px"></a>
+						<div style="left:400px; width: 450px; bottom:70px; font-size: 1.7em; font-weight: bold; position: absolute; color:white;">
+						 무선으로 어디서든 쓱-싹!<br>
+						여기가 세척 맛집
+						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="resources/images/mainimage02.jpg" width="1200px"
@@ -181,34 +185,6 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 								</c:forEach>
 							</ul>
 						</li>
-						<li>
-							<ul>
-								<c:forEach items="${ list }" var="p" varStatus="index" begin="6" end="8">
-									<li class="a${index.count}">
-										<div class="lists">
-											<input type="hidden" value="${p.projectNo}">
-											<div>
-												<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
-											</div>
-											<div>
-												<h4 style="height:60px;">
-													<b>${p.projectName}</b>
-												</h4>
-											</div>
-											<div class="maker">${p.projectCategory} | ${p.makerName}</div>
-											<div>
-												<progress value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" max="100"></progress>
-											</div>
-											<div>
-												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />%  &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
-												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
-													
-											</div>
-										</div>
-									</li>
-								</c:forEach>
-							</ul>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -221,7 +197,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	  $(document).ready(function(){
 	    
 	    $('.prev').click(function(){
-	        $('.list').stop().animate({'margin-left':'-2400px'},function(){
+	        $('.list').stop().animate({'margin-left':'-1200px'},function(){
 	            $('.list>li').eq(0).appendTo('.list');
 	            $('.list').css({'margin-left':'-1200px'});
 	        });
@@ -230,7 +206,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	    $('.next').click(function(){
 	        $('.list').stop().animate({'margin-left':'0px'},function(){
 	            $('.list>li').eq(2).prependTo('.list');
-	            $('.list').css({'margin-left':'-1200px'});
+	            $('.list').css({'margin-left':'0px'});
 	        });
 	    });
 	    

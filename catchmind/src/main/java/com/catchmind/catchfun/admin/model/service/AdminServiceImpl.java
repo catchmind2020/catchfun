@@ -190,6 +190,10 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<PayTotal> adminProjectPayTotalList(PageInfo pi) {
 		return aDao.adminProjectPayTotalList(sqlSession, pi);
 	}
+	@Override
+	public int adminProjectPayTotalCount2() {
+		return aDao.adminProjectPayTotalCount2(sqlSession);
+	}
 	
 	// 3. Category
 	

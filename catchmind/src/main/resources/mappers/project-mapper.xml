@@ -91,6 +91,19 @@
 		<result column="RCOUNT" property="rewardFundingCount"/>
    </resultMap>
    
+   <resultMap id="myfundingResultSet" type="MyFunding5">
+   		<result column="USER_NO" property="userNo"/>
+		<result column="TOTAL" property="total"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="CATEGORY_NAME" property="categoryName"/>
+		<result column="TOTAL_STATUS" property="totlaStatus"/>
+   </resultMap>
+   
+   
+   
    <resultMap id="wishlistResultSet" type="Wishlist5">
 		<result column="count" property="count"/>
    </resultMap>
@@ -240,10 +253,31 @@
 		 where reward_no = #{rewardNo}
    </update>
    
-   <update id="requestCancel" parameterType="FundingList5">
+   <update id="requestCancel" parameterType="string">
 		update FUNDING_LIST
 		   set FUNDING_STATUS = 'E'
-		 where PROJECT_NUMBER = #{projectNumber} AND USER_NO = #{userNo} AND REWARD_NO = #{rewardNo} AND FUNDING_STATUS = 'N'
+		 where FUNDING_NO = #{fNo} AND FUNDING_STATUS = 'N'
    </update>
    
+   <insert id="insertbanReply" parameterType="Report5">
+		INSERT INTO REPORT
+		VALUES(#{userNo}, #{reportNo}, 1, SYSDATE, null, null)
+   </insert>
+   
+   <select id="selectBanReply" parameterType="Report5" resultType="_int">
+		select count(*)
+		  from REPORT
+		 where REPORT_NO=#{reportNo} AND USER_NO = #{userNo}
+   </select>
+   
+   <select id="selectBookingList" parameterType="string" resultMap="myfundingResultSet">
+        select f.user_no, sum(FUNDING_COST*FUNDING_QUANTITY) as total, p.PROJECT_NAME as PROJECT_NAME, p.PROJECT_NUMBER as PROJECT_NUMBER, m2.user_id as user_id,PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME as CATEGORY_NAME, TOTAL_STATUS
+		  from FUNDING_LIST f
+		  join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		  join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		  join member m on (f.user_no = m.user_no)
+		  join member m2 on (p.user_no = m2.user_no)
+          where f.user_no = #{ userNo }
+		 group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME, TOTAL_STATUS, f.user_no
+   </select>
 </mapper>

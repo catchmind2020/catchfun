@@ -62,7 +62,7 @@
     <br>
    
       <div id="sales">
-        <form action="salesSearch.ad" method="get">
+        <form action="salesSearch.ad" method="POST">
           <div class="k_btn">
             <input type="date" name="sDate"> <button type="submit" class="mybtn">조회</button>
           </div>
@@ -79,11 +79,11 @@
                 <th width="300">오픈예정 프로젝트 수<br>(1주일 이내)</th>
             </tr>
             <tr style="font-size:40px">
-                <td>52,320,000원</td>
-                <td>120건</td>
-                <td>420건</td>
-                <td>13건</td>
-                <td>50건</td>
+                <td>${sales6}원</td>
+                <td>${sales7}건</td>
+                <td>${sales8}건</td>
+                <td>${sales9}건</td>
+                <td>${sales10}건</td>
             </tr>
         </table>
 
