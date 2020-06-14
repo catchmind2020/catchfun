@@ -103,9 +103,12 @@ height: 40px;
         <div id="content">
             <div id="content_2">
                 
+                
+                
                 <table>
+              	<form id="enrollForm" action="updatePwd.me" method="post" onsubmit="">
                     <tr>
-                        <td style="font-size:25px; text-align: left;"><strong>비밀번호설정</strong></td>
+                        <td style="font-size:25px; text-align: left;"><strong>비밀번호변경</strong></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -113,18 +116,6 @@ height: 40px;
                             
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <form action="/action_page.php">
-                            <input type="email" id="email" name="email" placeholder="이메일">
-                            <label for="email"><p style="text-align:left;">위 이메일로 인증번호가 발송됩니다.</p></label>
-                            <button id="email_btn">인증</button>
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-
                     <tr>
                         <td>
                             <input type="password" id="pass1" name="pass1" placeholder="현재비밀번호">
@@ -137,20 +128,71 @@ height: 40px;
                     </tr>
                     <tr>
                         <td>
-                            <input type="password" id="pass3" name="pass3" placeholder="새로운비밀번호">
+                            <input type="password" id="pass3" name="changePwd" placeholder="새로운비밀번호">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="submit" value="완료">
+                            <button type="submit" onclick="return next();" value="완료">
                         </td>
                     </tr>
-
+					</form>
                 </table>
             </div>
            </div>
         </div>
-
     </div>
+    
+    <script>
+    function next(){   	
+      var pass1 = document.getElementById("pass1");
+      var pass2 = document.getElementById("pass2");
+      var changePwd = document.getElementById("changePwd");	
+      // 5_1) 비밀번호 검사
+      //    특수문자(!@#$%^&*) 또는 영문자 또는 숫자 포함 총 8자~15자
+      regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
+      if(!regExp.test(pass1.value)){
+          alert("유효한 비밀번호를 입력하세요!!");
+          pass1.value="";
+          pass1.focus();
+          return false;
+      }
+	
+      regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
+      if(!regExp.test(pass3.value)){
+          alert("유효한 비밀번호를 입력하세요!!");
+          pass3.value="";
+          pass3.focus();
+          return false;
+      }
+      // 5_2) 비밀번호 일치 확인
+      // 비밀번호값과 비밀번호 확인값이 일치하는지 검사
+      if(pass1.value != pass2.value){
+          alert("동일한 비밀번호 확인값을 입력하세요!!");
+          pass1.value = "";
+          pass2.focus();
+          return false;
+      }
+     }
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>

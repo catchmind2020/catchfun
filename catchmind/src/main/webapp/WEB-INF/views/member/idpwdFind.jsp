@@ -119,6 +119,16 @@ input[type=submit]:hover {
 	height: 25%;
 }
 
+    .wrap{width:1000px; height:1000px; margin:auto; 
+        text-align: center; font-size: 30px; color: black;}
+    .wrap>#header{width:100%; height:5%; margin-bottom:60px;}
+    .wrap>#content{width:100%; height:70%;}
+    .wrap>#content>#content_1{width:100%; height:25%;}
+    .wrap>#content>#content_2{width:100%; height:75%; font-size:15px; background-color: rgb(243, 242, 242);}
+    .wrap>#content>#content_1>table{width:40%; height:100%; padding:20px; font-size:15px;}
+    .wrap>#footer{width:100%; height:20%;}
+    </style>
+     <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
 .wrap>#content>#content_2 {
 	width: 100%;
 	height: 75%;
@@ -197,6 +207,147 @@ input[type=submit]:hover {
 													<h4>가입정보로 확인</h4>
 													<br> * 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
 													아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
+		                                </p></label>
+		                              <input type="text" id="userName1" name="userName" placeholder="이름">
+		                              <input type="text" id="phone1" name="phone" placeholder="휴대폰번호'-'없이 입력">
+	                            	  <input type="submit" value="완료">
+	                        	</td>
+                        	</div>
+                    	</tr>
+                    </center>
+                   </table>
+                </div>
+              
+                <div id="passwordfind" class="w3-container city" style="display:none">
+                  <center>
+                    <table id="id_table">
+                    <tr>
+                        <td>
+                            <form action="pwdFind2.me">
+                            	<div id="passwordfind1" style="width:300px;">
+                            		<input type="text" id="userId2" name="userId" placeholder="아이디">
+		                            <input type="text" id="userName2" name="userName" placeholder="이름">
+		                            <input type="text" id="phone2" name="phone" placeholder="전화번호 '-'포함 입력" required>
+		                            <input id="pwdBtn1" type="button" value="발송">
+		                            <label for="email">
+		                                <p style="text-align:left;">
+							                                    회원가입한 아이디를 입력하시면. <br>
+							                                    이메일로 인증번호를 발송해드립니다. <br>
+		                                </p></label>
+		                            <input type="text" id="certi" name="certi" placeholder="인증번호입력">
+		                            <input id="pwdBtn2" type="submit" value="인증확인">
+	                           </div>
+	                           </form>
+                        </td>
+                        
+                        <td>
+                        </td>
+                    </tr>
+                    </center>
+                   </table>
+                </div>
+              </div>
+                <script>
+                  function openCity(evt, cityName) {
+                    var i, x, tablinks;
+                    x = document.getElementsByClassName("city");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablink");
+                    for (i = 0; i < x.length; i++) {
+                      tablinks[i].className = tablinks[i].className.replace(" w3-border-cyan", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.firstElementChild.className += " w3-border-cyan";
+                  }
+                  </script>         
+                  <script>
+                 	$(function(){  // 이벤트 걸고자 하는 input 요소 변수에 기록해놓기
+                        
+                       // var $idInput = $("#enrollForm input[name=userId]");
+                        $("#pwdBtn1").click(function(){
+                        	
+        				// 1. 중복복검사(중복있을경우 성공)	
+        				$.ajax({
+        					url:"pwdFind.me",
+        					data:{userId:$("#userId2").val(), userName:$("#userName2").val(), phone:$("#phone2").val()},
+        					type:"post", 
+        					success:function(result){	// 1 또는 0
+        						
+        						if(result != 0){		// DB에 조회
+        							
+        							if(confirm("회원정보가 조회되었습니다.")){
+        								
+        								// 아이디 더이상 수정이 불가하게끔
+        								$("#email").attr("readonly", "true");	// 이메일이 조회되면
+        								
+        								/// 인증번호 발송 버튼이 활성화 !!!
+        								//$("#numCheck").removeAttr("disabled");
+        					
+        							}else{
+        								$("#email").forcus();
+        								
+        							}
+        							
+        						}else {					// DB에 조회되지않는 정보
+        							alert("회원 정보가 존재하지 않습니다."); 
+        							email.focus();
+        						}
+        					
+        						},error:function(){
+        							console.log("ajax통신 실패!!");
+        						}
+        				
+        				});
+        				
+        			});
+                        
+                    $("#pwdBtn2").click(function(){
+                    	
+        				// 1. 중복검사(중복있을경우 성공)	
+        				$.ajax({
+        					url:"pwdFind2.me",
+        					data:{certi:$("#certi").val(),userId:$("#userId2").val(), userName:$("#userName2").val(), phone:$("#phone2").val()},
+        					type:"post", 
+        					success:function(result){	// 1 또는 0
+        						
+        						if(result = "success"){		// DB에 조회
+        							
+        							if(confirm("회원정보가 조회되었습니다.")){
+        								
+        								location.href="passwordChange.me";
+        					
+        							}else{
+        								$("#email").forcus();
+        								
+        							}
+        							
+        						}else {					// DB에 조회되지않는 정보
+        							alert("회원 정보가 존재하지 않습니다."); 
+        						}
+        					
+        						},error:function(){
+        							
+        							
+        							console.log("ajax통신 실패!!");
+        						}
+        				
+        				});
+        				
+        			});
+        			
+        		});
+        	</script>
+
+                  
+                  
+            </div>
+        </div>
+
+        <div id="footer"></div>
+
+    </div>
 													</p>
 												</label> <input type="text" id="userName" name="userName"
 													placeholder="이름"> <input type="text" id="phone"

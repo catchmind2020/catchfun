@@ -11,64 +11,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
     <style>
-    /* 폰트 초기화*/
-    body, input, textarea, select, button, table {
-    font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
-    color: #222; font-size: 18px; line-height: 1.5;} 
 
-
-        /*버튼*/
-    .button {
-        background-color: #4CAF50; /* Green */
+    #btn {
+        background-color: gray;
         border: none;
         color: white;
-        padding: 3px 32px;
+        padding: 6px 8px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 4px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
-        height: 50px;
         }
 
-    .button2 {
-        background-color: white; 
-        color: black; 
-        border: 2px solid #008CBA;
-        }
-
-    .button2:hover {
-        background-color: #008CBA;
-        color: white;
-        }
-    
-    .button3 {
-        background-color: white; 
-        color: black; 
-        border: 2px solid #f44336;
-        }
-
-    .button3:hover {
-        background-color: #f44336;
+    #btn:hover {
+        background-color: #28d7d7;
         color: white;
         }
 
-    .content{
-           
-        width:80%;
-        margin:auto;
-       }
-       
-     .innerOuter{
-        border:1px solid lightgray;
-        width:90%;
-        margin:auto;
-        padding:5% 15%;
-        background:white;
-       }
-
+.content{ width:800px; margin:auto;}
+.innerOuter{
+    width:800px;
+    margin:auto;
+    background:white; }
 
         table *{margin:5px;}
         table{width:100%;}
@@ -80,9 +46,9 @@
     <jsp:include page="../common/menubar.jsp"/>
 
     <div class="content">
-        <br><br>
-        <div class="innerOuter" style="background-color: rgb(243, 242, 242);">
-            <h2>메세지 상세</h2>
+        <br><br><br>
+        <div class="innerOuter">
+            <h3>메세지 상세</h3>
             <br>
             
           
@@ -107,7 +73,9 @@
                     <td colspan="4"><p style="height:150px">${q.questionContent}</p></td>
                 </tr>
             </table>
-           
+            <center>
+            <input type=button id="btn" value="목록으로" onclick="javascript:history.back(-1);">
+            </center>
 <!--            수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨
                <div align="center">
                   <button class="button button2" onclick="postFormSubmit(1);">목록으로</button>

@@ -75,8 +75,9 @@ public interface MemberService {
 	
 	ArrayList<MyWish> myWishList(String userNo);
 
+	int updatePwd(Member m);
 	
-	
+
 
 
 

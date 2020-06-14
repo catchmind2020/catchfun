@@ -97,6 +97,13 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteAnswer", qno);
 	}
 
+	public int pwdFind(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.pwdFind", m);
+	}
+
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
 	public ArrayList<Member> idFindMember(SqlSessionTemplate sqlSession, Member m) {
 		return (ArrayList)sqlSession.selectList("memberMapper.idFindMember", m);
 	}

@@ -66,33 +66,6 @@
            width: 100px;
            height: 30px;
         }
-        .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 3px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        height: 50px;
-        }
-
-        
-        .button4 {
-        background-color: white;
-        color: black;
-        border: 2px solid #e7e7e7;
-        margin-top: 20px;
-        float: right;
-        }
-
-        .button4:hover {background-color: #e7e7e7;}
-        
-        
 
 </style>
 <body>
@@ -126,7 +99,7 @@
 	                    <tr>
 	                        <td>${ n.noticeNo }</td>
 	                        <td>${ n.noticeTitle }</td>
-	                        <td>${ n.noticeWriter }</td>
+	                        <td>관리자</td>
 	                        <td>${ n.noticeDate }</td>
 	                        <td>${ n.noticeCount }</td>
                         </tr>
@@ -144,39 +117,39 @@
             </script>
             
 
-                <div id="pagingArea">
-                <ul class="pagination" align="center">
-                	
-                	<c:choose>
-                		<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">＜</a></li>     
-	                    </c:when>
-	                    <c:otherwise>
-	                   		<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage-1 }">＜</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                    
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    	<c:choose>
-                    		<c:when test="${ p eq pi.currentPage }">
-	                    		<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
-	                    	</c:when>
-	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.no?currentPage=${ p }">${ p }</a></li>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">＞</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage+1 }">＞</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
+<div id="pagingArea">
+		        <ul class="pagination">
+		        	
+		        	 <c:choose>
+		        		<c:when test="${ pi.currentPage eq 1 }">
+		             		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>     
+		             	</c:when>
+		             	<c:otherwise>
+		            		<li class="page-item"><a class="page-link" href="MessageRest.me?userNo=${ loginUser.userNo }&currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		            
+		            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		            	<c:choose>
+		            		<c:when test="${ p eq pi.currentPage }">
+		             			<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+		             		</c:when>
+		             		<c:otherwise>
+		             			<li class="page-item"><a class="page-link" href="MessageRest.me?userNo=${ loginUser.userNo }&currentPage=${ p }">${ p }</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:forEach>
+		            
+		            <c:choose>
+		            	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+		             </c:when>
+		             <c:otherwise>
+		             	<li class="page-item"><a class="page-link" href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=${ pi.currentPage+1 }">Next</a></li>
+		            	</c:otherwise>
+		            </c:choose>
+		        </ul>
+		    </div>
            
            
             <br clear="both"><br>

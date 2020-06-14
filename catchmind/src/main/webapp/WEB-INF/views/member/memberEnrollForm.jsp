@@ -166,7 +166,7 @@ button[type=submit]:hover {
 								<div class="form-check" style="text-align: left;">
 									<input type="checkbox" id="ex_rd" name="ex_rd" value="agree">
 									<label for="ex_rd"><b>전체동의</b><br></label>
-									<p style="font-size: 15px;">와디즈 서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
+									<p style="font-size: 15px;">서비스 이용약관(필수), 개인정보 수집ᆞ이용동의(필수), 마케팅정보 수집동의(선택)</p>
 								</div>
 							</td>
 						</tr>
@@ -515,7 +515,7 @@ button[type=submit]:hover {
     
    </script>
    
-   <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
+<!--    <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
     	 function check(){
     			 var authCode = data;
                 var certifi = document.getElementById("certified");
@@ -554,7 +554,7 @@ button[type=submit]:hover {
               	
               	}
        	 	}
-   
+    -->
     
 
     
