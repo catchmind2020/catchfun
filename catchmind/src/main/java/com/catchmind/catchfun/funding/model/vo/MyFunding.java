@@ -22,6 +22,6 @@ public class MyFunding {
 	private String userId;
 	private Date projectFinishDate;
 	private String categoryName;
-	private String totlaStatus;
+	private String totlaStatus;  
 	
 }

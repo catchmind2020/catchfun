@@ -67,6 +67,35 @@
 		<result column="FILE_PATH" property="filePath"/>
 	</resultMap>
 	
+	<resultMap id="adminProDetailResultSet" type="Detail">
+		<id column="PROJECT_NUMBER" property="projectNumber"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PROJECT_REPORT" property="projectReport"/>
+		<result column="PROJECT_CONTENT" property="projectContent"/>
+		<result column="PROJECT_STATUS" property="projectStatus"/>
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="REPORT_CATEGORY" property="reportCategory"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_TITLE" property="reportTitle"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="PROJECT_STARTDATE" property="projectStartDate"/>
+		<result column="PROJECT_FINISHDATE" property="projectFinishDate"/>
+		<result column="PROJECT_CATEGORY" property="projectCategory"/>
+		<result column="PROJECT_TARGET_AMOUNT" property="projectTargetAmount"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PROJECT_DATE" property="projectDate"/>
+		<result column="HASHTAGS" property="hashtags"/>
+		<result column="STATUS_STORY" property="statusStory"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="PROJECT_DATE" property="projectDate"/>
+	</resultMap>
+	
 	
 	<resultMap id="makerResultSet" type="Maker5">
 		<id column="MAKER_NO" property="makerNo"/>
@@ -306,7 +335,7 @@
     	 where p.project_status=#{proCategory}
     </select>
    
-    <select id="selectProject" parameterType="string" resultMap="adminProReportResultSet">
+    <select id="selectProject" parameterType="string" resultMap="adminProDetailResultSet">
 		SELECT p.PROJECT_NUMBER, p.USER_NO, p.PROJECT_NAME, p.PROJECT_FINISHDATE, p.PROJECT_CONTENT, 
 		               p.PROJECT_TARGET_AMOUNT, p.PROJECT_REPORT, p.HASHTAGS, p.PROJECT_STATUS, p.STATUS_STORY, A.CHANGE_NAME, A.FILE_PATH
 		  FROM PROJECT p

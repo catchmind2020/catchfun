@@ -1,6 +1,5 @@
 package com.catchmind.catchfun.admin.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectDetail;
 import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -559,7 +559,7 @@ public class AdminController2 {
 	@RequestMapping("projectDetail.ad")
 	public ModelAndView selectProject(String pno, ModelAndView mv, HttpSession session) {
 		
-		Project p = aService2.selectProject(pno); // 프로젝트 정보
+		ProjectDetail p = aService2.selectProject(pno); // 프로젝트 정보
 		Maker m = aService2.selectMaker(pno); // 메이커 정보
 		FundingList fl = aService2.selectFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 		ArrayList<Reward> rlist = aService2.selectReward(pno); // 리워드 정보
