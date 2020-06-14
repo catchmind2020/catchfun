@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.catchmind.catchfun.admin.model.dao.AdminDao2;
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectDetail;
 import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -130,7 +131,7 @@ public class AdminServiceImpl2 implements AdminService2 {
 		return aDao2.projectSearch(sqlSession, pi, proCategory);
 	}
 	@Override
-	public Project selectProject(String pno) {
+	public ProjectDetail selectProject(String pno) {
 		return aDao2.selectProject(sqlSession, pno);
 	}
 	@Override

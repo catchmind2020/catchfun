@@ -47,6 +47,10 @@
 		position:relative;
 		top:1px;
 	}
+	#pagingArea{
+		width:500px;
+		padding-left:550px;
+	}
 	</style>
 </head>
 <body>
@@ -144,15 +148,14 @@
       <script>
    		$(function(){
    			$(".tb>tbody>tr").click(function(){
-   				// console.log("클릭");
 	   				
 	   			var pno = $(this).children().eq(0).text();
-	   			// 상품코드 밸류값이 넘어감 
+	   			// 프로젝트 번호 밸류값이 넘어감  projectDetail로
 	   			location.href="projectDetail.ad?pno=" + pno; 
  			});
  
    		});   
-    </script>
+   	  </script>
  
 
   

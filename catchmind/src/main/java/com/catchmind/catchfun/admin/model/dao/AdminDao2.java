@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectDetail;
 import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -247,7 +248,7 @@ public class AdminDao2 {
 		return (ArrayList)sqlSession.selectList("adminMapper2.projectSearch", proCategory, rowBounds);
 	}
 	
-	public Project selectProject(SqlSessionTemplate sqlSession, String pno) {
+	public ProjectDetail selectProject(SqlSessionTemplate sqlSession, String pno) {
 		
 		return sqlSession.selectOne("adminMapper2.selectProject", pno);
 	}
