@@ -777,6 +777,38 @@ public class MemberController {
 	
 	
 	
+	
+
+	
+	
+	@RequestMapping(value="	selectId.me")
+	public String selectId(Member m, Model model, HttpSession session) {
+		
+		System.out.println(m);
+		
+		Member member = mService.selectId(m);
+		
+		
+		
+		session.setAttribute("loginUser", m);
+		
+	
+		
+		if(pw.equals(m.getCerti())) {
+//			int updatePwd = mService.updatePwd(certi);
+			
+			model.addAttribute(m);
+			return "member/messageUpdateForm";
+			
+		}else {
+			return "fail";
+		}
+			
+	}
+			
+
+	
+	
 	@RequestMapping(value="pwdFind2.me")
 	public String pwdFind(Member m, Model model, HttpSession session) {
 		

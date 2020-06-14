@@ -201,6 +201,31 @@ wrap>#content>#content_2>.w3-row2 {
 	<jsp:include page="../common/menubar.jsp" />
 	<div class="wrap">
 
+            <div id="content_2">
+              <div class="w3-container">
+               
+              
+                <div class="w3-row">
+                  <a href="javascript:void(0)" onclick="openCity(event, 'idfind');">
+                    <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">아이디찾기</div>
+                  </a>
+                  <a href="javascript:void(0)" onclick="openCity(event, 'passwordfind');">
+                    <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">비밀번호찾기</div>
+                  </a>
+                  
+                </div>
+              
+                <div id="idfind" class="w3-container city" style="display:none">
+                   <center>
+                    <table id="id_table">
+                    <tr>
+                        <td>
+                            <form action="selectId.me">
+                            	<div id="idfind1" style="width:300px;">
+		                            <label for="email">
+		                                <p style="text-align:left;">
+			                                	<h4>가입정보로 확인</h4><br>
+													* 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
 		<script>
 			function expand() {
 				$(".search").toggleClass("close");

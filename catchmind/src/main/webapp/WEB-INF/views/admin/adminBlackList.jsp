@@ -47,6 +47,10 @@
 		position:relative;
 		top:1px;
 	}
+	#pagingArea{
+		width:800px;
+		padding-left:350px;
+	}
 	</style>
 </head>
 <body>
@@ -87,9 +91,10 @@
 	                    <td>${ b.userId }</td>
 	                    <td>
 	                    <c:choose>
-	                    	<c:when test="${ b.userType eq '1' }">일반회원</c:when>
-	                    	<c:when test="${ b.userType eq '2' }">프로젝트 등록자</c:when>
-	                    	<c:when test="${ b.userType eq '3' }">관리자</c:when>
+	                    	<c:when test="${ b.userType eq '1'}">일반회원</c:when>
+			            	<c:when test="${ b.userType eq '2'}">프로잭트회원(등록전)</c:when>
+			            	<c:when test="${ b.userType eq '3'}">프로잭트회원(등록후)</c:when>
+			            	<c:when test="${ b.userType eq '4'}">관리자</c:when>
 	                    </c:choose>	
 	                    </td>
 	                    <td>그냥그냥</td>

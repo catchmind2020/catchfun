@@ -79,7 +79,7 @@
         width:90%;
         min-width:1200px;
         margin:auto;
-        padding:5% 15%;
+        padding:5% 12%;
         background:white;
        }
 
@@ -88,8 +88,6 @@
     </style>
 </head>
 <body>
-    
-    
      <jsp:include page="../common/menubar.jsp" />
 
     <div class="content">

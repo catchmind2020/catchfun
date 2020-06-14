@@ -206,7 +206,7 @@ button[type=submit]:hover {
 								<div id="checkResult1" style="display:none; font-size:0.8em"></div></td>
 						</tr>
 						<tr>
-							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" oninput="signupCheck()" required></td>
+							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'빼고입력" oninput="signupCheck()" required></td>
 						</tr>
 						<tr>
 							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" oninput="signupCheck()" required readonly>

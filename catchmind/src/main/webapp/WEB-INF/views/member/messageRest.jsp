@@ -98,7 +98,7 @@
              </script>
             
              <div id="pagingArea">
-		        <ul class="pagination">
+		        <ul class="pagination"  style="width:300px; height:70px;">
 		        	
 		        	 <c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">

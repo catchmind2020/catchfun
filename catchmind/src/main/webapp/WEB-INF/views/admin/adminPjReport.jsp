@@ -47,6 +47,10 @@
       position:relative;
       top:1px;
       }
+      #pagingArea{
+		width:800px;
+		padding-left:200px;
+	  }
 
 </style>
 </head>

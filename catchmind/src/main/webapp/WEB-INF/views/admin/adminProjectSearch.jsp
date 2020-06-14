@@ -60,7 +60,7 @@
       <form action="projectSearch.ad" method="POST">
         	<input type="hidden" name="currentPage" value="1">
         			<select name="proCategory">
-	        			<option value="E">승인요청</option>
+	        			<option value="E">등록요청</option>
 	                	<option value="B">수정요청</option>
         		    </select> <button type="submit">조회</button>
    	  <button type="button" onclick="location.href='projectList.ad?currentPage=1'">전체조회</button>
