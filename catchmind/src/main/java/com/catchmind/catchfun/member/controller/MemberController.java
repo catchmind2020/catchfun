@@ -21,13 +21,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.catchmind.catchfun.admin.model.vo.Category;
 import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
+import com.catchmind.catchfun.member.model.service.MailService;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
 import com.google.gson.GsonBuilder;
@@ -37,6 +40,9 @@ public class MemberController {
 	
 	@Autowired // DI
 	private MemberService mService;
+	
+	@Autowired
+	MailService ms;
 	
 	// 암호화
 	@Autowired
@@ -483,6 +489,51 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("updatePwd.me")
+	public String updatePwd(String pass1, Model model, HttpSession session) {
+		
+		
+		
+		
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		
+		Member member = mService.loginMember(loginUser); // 아이디만을 가지고 조회한 결과
+		
+		// loginUser에 userPwd : 암호문
+		// 		m 에 userPwd : 로그인 시 입력한 비밀번호(평문)
+		System.out.println(loginUser);
+		if(loginUser != null && bcryptPasswordEncoder.matches(pass1, member.getUserPwd())) {
+			session.setAttribute("loginUser", loginUser);
+
+			System.out.println("성공성공");
+		
+		
+		
+		
+		String encPwd = bcryptPasswordEncoder.encode(pass1);
+	
+		
+		loginUser.setChangePwd(encPwd);
+		
+		
+		int result = mService.updatePwd(loginUser);
+		
+		
+		return "member/login"; //myPage.me
+		
+		}else { // 회원정보 수정 실패 --> 에러페이지로 포워딩
+			
+			model.addAttribute("msg", "현재비밀번호를 잘못 입력하셨습니다.");
+			return "member/passwordChange";
+		}
+		
+		
+	}
+	
+	
+	
 	@RequestMapping("idpwdFind.me")
 	public String idpwdFind() {
 		return "member/idpwdFind";
@@ -676,6 +727,86 @@ public class MemberController {
 		return "member/mypageModify";
 	}
 	
+	// 비밀번호찾기
+	@ResponseBody
+	@RequestMapping(value="pwdFind.me")
+	public String pwdFind(Member m, Model model, @RequestParam String userId, HttpServletRequest req) {
+		
+		/*
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
+		
+		int result = mService.insertMember(m);
+		*/
+		
+		System.out.println("객체 테스트1(객체) : " + m);
+		
+		int pwdFind = mService.pwdFind(m);
+		System.out.println("객체 테스트2(1) : " + pwdFind);
+		
+		
+		if(pwdFind > 0) {
+			
+			//이메일 인증
+			int ran = new Random().nextInt(900000) + 100000;
+			
+			HttpSession session = req.getSession(true);
+			String authCode = String.valueOf(ran);
+			String subject = "캐치펀 회원가입 인증 코드 발급 안내 입니다.";
+			StringBuilder sb = new StringBuilder();
+			sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
+			
+			session.setAttribute("pw", authCode);
+			
+			System.out.println(authCode);
+			
+			if(ms.send(subject, sb.toString(), "캐치마인드", userId, null)) {
+				// 메일 발송 성공
+				
+//				int updatePwd = mService.updatePwd(authCode);
+				
+				return "success";
+			}else {
+				// 메일 발송 실패
+				return "fail";
+			}
+			
+		}else {
+			return "fail";
+		}
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="pwdFind2.me")
+	public String pwdFind(Member m, Model model, HttpSession session) {
+		
+		System.out.println("인증번호 테스트 : " + m.getCerti());
+		
+		String pw = (String)session.getAttribute("pw");
+		
+		session.setAttribute("loginUser", m);
+		
+	
+		
+		if(pw.equals(m.getCerti())) {
+//			int updatePwd = mService.updatePwd(certi);
+			
+			model.addAttribute(m);
+			return "member/messageUpdateForm";
+			
+		}else {
+			return "fail";
+		}
+			
+	}
+			
+
 	@ResponseBody
 	@RequestMapping(value="alist.qu", produces="application/json; charset=utf-8")
 	public String selectReplyList(String qno) {
@@ -709,73 +840,71 @@ public class MemberController {
 
 	// 이메일 인증 시작!
 	
-	// mailSending 코드
-    @RequestMapping( value = "/member/auth.do" , method=RequestMethod.POST )
-    public ModelAndView mailSending(HttpServletRequest request, String e_mail, HttpServletResponse response_email) throws IOException {
-
-        Random r = new Random();
-        int dice = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
-        
-        String setfrom = "dlgkstjq623@gamil.com";
-        String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
-        String title = "회원가입 인증 이메일 입니다."; // 제목
-        String content =
-        
-        System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
-        
-        System.getProperty("line.separator")+
-                
-        "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
-        
-        +System.getProperty("line.separator")+
-        
-        System.getProperty("line.separator")+
-
-        " 인증번호는 " +dice+ " 입니다. "
-        
-        +System.getProperty("line.separator")+
-        
-        System.getProperty("line.separator")+
-        
-        "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다."; // 내용
-        
-        
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message,
-                    true, "UTF-8");
-
-            messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-            messageHelper.setTo(tomail); // 받는사람 이메일
-            messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-            messageHelper.setText(content); // 메일 내용
-            
-            mailSender.send(message);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        ModelAndView mv = new ModelAndView();    //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
-        mv.setViewName("/member/email_injeung");     //뷰의이름
-        mv.addObject("dice", dice);
-        
-        System.out.println("mv : "+mv);
-
-        response_email.setContentType("text/html; charset=UTF-8");
-        PrintWriter out_email = response_email.getWriter();
-        out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-        out_email.flush();
-        
-        
-        return mv;
-        
-    }
-
+	/*
+	 * // mailSending 코드
+	 * 
+	 * @RequestMapping( value = "/member/auth.do" , method=RequestMethod.POST )
+	 * public ModelAndView mailSending(HttpServletRequest request, String e_mail,
+	 * HttpServletResponse response_email) throws IOException {
+	 * 
+	 * Random r = new Random(); int dice = r.nextInt(4589362) + 49311; //이메일로 받는
+	 * 인증코드 부분 (난수)
+	 * 
+	 * String setfrom = "dlgkstjq623@gamil.com"; String tomail =
+	 * request.getParameter("e_mail"); // 받는 사람 이메일 String title =
+	 * "회원가입 인증 이메일 입니다."; // 제목 String content =
+	 * 
+	 * System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
+	 * 
+	 * System.getProperty("line.separator")+
+	 * 
+	 * "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
+	 * 
+	 * +System.getProperty("line.separator")+
+	 * 
+	 * System.getProperty("line.separator")+
+	 * 
+	 * " 인증번호는 " +dice+ " 입니다. "
+	 * 
+	 * +System.getProperty("line.separator")+
+	 * 
+	 * System.getProperty("line.separator")+
+	 * 
+	 * "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다."; // 내용
+	 * 
+	 * 
+	 * try { MimeMessage message = mailSender.createMimeMessage(); MimeMessageHelper
+	 * messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	 * 
+	 * messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+	 * messageHelper.setTo(tomail); // 받는사람 이메일 messageHelper.setSubject(title); //
+	 * 메일제목은 생략이 가능하다 messageHelper.setText(content); // 메일 내용
+	 * 
+	 * mailSender.send(message); } catch (Exception e) { System.out.println(e); }
+	 * 
+	 * ModelAndView mv = new ModelAndView(); //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을
+	 * 지정한다. mv.setViewName("/member/email_injeung"); //뷰의이름 mv.addObject("dice",
+	 * dice);
+	 * 
+	 * System.out.println("mv : "+mv);
+	 * 
+	 * response_email.setContentType("text/html; charset=UTF-8"); PrintWriter
+	 * out_email = response_email.getWriter();
+	 * out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
+	 * out_email.flush();
+	 * 
+	 * 
+	 * return mv;
+	 * 
+	 * }
+	 */
 	//이메일 인증 페이지 맵핑 메소드
 	@RequestMapping("/member/email.do")
 	public String email() {
 	    return "member/email";
 	}
+	
+	
 	
 	
 	//이메일로 받은 인증번호를 입력하고 전송 버튼을 누르면 맵핑되는 메소드.
@@ -784,9 +913,6 @@ public class MemberController {
 	@RequestMapping(value = "/member/join_injeung.do{dice}", method = RequestMethod.POST)
 	public ModelAndView join_injeung(String email_injeung, @PathVariable String dice, HttpServletResponse response_equals) throws IOException {
 	
-	    
-	    
-	    
 	    System.out.println("마지막 : email_injeung : "+email_injeung);
 	    
 	    System.out.println("마지막 : dice : "+dice);
