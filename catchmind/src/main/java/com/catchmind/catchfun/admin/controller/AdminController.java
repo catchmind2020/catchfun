@@ -620,12 +620,16 @@ public class AdminController {
 		
 		int listCount = aService.adminProjectPayTotalCount();
 		
+		int listCount2 = aService.adminProjectPayTotalCount2();
+		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<PayTotal> payList = aService.adminProjectPayTotalList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("payListCount", listCount);
+		model.addAttribute("payListCount2", listCount2);
+		
 		model.addAttribute("payList", payList);
 		
 		return "admin/adminProjectPayTotal";

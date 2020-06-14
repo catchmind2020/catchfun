@@ -196,6 +196,10 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.adminProjectPayTotalList", null, rowBounds);
 	}
+
+	public int adminProjectPayTotalCount2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.adminProjectPayTotalCount2");
+	}
 	
 	// 주혁 끝
 }

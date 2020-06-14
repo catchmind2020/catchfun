@@ -14,6 +14,26 @@
 
   <!-- Custom styles for this template-->
   <link href="<%= contextPath %>/resources/admin/css/sb-admin-2.css" rel="stylesheet">
+  
+<style>
+/* 버튼 */
+	.j-btn {
+    background-color: white;
+    border: 1px solid #28d7d7;
+    color: black;
+    padding: 3px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 35px;
+    }
+
+    .j-btn:hover {background-color: #28d7d7;}
+</style>
 
 </head>
 <body>
@@ -97,8 +117,6 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="question.ad?currentPage=1">1:1 문의관리</a>
             <a class="collapse-item" href="notice.ad?currentPage=1">공지사항</a>
-            <a class="collapse-item" href="#">자주하는질문(FAQ)</a>
-            <a class="collapse-item" href="#">이벤트관리</a>
           </div>
         </div>
       </li>
@@ -113,7 +131,6 @@
         <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="category.ad">카테고리</a>
-            <a class="collapse-item" href="#">등록</a>
           </div>
         </div>
       </li>
@@ -136,12 +153,11 @@
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsediv2" aria-expanded="true" aria-controls="collapseUtilities2">
         <i class="fas fa-fw fa-list"></i>
-        <span>결제관리(보류)</span>
+        <span>결제관리</span>
       </a>
       <div id="collapsediv2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="adminProjectPayTotal.ad?currentPage=1">결제내역</a>
-          <a class="collapse-item" href="#">보류</a>
         </div>
       </div>
     </li>
