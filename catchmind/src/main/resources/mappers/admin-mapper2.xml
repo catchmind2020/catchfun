@@ -21,12 +21,12 @@
 	</resultMap>
 	
 	<resultMap id="adminReportResultSet" type="Reply1">
-		<result column="P_QUESTION_NO" property="replyNo"/>
-		<result column="QUESTION_CONTENT" property="questionContent"/>
-		<result column="QUESTION_DATE" property="questionDate"/>
-		<result column="QUESTION_YN" property="questionYN"/>
-		<result column="QUESTION_STATUS" property="questionStatus"/>
-		<result column="QUESTION_BAN_COUNT" property="questionBanCount"/>
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_YN" property="replyYN"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="REPLY_BAN_COUNT" property="replyBanCount"/>
 		<result column="USER_ID" property="userId"/>
 		<result column="USER_TYPE" property="userType"/>
 		<result column="USER_NAME" property="userName"/>
@@ -191,15 +191,15 @@
     	select count(*)
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1' and question_status='N' 
+          join report p on (r.reply_no = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1' and reply_status='N' 
     </select>
     
     <select id="reportList" resultMap="adminReportResultSet">
     	select *
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+          join report p on (r.reply_no = p.REPORT_NO)
     	  where m.status='Y' and p.report_category='1'     	  
     </select>
     
@@ -207,7 +207,7 @@
     	select count(*)
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+          join report p on (r.reply_no = p.REPORT_NO)
     	  where m.status='Y' and p.report_category='1'and USER_ID LIKE '%' || #{keyword} || '%' 
     </select>
     
@@ -215,7 +215,7 @@
     	select *
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
+          join report p on (r.reply_no = p.REPORT_NO)
     	  where m.status='Y' and p.report_category='1'and m.USER_ID LIKE '%' || #{keyword} || '%'   	  
     </select>
     
@@ -252,12 +252,12 @@
     </select>
     
     <select id="rpReportDetail" parameterType="string" resultMap="adminReportResultSet">
-        select P_QUESTION_NO, QUESTION_CONTENT, QUESTION_DATE, QUESTION_YN, QUESTION_STATUS, QUESTION_BAN_COUNT, USER_ID, REPORT_CONTENT,
+        select reply_NO, reply_CONTENT, reply_DATE, reply_YN, reply_STATUS, reply_BAN_COUNT, USER_ID, REPORT_CONTENT,
                USER_TYPE, USER_NAME, EMAIL, PHONE, ENROLLDATE, r.user_no as RNO, p.user_no as PNO
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
-          join report p on (r.P_QUESTION_NO = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1'and P_QUESTION_NO =#{rd}   
+          join report p on (r.reply_NO = p.REPORT_NO)
+    	  where m.status='Y' and p.report_category='1'and reply_NO =#{rd}   
     </select>
     
     
@@ -355,19 +355,19 @@
    </update>
    
    <update id="updateMaker" parameterType="string" >
-		update project_maker set project_status='Y' where project_number=#{pno}   
+		update project_maker set status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateFunding" parameterType="string" >
-		update funding_list set project_status='Y' where project_number=#{pno}   
+		update funding_list set funding_status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateReward" parameterType="string" >
-		update reward set project_status='Y' where project_number=#{pno}   
+		update reward set reward_status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateNews" parameterType="string" >
-		update news set project_status='Y' where project_number=#{pno}   
+		update news set news_status='Y' where project_number=#{pno}   
    </update>
     
     <select id="sales1" parameterType="string"  resultType="_int">
