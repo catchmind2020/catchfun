@@ -355,19 +355,19 @@
    </update>
    
    <update id="updateMaker" parameterType="string" >
-		update project_maker set project_status='Y' where project_number=#{pno}   
+		update project_maker set status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateFunding" parameterType="string" >
-		update funding_list set project_status='Y' where project_number=#{pno}   
+		update funding_list set funding_status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateReward" parameterType="string" >
-		update reward set project_status='Y' where project_number=#{pno}   
+		update reward set reward_status='Y' where project_number=#{pno}   
    </update>
    
    <update id="updateNews" parameterType="string" >
-		update news set project_status='Y' where project_number=#{pno}   
+		update news set news_status='Y' where project_number=#{pno}   
    </update>
     
     <select id="sales1" parameterType="string"  resultType="_int">
