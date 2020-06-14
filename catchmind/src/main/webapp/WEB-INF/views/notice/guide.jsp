@@ -111,20 +111,6 @@
     </div>
  		<hr id="hr">
  		
- 		            <script>
-        $(function(){
-            $("div").click(function(){
-                // $(this).next().slideDown();
-                var p = $(this).next();
-                if(p.css("display") == "none"){
-                    $(this).siblings("p").slideUp();
-                    p.slideDown();
-                }else{
-                    p.slideUp();
-                }
-            });
-        });
-    </script>
     <br><br><br>
 
 <div class="body">
