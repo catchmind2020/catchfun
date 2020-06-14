@@ -66,7 +66,7 @@
             </svg>
 				</div>
 				<div align="center" style="font-size: small;">
-					<br> ${  projectUser.userNo }님<br> 환영합니다.
+					<br> ${  project.projectName }님<br> 환영합니다.
 
 				</div>
 		</a></li>
