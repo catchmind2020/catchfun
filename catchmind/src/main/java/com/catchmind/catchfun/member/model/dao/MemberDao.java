@@ -105,6 +105,7 @@ public class MemberDao {
 
 	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updatePwd", m);
+	}
 	public ArrayList<Member> idFindMember(SqlSessionTemplate sqlSession, Member m) {
 		return (ArrayList)sqlSession.selectList("memberMapper.idFindMember", m);
 	}
