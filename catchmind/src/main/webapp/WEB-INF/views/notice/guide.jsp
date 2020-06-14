@@ -99,6 +99,7 @@
 
               
 <body>
+
 <jsp:include page="../common/menubar.jsp" />
 	<br><br><br>
     
@@ -110,7 +111,20 @@
     </div>
  		<hr id="hr">
  		
- 		
+ 		            <script>
+        $(function(){
+            $("div").click(function(){
+                // $(this).next().slideDown();
+                var p = $(this).next();
+                if(p.css("display") == "none"){
+                    $(this).siblings("p").slideUp();
+                    p.slideDown();
+                }else{
+                    p.slideUp();
+                }
+            });
+        });
+    </script>
     <br><br><br>
 
 <div class="body">
@@ -205,6 +219,6 @@ A : 와디즈는 결제하고 바로 배송하는 쇼핑몰이 아닙니다 :) �
 </div>
 </div>
 
-
 </body>
+
 </html>

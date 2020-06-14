@@ -12,30 +12,15 @@
     
     <style>
 
-
-/* 폰트 초기화*/
-body, input, textarea, select, button, table {
-    font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
-    color: #222; font-size: 18px; line-height: 1.5;} 
-
-        .content{
-           
-            width:80%;
-            margin:auto;
-        }
-        
-        .innerOuter{
-            border:1px solid lightgray;
-            width:90%;
-            margin:auto;
-            padding:5% 15%;
-            background:white;
-        }
-
+.content{ width:800px; margin:auto;}
+.innerOuter{
+    width:800px;
+    margin:auto;
+    background:white; }
         #boardList{text-align: center;}
         #boardList>tbody>tr:hover{cursor:pointer;}
 
-        #pagingArea{width:100%; margin:auto; text-align: center;}
+        #pagingArea{width:fit-content;margin:auto;}
        
         #searchForm{
             width:80%;
@@ -49,10 +34,6 @@ body, input, textarea, select, button, table {
         .text{width:53%;}
         .searchBtn{Width:20%;}
 
-        .pagination {
-       
-        display: inline-block;
-        }
 
         .pagination a {
         color: black;
@@ -80,9 +61,9 @@ body, input, textarea, select, button, table {
 <body>
     <jsp:include page="../common/menubar.jsp" />
     <div class="content">
-        <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
-            <h2>메세지함</h2>
+        <br><br><br>
+        <div class="innerOuter">
+            <h3>메세지함</h3><br>
             <c:if test="${ loginUser.userType eq 2 }" >
             	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button>
             </c:if>
@@ -150,21 +131,9 @@ body, input, textarea, select, button, table {
 		        </ul>
 		    </div>
            
-            <br clear="both"><br>
+            <br clear="both"><br><br>
 
-            <form id="searchForm" action="" method="Get" align="center">
-                <div class="select">
-                    <select class="custom-select" name="condition">
-                        <option value="writer">보낸사람</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                </div>
-                <div class="text">
-                    <input type="text" class="form-control" name="keyword">
-                </div>
-                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-            </form>
+           
             <br><br>
         </div>
         <br><br>
