@@ -100,9 +100,11 @@ public class NoticeController {
 	public String cqSelectList(int currentPage,HttpSession session, Model model) {
 		
 		Member loginUser = (Member)(session.getAttribute("loginUser"));
-		String userNo = loginUser.getUserNo();
 		
-		int listCount = ntService.cqselectListCount();	// 게시판 글갯수 조회용
+		if(loginUser != null) {
+		
+		String userNo = loginUser.getUserNo();
+		int listCount = ntService.cqselectListCount(userNo);	// 게시판 글갯수 조회용
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<CatchfunQuestion> list = ntService.cqselectList(pi, userNo);
 		
@@ -110,6 +112,13 @@ public class NoticeController {
 		model.addAttribute("list", list);
 		
 		return "notice/CatchfunQuestionListView";
+		
+		} else { 
+			
+			model.addAttribute("msg", "로그인 후 이용해주세요. ");
+			return "common/errorPage";
+			
+		}
 	}
 	
 	/**

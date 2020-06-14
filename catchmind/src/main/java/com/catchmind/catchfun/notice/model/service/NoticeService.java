@@ -31,7 +31,7 @@ public interface NoticeService {
 
 	
 	// 1:1문의 글 총개수 알아오기
-	int cqselectListCount();	
+	int cqselectListCount(String userNo);	
 	
 	// 1:1문의  리스트 조회
 	ArrayList<CatchfunQuestion> cqselectList(PageInfo pi, String userNo);

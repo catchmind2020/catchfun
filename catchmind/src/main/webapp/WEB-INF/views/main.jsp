@@ -69,7 +69,7 @@ progress { width: 370px; height: 10px; background-color: #2ed5d5; }
 progress::-webkit-progress-bar { background-color: lightgray; }
 progress::-webkit-progress-value { background-color: #2ed5d5; }
 
-
+.lists:hover {cursor:pointer; background-color:#F4FFFE; }
 </style>
 </head>
 <body>

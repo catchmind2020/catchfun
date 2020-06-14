@@ -14,8 +14,8 @@
     <style>
     
 /* 서브메뉴 영역 CSS */
-a{color:black;  text-decoration:none !important }
-a:hover{color:#28d7d7;  text-decoration:none !important }
+.submenu>a{color:black;  text-decoration:none !important; }
+.submenu>a:hover{color:#28d7d7;  text-decoration:none important!; }
 .submenu{width:140px; font-size:15px; font-weight: 900; display:table-cell; padding-top:10px; padding-bottom: 20px;}
 .submenu:hover { color:#28d7d7; cursor: pointer;}
 .choice{border-bottom: 3px solid rgb(31, 205, 211); padding-bottom: 5px;}

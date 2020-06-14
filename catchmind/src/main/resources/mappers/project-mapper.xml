@@ -240,10 +240,20 @@
 		 where reward_no = #{rewardNo}
    </update>
    
-   <update id="requestCancel" parameterType="FundingList5">
+   <update id="requestCancel" parameterType="string">
 		update FUNDING_LIST
 		   set FUNDING_STATUS = 'E'
-		 where PROJECT_NUMBER = #{projectNumber} AND USER_NO = #{userNo} AND REWARD_NO = #{rewardNo} AND FUNDING_STATUS = 'N'
+		 where FUNDING_NO = #{fNo} AND FUNDING_STATUS = 'N'
    </update>
    
+   <insert id="insertbanReply" parameterType="Report5">
+		INSERT INTO REPORT
+		VALUES(#{userNo}, #{reportNo}, 1, SYSDATE, null, null)
+   </insert>
+   
+   <select id="selectBanReply" parameterType="Report5" resultType="_int">
+		select count(*)
+		  from REPORT
+		 where REPORT_NO=#{reportNo} AND USER_NO = #{userNo}
+   </select>
 </mapper>
