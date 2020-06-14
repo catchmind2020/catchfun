@@ -864,12 +864,16 @@
     				
     				for(var i in list){ // Gson 기본 포맷에 맞게 날짜가 나옴 
     					
+    					var email = list[i].userNo;
+    					var index = email.indexOf("@");
+    					var userId = email.substr(0, index); 
+    					
      					if( $("#dddd").val() != "" ){ // 로그인 했을 때
     						
         					if( $("#dddd").val() == list[i].userNo ){ // 로그인한 id와 동일할 때 --> 신고 x, 삭제/수정 o
         						
         				        value += "<tr>" +
-						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
+						        			"<td width='80px' id='replyUserId'><b>" + userId + "</b></td>" +
 						                    "<td width='330px' colspan='2'>" + list[i].replyContent + 
 						                    
 						                    	/* "<form action='updateReply.pro' method='POST'>" + 
@@ -884,7 +888,7 @@
         					}else{ // 동일하지않을 때
         						
         				        value += "<tr>" +
-						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
+						        			"<td width='80px' id='replyUserId'><b>" + userId + "</b></td>" +
 						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBanBtn' key=" + list[i].replyNo + " onclick='replyBan();'>신고</button></td>" +
 						                    "<td width='70px'>" + list[i].replyDate + "</td>" + 						                   
 						                 "</tr>";
@@ -893,7 +897,7 @@
     					}else{	// 로그인 안했을 때
     						
     				        value += "<tr>" +
-    				        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
+    				        			"<td width='80px' id='replyUserId'><b>" + userId + "</b></td>" +
 					                    "<td width='330px' colspan='2'>" + list[i].replyContent + "</td>" +
 					                    "<td width='70px'>" + list[i].replyDate + "</td>" + 
 					                 "</tr>";
