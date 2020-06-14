@@ -1,6 +1,5 @@
 package com.catchmind.catchfun.admin.model.dao;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.funding.model.vo.FundingList;
@@ -340,6 +340,29 @@ public class AdminDao2 {
 		return sqlSession.selectOne("adminMapper2.sales10");
 	}
 	
+	public int returnProject(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnProject", pno);
+	}
+	
+	public int returnMaker(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnMaker", pno);
+	}
+	
+	public int returnFunding(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnFunding", pno);
+	}
+	
+	public int returnReward(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnReward", pno);
+	}
+	
+	public int returnNews(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.returnNews", pno);
+	}
+	
+	public int insertReturn(SqlSessionTemplate sqlSession, ProjectReturn p) {
+		return sqlSession.insert("adminMapper2.insertReturn", p);
+	}
 	
 }
 

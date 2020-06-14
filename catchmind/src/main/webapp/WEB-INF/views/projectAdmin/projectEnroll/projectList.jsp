@@ -27,6 +27,7 @@
 
 <style>
 
+
 .wrap {
 	width: 1000px;
 	height: 1000px;
@@ -79,22 +80,22 @@
 	<jsp:include page="../../common/menubar.jsp" />
 	<div class="wrap">
 		<div id="header">
-<br>
-			<h1 style="font-size: 20px;">
+<br><br>
+			<h1 style="font-size:25px;">
 				<strong>프로젝트 리스트</strong>
 			</h1>
-			
-			
+	
 <br>
-				<c:choose>
-					<c:when test="${ empty projectList }">
-						<h1 style="font-size: 28px; ">
-							<strong>프로젝트 리스트가 존재하지 않습니다.</strong>
-						</h1>
-					</c:when>
-					<c:otherwise>
-					
-					<div class="row" style="width: 100%; ">
+
+			<c:choose>
+				<c:when test="${ empty projectList }">
+					<h1 style="font-size: 28px;">
+						<strong>프로젝트 리스트가 존재하지 않습니다.</strong>
+					</h1>
+				</c:when>
+				<c:otherwise>
+
+					<div class="row" style="width: 100%;">
 						<c:forEach items="${ projectList }" var="p">
 							<div class="card mb-5" style="width: 320px; margin-left: 1%;">
 								<div class="card-header py-3">
@@ -104,30 +105,69 @@
 									<h6 class="black">
 										<br> 등록일 : ${ p.projectDate }
 									</h6>
+
+									<form action="<%=contextPath%>/ptest.pa" method="post">
+										<input type="hidden" name="projectNo" value="${ p.projectNo }">
+										<div class="col-auto text-right" id="addReply">
+											<button type="submit" class="btn btn-success ">작성</button>
+										</div>
+									</form>
 								</div>
-								<form action="<%=contextPath%>/ptest.pa" method="post">
-									<input type="hidden" name="projectNo" value="${ p.projectNo }">
-									<div class="col-auto text-right">
-										<button type="submit" class="btn btn-success ">작성</button>
-									</div>
-								</form>
-								</div>
+
 							</div>
+
 							<br>
 						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			
-
+					</div>
+				</c:otherwise>
+			</c:choose>
 			<a href="<%=contextPath%>/projectEnroll.pa">
 				<button type="button" class="btn btn-primary">등록하기</button>
-			</a> <br>
+			</a>
+
 		</div>
+
+
+
+		<br>
 	</div>
+
 	<br>
 	<br>
 	<jsp:include page="../../common/footer.jsp" />
 
-
+	<script>
+$(function(){
+   		/* 	selectReplyList(); */
+   			
+   			$("#addReply").click(function(){
+   				
+   				$.ajax({
+   					url:"rinsert.bo",
+   					data:{replyContent:$("#content").val(),
+   						  refBoardNo:${b.boardNo},
+   						  replyWriter:"${loginUser.userId}"},
+   					type:"post",
+   					success:function(status){
+   						
+   						if(status == "success"){
+   							
+   							$("#content").val("");
+   							
+   							selectReplyList();
+   							
+   						}else{
+   							alert("댓글등록실패!");
+   						}
+   						
+   					},error:function(){
+   						console.log("댓글 작성용   통신 실패!");
+   					}
+   				});
+   				
+   			});
+   			
+   		});
+</script>
 </body>
 </html>

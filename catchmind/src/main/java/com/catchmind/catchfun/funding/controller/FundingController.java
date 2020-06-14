@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.catchmind.catchfun.funding.model.service.FundingService;
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.MyFunding;
 import com.catchmind.catchfun.funding.model.vo.News;
 import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
@@ -458,8 +459,9 @@ public class FundingController {
 	@RequestMapping("selectPayDetail.pro")
 	public ModelAndView selectPayDetail(String pno, ModelAndView mv, HttpSession session) {
 		
-		
+		System.out.println(pno);
 		Project p = fService.selectProject(pno); // 프로젝트 정보
+		System.out.println(p);
 		Maker m = fService.selectMaker(pno); 	 // 메이커 정보
 		
 		mv.addObject("p", p);
@@ -552,4 +554,24 @@ public class FundingController {
 	
 	
 	}*/
+	
+	
+	
+	// Member 부분
+	@RequestMapping("bookingList.me")
+	public ModelAndView selectBookingList(ModelAndView mv, HttpSession session) {
+	
+		Member m = (Member)session.getAttribute("loginUser");
+		String userNo = m.getUserNo();
+		
+		ArrayList<MyFunding> fl = fService.selectBookingList(userNo); // 펀딩 리스트
+		
+		mv.addObject("fl", fl);
+		mv.setViewName("member/mypage");
+		
+		return mv;
+	}
+	
+
+	
 }

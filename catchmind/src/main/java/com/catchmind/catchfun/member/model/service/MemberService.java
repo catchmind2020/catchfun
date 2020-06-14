@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.member.model.vo.Member;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 
 public interface MemberService {
 	
@@ -72,10 +73,11 @@ public interface MemberService {
 
 	ArrayList<Member> idFindMember(Member m);
 	
+	ArrayList<MyWish> myWishList(String userNo);
 
+	int updatePwd(Member m);
+	
 
-	
-	
 
 
 

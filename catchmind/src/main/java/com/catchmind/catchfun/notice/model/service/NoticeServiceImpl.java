@@ -54,8 +54,8 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	
 	@Override
-	public int cqselectListCount() {
-		return ntDao.cqselectListCount(sqlSession);
+	public int cqselectListCount(String userNo) {
+		return ntDao.cqselectListCount(sqlSession, userNo);
 	}
 
 	@Override

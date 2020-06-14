@@ -29,6 +29,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Project" alias="Project1"/>
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Question" alias="Question" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Funding" alias="Funding"/>
+		<typeAlias type="com.catchmind.catchfun.admin.model.vo.ProjectReturn" alias="Return"/>
+		
 		
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Main" alias="Main" />
 		<typeAlias type="com.catchmind.catchfun.main.model.vo.Category" alias="MainCategory" />
@@ -45,11 +47,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.PersonQuestion" alias="PersonQuestion5" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Report" alias="Report5" />
 		<typeAlias type="com.catchmind.catchfun.funding.model.vo.Wishlist" alias="Wishlist5" />
+		<typeAlias type="com.catchmind.catchfun.funding.model.vo.MyFunding" alias="MyFunding5" />
 
 
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Category" alias="Category" />
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.Reply" alias="Reply1"/>
 		<typeAlias type="com.catchmind.catchfun.admin.model.vo.PayTotal" alias="PayTotal"/>
+		
+		<typeAlias type="com.catchmind.catchfun.member.model.vo.MyWish" alias="MyWish"/>
 		
 	</typeAliases>
 	

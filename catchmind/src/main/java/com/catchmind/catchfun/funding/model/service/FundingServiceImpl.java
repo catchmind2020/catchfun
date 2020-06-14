@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.catchmind.catchfun.funding.model.dao.FundingDao;
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.MyFunding;
 import com.catchmind.catchfun.funding.model.vo.News;
 import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
@@ -182,6 +183,12 @@ public class FundingServiceImpl implements FundingService{
 	public int insertbanReply(Report r) {
 
 		return fDao.insertbanReply(sqlSession, r);
+	}
+
+	@Override
+	public ArrayList<MyFunding> selectBookingList(String userNo) {
+		
+		return fDao.selectBookingList(sqlSession, userNo);
 	}
 
 
