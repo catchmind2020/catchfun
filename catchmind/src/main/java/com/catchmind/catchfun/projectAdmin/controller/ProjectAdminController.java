@@ -256,14 +256,19 @@ public class ProjectAdminController {
 		
 		Member member = (Member) session.getAttribute("loginUser");  //나중에 로그인 되면 이걸로 위에껄 이걸로 대체할거임
 		
+		if(member != null) {
 		
 		ArrayList<Project> projectList = paService.selectProjectList(member.getUserNo());
 
-
-
 		session.setAttribute("projectList", projectList);
-
 		return "projectAdmin/projectEnroll/projectList";
+		
+		} else {
+			
+				model.addAttribute("msg", "로그인 후 이용해주세요. ");
+				return "common/errorPage";
+				
+			}
 	}
 	
 	

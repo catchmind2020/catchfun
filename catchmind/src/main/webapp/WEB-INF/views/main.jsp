@@ -69,7 +69,7 @@ progress { width: 370px; height: 10px; background-color: #2ed5d5; }
 progress::-webkit-progress-bar { background-color: lightgray; }
 progress::-webkit-progress-value { background-color: #2ed5d5; }
 
-
+.lists:hover {cursor:pointer; background-color:#F4FFFE; }
 </style>
 </head>
 <body>
@@ -173,34 +173,6 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 											</div>
 											<div>
 												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />% &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
-												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
-													
-											</div>
-										</div>
-									</li>
-								</c:forEach>
-							</ul>
-						</li>
-						<li>
-							<ul>
-								<c:forEach items="${ list }" var="p" varStatus="index" begin="6" end="8">
-									<li class="a${index.count}">
-										<div class="lists">
-											<input type="hidden" value="${p.projectNo}">
-											<div>
-												<img src="${pageContext.servletContext.contextPath}/resources/images/projectimages/${p.projectImg }">
-											</div>
-											<div>
-												<h4 style="height:60px;">
-													<b>${p.projectName}</b>
-												</h4>
-											</div>
-											<div class="maker">${p.projectCategory} | ${p.makerName}</div>
-											<div>
-												<progress value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" max="100"></progress>
-											</div>
-											<div>
-												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />%  &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
 												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
 													
 											</div>

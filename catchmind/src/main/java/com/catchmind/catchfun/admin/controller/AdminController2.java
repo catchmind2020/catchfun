@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
@@ -577,6 +578,7 @@ public class AdminController2 {
 		System.out.println(m);
 		System.out.println(fl);
 		System.out.println(rlist);
+		System.out.println(nlist);
 		System.out.println(pno);
 		
 		mv.setViewName("admin/adminProjectDetail");
@@ -597,27 +599,58 @@ public class AdminController2 {
 		
 	}
 	
+	@RequestMapping("projectReturn.ad")
+	public String projectReturn(String pno, String returnContent, Model model) {
+		
+		ProjectReturn p = new ProjectReturn();
+		p.setProjectNumber(pno);
+		p.setReturnContent(returnContent);
+		
+		aService2.insertReturn(p);
+		
+		aService2.returnProject(pno); // 프로젝트 정보
+		aService2.returnMaker(pno); // 메이커 정보
+		aService2.returnFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
+		aService2.returnReward(pno); // 리워드 정보
+		aService2.returnNews(pno); // 뉴스 정보
+		
+		return "redirect:projectList.ad?currentPage=1";
+		
+	}
+	
 	/**
 	 * 매출 통계 리스트페이지
 	 */
 	@RequestMapping("sales.ad")
-	public String adminSales() {
+	public String adminSales(Model model) {
+		
+		int sales6 = aService2.sales6();
+		int sales7 = aService2.sales7();
+		int sales8 = aService2.sales8();
+		int sales9 = aService2.sales9();
+		int sales10 = aService2.sales10();
+		
+		model.addAttribute("sales6", sales6);
+		model.addAttribute("sales7", sales7);
+		model.addAttribute("sales8", sales8);
+		model.addAttribute("sales9", sales9);
+		model.addAttribute("sales10", sales10);
 		return "admin/adminSales";
 	}
 	
 	@RequestMapping("salesSearch.ad")
-	public String adminSalesSearch(Date sDate, Model model) {
-		
+	public String adminSalesSearch(String sDate, Model model) {
+
 		int sales1 = aService2.sales1(sDate);
 		int sales2 = aService2.sales2(sDate);
 		int sales3 = aService2.sales3(sDate);
 		int sales4 = aService2.sales4(sDate);
 		int sales5 = aService2.sales5(sDate);
-		System.out.println(sales1);
-		System.out.println(sales2);
-		System.out.println(sales3);
-		System.out.println(sales4);
-		System.out.println(sales5);
+		model.addAttribute("sales1", sales1);
+		model.addAttribute("sales2", sales2);
+		model.addAttribute("sales3", sales3);
+		model.addAttribute("sales4", sales4);
+		model.addAttribute("sales5", sales5);
 		return "admin/adminSalesSearch";
 	}
 	

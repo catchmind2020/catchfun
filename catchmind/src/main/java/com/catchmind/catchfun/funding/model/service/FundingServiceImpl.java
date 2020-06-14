@@ -167,9 +167,21 @@ public class FundingServiceImpl implements FundingService{
 	}
 
 	@Override
-	public int requestCancel(FundingList f) {
+	public int requestCancel(String fNo) {
 
-		return fDao.requestCancel(sqlSession, f);
+		return fDao.requestCancel(sqlSession, fNo);
+	}
+
+	@Override
+	public int selectBanReply(Report r) {
+
+		return fDao.selectBanReply(sqlSession, r);
+	}
+
+	@Override
+	public int insertbanReply(Report r) {
+
+		return fDao.insertbanReply(sqlSession, r);
 	}
 
 

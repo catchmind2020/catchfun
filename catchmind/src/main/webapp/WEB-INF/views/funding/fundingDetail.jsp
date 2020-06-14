@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> <!-- 공유하기  -->
     <title>Document</title>
 </head>
 <style>
@@ -367,6 +368,7 @@
          color: rgb(203, 61, 36); 
          padding-left: 25px;
      } 
+     
      .modal h4, .modal2 h4 {color: gray; padding-left: 25px; padding-top: 0px; }
      .modal label, .modal2 label { 
          display: block; 
@@ -537,7 +539,7 @@
 				
 				for(var i=0; i<hashtagsSplit.length; i++){
 					
-					hashtagHtml += '<button class="search_tag">#' + hashtagsSplit[i] + '</button> ';
+					hashtagHtml += '<button id="tag2" class="search_tag">#' + hashtagsSplit[i] + '</button> ';
 				}
 				
 				$("#tag").html(hashtagHtml);
@@ -603,7 +605,8 @@
 		                    <td align="right" style="padding-right:0px;"><button class="maker_button trigger">개설자문의</button> <button id="maker_ban_button" class="trigger2">개설자신고</button></td>
 		                    <td></td>
 		                    <td class="info_title" style="vertical-align: middle;">
-			                    <input type="button" class="side_button2" value="공유">&nbsp;
+			                    <!-- <input type="button" class="side_button2" value="공유">&nbsp; -->
+			                    <a id="kakao-link-btn" href="javascript:sendLink()"><input type="button" class="side_button2" value="공유"></a>
 			                    <span id="zzimDir"></span>			                    
 		                    </td>
                 		</c:when>
@@ -649,6 +652,7 @@
                                     <div style="width:550px; word-break:break-all;">
                                         <br><br> <!-- summernote -->
                                         <p>${ p.projectContent }</p>
+                                        <%-- <button onclick="location.href='selectPayDetail.pro?pno=${p.projectNumber}'">펀딩내역</button> --%>
                                     </div>
                                 </div>
                             </section>
@@ -786,8 +790,7 @@
                 </tbody>
 
             </table>
-            
-            
+    
         </div>
         <br><br><br><br><br><br><br><br><br><br><br><br>	
 
@@ -867,7 +870,14 @@
         						
         				        value += "<tr>" +
 						        			"<td width='80px' id='replyUserId'><b>" + list[i].userNo + "</b></td>" +
-						                    "<td width='330px' colspan='2'>" + list[i].replyContent + " <button class='rBtn' onclick='updateReply();'>수정</button> <button class='rBtn' key=" + list[i].replyNo + " onclick='deleteReply();'>삭제</button>" + "</td>" +
+						                    "<td width='330px' colspan='2'>" + list[i].replyContent + 
+						                    
+						                    	/* "<form action='updateReply.pro' method='POST'>" + 
+							                    	"<input type='hidden' name='replyContent' value='" + list[i].replyContent + "'>"  + 
+							                    	"<input type='hidden' name='replyNo' value='" + list[i].replyNo + "'>"  +  */
+							                    	
+							                    "<button type='button' class='rBtn trigger3' key=" + list[i].replyNo + ">수정</button>" + 
+							                    "<button class='rBtn' key=" + list[i].replyNo + " onclick='deleteReply();'>삭제</button>" + "</td>" +
 						                    "<td width='70px'>" + list[i].replyDate + "</td>" +
 						                 "</tr>";
 			                 
@@ -890,7 +900,7 @@
     					}
     					
 
-    				 
+     			    	
     				 
     				/* //var a = "list[i].replyNo";
     				 
@@ -911,6 +921,7 @@
     	}
 
     	
+   	
     	// 댓글 신고
     	function replyBan(){ 
     		
@@ -927,6 +938,8 @@
 						alert("댓글 신고 성공");
 						selectReplyList(); 
 						
+					}else if(status == "already"){
+						alert("이미 신고된 댓글입니다.");
 					}else{
 						alert("댓글 신고 실패");
 					}
@@ -941,7 +954,7 @@
     	// 댓글 삭제
     	function deleteReply(){
     		
-    		var replyNo =window.event.target.getAttribute("key"); 
+    		var replyNo = window.event.target.getAttribute("key"); 
     		
     		$.ajax({
 				url: "deleteReply.pro",
@@ -962,6 +975,43 @@
 				}
 			});
     	}
+    	
+    	
+    	
+
+    	// 댓글 수정
+    	function updateReply(){
+    		
+    		var replyNo = window.event.target.getAttribute("key");
+    		
+    		 var a = $("#replyNo");//.delete();
+    		 console.log(a);
+    		/*
+    		$.ajax({
+				url: "updateReply.pro",
+				data: { replyNo: replyNo },
+				type: "post",
+				success: function(status){
+				
+					if(status == "success"){
+						
+						alert("댓글 삭제 성공");
+						selectReplyList(); // 다시 댓글 조회
+						
+					}else{
+						alert("댓글 삭제 실패");
+					}
+				}, error: function(){
+					alert("댓글 삭제 ajax 통신 실패");
+				}
+			});
+    		 */
+    		
+    	}
+    	
+    	
+    	
+    	
     	
     // 찜 불러오기
    	$(function(){
@@ -1077,6 +1127,8 @@
 	         </form> 
 	     </div> 
 	 </div>
+	 
+	 
 	 <!-- 개설자 신고 popup -->
 	<div class="modal2"> 
 	    <div class="modal-content"> 
@@ -1098,6 +1150,8 @@
 	         </form> 
 	     </div> 
 	 </div>
+	 
+	
 	<!--------------------------------- 팝업 ---------------------------------------------------------------->
 		
 		
@@ -1150,11 +1204,59 @@
 		    cancel2.addEventListener("click", toggleModal2); 
 		    window.addEventListener("click", windowOnClick2); 
 		    <!-- 개설자 신고 popup 끝 -->	
+		    
+
 		}
 		
 	</script>
 	<!--------------------------------- 팝업 ---------------------------------------------------------------->
 
+
+
+<!-- 카톡 공유하기 -->
+<script type="text/javascript">
+  // input your appkey
+  Kakao.init('cdc7db801af54bae62d1a08b2d60aad8')
+  function sendLink() {
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '${ p.projectName }',
+        description: '${ p.hashtags }',
+        imageUrl:
+          /* 'http://localhost:8888/catchfun/resources/images/ss3.png', */
+          'http://localhost:8888/catchfun/resources/uploadFiles/${ p.changeName }',
+          /* 'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png', */
+        link: {
+          mobileWebUrl: 'http://localhost:8888/catchfun/detail.pro?pno=${ p.projectNumber }',
+          webUrl: 'http://localhost:8888/catchfun/detail.pro?pno=${ p.projectNumber }',
+        },
+      }
+      /* social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ], */
+    })
+  }
+</script>
+<!-- 카톡 공유하기 끝-->
 
 
 </body>

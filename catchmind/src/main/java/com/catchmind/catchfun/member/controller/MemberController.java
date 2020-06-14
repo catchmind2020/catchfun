@@ -17,6 +17,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catchmind.catchfun.admin.model.vo.Category;
+import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
@@ -963,6 +965,22 @@ public class MemberController {
 	    }    
 	
 	    return mv;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("idFind.me")
+	public String idFindMember(Member m, Model model) {
+		
+		ArrayList<Member> findId = mService.idFindMember(m);
+		
+		model.addAttribute("findId", findId);
+		
+		if(findId != null) {
+			return "success";
+		}else {
+			return "fail";
+		}
 		
 	}
 	

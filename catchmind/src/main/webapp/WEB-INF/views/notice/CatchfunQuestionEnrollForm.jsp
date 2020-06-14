@@ -13,55 +13,32 @@
     <title>Document</title>
     <style>
 
-        /*버튼*/
-    .button {
-        background-color: #4CAF50; /* Green */
+
+    .btn {
+        background-color: gray;
         border: none;
         color: white;
-        padding: 3px 32px;
+        padding: 6px 8px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 4px 2px;
         transition-duration: 0.4s;
         cursor: pointer;
-        height: 50px;
         }
 
-    .button2 {
-        background-color: white; 
-        color: black; 
-        border: 2px solid #008CBA;
-        }
-
-    .button2:hover {
-        background-color: #008CBA;
-        color: white;
-        }
-    
-    .button3 {
-        background-color: white; 
-        color: black; 
-        border: 2px solid #f44336;
-        }
-
-    .button3:hover {
-        background-color: #f44336;
+    .btn:hover {
+        background-color: #28d7d7;
         color: white;
         }
 
-    .content{
-           
-        width:800px;
-        margin:auto;
-       }
-       
-     .innerOuter{
-        width:800px;
-        margin:auto;
-        background:white;
-       }
+
+
+.content{ width:800px; margin:auto;}
+.innerOuter{
+    width:800px;
+    margin:auto;
+    background:white; }
 
        textarea{
         width: 400px;
@@ -77,8 +54,8 @@
         table{width:100%;}
         
 /* 서브메뉴 영역 CSS */
-a{color:black;  text-decoration:none !important }
-a:hover{color:#28d7d7;  text-decoration:none !important }
+.submenu>a{color:black;  text-decoration:none !important; }
+.submenu>a:hover{color:#28d7d7;  text-decoration:none important!; }
 .submenu{width:140px; font-size:15px; font-weight: 900; display:table-cell; padding-top:10px; padding-bottom: 20px;}
 .submenu:hover { color:#28d7d7; cursor: pointer;}
 .choice{border-bottom: 3px solid rgb(31, 205, 211); padding-bottom: 5px;}
@@ -99,28 +76,22 @@ a:hover{color:#28d7d7;  text-decoration:none !important }
  		<hr id="hr">
  		
 <div class="content">
-        <br><br>
-        <div class="innerOuter" style="background-color: rgb(243, 242, 242);">
+        <br><br><br>
+        <div class="innerOuter">
 		<form action="insert.cq" method="post">
             <table id="contentArea" align="center" class="table">
                 <tr>
-                    <th width="100">제목</th>
-                    <td colspan="3"><input type="text" id="cqTitle" class="form-control" name="cqTitle"></td>
-                </tr>
-
-                <tr>
-                    <th>내용</th>
-                    <td colspan="3"></td>
+                    <td colspan="3"><input type="text" id="cqTitle" class="form-control" name="cqTitle" placeholder="문의 제목을 입력해주세요"></td>
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <textarea class="form-control" name="cqContent" id="cqContent" rows="10" style="resize:none;"></textarea>
+                        <textarea class="form-control" name="cqContent" id="cqContent" rows="10" style="resize:none;" placeholder="문의 내용을 입력해주세요"></textarea>
                     </td>
                 </tr>
             </table>
             <center>
-                <button class="button button2" onClick="history.back();">취소하기</button>
-                <button type="submit" class="button button3">문의하기</button>
+                <button type="button" class="btn" onClick="history.back();">취소하기</button>&nbsp;&nbsp;
+                <button type="submit" class="btn">문의하기</button>
             </center>
             <br>
 </form>

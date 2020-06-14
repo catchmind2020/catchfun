@@ -7,8 +7,8 @@
 		<result column="board_title" property="boardTitle" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_content" property="boardContent" />
-		<result column="MAKER_ORIGIN_NAME" property="originName" />
-		<result column="MAKER_CHANGE_NAME" property="changeName" />
+		<result column="origin_name" property="originName" />
+		<result column="change_name" property="changeName" />
 		<result column="count" property="count" />
 		<result column="create_date" property="createDate" />
 		<result column="status" property="status" />
@@ -54,8 +54,8 @@
 		<result column="HASHTAGS" property="hhsh" />
 		<result column="PROJECT_STATUS" property="projectStatus" />
 		<result column="STATUS_STORY" property="statusStory" />
-		<result column="MAKER_ORIGIN_NAME" property="originName" />
-		<result column="MAKER_CHANGE_NAME" property="changeName" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
 	</resultMap>
 
 
@@ -99,8 +99,8 @@
 		<result column="REPRESENTATIVE_NAME" property="rName" />
 		<result column="REPRESENTATIVE_EMAIL" property="rEmail" />
 		<result column="STATUS" property="status" />
-		<result column="MAKER_ORIGIN_NAME" property="originName" />
-		<result column="MAKER_CHANGE_NAME" property="changeName" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
 
 	</resultMap>
 
@@ -121,9 +121,10 @@
 	</resultMap>
 	<resultMap id="categoryResultSet" type="Category2">
 		<id column="PROJECT_CATEGORY" property="categoryNo" />
-		<result column="PROJECT_CATEGORY_NAME" property="categoryName" />
+		<result column="PROJECT_CATEGOTY_NAME" property="categoryName" />
 
 	</resultMap>
+
 
 
 	<resultMap id="fundingListResultSet" type="Funding2">
@@ -300,9 +301,9 @@
 	<select id="selectfundListCount" parameterType="string"
 		resultType="_int">
 		select count(*)
-		from FUNDING_LIST
-		where FUNDING_STATUS='N'
-		and PROJECT_NUMBER=#{projectNo}
+	from FUNDING_LIST F
+		JOIN REWARD R USING(REWARD_NO)
+		where F.PROJECT_NUMBER=#{projectNo}
 
 	</select>
 
@@ -319,12 +320,12 @@
 	<select id="selectFundingList" parameterType="string"
 		resultMap="fundingListResultSet">
 		select *
-		from FUNDING_LIST
-		JOIN REWARD R USING(PROJECT_NUMBER)
-		where FUNDING_STATUS='N' and PROJECT_NUMBER=#{projectNo}
+		from FUNDING_LIST F
+		JOIN REWARD R USING(REWARD_NO)
+		where F.PROJECT_NUMBER=#{projectNo}
 		order by
 		FUNDING_DATE desc
-	</select>
+		</select>
 
 	<select id="selectNewsList" parameterType="string"
 		resultMap="newsResultSet">
@@ -356,8 +357,8 @@
 		MAKER_HOMEPAGE=#{makerHomepage},
 		REPRESENTATIVE_NAME=#{rName},
 		REPRESENTATIVE_EMAIL=#{rEmail},
-		MAKER_ORIGIN_NAME=#{originName},
-		MAKER_CHANGE_NAME=#{changeName}
+		ORIGIN_NAME=#{originName},
+		CHANGE_NAME=#{changeName}
 		where
 		PROJECT_NUMBER=#{projectNo}
 	</update>
@@ -368,6 +369,15 @@
 		PROJECT_STATUS='E'
 		where PROJECT_NUMBER=#{projectNo}
 	</update>
+	
+	
+		<update id="updateFund" parameterType="string">
+		update FUNDING_LIST
+		set
+		FUNDING_STATUS='C'
+		where FUNDING_NO=#{fundingNo}
+	</update>
+
 
 	<update id="updateMaker" parameterType="string">
 		update PROJECT_MAKER
@@ -401,13 +411,13 @@
 	<insert id="insertFile" parameterType="Project2">
 		insert into attachment
 		values( 'AT'||SEQ_ATNO.nextval, #{projectNo}, #{originName},
-		#{changeName},'resources/uploadFiles',sysdate,default,#{projectNo})
+		#{changeName},'resources/images',sysdate,default,#{projectNo})
 	</insert>
 	<update id="updateFile" parameterType="Project2">
 		update ATTACHMENT
 		set
-		MAKER_ORIGIN_NAME=#{originName} ,
-		MAKER_CHANGE_NAME=#{changeName}
+		ORIGIN_NAME=#{originName} ,
+		CHANGE_NAME=#{changeName}
 		where
 		REF_NO=#{projectNo}
 	</update>

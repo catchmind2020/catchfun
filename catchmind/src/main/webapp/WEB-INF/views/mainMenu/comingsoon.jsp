@@ -16,7 +16,6 @@
 </head>
 <style>
 .profile:hover { border: 1px solid white; }
-
 .profile {
 	width: 100%;
 	height: 100%;
