@@ -169,7 +169,17 @@
 		where ANS_NO=#{ansNo}  
 	</delete>  -->
 	 
+	 <select id="pwdFind" parameterType="Member" resultType="_int">
+		 select COUNT(*) 
+		 from MEMBER
+		 where USER_ID=#{userId} and USER_Name=#{userName} and PHONE=#{phone} 
+	 </select>
 	 
+	 <update id="updatePwd" parameterType="Member">
+		update MEMBER
+		set USER_PWD=#{changePwd} 
+		where USER_ID=#{userId}
+	</update>
 	  
 	  <!-- 이메일!! -->
 	  

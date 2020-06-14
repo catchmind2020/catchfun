@@ -175,7 +175,7 @@ height: 40px;
                     <table id="id_table">
                     <tr>
                         <td>
-                            <form action="pwdFind2.me">
+                            <form action="">
                             	<div id="passwordfind1" style="width:300px;">
                             		<input type="text" id="userId2" name="userId" placeholder="아이디">
 		                            <input type="text" id="userName2" name="userName" placeholder="이름">
@@ -186,13 +186,11 @@ height: 40px;
 							                                    회원가입한 아이디를 입력하시면. <br>
 							                                    이메일로 인증번호를 발송해드립니다. <br>
 		                                </p></label>
-		                            <input type="text" id="certi" name="certi" placeholder="인증번호입력">
-		                            <input id="pwdBtn2" type="submit" value="인증확인">
-	                           </div>
-	                           </form>
+		                            <input type="text" id="certi" name=certi placeholder="인증번호입력">
+		                            <input id="pwdBtn2" type="button" value="인증확인">
+		                           </div>
                         </td>
-                        
-                        <td>
+                        <td>  
                         </td>
                     </tr>
                     </center>
@@ -257,18 +255,22 @@ height: 40px;
                         
                     $("#pwdBtn2").click(function(){
                     	
-        				// 1. 중복검사(중복있을경우 성공)	
+        				// 1. 중복복검사(중복있을경우 성공)	
         				$.ajax({
         					url:"pwdFind2.me",
-        					data:{certi:$("#certi").val(),userId:$("#userId2").val(), userName:$("#userName2").val(), phone:$("#phone2").val()},
+        					data:{certi:$("#certi").val()},
         					type:"post", 
         					success:function(result){	// 1 또는 0
         						
-        						if(result = "success"){		// DB에 조회
+        						if(result != 0){		// DB에 조회
         							
         							if(confirm("회원정보가 조회되었습니다.")){
         								
-        								location.href="passwordChange.me";
+        								// 아이디 더이상 수정이 불가하게끔
+        								$("#email").attr("readonly", "true");	// 이메일이 조회되면
+        								
+        								/// 인증번호 발송 버튼이 활성화 !!!
+        								//$("#numCheck").removeAttr("disabled");
         					
         							}else{
         								$("#email").forcus();
@@ -277,11 +279,10 @@ height: 40px;
         							
         						}else {					// DB에 조회되지않는 정보
         							alert("회원 정보가 존재하지 않습니다."); 
+        							email.focus();
         						}
         					
         						},error:function(){
-        							
-        							
         							console.log("ajax통신 실패!!");
         						}
         				
@@ -290,8 +291,8 @@ height: 40px;
         			});
         			
         		});
+        	
         	</script>
-
                   
                   
             </div>
