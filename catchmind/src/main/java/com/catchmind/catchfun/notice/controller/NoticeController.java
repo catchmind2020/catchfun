@@ -143,7 +143,6 @@ public class NoticeController {
 	
 	@RequestMapping("insert.cq")
 	public String insertBoard(CatchfunQuestion q, HttpSession session, Model model) {
-		
 		Member loginUser = (Member)(session.getAttribute("loginUser"));
 		String userNo = loginUser.getUserNo();
 		

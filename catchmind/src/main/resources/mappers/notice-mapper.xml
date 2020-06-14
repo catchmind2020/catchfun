@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * 
 		  FROM PERSON_QUESTION
 		 WHERE QUESTION_STATUS = 'N' AND USER_NO = #{userNo} AND QUESTION_TYPE = 2
-		 ORDER BY A_QUESTION_NO DESC
+		 ORDER BY QUESTION_DATE DESC
 	</select>
 	
 	<select id="selectCatchfunQu" parameterType="string" resultMap="MainQuesionResultSet">
@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertCatchfunQuestion" parameterType="java.util.HashMap">
 		INSERT INTO PERSON_QUESTION
-		values('Q'||SEQ_QNO.nextval, #{userNo}, 2, NULL, #{cqTitle}, #{cqContent}, SYSDATE,
+		values('Q'||SEQ_QNO.nextval, #{userNo}, 2, NULL, #{q.cqTitle}, #{q.cqContent}, SYSDATE,
 			  default,default, NULL, NULL, NULL, NULL)
 	</insert>
 	
