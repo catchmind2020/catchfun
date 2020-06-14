@@ -1,10 +1,6 @@
 package com.catchmind.catchfun.member.model.service;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,7 @@ import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.member.model.dao.MemberDao;
 import com.catchmind.catchfun.member.model.vo.Member;
-import com.catchmind.catchfun.member.model.vo.MemberDTO;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 
 //@Component // 단순한 빈으로 등록하기 위한 어노테이션
 @Service("mService") // 구체화 된 빈 (즉, 이 객체는 서비스의 역할을 수행하는 빈으로 등록)
@@ -146,6 +142,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.idFindMember(sqlSession, m);
 	}
 	
+	@Override
+	public ArrayList<MyWish> myWishList(String userNo) {
+		return mDao.myWishList(sqlSession, userNo);
+	}
 
 
 

@@ -3,6 +3,7 @@ package com.catchmind.catchfun.projectAdmin.model.service;
 import java.util.ArrayList;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.projectAdmin.model.vo.Category;
 import com.catchmind.catchfun.projectAdmin.model.vo.FundSum;
 import com.catchmind.catchfun.projectAdmin.model.vo.Funding;
@@ -89,5 +90,6 @@ public interface ProjectAdminService {
 	int updateBasic2(ProjectBasic Basic);
 
 	int updateMaker2(ProjectMaker maker);
-
+	
+	ArrayList<FundingList> selectBookingList(String userNo);
 }

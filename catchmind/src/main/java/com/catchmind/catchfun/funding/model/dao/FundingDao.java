@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.MyFunding;
 import com.catchmind.catchfun.funding.model.vo.News;
 import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
@@ -164,5 +165,11 @@ public class FundingDao {
 	public int selectBanReply(SqlSessionTemplate sqlSession, Report r) {
 		
 		return sqlSession.selectOne("projectMapper.selectBanReply", r);
+	}
+	
+	public ArrayList<MyFunding> selectBookingList(SqlSessionTemplate sqlSession, String userNo) {
+		
+		ArrayList<MyFunding> list = (ArrayList)sqlSession.selectList("projectMapper.selectBookingList", userNo);
+		return list;
 	}
 }

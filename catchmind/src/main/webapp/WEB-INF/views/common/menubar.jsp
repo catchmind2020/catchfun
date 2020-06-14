@@ -333,7 +333,7 @@ a:hover { text-decoration:none !important; color:black; }
 					            <td></td>
 					        </tr>
 					        <tr style=border:0.05px solid grey;>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="bookingList.me"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
