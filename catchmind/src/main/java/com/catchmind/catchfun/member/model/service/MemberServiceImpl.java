@@ -137,10 +137,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteAnswer(sqlSession, qno);
 	}
 
-	@Override
-	public int pwdFind(Member m) {
-		return mDao.pwdFind(sqlSession, m);
-	}
+	/*
+	 * @Override public int pwdFind(Member m) { return mDao.pwdFind(sqlSession, m);
+	 * }
+	 */
 
 	@Override
 	public int updatePwd(Member m) {

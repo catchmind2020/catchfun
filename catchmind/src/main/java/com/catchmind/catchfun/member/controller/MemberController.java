@@ -742,40 +742,33 @@ public class MemberController {
 		
 		System.out.println("객체 테스트1(객체) : " + m);
 		
-		int pwdFind = mService.pwdFind(m);
-		System.out.println("객체 테스트2(1) : " + pwdFind);
-		
-		
-		if(pwdFind > 0) {
-			
-			//이메일 인증
-			int ran = new Random().nextInt(900000) + 100000;
-			
-			HttpSession session = req.getSession(true);
-			String authCode = String.valueOf(ran);
-			String subject = "캐치펀 회원가입 인증 코드 발급 안내 입니다.";
-			StringBuilder sb = new StringBuilder();
-			sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
-			
-			session.setAttribute("pw", authCode);
-			
-			System.out.println(authCode);
-			
-			if(ms.send(subject, sb.toString(), "캐치마인드", userId, null)) {
-				// 메일 발송 성공
-				
-//				int updatePwd = mService.updatePwd(authCode);
-				
-				return "success";
-			}else {
-				// 메일 발송 실패
-				return "fail";
-			}
-			
-		}else {
-			return "fail";
-		}
-			
+		/* int pwdFind = mService.pwdFind(m); */
+		/*
+		 * System.out.println("객체 테스트2(1) : " + pwdFind);
+		 * 
+		 * 
+		 * if(pwdFind > 0) {
+		 * 
+		 * //이메일 인증 int ran = new Random().nextInt(900000) + 100000;
+		 * 
+		 * HttpSession session = req.getSession(true); String authCode =
+		 * String.valueOf(ran); String subject = "캐치펀 회원가입 인증 코드 발급 안내 입니다.";
+		 * StringBuilder sb = new StringBuilder(); sb.append("귀하의 인증 코드는 " + authCode +
+		 * "입니다.");
+		 * 
+		 * session.setAttribute("pw", authCode);
+		 * 
+		 * System.out.println(authCode);
+		 * 
+		 * if(ms.send(subject, sb.toString(), "캐치마인드", userId, null)) { // 메일 발송 성공
+		 * 
+		 * // int updatePwd = mService.updatePwd(authCode);
+		 * 
+		 * return "success"; }else { // 메일 발송 실패 return "fail"; }
+		 * 
+		 * }else { return "fail"; }
+		 */
+		return "success"; // 빨간줄 없애기용 그냥 써둠
 	}
 	
 	
@@ -984,7 +977,8 @@ public class MemberController {
 		}
 		
 	}
-	
+
+	/*
 	@RequestMapping(value="myWish.me")
 	public ModelAndView noticeDetail(String userNo, ModelAndView mv) {
 		
@@ -999,7 +993,17 @@ public class MemberController {
 		
 		return mv;
 	}
+	*/
 	
+	@ResponseBody
+	@RequestMapping(value="myWish.me", produces="application/json; charset=utf-8")
+	public String myWishList(String userNo) {
+		
+		ArrayList<MyWish> list3 = mService.myWishList(userNo);
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list3);
+		
+	}
 	
 // 아이유 끝
 	
