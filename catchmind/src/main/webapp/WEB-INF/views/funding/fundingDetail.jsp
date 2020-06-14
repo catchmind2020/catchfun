@@ -652,7 +652,7 @@
                                     <div style="width:550px; word-break:break-all;">
                                         <br><br> <!-- summernote -->
                                         <p>${ p.projectContent }</p>
-                                        <button onclick="location.href='selectPayDetail.pro?pno=${p.projectNumber}'">펀딩내역</button>
+                                        <%-- <button onclick="location.href='selectPayDetail.pro?pno=${p.projectNumber}'">펀딩내역</button> --%>
                                     </div>
                                 </div>
                             </section>
@@ -750,7 +750,7 @@
 		                                        <b class="reward_money"><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" />원 펀딩</b>
 		                                        <p class="reward_name">${ r.rewardTitle }<br></p>
 		                                        <p>${ r.rewardContent }<br></p>
-		                                        <button class="reward_sum">${ r.rewardFundingCount }명</button>&nbsp;&nbsp;참여 / 수량 ${ r.rewardRemainingQuantity }개 남음
+		                                        <button disabled class="reward_sum">${ r.rewardFundingCount }명</button>&nbsp;&nbsp;참여 / 수량 ${ r.rewardRemainingQuantity }개 남음
 		                                    </div>
 	                                    </td>
 	                                </tr>
