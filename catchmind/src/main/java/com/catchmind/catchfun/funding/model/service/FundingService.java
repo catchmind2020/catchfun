@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.funding.model.vo.Maker;
+import com.catchmind.catchfun.funding.model.vo.MyFunding;
 import com.catchmind.catchfun.funding.model.vo.News;
 import com.catchmind.catchfun.funding.model.vo.PersonQuestion;
 import com.catchmind.catchfun.funding.model.vo.Project;
@@ -88,6 +89,9 @@ public interface FundingService {
 	
 	// 결제 예약 취소 
 	int requestCancel (String fNo);
+	
+	// 펀딩 내역 조회
+	ArrayList<MyFunding> selectBookingList(String userNo);
 
 	
 }

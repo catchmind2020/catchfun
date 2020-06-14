@@ -33,6 +33,7 @@ import com.catchmind.catchfun.common.template.Pagination;
 import com.catchmind.catchfun.member.model.service.MailService;
 import com.catchmind.catchfun.member.model.service.MemberService;
 import com.catchmind.catchfun.member.model.vo.Member;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 import com.google.gson.GsonBuilder;
 
 @Controller // 해당 이 클래스를 Controller 역할을 하는 빈으로 등록시키는 어노테이션
@@ -982,6 +983,21 @@ public class MemberController {
 			return "fail";
 		}
 		
+	}
+	
+	@RequestMapping(value="myWish.me")
+	public ModelAndView noticeDetail(String userNo, ModelAndView mv) {
+		
+		System.out.println("name : " + userNo);
+		
+		ArrayList<MyWish> list = mService.myWishList(userNo);
+		
+		System.out.println("제발! : " + list);
+		
+		mv.addObject("myWish", list);
+		mv.setViewName("member/mypage");
+		
+		return mv;
 	}
 	
 	

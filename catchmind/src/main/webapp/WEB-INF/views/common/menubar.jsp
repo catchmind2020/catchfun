@@ -333,8 +333,8 @@ a:hover { text-decoration:none !important; color:black; }
 					            <td></td>
 					        </tr>
 					        <tr style=border:0.05px solid grey;>
-					            <td rowspan="1" style="width: 100px;"><a href="mypage.me"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
-					            <td rowspan="1" style="width: 100px;"><a href="mypage.me"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="bookingList.me"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
@@ -343,7 +343,6 @@ a:hover { text-decoration:none !important; color:black; }
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->
 					            <td rowspan="1" style="width: 100px;"><a href="list.cq?currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
-					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->
 					        </tr>
 					        <tr>
 					            <td colspan="2" style="padding:15px;">포인트 ${ loginUser.point }</td>

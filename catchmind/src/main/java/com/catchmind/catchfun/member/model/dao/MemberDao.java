@@ -1,17 +1,15 @@
 package com.catchmind.catchfun.member.model.dao;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.member.model.vo.Member;
-import com.catchmind.catchfun.member.model.vo.MemberDTO;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 
 @Repository("mDao")
 public class MemberDao {
@@ -108,6 +106,10 @@ public class MemberDao {
 	}
 	public ArrayList<Member> idFindMember(SqlSessionTemplate sqlSession, Member m) {
 		return (ArrayList)sqlSession.selectList("memberMapper.idFindMember", m);
+	}
+	
+	public ArrayList<MyWish> myWishList(SqlSessionTemplate sqlSession, String userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.myWishList", userNo);
 	}
 
 
