@@ -652,7 +652,7 @@
                                     <div style="width:550px; word-break:break-all;">
                                         <br><br> <!-- summernote -->
                                         <p>${ p.projectContent }</p>
-                                        <%-- <button onclick="location.href='selectPayDetail.pro?pno=${p.projectNumber}'">펀딩내역</button> --%>
+                                        <button onclick="location.href='selectPayDetail.pro?pno=${p.projectNumber}'">펀딩내역</button>
                                     </div>
                                 </div>
                             </section>
