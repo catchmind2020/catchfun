@@ -319,7 +319,6 @@ a:hover { text-decoration:none !important; color:black; }
 		 		<div class=" login  header-img">
 					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
-							<img src="<%=request.getContextPath() %>/resources/images/bellicon32.png">&nbsp;&nbsp;&nbsp;&nbsp;
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
   						</button>
   							<div id="myDropdown" class="dropdown-content">
@@ -338,13 +337,8 @@ a:hover { text-decoration:none !important; color:black; }
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
-					        </tr>
-					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
 					        </tr>
-					      
 					        <tr>
 					            <td colspan="2"><button class="button button4" style="width:200px; height:30px;" onclick="location.href='logout.me'">로그아웃</button></td>
 					        </tr>
