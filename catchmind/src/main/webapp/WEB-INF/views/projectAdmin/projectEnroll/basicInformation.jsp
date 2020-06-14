@@ -173,7 +173,7 @@
 
 							<input name="check1" type="radio" class="q1_type" value="q1c1"
 								id="agree2" ${q1ch1}> <label for="pay_type_1">아니요.
-								다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.</label> <br> <input
+								다른 곳에서 유통한 적이 없으며 캐치펀를 통해 처음 선보이는 제품입니다.</label> <br> <input
 								name="check1" type="radio" class="q1_type" value="q1c2"
 								id="agree" ${q1ch2}> <label for="pay_type_2">예,
 								다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</label>
@@ -318,12 +318,12 @@
 						<div class="blacktool" style="display: block">
 							펀딩 오픈 수수료는 7% (VAT별도)입니다.<br> · 부가 서비스 이용 시, 추가 수수료가 발생될 수
 							있습니다.<br> · 리워드가 없는 기부후원 프로젝트의 경우, 수수료가 다르게 적용됩니다<br>.
-							· 자세한 내용은와디즈 수수료 정책을 확인해주세요.
+							· 자세한 내용은캐치펀 수수료 정책을 확인해주세요.
 						</div>
 						<div class="custom-control custom-checkbox small">
 							<input name="check3" type="checkbox" class="custom-control-input"
 								id="customCheck" value="checked" ${projectBasic.check3} required>
-							<label class="custom-control-label" for="customCheck">와디즈
+							<label class="custom-control-label" for="customCheck">캐치펀
 								수수료 정책을 확인하였습니다</label>
 						</div>
 						<br>
@@ -408,7 +408,7 @@
 
 							<input name="check1" type="radio" class="q1_type" value="q1c1"
 								id="agree2" ${q1ch1}> <label for="pay_type_1">아니요.
-								다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.</label> <br> <input
+								다른 곳에서 유통한 적이 없으며 캐치펀를 통해 처음 선보이는 제품입니다.</label> <br> <input
 								name="check1" type="radio" class="q1_type" value="q1c2"
 								id="agree" ${q1ch2}> <label for="pay_type_2">예,
 								다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.</label>
@@ -553,12 +553,12 @@
 						<div class="blacktool" style="display: block">
 							펀딩 오픈 수수료는 7% (VAT별도)입니다.<br> · 부가 서비스 이용 시, 추가 수수료가 발생될 수
 							있습니다.<br> · 리워드가 없는 기부후원 프로젝트의 경우, 수수료가 다르게 적용됩니다<br>.
-							· 자세한 내용은와디즈 수수료 정책을 확인해주세요.
+							· 자세한 내용은캐치펀 수수료 정책을 확인해주세요.
 						</div>
 						<div class="custom-control custom-checkbox small">
 							<input name="check3" type="checkbox" class="custom-control-input"
 								id="customCheck" value="checked" ${projectBasic.check3} required>
-							<label class="custom-control-label" for="customCheck">와디즈
+							<label class="custom-control-label" for="customCheck">캐치펀
 								수수료 정책을 확인하였습니다</label>
 						</div>
 						<br>
