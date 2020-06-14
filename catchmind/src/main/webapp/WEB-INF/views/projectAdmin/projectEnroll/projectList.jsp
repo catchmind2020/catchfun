@@ -107,6 +107,9 @@
 									</h6>
 
 									<form action="<%=contextPath%>/ptest.pa" method="post">
+									
+						
+									<input type="hidden" name="projectName" value="${ p.projectName }">
 										<input type="hidden" name="projectNo" value="${ p.projectNo }">
 										<div class="col-auto text-right" id="addReply">
 											<button type="submit" class="btn btn-success ">작성</button>

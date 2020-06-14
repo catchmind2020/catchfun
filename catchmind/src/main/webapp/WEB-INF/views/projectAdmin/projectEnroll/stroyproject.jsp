@@ -118,7 +118,7 @@
 
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
 								<input id="question3" name="projectName" class="questioninput"
-									value="${projectUser.projectName}" disabled></input> <br> <br>
+									value="${  projectUser.projectName }"  disabled></input> <br> <br>
 
 								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
 								<input id="question4" name="projectTargetAmount"
@@ -263,7 +263,7 @@
 
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
 								<input id="question3" name="projectName" class="questioninput"
-									value="${project.projectName}" required></input> <br> <br>
+									value="${  projectUser.projectName }"  disabled></input> <br> <br>
 
 								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
 								<input id="question4" name="projectTargetAmount"
@@ -273,26 +273,17 @@
 								<h6 class="m-0 font-weight-bold text-primary">카테고리</h6>
 								<%-- 	<c:choose>
 							<c:when test="${ empty project.projectStatus }"> --%>
-								<select id="question5" name="projectCategory"
+							<select id="question5" name="projectCategory"
 									class="questioninput" required>
-									<option value="ko">한국</option>
-									<option value="us" selected>공연컬쳐</option>
-									<option value="eu">영국</option>
 
-								</select> <br>
-								<%-- 		</c:when>
-							<c:otherwise>
-								<select id="question5" name="projectCategory"
-									class="questioninput">
-
-									<option value="${project.projectName}" selected>공연컬쳐</option>
+									
+									<c:forEach items="${ categoryList }" var="c">
+										<option value="${ c.categoryNo}">${ c.categoryName}</option>
 
 
-								</select>
-								<br>
-							</c:otherwise>
-						</c:choose> --%>
-								<br>
+									</c:forEach>
+
+								</select> <br> <br>
 
 								<h6 class="m-0 font-weight-bold text-primary">대표이미지</h6>
 								<label for="upfile">첨부파일</label> <input type="file" id="upfile"
