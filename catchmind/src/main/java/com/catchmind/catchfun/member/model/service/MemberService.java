@@ -69,13 +69,14 @@ public interface MemberService {
 
 	// 답글 삭제 서비스
 	int deleteAnswer(String qno);
+
+	int pwdFind(Member m);
+
+	int updatePwd(Member m);
 	
 
 
-	
-	
-
-
+	Member selectId(Member m);
 
 	
 	

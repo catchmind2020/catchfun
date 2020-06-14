@@ -45,7 +45,8 @@ public class Member {
 	private String reason;
 	private String addressDetail;
 	private String addressReference;
-	
+	private String changePwd;
+	private String certi;
 	public Member(String userNo, String userId) {
 		super();
 		this.userNo = userNo;

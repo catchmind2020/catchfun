@@ -205,7 +205,7 @@ button[type=submit]:hover {
 								<div id="checkResult1" style="display:none; font-size:0.8em"></div></td>
 						</tr>
 						<tr>
-							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" oninput="signupCheck()" required></td>
+							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'빼고입력" oninput="signupCheck()" required></td>
 						</tr>
 						<tr>
 							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" oninput="signupCheck()" required readonly>
@@ -515,7 +515,7 @@ button[type=submit]:hover {
     
    </script>
    
-   <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
+<!--    <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
     	 function check(){
     			 var authCode = data;
                 var certifi = document.getElementById("certified");
@@ -554,7 +554,7 @@ button[type=submit]:hover {
               	
               	}
        	 	}
-   
+    -->
     
 
     

@@ -83,7 +83,7 @@ body, input, textarea, select, button, table {
         <br><br>
         <div class="innerOuter" style="padding:5% 10%;">
             <h2>메세지함</h2>
-            <c:if test="${ loginUser.userType eq 2 }" >
+            <c:if test="${ loginUser.userType eq 3 }" >
             	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button>
             </c:if>
             <table id="questionList" class="table table-hover" align="center">
@@ -117,7 +117,7 @@ body, input, textarea, select, button, table {
              </script>
             
              <div id="pagingArea">
-		        <ul class="pagination">
+		        <ul class="pagination"  style="width:300px; height:70px;">
 		        	
 		        	 <c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">
@@ -152,20 +152,6 @@ body, input, textarea, select, button, table {
            
             <br clear="both"><br>
 
-            <form id="searchForm" action="" method="Get" align="center">
-                <div class="select">
-                    <select class="custom-select" name="condition">
-                        <option value="writer">보낸사람</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                </div>
-                <div class="text">
-                    <input type="text" class="form-control" name="keyword">
-                </div>
-                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-            </form>
-            <br><br>
         </div>
         <br><br>
     </div>

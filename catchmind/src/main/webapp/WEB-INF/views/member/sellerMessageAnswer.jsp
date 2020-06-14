@@ -76,20 +76,16 @@
        
      .innerOuter{
         border:1px solid lightgray;
-        width:90%;
+        width:100%;
         margin:auto;
-        padding:5% 15%;
+        padding:5% 12%;
         background:white;
        }
-
-
         table *{margin:5px;}
         table{width:100%;}
     </style>
 </head>
 <body>
-    
-    
      <jsp:include page="../common/menubar.jsp" />
 
     <div class="content">

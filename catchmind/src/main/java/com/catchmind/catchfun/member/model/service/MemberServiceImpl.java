@@ -140,6 +140,22 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteAnswer(String qno) {
 		return mDao.deleteAnswer(sqlSession, qno);
 	}
+
+	@Override
+	public int pwdFind(Member m) {
+		return mDao.pwdFind(sqlSession, m);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return mDao.updatePwd(sqlSession, m);
+	}
+
+	@Override
+	public Member selectId(Member m) {
+		// TODO Auto-generated method stub
+		return mDao.selectId(sqlSession, m);
+	}
 	
 
 
