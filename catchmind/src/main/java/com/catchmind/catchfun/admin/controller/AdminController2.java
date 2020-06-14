@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.catchmind.catchfun.admin.model.service.AdminService2;
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
@@ -577,6 +578,7 @@ public class AdminController2 {
 		System.out.println(m);
 		System.out.println(fl);
 		System.out.println(rlist);
+		System.out.println(nlist);
 		System.out.println(pno);
 		
 		mv.setViewName("admin/adminProjectDetail");
@@ -592,6 +594,25 @@ public class AdminController2 {
 		aService2.updateFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 		aService2.updateReward(pno); // 리워드 정보
 		aService2.updateNews(pno); // 새소식 정보
+		
+		return "redirect:projectList.ad?currentPage=1";
+		
+	}
+	
+	@RequestMapping("projectReturn.ad")
+	public String projectReturn(String pno, String returnContent, Model model) {
+		
+		ProjectReturn p = new ProjectReturn();
+		p.setProjectNumber(pno);
+		p.setReturnContent(returnContent);
+		
+		aService2.insertReturn(p);
+		
+		aService2.returnProject(pno); // 프로젝트 정보
+		aService2.returnMaker(pno); // 메이커 정보
+		aService2.returnFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
+		aService2.returnReward(pno); // 리워드 정보
+		aService2.returnNews(pno); // 뉴스 정보
 		
 		return "redirect:projectList.ad?currentPage=1";
 		

@@ -1,6 +1,5 @@
 package com.catchmind.catchfun.admin.model.service;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.catchmind.catchfun.admin.model.dao.AdminDao2;
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.funding.model.vo.FundingList;
@@ -208,6 +208,30 @@ public class AdminServiceImpl2 implements AdminService2 {
 	@Override
 	public int sales10() {
 		return aDao2.sales10(sqlSession);
+	}
+	@Override
+	public int returnProject(String pno) {
+		return aDao2.returnProject(sqlSession, pno);
+	}
+	@Override
+	public int returnMaker(String pno) {
+		return aDao2.returnMaker(sqlSession, pno);
+	}
+	@Override
+	public int returnFunding(String pno) {
+		return aDao2.returnFunding(sqlSession, pno);
+	}
+	@Override
+	public int returnReward(String pno) {
+		return aDao2.returnReward(sqlSession, pno);
+	}
+	@Override
+	public int returnNews(String pno) {
+		return aDao2.returnNews(sqlSession, pno);
+	}
+	@Override
+	public int insertReturn(ProjectReturn p) {
+		return aDao2.insertReturn(sqlSession, p);
 	}
 
 	/*

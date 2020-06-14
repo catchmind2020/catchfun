@@ -438,6 +438,30 @@
 		 WHERE SYSDATE <![CDATA[ < ]]>	 PROJECT_STARTDATE AND PROJECT_STARTDATE <![CDATA[ < ]]> SYSDATE +7
     </select>
     
+   <update id="returnProject" parameterType="string" >
+		update project set project_status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnMaker" parameterType="string" >
+		update project_maker set status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnFunding" parameterType="string" >
+		update funding_list set funding_status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnReward" parameterType="string" >
+		update reward set reward_status='N' where project_number=#{pno}   
+   </update>
+   
+   <update id="returnNews" parameterType="string" >
+		update news set news_status='N' where project_number=#{pno}   
+   </update>
+    
+   <insert id="insertReturn" parameterType="Return">
+  	    insert into project_return 
+  	    values('REF'||SEQ_RETURN.nextval, #{projectNumber}, sysdate, #{returnContent}, 'N')
+   </insert> 
     
 
 
