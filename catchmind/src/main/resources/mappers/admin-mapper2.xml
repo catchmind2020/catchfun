@@ -192,7 +192,7 @@
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
           join report p on (r.reply_no = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1' and reply_status='N' 
+    	  where m.status='Y' and p.report_category='1'
     </select>
     
     <select id="reportList" resultMap="adminReportResultSet">
@@ -208,7 +208,7 @@
     	  from reply r
     	  join member m on (r.user_no = m.user_no)
           join report p on (r.reply_no = p.REPORT_NO)
-    	  where m.status='Y' and p.report_category='1'and USER_ID LIKE '%' || #{keyword} || '%' 
+    	  where m.status='Y' and p.report_category='1'and USER_ID LIKE '%' || #{keyword} || '%'  
     </select>
     
     <select id="reportSearch" resultMap="adminReportResultSet">

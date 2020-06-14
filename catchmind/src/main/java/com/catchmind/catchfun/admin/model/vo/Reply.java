@@ -17,11 +17,11 @@ public class Reply {
 	
 	private String replyNo;
 	private String userNo;
-	private String questionContent;
-	private Date questionDate;
-	private String questionYN;
-	private String questionStatus;
-	private int questionBanCount;
+	private String replyContent;
+	private Date replyDate;
+	private String replyYN;
+	private String replyStatus;
+	private int replyBanCount;
 	
 	private String userId;
 	private int userType;
@@ -29,6 +29,7 @@ public class Reply {
 	private String email;
 	private String phone;
 	private Date userEnrolldate;
+	private String questionBanCount;
 	
 	private String userNo1;
 	private String reportContent;
