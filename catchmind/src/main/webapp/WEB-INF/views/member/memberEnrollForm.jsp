@@ -47,7 +47,8 @@ table {
 }
 
 
-input[type=text], input[type=password], input[type=email], input[type=number], select {
+#userId, #certified, #userName, #repwd1, #repwd, #phone, #del_postcod,
+#del_address, #del_extraAddress, #del_detailAddress, select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
