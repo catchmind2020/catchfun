@@ -515,7 +515,7 @@ button[type=submit]:hover {
     
    </script>
    
-   <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
+<!--    <script> /* "인증번호 완료" 버튼 클릭시 -> ramdom키와 사용자입력키(identify)와 비교 */
     	 function check(){
     			 var authCode = data;
                 var certifi = document.getElementById("certified");
@@ -554,7 +554,7 @@ button[type=submit]:hover {
               	
               	}
        	 	}
-   
+    -->
     
 
     

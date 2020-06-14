@@ -73,9 +73,11 @@ public interface MemberService {
 	ArrayList<Member> idFindMember(Member m);
 	
 
+	int pwdFind(Member m);
 
+	int updatePwd(Member m);
 	
-	
+
 
 
 

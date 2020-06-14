@@ -78,7 +78,6 @@ public class ProjectAdminController {
 		
 		ArrayList<Category> categoryList = paService.selectCategoryList();
 		Project project = paService.selectProject(pro);
-		System.out.println(project);
 		session.setAttribute("project", project);
 		session.setAttribute("categoryList", categoryList);
 		mv.setViewName("projectAdmin/projectEnroll/stroyproject");

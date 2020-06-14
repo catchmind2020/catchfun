@@ -142,6 +142,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int pwdFind(Member m) {
+		return mDao.pwdFind(sqlSession, m);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return mDao.updatePwd(sqlSession, m);
 	public ArrayList<Member> idFindMember(Member m) {
 		return mDao.idFindMember(sqlSession, m);
 	}
