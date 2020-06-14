@@ -139,7 +139,7 @@
 		 where status='Y'
 		 order by user_no asc
 	</select>
-	
+	 
 	<select id="blackListCount" resultType="_int">
 		select count(*)
 		  from member
