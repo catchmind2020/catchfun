@@ -440,8 +440,7 @@ public class AdminController2 {
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("rlist", rlist);
-		
-		
+
 		return "admin/adminReport";
 	}
 	
@@ -605,7 +604,6 @@ public class AdminController2 {
 		ProjectReturn p = new ProjectReturn();
 		p.setProjectNumber(pno);
 		p.setReturnContent(returnContent);
-		
 		aService2.insertReturn(p);
 		
 		aService2.returnProject(pno); // 프로젝트 정보

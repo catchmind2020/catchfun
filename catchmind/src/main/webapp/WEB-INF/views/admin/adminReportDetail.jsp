@@ -74,11 +74,11 @@
           <th width="90">신고자 ID : </th>
           <td width="100">${ rp.userNo1 }</td>
           <th width="90">신고날짜 : </th>
-          <td width="100">${ rp.questionDate }</td>
+          <td width="100">${ rp.replyDate }</td>
        </tr>
        <tr>
           <th>댓글 내용</th>
-          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ rp.questionContent}</textarea></td> 
+          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ rp.replyContent}</textarea></td> 
        </tr>
        <tr>
           <th>신고자 내용</th>

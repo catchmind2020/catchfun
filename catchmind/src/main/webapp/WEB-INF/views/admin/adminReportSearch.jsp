@@ -47,6 +47,10 @@
       position:relative;
       top:1px;
       }
+      #pagingArea{
+		width:800px;
+		padding-left:250px;
+	  }
 
 </style>
 </head>
@@ -87,18 +91,19 @@
 				              <tr>
 				                <td>${ r.replyNo }</td>
 				                <td>${ r.userId }</td>
-				                <td> 
+				                <td>
 				                <c:choose>
-					            	<c:when test="${ r.userType eq '1'}">일반회원</c:when>
-					            	<c:when test="${ r.userType eq '2'}">프로잭트회원</c:when>
-					            	<c:when test="${ r.userType eq '3'}">관리자</c:when>
-					            </c:choose>	
-					            </td>
+			                    	<c:when test="${ r.userType eq '1'}">일반회원</c:when>
+					            	<c:when test="${ r.userType eq '2'}">프로잭트회원(등록전)</c:when>
+					            	<c:when test="${ r.userType eq '3'}">프로잭트회원(등록후)</c:when>
+					            	<c:when test="${ r.userType eq '4'}">관리자</c:when>
+			                    </c:choose>	
+			                    </td>
 				                <td>${ r.userName }</td>
 				                <td>${ r.phone }</td>
 				                <td>${ r.email }</td>                 
 				                <td>${ r.userEnrolldate }</td>
-				                <td>${ r.questionBanCount }</td>
+				                <td>${ r.replyBanCount }</td>
 				              </tr>
 			              </c:forEach>
 		              </tbody>
