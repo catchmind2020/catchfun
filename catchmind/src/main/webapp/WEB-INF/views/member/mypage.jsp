@@ -237,7 +237,8 @@
 			 
 			 $.ajax({
 	    			url:"myWish.me",
-	    			data:{userNo:"${loginUser.userNo}"},
+	    			/* data:{userNo:"${loginUser.userNo}"}, */
+	    			dataType: "json",
 	    			success:function(list){
 	    				
 	    				var value="";

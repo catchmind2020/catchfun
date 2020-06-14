@@ -151,6 +151,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectId(Member m) {
 		// TODO Auto-generated method stub
 		return mDao.selectId(sqlSession, m);
+	}
 	public ArrayList<Member> idFindMember(Member m) {
 		return mDao.idFindMember(sqlSession, m);
 	}
