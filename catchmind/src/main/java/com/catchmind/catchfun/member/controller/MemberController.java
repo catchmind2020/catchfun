@@ -810,14 +810,12 @@ public class MemberController {
 		
 		session.setAttribute("loginUser", m);
 		
-	
-		
 		if(pw.equals(m.getCerti())) {
 //			int updatePwd = mService.updatePwd(certi);
 			
 			model.addAttribute(m);
-			return "member/messageUpdateForm";
-			
+			//return "member/messageUpdateForm";
+			return "member/passwordChange";
 		}else {
 			return "fail";
 		}

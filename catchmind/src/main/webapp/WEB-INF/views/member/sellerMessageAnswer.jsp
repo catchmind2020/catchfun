@@ -236,8 +236,8 @@
 		    				console.log("성공!");
 		        					var value = "<tr>" +
 		        								"<td>" + list.ansNo +"<td>" +
-		        								"<td>" + list.ansContent +"<td>" +
-		        								'<td style="width:300px;">' + list.ansDate +"<td>" +
+		        								'<td style="width:370px;">' + list.ansContent +"<td>" +
+		        								'<td style="width:180px;">' + list.ansDate +"<td>" +
 		        							"<tr>";
 		        							
 		        					$("#replyArea tbody").html(value);
