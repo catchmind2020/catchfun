@@ -9,15 +9,48 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 
+/* 아이유 전용 스타일 */
 
-/* 폰트 초기화*/
-body, input, textarea, select, button, table {
-	font-family: 'Nanum Gothic', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕',
-		'dotum', '돋움', sans-serif;
-	color: #222;
-	font-size: 18px;
-	line-height: 1.5;
+.dropbtn {
+  background-color: white;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+
+.show {display: block;}
+
+/* */
+
+
+.dropdown>.dropdown-content>table{width:200px; height:250px; padding-top: 5px; padding-left:5px; } 
 
 
 /*회원정보수정페이지*/
@@ -41,18 +74,17 @@ body, input, textarea, select, button, table {
 	font-size: 20px;
 }
 
-table {
+ table {
 	border-top: 0.3px solid black;
 	border-bottom: 0.3px solid black;
 	height: 500px;
 	width: 1000px;
 	margin: 0 auto;
 	padding-left: 140px;
-	padding-right: 80px;
 	padding-top: 60px;
 	padding-bottom: 60px;
 	background-color: rgb(243, 242, 242);
-}
+} 
 
 /* input박스*/
 .btnenroll {
@@ -257,7 +289,6 @@ tbody {
 	width: 1000px;
 	height: 1000px;
 	margin: auto;
-	text-align: center;
 	font-size: 30px;
 	color: black;
 }
@@ -299,7 +330,6 @@ tbody {
 		
 		<div id="content">
 			<div id="content_1"></div>
-
 			<div id="content_2">
 				<div class="container">
 					<div id="modify">
@@ -375,7 +405,7 @@ tbody {
 								</tr>
 								<tr>
 									<td></td>
-									<td style="text-align: left;" colspan="1"><input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:400px;"> <!-- 사용자가 직접 입력하는 칸  --></td>
+									<td style="text-align: left;" colspan="1"><input type="text" id="del_detailAddress" name="address4" placeholder="상세주소" style="width:400px;"> <!-- 사용자가 직접 입력하는 칸  --></td>
 									<td></td>
 								</tr>
 								</ul>

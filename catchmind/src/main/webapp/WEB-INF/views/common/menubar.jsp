@@ -248,7 +248,7 @@ a:hover { text-decoration:none !important; color:black; }
 /* */
 
 
-.dropdown>.dropdown-content>table{width:200px; height:250px; padding-top: 15px; padding-left:5px; } 
+.dropdown>.dropdown-content>table{width:200px; height:250px; padding-top: 5px; padding-left:5px; } 
 
 .button4 {
   background-color: white;
@@ -269,11 +269,7 @@ a:hover { text-decoration:none !important; color:black; }
   -webkit-justify-content: center;
           justify-content: center;
 }
- 
-/*  div{border:1px solid black;}  */
-
 </style>
-
 </head>
 
 <body>
@@ -311,13 +307,10 @@ a:hover { text-decoration:none !important; color:black; }
 			<button type="reset" class="search" id="search-btn"></button>
 		</form>
 		
-		
 		<c:choose>
 			<c:when test="${!empty loginUser}">
 				<!-- 로그인 후 -->
-				
 		 		<div class=" login  header-img">
-		 	
 					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
@@ -357,30 +350,16 @@ a:hover { text-decoration:none !important; color:black; }
 					    
 					  </div>
 					</div>
-				
 			</c:when>
 			<c:otherwise>
-	 			
 				<!-- 로그인 전 -->
 				<div class="login">
 					<a href="loginGo.me">로그인 ｜</a>
 				    <a href="memberEnrollForm.me">회원가입</a>
 				</div>
-				
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
-	<!-- <div class="test">
-		검색바 애니메이션
-		<form id="header_searchbar">
-			<input type="text" name="input" class="input" id="search-input">
-			<button type="reset" class="search" id="search-btn"></button>
-		</form>
-	</div> -->
-		
-	
-
 
  	<!-- 검색바 스크립트 -->
    	<script> 
@@ -395,16 +374,13 @@ a:hover { text-decoration:none !important; color:black; }
    		}
    		$('.search').on('click', expand);
    	</script>
-	
 	<!-- 사이드메뉴바 스크립트 -->
 <script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-// Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn1')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");

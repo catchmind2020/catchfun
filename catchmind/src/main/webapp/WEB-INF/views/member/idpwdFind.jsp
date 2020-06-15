@@ -31,10 +31,6 @@ table {
     margin:0 auto;
     margin-top: 18px;
 }
-
-    <style>
-
-
 /* 아이디발송요청 Buttom*/
 .userid_request{
     width:600px;
@@ -57,8 +53,7 @@ table {
     margin-top: 25px;
     margin-bottom: 10px;
 } 
-/* input[type=text],input[type=password],input[type=email], select { */
-#email, select {
+input[type=text],input[type=password],input[type=email], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -73,7 +68,8 @@ input[type=submit] {
   background-color: #28d7d7;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 8px 20px;
+  margin-top:20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -123,25 +119,11 @@ height: 40px;
     .wrap>#content>#content_1{width:100%; height:10%;margin-bottom:10px;}
     .wrap>#content>#content_2>table{width:100%; height:80%; font-size:15px; background-color: rgb(243, 242, 242);}
     .wrap>#footer{width:100%; height:20%;}
-
-    </style>
-#id_table{margin-top: 100px;}
-
-    .wrap{width:1000px; height:1000px; margin:auto; 
-        text-align: center; font-size: 30px; color: black;}
-    .wrap>#header{width:100%; height:5%; margin-bottom:60px;}
-    .wrap>#content{width:100%; height:70%;}
-    .wrap>#content>#content_1{width:100%; height:25%;}
-    .wrap>#content>#content_2{width:100%; height:75%; font-size:15px; background-color: rgb(243, 242, 242);}
-    .wrap>#content>#content_1>table{width:40%; height:100%; padding:20px; font-size:15px;}
-    .wrap>#footer{width:100%; height:20%;}
-    </style>
-     <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
+</style>
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
     <div class="wrap">
-        
             <script>
 		         function expand() {
 		              $(".search").toggleClass("close");
@@ -160,7 +142,7 @@ height: 40px;
                 <table id="table1">
                     <tr>
                        <!--  <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td> -->
-                        <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td>
+                        <!-- <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td> -->
                         <td></td>
                     </tr>
                     <tr>
@@ -186,7 +168,6 @@ height: 40px;
                     <table id="id_table">
                     <tr>
                         <td>
-                            <form action="#">
                             <form action="pwdFind.me">
                             	<div id="idfind1" style="width:300px;">
 		                            <label for="email">
@@ -202,12 +183,10 @@ height: 40px;
                         	</div>
                     	 </tr>
                     	</table>
-                    </center>
                     	</tr>
                     </center>
                    </table>
                 </div>
-              
                 <div id="passwordfind" class="w3-container city" style="display:none">
                   <center>
                     <table id="id_table">
@@ -218,23 +197,22 @@ height: 40px;
                             		<input type="text" id="userId2" name="userId" placeholder="아이디">
 		                            <input type="text" id="userName2" name="userName" placeholder="이름">
 		                            <input type="text" id="phone2" name="phone" placeholder="전화번호 '-'포함 입력" required>
-		                            <input id="pwdBtn1" type="button" value="발송">
+		                            <input id="pwdBtn1" type="submit" value="발송">
 		                            <label for="email">
 		                                <p style="text-align:left;">
-							                                    회원가입한 아이디를 입력하시면. <br>
-							                                    이메일로 인증번호를 발송해드립니다. <br>
+							                                    회원가입한 아이디를 입력하시면.<br>
+							                                    이메일로 인증번호를 발송해드립니다.<br>
 		                                </p></label>
 		                            <input type="text" id="certi" name="certi" placeholder="인증번호입력">
 		                            <input id="pwdBtn2" type="submit" value="인증확인">
 	                           </div>
 	                           </form>
                         	</td>
-                         <td>
-                        </td>
-                        
-                        <td>
-                        </td>
-                    </tr>
+	                        <td>
+	                        </td>
+	                        <td>
+	                        </td>
+                     	</tr>
                     </center>
                    </table>
                 </div>
