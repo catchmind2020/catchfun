@@ -964,22 +964,40 @@ public class MemberController {
 		
 	}
 	
-	@ResponseBody
+	//@ResponseBody
 	@RequestMapping("idFind.me")
-	public String idFindMember(Member m, Model model) {
-		
+	public ModelAndView idFindMember(Member m, ModelAndView mv) {
+		System.out.println("ddd" + m);
 		ArrayList<Member> findId = mService.idFindMember(m);
+		System.out.println(findId);
 		
-		model.addAttribute("findId", findId);
+		mv.addObject("findId", findId);
 		
-		if(findId != null) {
-			return "success";
-		}else {
-			return "fail";
-		}
+		return mv;
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "idFind.me2", produces = "application/json; charset=utf-8")
+	public String idFindMember2(Member m) {
+		
+		//System.out.println("ddd" + m);
+		
+		ArrayList<Member> list = mService.idFindMember(m); //findId
+		
+		//System.out.println(list);
+		
+		//mv.addObject("findId", findId);
+		
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(list);
 		
 	}
 
+	
+	
+	
+	
 	/*
 	@RequestMapping(value="myWish.me")
 	public ModelAndView noticeDetail(HttpSession session, ModelAndView mv) {

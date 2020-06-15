@@ -25,7 +25,7 @@ p {
 
 .main {
     min-width: 320px;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 50px;
     margin: 0 auto;
     background: #ffffff;}
@@ -165,7 +165,7 @@ input:checked + label {
 					</tr>
 					<tr>
 						<td>
-							<button class="w3-btn w3-white w3-border w3-round-large">프로필변경</button>
+							<button class="w3-btn w3-white w3-border w3-round-large" onclick="location.href='mypageModify.me'">프로필변경</button>
 						</td>
 						<td></td>
 						<td></td>
@@ -177,12 +177,20 @@ input:checked + label {
 	
 	
 	<div class="main">
-	    <input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
-	    <label for="tab1">참여한 펀딩</label>
-	
-	    <input id="tab2" type="radio" name="tabs">
-	    <label for="tab2">찜한 펀딩</label>
-	
+		<c:choose>
+			<c:when test="${chc eq 'li'}">
+			    <input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
+			    <label for="tab1">참여한 펀딩</label>
+			    <input id="tab2" type="radio" name="tabs">
+			    <label for="tab2">찜한 펀딩</label>
+			</c:when>
+			<c:otherwise>
+				<input id="tab1" type="radio" name="tabs"> <!--디폴트 메뉴-->
+			    <label for="tab1">참여한 펀딩</label>
+			    <input id="tab2" type="radio" name="tabs" checked>
+			    <label for="tab2">찜한 펀딩</label>
+		    </c:otherwise>
+		</c:choose>
 	
 	    <section id="content1">
 			

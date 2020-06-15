@@ -92,6 +92,7 @@
 		<result column="STATUS" property="status"/>
 		<result column="PROJECT_CATEGORY_NAME" property="projectName"/>
 		<result column="PROJECT_CATEGORY" property="projectCategory"/>
+		<result column="CATEGORY_DATE" property="categoryDate"/>
 	</resultMap>
 	
 	<resultMap id="adminPayTotalResultSet" type="PayTotal">
@@ -227,6 +228,7 @@
 	      from ATTACHMENT A
 	      join CATEGORY_TYPE C on (PROJECT_CATEGORY = REF_NO)
 	     where STATUS='N'
+	     order by C.CATEGORY_DATE desc
 	</select>
 	
 	<select id="deleteCategoryFile" parameterType="string" resultType="string">

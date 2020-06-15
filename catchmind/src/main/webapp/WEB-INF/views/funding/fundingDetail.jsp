@@ -1074,7 +1074,7 @@
 						
 						alert("해당 프로젝트가 찜되었습니다. 찜목록은 마이페이지에서 확인 가능합니다.");
 						$("#addWish").val("♥");
-						$("#addWish").css({'color':'red', 'font-size':'23px', 'cursor':'pointer'});
+						$("#addWish").css({'color':'red', 'font-size':'20px', 'cursor':'pointer'});
 						
 					}
     				

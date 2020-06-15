@@ -171,10 +171,10 @@
 	</update> 
 	
 	
-	<select id="idFindMember" resultMap="memberResultSet">
+	<select id="idFindMember" parameterType="Member" resultMap="memberResultSet">
 		select USER_ID
 		 from MEMBER
-		 where USER_NAME = #{userName} and phone = {phone} and STATUS='Y'
+		 where USER_NAME = #{userName} and phone = #{phone} and STATUS='Y'
 	</select>
 	
 	<select id="myWishList" parameterType="string" resultMap="myWishResultSet">
