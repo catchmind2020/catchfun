@@ -381,7 +381,7 @@ public class MemberController {
 	
 	@RequestMapping("loginGo.me")
 	public String login() {
-		return "member/login";
+		return "member/login2";
 	}
 	
 	@RequestMapping("login.me")
@@ -792,14 +792,12 @@ public class MemberController {
 		
 		session.setAttribute("loginUser", m);
 		
-	
-		
 		if(pw.equals(m.getCerti())) {
 //			int updatePwd = mService.updatePwd(certi);
 			
 			model.addAttribute(m);
-			return "member/messageUpdateForm";
-			
+			//return "member/messageUpdateForm";
+			return "member/passwordChange";
 		}else {
 			return "fail";
 		}

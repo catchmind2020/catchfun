@@ -144,7 +144,6 @@
       <div id="collapsediv1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="projectList.ad?currentPage=1">프로젝트 리스트</a>
-          <a class="collapse-item" href="#">보류(결제내역)</a>
         </div>
       </div>
     </li>
@@ -171,7 +170,6 @@
       <div id="collapsediv" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="sales.ad">매출통계</a>
-          <a class="collapse-item" href="#">접속통계</a>
         </div>
       </div>
     </li>

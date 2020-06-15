@@ -93,7 +93,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 					<div class="carousel-item active"  style="position: relative;"><a href="">
 						<img src="resources/images/mainimage05.jpg" width="1200px"
 							height="400px"></a>
-						<div style="left:400px; width: 450px; bottom:70px; font-size: 1.7em; font-weight: bold; position: absolute; color:white;">
+						<div style="right:150px; width: 450px; bottom:100px; font-size: 2.0em; font-weight: bold; position: absolute; color:white;">
 						 무선으로 어디서든 쓱-싹!<br>
 						여기가 세척 맛집
 						</div>
@@ -101,10 +101,15 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 					<div class="carousel-item">
 						<img src="resources/images/mainimage02.jpg" width="1200px"
 							height="400px">
+
 					</div>
 					<div class="carousel-item">
-						<img src="resources/images/mainimage01.jpg" width="1200px"
+						<img src="resources/images/mainimage06.jpg" width="1200px"
 							height="400px">
+						<div style="left:420px; width: 450px; bottom:110px; font-size: 1.8em; font-weight: bold; position: absolute; color:white;">
+						 수요미식회가 인정한 한우<br>
+						 한우가 돌아왔어요!
+						</div>
 					</div>
 				</div>
 
@@ -199,14 +204,14 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	    $('.prev').click(function(){
 	        $('.list').stop().animate({'margin-left':'-1200px'},function(){
 	            $('.list>li').eq(0).appendTo('.list');
-	            $('.list').css({'margin-left':'-1200px'});
+	            $('.list').css({'margin-left':'0px'});
 	        });
 	    });
 	    
 	    $('.next').click(function(){
 	        $('.list').stop().animate({'margin-left':'0px'},function(){
-	            $('.list>li').eq(2).prependTo('.list');
-	            $('.list').css({'margin-left':'0px'});
+	            $('.list>li').eq(1).prependTo('.list');
+	            $('.list').css({'margin-left':'-1200px'});
 	        });
 	    });
 	    

@@ -340,7 +340,7 @@ a:hover { text-decoration:none !important; color:black; }
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
-					            <td rowspan="1" style="width: 100px;"><a href="mypageModify.me"><img src="<%=request.getContextPath() %>/resources/images/info.png" style="width:40px; height:40px;"><br>정보변경</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="mypageModify.me"><img src="<%=request.getContextPath() %>/resources/images/info2.png" style="width:40px; height:40px;"><br>정보변경</a></td>
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->

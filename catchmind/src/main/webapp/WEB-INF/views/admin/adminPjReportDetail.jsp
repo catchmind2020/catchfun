@@ -105,10 +105,6 @@
           <td width="100">${ pj.reportDate }</td>
        </tr>
        <tr>
-          <th>프로젝트 내용</th>
-          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ pj.projectContent }</textarea></td> 
-       </tr>
-       <tr>
           <th>신고자 내용</th>
           <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ pj.reportContent }</textarea></td>
        </tr>

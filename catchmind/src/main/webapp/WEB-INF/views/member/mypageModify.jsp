@@ -359,7 +359,7 @@ tbody {
 											<option value="011">011</option>
 											<option value="016">016</option>
 											<option value="019">019</option>
-									</select> <input type="number" id="number1" type="number1" placeholder="111-2222"></td>
+									</select> <input type="text" id="number1" type="number1" placeholder="전화번호'-'빼고 입력"></td>
 									<td></td>
 								</tr>
 								<tr>

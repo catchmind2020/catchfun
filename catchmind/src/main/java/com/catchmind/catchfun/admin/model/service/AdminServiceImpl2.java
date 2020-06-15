@@ -234,6 +234,10 @@ public class AdminServiceImpl2 implements AdminService2 {
 	public int insertReturn(ProjectReturn p) {
 		return aDao2.insertReturn(sqlSession, p);
 	}
+	@Override
+	public int updateMember(String pno) {
+		return aDao2.updateMember(sqlSession, pno);
+	}
 
 	/*
 	@Override
