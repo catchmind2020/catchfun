@@ -269,7 +269,8 @@
 
 	/* 새소식 테이블 css */
     #noTable {
-        width: 500px;
+        width: 550px;
+        max-width: 550px;
         margin: 0px;
         text-align:left;
         align-self: center;
@@ -469,9 +470,23 @@
          transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
      } 
 	/* popup css */
-	#content1 img{
-		width: 500px;
-		max-width: 550px;
+	
+	#content1 img, #content2 img{
+		width: 490px;
+		max-width: 490px;
+	}
+	div#noContent img{
+		width: 490px;
+		max-width: 490px;
+	}
+	
+	#noTable img{
+	max-width: 550px;
+		
+	}
+	#noTable{
+		text-align: center;
+		margin: auto;
 	}
     
 </style>
@@ -660,7 +675,7 @@
                         
                         	<!-- 새소식 -->
                             <section id="content2">
-                            	<div style="word-break:break-all;">
+                            	<div style="width:550px; max-width:550px; word-break:break-all;">
                                 <table id="noTable">
                                 	
                                 	<!-- for문 -->

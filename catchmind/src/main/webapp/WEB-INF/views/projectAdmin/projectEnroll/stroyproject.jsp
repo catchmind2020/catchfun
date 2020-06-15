@@ -68,6 +68,9 @@
 	font-size: 15px;
 	color: black;
 }
+.note-children-container{
+display: none;
+}
 </style>
 
 <!--써머노트  -->
