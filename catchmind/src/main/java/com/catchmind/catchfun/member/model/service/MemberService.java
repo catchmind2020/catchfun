@@ -71,6 +71,9 @@ public interface MemberService {
 	// 답글 삭제 서비스
 	int deleteAnswer(String qno);
 
+	int pwdFind(Member m);
+
+
 	ArrayList<Member> idFindMember(Member m);
 	
 	ArrayList<MyWish> myWishList(String userNo);
@@ -79,6 +82,7 @@ public interface MemberService {
 	
 
 
+	Member selectId(Member m);
 
 
 	

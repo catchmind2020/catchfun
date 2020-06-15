@@ -23,6 +23,9 @@
         font-size: 16px;
         transition-duration: 0.4s;
         cursor: pointer;
+        margin: 70px;
+        width:130px;
+        hight:90px;
         }
 
     #btn:hover {
@@ -38,6 +41,7 @@
 
         table *{margin:5px;}
         table{width:100%;}
+
     </style>
     
 </head>
@@ -49,10 +53,7 @@
         <br><br><br>
         <div class="innerOuter">
             <h3>메세지 상세</h3>
-            <br>
-            
-          
-            <br><br>
+            <br><br><br>
             <table id="contentArea" align="center" class="table">
                 <tr>
                     <th width="100">제목</th>
@@ -73,8 +74,29 @@
                     <td colspan="4"><p style="height:150px">${q.questionContent}</p></td>
                 </tr>
             </table>
-            <center>
-            <input type=button id="btn" value="목록으로" onclick="javascript:history.back(-1);">
+            
+             <br>
+            <c:if test="${ q.questionYn ne 'N'}">
+             <table id="replyArea" class="table" align="center">
+                <tbody>
+                    <tr>
+                        <th width="50px;">답변 </th>
+                        <td width="370px;">${ q.ansTitle }</td>
+                        <th width="90px;">답변작성일 </th>
+                        <td width="100px;">${ q.ansDate }</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">${ q.ansContent }</td>
+                    </tr>
+
+                </tbody>
+            </table>
+			</c:if>
+            
+	         </div>
+	        <br><br><br>
+        	<center>
+            <input type=button id="btn" value="목록으로" onclick="javascript:history.back(-1);"> <br>
             </center>
 <!--            수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨
                <div align="center">
@@ -104,6 +126,7 @@
 	            
 	            <form action="" id="postForm" method="post">
 	            	<input type="hidden" name="qno" value="${ q.questionNo }">
+	            	<input type="hidden" name="userNo" value="${ loginUser.userNo}">
 	            </form>
 	            
 	            <script>

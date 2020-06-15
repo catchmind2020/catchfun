@@ -821,7 +821,7 @@
 	<!-- 개설자 문의 popup -->
 	 
 	 
-	<!-- 개설자 신고 popup -->
+	<!-- 프로젝트 반려 popup -->
 	<div class="modal2"> 
 	    <div class="modal-content2"> 
 	        <span class="close-button2">&times;</span> 
@@ -850,7 +850,7 @@
 		
 	
 			
-			<!-- 개설자 신고 popup -->	
+			<!-- 프로젝트 반려 popup -->	
 		    var modal2 = document.querySelector(".modal2"); 
 		    var trigger2 = document.querySelector(".trigger2"); 
 		    var closeButton2 = document.querySelector(".close-button2"); 
@@ -870,7 +870,7 @@
 		    closeButton2.addEventListener("click", toggleModal2); 
 		    cancel2.addEventListener("click", toggleModal2); 
 		    window.addEventListener("click", windowOnClick2); 
-		    <!-- 개설자 신고 popup 끝 -->
+		    <!-- 프로젝트 반려 popup 끝 -->
 		}
 		
 	</script>

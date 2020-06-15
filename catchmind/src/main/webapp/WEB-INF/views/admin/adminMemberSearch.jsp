@@ -50,6 +50,10 @@
 		position:relative;
 		top:1px;
 	}
+	#pagingArea{
+		width:800px;
+		padding-left:400px;
+	}
 	</style>
 </head>
 <body>
@@ -76,7 +80,7 @@
 	            
 	            <th width="100px">회원번호</th>
 	            <th width="200px">아이디</th>
-	            <th width="80px">구분</th>
+	            <th width="100px">구분</th>
 	            <th width="100px">회원명</th>
 	            <th width="150px">연락처</th>
 	            <th width="150px">이메일</th>
@@ -94,8 +98,9 @@
 	            <td>
 	            <c:choose>
 	            	<c:when test="${ m.userType eq '1'}">일반회원</c:when>
-	            	<c:when test="${ m.userType eq '2'}">프로잭트회원</c:when>
-	            	<c:when test="${ m.userType eq '3'}">관리자</c:when>
+	            	<c:when test="${ m.userType eq '2'}">프로잭트회원(등록전)</c:when>
+	            	<c:when test="${ m.userType eq '3'}">프로잭트회원(등록후)</c:when>
+	            	<c:when test="${ m.userType eq '4'}">관리자</c:when>
 	            </c:choose>	
 				</td>
 	            <td>${ m.userName }</td>

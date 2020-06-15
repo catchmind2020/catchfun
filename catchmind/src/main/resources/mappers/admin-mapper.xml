@@ -78,6 +78,7 @@
 		<result column="ANS_DATE" property="ansDate"/>
 		<result column="ANS_NO" property="ansNo"/>
 		<result column="COUNSELING" property="counseling"/>
+		<result column="USER_ID" property="userId"/>
 	</resultMap>
 	
 	<resultMap id="adminCategoryResultSet" type="Category">
@@ -90,6 +91,7 @@
 		<result column="FILE_LEVEL" property="fileLevel"/>
 		<result column="STATUS" property="status"/>
 		<result column="PROJECT_CATEGORY_NAME" property="projectName"/>
+		<result column="PROJECT_CATEGORY" property="projectCategory"/>
 	</resultMap>
 	
 	<resultMap id="adminPayTotalResultSet" type="PayTotal">
@@ -147,20 +149,21 @@
 	<select id="questionSelectListCount" resultType="_int">
 		select count(*)
 		  from PERSON_QUESTION
-		 where QUESTION_STATUS='N'
+		 where QUESTION_STATUS='N' and QUESTION_TYPE = 2
 	</select>
 	
 	<select id="questionSelectList" resultMap="adminQuestionResultSet">
 		select *
 		  from PERSON_QUESTION
 		  join member m using (user_no)
-		 where QUESTION_STATUS='N'
-		 order by A_QUESTION_NO desc
+		 where QUESTION_STATUS='N'and QUESTION_TYPE = 2
+		 order by QUESTION_DATE desc
 	</select>
 	
 	<select id="qnaDetail" parameterType="string" resultMap="adminQuestionResultSet">
 		select *
 		  from PERSON_QUESTION
+		  join member m using (user_no)
 		 where A_QUESTION_NO=#{qno} and QUESTION_STATUS='N'
 	</select>
 	
@@ -181,7 +184,7 @@
 	 
 	<insert id="insertCategory" parameterType="Category">
 		insert into CATEGORY_TYPE
-		values('C'||SEQ_CNO.nextval, #{projectCategoryName})
+		values('C'||SEQ_CNO.nextval, #{projectCategoryName}, DEFAULT)
 	</insert>
 	
 	<insert id="insertAttachment" parameterType="Category">
@@ -195,7 +198,7 @@
 		   (         
 		   select PROJECT_CATEGORY
 		   from CATEGORY_TYPE
-		   order by 1 desc
+		   ORDER BY CATEGORY_DATE DESC
 		   )
   <![CDATA[where rownum<=1]]>
 	</select>
@@ -220,7 +223,7 @@
 	</update>
 	
 	<select id="categoryList" resultMap="adminCategoryResultSet">
-		select A.*, c.PROJECT_CATEGORY_NAME
+		select A.*, c.PROJECT_CATEGORY_NAME, PROJECT_CATEGORY
 	      from ATTACHMENT A
 	      join CATEGORY_TYPE C on (PROJECT_CATEGORY = REF_NO)
 	     where STATUS='N'
@@ -260,24 +263,51 @@
 	 -->
 	 
 	<select id="adminProjectPayTotalCount" resultType="_int">
-		select count(sum(FUNDING_COST*FUNDING_QUANTITY))
+		<!-- select count(sum(FUNDING_COST*FUNDING_QUANTITY))
 		from FUNDING_LIST f
 		join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
 		join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
 		join member m on (f.user_no = m.user_no)
 		join member m2 on (p.user_no = m2.user_no)
-		group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME
-	</select>
-	
-	<select id="adminProjectPayTotalList" resultMap="adminPayTotalResultSet">
-		select sum(FUNDING_COST*FUNDING_QUANTITY) as total, p.PROJECT_NAME as PROJECT_NAME, p.PROJECT_NUMBER as PROJECT_NUMBER, m2.user_id as user_id, PROJECT_TARGET_AMOUNT as PROJECT_TARGET_AMOUNT,PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME as CATEGORY_NAME, TOTAL_STATUS
+		group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME -->
+		
+		select count(sum(FUNDING_COST*FUNDING_QUANTITY))
 		  from FUNDING_LIST f
 		  join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
 		  join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
 		  join member m on (f.user_no = m.user_no)
 		  join member m2 on (p.user_no = m2.user_no)
-		 group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME, TOTAL_STATUS
+		 where <![CDATA[PROJECT_FINISHDATE <= sysdate+1]]> and FUNDING_STATUS != 'C'
+	 	 group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME, TOTAL_STATUS
+		having sum(FUNDING_COST*FUNDING_QUANTITY)>= PROJECT_TARGET_AMOUNT
 	</select>
+	
+	<select id="adminProjectPayTotalCount2" resultType="_int">
+		select count(sum(FUNDING_COST*FUNDING_QUANTITY))
+		  from FUNDING_LIST f
+		  join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		  join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		  join member m on (f.user_no = m.user_no)
+		  join member m2 on (p.user_no = m2.user_no)
+		 where <![CDATA[PROJECT_FINISHDATE <= sysdate+1]]> and FUNDING_STATUS != 'C' and TOTAL_STATUS = 'N'
+	 	 group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME, TOTAL_STATUS
+		having sum(FUNDING_COST*FUNDING_QUANTITY)>= PROJECT_TARGET_AMOUNT
+		 order by PROJECT_FINISHDATE
+	</select>
+	
+	<select id="adminProjectPayTotalList" resultMap="adminPayTotalResultSet">
+		select sum(FUNDING_COST*FUNDING_QUANTITY) as total, p.PROJECT_NAME as PROJECT_NAME, p.PROJECT_NUMBER as PROJECT_NUMBER, m2.user_id as user_id, PROJECT_TARGET_AMOUNT as PROJECT_TARGET_AMOUNT,PROJECT_FINISHDATE as PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME as CATEGORY_NAME, TOTAL_STATUS
+	  	  from FUNDING_LIST f
+		  join PROJECT p on (f.PROJECT_NUMBER = p.PROJECT_NUMBER)
+		  join CATEGORY_TYPE c on (p.PROJECT_CATEGORY = c.PROJECT_CATEGORY)
+		  join member m on (f.user_no = m.user_no)
+		  join member m2 on (p.user_no = m2.user_no)
+		 where <![CDATA[PROJECT_FINISHDATE <= sysdate+1]]> and FUNDING_STATUS != 'C'
+		 group by p.PROJECT_NUMBER, p.PROJECT_NAME, p.PROJECT_NUMBER, m2.user_id, PROJECT_TARGET_AMOUNT, PROJECT_FINISHDATE, c.PROJECT_CATEGORY_NAME, TOTAL_STATUS
+		having sum(FUNDING_COST*FUNDING_QUANTITY)>= PROJECT_TARGET_AMOUNT
+		 order by PROJECT_FINISHDATE desc
+	</select>
+	
 	
 	<select id="prList" resultType="string">
 		select PROJECT_NUMBER
@@ -293,7 +323,7 @@
 	<update id="updateAdminPay" parameterType="_int">
 		update MEMBER
 		   set USER_POINT= USER_POINT + #{adminPay}
-		 where USER_TYPE=3
+		 where USER_TYPE=4
 	</update>
 	
 	<update id="updateProjectStatus" parameterType="PayTotal">

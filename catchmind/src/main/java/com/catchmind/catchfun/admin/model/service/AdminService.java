@@ -112,6 +112,7 @@ public interface AdminService {
 	int adminProjectPayTotalCount();
 	
 	ArrayList<PayTotal> adminProjectPayTotalList(PageInfo pi);
+	int adminProjectPayTotalCount2();
 	
 	// 주혁 끝
 	

@@ -13,7 +13,7 @@
 	/* padding: 70px; */
 	margin-left: 250px;
 	margin-top: 50px;
-	min-width: 1050px;
+	min-width: 1280px;
 }
 .tb tr{
 	text-align: center;
@@ -28,11 +28,9 @@
 	<label>결제를 관리합니다.</label><br>
 	
 	
-	<div class="k_btn">
-		<input type="text" name="keyword" placeholder="아이디 입력"> <button type="button">조회</button>
-	</div>
+
 	<br>
-	입금대기 수 : ${ payListCount } 개
+	입금대기 수 : ${ payListCount2 } 개
 	<br><br>
 
 	<div>
@@ -48,7 +46,7 @@
 						<th width="100px">카테고리</th>
 						<th width="150px">포인트 예상금액(93%)</th>
 						<th width="150px">포인트 발급 상태</th>
-						<th width="100px">발급(버튼)</th>
+						<th width="150px">발급(버튼)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -67,7 +65,7 @@
 							<c:choose>
 								<c:when test="${ p.totalStatus eq 'N'}">
 									<td>미발급</td>
-									<td><button type="button" class="mBtn">발급하기</button></td>
+									<td><button type="button" class="mBtn j-btn">발급하기</button></td>
 								</c:when>
 								<c:otherwise>
 									<td>발급</td>

@@ -121,7 +121,6 @@ body, input, textarea, select, button, table {
                  </tbody>
             </table>
             <br>
-
 <!-- 
             <div id="pagingArea">
                 <ul class="pagination" style="width: 400px; height:100px; align:center;">
@@ -139,7 +138,7 @@ body, input, textarea, select, button, table {
              <script>
              	$(function(){
              		$("#questionList tbody tr").click(function(){
-             			location.href = "sellerMessageView.me?qno=" + $(this).children().eq(0).text();
+             			location.href = "sellerMessageAnswer.me?qno=" + $(this).children().eq(0).text();
              			
              		});
              	});
@@ -147,7 +146,7 @@ body, input, textarea, select, button, table {
              
              
              <div id="pagingArea">
-		        <ul class="pagination">
+		        <ul class="pagination" style="width:300px; height:70px;">
 		        	
 		        	 <c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">
@@ -168,7 +167,6 @@ body, input, textarea, select, button, table {
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
-		            
 		            <c:choose>
 		            	<c:when test="${ pi.currentPage eq pi.maxPage }">
 		             	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
@@ -179,25 +177,7 @@ body, input, textarea, select, button, table {
 		            </c:choose>
 		        </ul>
 		    </div>
-            
-           
             <br clear="both"><br>
-            
-
-            <form id="searchForm" action="" method="Get" align="center">
-                <div class="select">
-                    <select class="custom-select" name="condition">
-                        <option value="writer">보낸사람</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                </div>
-                <div class="text">
-                    <input type="text" class="form-control" name="keyword">
-                </div>
-                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-            </form>
-            <br><br>
         </div>
         <br><br>
     </div>

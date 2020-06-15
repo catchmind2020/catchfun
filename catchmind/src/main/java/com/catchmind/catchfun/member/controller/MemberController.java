@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.catchmind.catchfun.admin.model.vo.Category;
-import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
@@ -632,14 +627,14 @@ public class MemberController {
 	}
 	// 메세지(질문) 삭제하기
 	@RequestMapping("delete.qu")
-	public String deleteMessage(String qno, Question q, Model model) { 
+	public String deleteMessage(String qno, String userNo, Question q, Model model) { 
 		
 		int result = mService.deleteMessage(qno);
 		
 		
 		if(result > 0) {// 게시글 삭제 성공 
 
-			return "redirect:messageRest.me?userNo=" + q.getUserNo()
+			return "redirect:messageRest.me?currentPage=1&userNo=" + userNo
 			;//"redirect:messageRest.me?userNo=M3&currentPage=1";
 			
 		}else {	// 게시글 삭제 실패
@@ -782,6 +777,35 @@ public class MemberController {
 	
 	
 	
+	
+	
+	
+
+	
+	
+	/*
+	 * @RequestMapping(value="	selectId.me") public String selectId(Member m, Model
+	 * model, HttpSession session) {
+	 * 
+	 * System.out.println(m);
+	 * 
+	 * Member member = mService.selectId(m);
+	 * 
+	 * 
+	 * 
+	 * session.setAttribute("loginUser", m);
+	 * 
+	 * 
+	 * 
+	 * if(pw.equals(m.getCerti())) { // int updatePwd = mService.updatePwd(certi);
+	 * 
+	 * model.addAttribute(m); return "member/messageUpdateForm";
+	 * 
+	 * }else { return "fail"; }
+	 * 
+	 * }
+	 */
+
 	
 	
 	@RequestMapping(value="pwdFind2.me")
@@ -984,7 +1008,8 @@ public class MemberController {
 		}
 		
 	}
-	
+
+	/*
 	@RequestMapping(value="myWish.me")
 	public ModelAndView noticeDetail(HttpSession session, ModelAndView mv) {
 		
@@ -1001,7 +1026,22 @@ public class MemberController {
 		
 		return mv;
 	}
+	*/
 	
+	@ResponseBody
+	@RequestMapping(value="myWish.me", produces="application/json; charset=utf-8")
+	public String myWishList(String userNo) {
+		
+		System.out.println("GSON 테스트 : " +userNo);
+		
+		ArrayList<MyWish> list3 = mService.myWishList(userNo);
+		
+		System.out.println("리스트3 : " + list3);
+		System.out.println("실행완료 ? GSON");
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list3);
+		
+	}
 	
 // 아이유 끝
 	
