@@ -792,9 +792,10 @@
             </table>
     
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br>	
-
+        <br><br><br><br>	
+		
     </div>
+
 
 	<%-- <jsp:include page="../common/footer.jsp"/> --%>
 	<input hidden id="dddd" value="${ loginUser.userId }" >
@@ -1257,11 +1258,11 @@
           },
         },
       ], */
-    })
+    });
   }
 </script>
 <!-- 카톡 공유하기 끝-->
 
-
+<%-- <jsp:include page="../common/footer.jsp"/> --%>
 </body>
 </html>

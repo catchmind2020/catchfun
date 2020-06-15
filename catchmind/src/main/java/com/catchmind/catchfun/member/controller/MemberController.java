@@ -391,11 +391,11 @@ public class MemberController {
 		
 		// loginUser에 userPwd : 암호문
 		// 		m 에 userPwd : 로그인 시 입력한 비밀번호(평문)
-		System.out.println(loginUser);
+		//System.out.println(loginUser);
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 
-			System.out.println("성공성공");
+			//System.out.println("성공성공");
 		
 
 			if(loginUser.getUserId().equals("admin")) {
@@ -435,7 +435,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		int ran = new Random().nextInt(900000) + 100000;
 		
-		System.out.println(ran);
+		//System.out.println(ran);
 		mv.setViewName("member/memberEnrollForm");
 		mv.addObject("random", ran);
 		return mv;
@@ -499,11 +499,11 @@ public class MemberController {
 		
 		// loginUser에 userPwd : 암호문
 		// 		m 에 userPwd : 로그인 시 입력한 비밀번호(평문)
-		System.out.println(loginUser);
+		//System.out.println(loginUser);
 		if(loginUser != null && bcryptPasswordEncoder.matches(pass1, member.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 
-			System.out.println("성공성공");
+			//System.out.println("성공성공");
 		
 		
 		
@@ -558,8 +558,8 @@ public class MemberController {
 		
 		ArrayList<Question> list = mService.sellerMessageRestList(pi, counseling);
 		
-		System.out.println(listCount);
-		System.out.println(list);
+		//System.out.println(listCount);
+		//System.out.println(list);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -577,8 +577,8 @@ public class MemberController {
 		
 		ArrayList<Question> list = mService.MessageRestList(pi, userNo);
 		
-		System.out.println(listCount);
-		System.out.println(list);
+		//System.out.println(listCount);
+		//System.out.println(list);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -735,7 +735,7 @@ public class MemberController {
 		int result = mService.insertMember(m);
 		*/
 		
-		System.out.println("객체 테스트1(객체) : " + m);
+		//System.out.println("객체 테스트1(객체) : " + m);
 		
 		int pwdFind = mService.pwdFind(m);
 
@@ -782,7 +782,7 @@ public class MemberController {
 	@RequestMapping(value="pwdFind2.me")
 	public String pwdFind(Member m, Model model, HttpSession session) {
 		
-		System.out.println("인증번호 테스트 : " + m.getCerti());
+		//System.out.println("인증번호 테스트 : " + m.getCerti());
 		
 		String pw = (String)session.getAttribute("pw");
 		
@@ -810,10 +810,10 @@ public class MemberController {
 	@RequestMapping(value="alist.qu", produces="application/json; charset=utf-8")
 	public String selectReplyList(String qno) {
 		
-		System.out.println("화긴화긴1 : " + qno);
+		//System.out.println("화긴화긴1 : " + qno);
 		//ArrayList<Question> list1 = mService.selectReplyList(qno);
 		Question list1 = mService.selectReplyList(qno);
-		System.out.println("화긴화긴 : " + list1);
+		//System.out.println("화긴화긴 : " + list1);
 		
 		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(list1);
 		//return new Gson().toJson(list1);
@@ -822,9 +822,9 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="ainsert.qu")
 	public String insertReply(Question q, Model model) {
-		System.out.println(q + "ㅇㅇㅇ");
+		//System.out.println(q + "ㅇㅇㅇ");
 		int result = mService.insertReply(q);
-		System.out.println("asdasdsada : " + result);
+		//System.out.println("asdasdsada : " + result);
 		
 		if(result > 0){
 			return "success";
@@ -912,9 +912,9 @@ public class MemberController {
 	@RequestMapping(value = "/member/join_injeung.do{dice}", method = RequestMethod.POST)
 	public ModelAndView join_injeung(String email_injeung, @PathVariable String dice, HttpServletResponse response_equals) throws IOException {
 	
-	    System.out.println("마지막 : email_injeung : "+email_injeung);
+	    //System.out.println("마지막 : email_injeung : "+email_injeung);
 	    
-	    System.out.println("마지막 : dice : "+dice);
+	    //System.out.println("마지막 : dice : "+dice);
 	    
 	    
 	    //페이지이동과 자료를 동시에 하기위해 ModelAndView를 사용해서 이동할 페이지와 자료를 담음
@@ -985,16 +985,18 @@ public class MemberController {
 
 	/*
 	@RequestMapping(value="myWish.me")
-	public ModelAndView noticeDetail(String userNo, ModelAndView mv) {
+	public ModelAndView noticeDetail(HttpSession session, ModelAndView mv) {
 		
-		System.out.println("name : " + userNo);
+		//System.out.println("name : " + userNo);
+		Member m = (Member)session.getAttribute("loginUser");
+		String userNo = m.getUserNo(); 
 		
 		ArrayList<MyWish> list = mService.myWishList(userNo);
 		
-		System.out.println("제발! : " + list);
+		//System.out.println("제발! : " + list);
 		
 		mv.addObject("myWish", list);
-		mv.setViewName("member/mypage");
+		mv.setViewName("member/mypage2");
 		
 		return mv;
 	}

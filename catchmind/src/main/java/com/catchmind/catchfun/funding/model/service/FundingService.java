@@ -12,6 +12,7 @@ import com.catchmind.catchfun.funding.model.vo.Reply;
 import com.catchmind.catchfun.funding.model.vo.Report;
 import com.catchmind.catchfun.funding.model.vo.Reward;
 import com.catchmind.catchfun.funding.model.vo.Wishlist;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 
 public interface FundingService {
 	
@@ -92,6 +93,9 @@ public interface FundingService {
 	
 	// 펀딩 내역 조회
 	ArrayList<MyFunding> selectBookingList(String userNo);
+	
+	// 마이찜 내역 조회
+	ArrayList<MyWish> myWishList(String userNo);
 
 	
 }
