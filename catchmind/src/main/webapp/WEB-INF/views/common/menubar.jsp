@@ -328,15 +328,15 @@ a:hover { text-decoration:none !important; color:black; }
 					      	<table style="text-align: center;">
 					          <tr>
 					              <td style="font-size:20px;"><b>${loginUser.userName}님</b></td>
-					              <td rowspan="2"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/home2.png" style="width:30px; height:30px;"><br>마이홈</a></td>
+					              <td rowspan="2"><a href="bookingList.me?chc=li"><img src="<%=request.getContextPath() %>/resources/images/home2.png" style="width:30px; height:30px;"><br>마이홈</a></td>
 					          </tr>
 					        <tr>
 					             <td><!-- <button class="button button4" onclick="location.href='mypageModify.me'">정보변경</button> --></td>
 					            <td></td> 
 					        </tr> 
 					        <tr style=border:0.05px solid grey;>
-					            <td rowspan="1" style="width: 100px;"><a href="bookingList.me"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
-					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="bookingList.me?chc=li"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="bookingList.me?chc=ll"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
