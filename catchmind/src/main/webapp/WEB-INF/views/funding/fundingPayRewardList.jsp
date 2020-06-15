@@ -238,7 +238,8 @@
         <input type="hidden" name="userNo" value="${ loginUser.userNo }">
         
         <button type="submit" id="next_btn" >다음단계</button>     
-        <button type="reset" id="next_btn2" >취소</button>
+        <!-- <button type="reset" id="next_btn2" >취소</button> -->
+        <button type="button" id="next_btn2" onclick="javascript:history.go(-1);">취소</button>
         </form>
         
         <input type="hidden" value="${ rno }" id="rno2" >
@@ -246,8 +247,8 @@
         
 		
     </div>
-    <br><br><br><br><br><br>
-    <jsp:include page="../common/footer.jsp"/>
+    <br><br><br>
+    <%-- <jsp:include page="../common/footer.jsp"/> --%>
 
 	<script>
 		

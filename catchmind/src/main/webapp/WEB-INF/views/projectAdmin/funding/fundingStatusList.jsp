@@ -79,7 +79,7 @@
 
 	<div class="outer">
 
-	
+	<fmt:formatNumber value="${ project.projectTargetAmount }" pattern="#,###" />
 	<div style=" height: 700px ; margin-left: 270px;">
 
 			<br>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="card-body">
 	                 	<h1 class="black">
-						1) ${project.projectTargetAmount }원목표
+						1) <fmt:formatNumber value="${project.projectTargetAmount }" pattern="#,###" />원목표
 						</h1>
 						<h1 class="black">
 						2) ${project.projectStartDate }~${project.projectFinishDate } 마감
@@ -109,8 +109,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 결제 예약금액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum}원</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundSum}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${fundSum.fundSum}" pattern="#,###" />원</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘<fmt:formatNumber value="${todayfundSum.fundSum}" pattern="#,###" />원</div>
                     </div>
                   
                   </div>
@@ -123,8 +123,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 달성률</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundSum / project.projectTargetAmount *100}%</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundSum /project.projectTargetAmount *100}%</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${fundSum.fundSum / project.projectTargetAmount *100}" pattern="0.0" />%</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 <fmt:formatNumber value="${todayfundSum.fundSum /project.projectTargetAmount *100}" pattern="0.0" /></div>
                     </div>
                   
                   </div>
@@ -137,8 +137,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 건수</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${fundSum.fundCount}건</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 ${todayfundSum.fundCount}건</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${fundSum.fundCount}" pattern="#,###" />건</div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 <fmt:formatNumber value="${todayfundSum.fundCount}" pattern="#,###" />건</div>
                     </div>
                   
                   </div>
@@ -197,11 +197,11 @@
 	                    <tr>
 	                        <td>${ b.fundingProduct }</td>
 	                        <td>${ b.rewardTitle }</td>
-	                        <td>${ b.fundingCost }</td>
-	                        <td>${ b.fundingQuantity }</td>
+	                        <td><fmt:formatNumber value="${ b.fundingCost }" pattern="#,###" /></td>
+	                        <td><fmt:formatNumber value="${ b.fundingQuantity }" pattern="#,###" /></td>
 	                        <td>${ b.fundingDate }</td>
 	                      	<td>${ b.fundingStatus }</td>
-	                      	<td>${ b.fundingQuantity * b.fundingCost }</td>
+	                      	<td><fmt:formatNumber value="${ b.fundingQuantity * b.fundingCost }" pattern="#,###" /></td>
 	                      	<td>
 	                      	<c:choose>
 	                      	<c:when test="${b.fundingStatus eq 'E' }">

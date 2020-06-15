@@ -206,7 +206,7 @@ button[type=submit]:hover {
 								<div id="checkResult1" style="display:none; font-size:0.8em"></div></td>
 						</tr>
 						<tr>
-							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'포함 입력" oninput="signupCheck()" required></td>
+							<td><input type="text" id="phone" name="phone" placeholder="전화번호 '-'빼고입력" oninput="signupCheck()" required></td>
 						</tr>
 						<tr>
 							<td><input type="text" id="del_postcode" name="addressNum" placeholder="우편번호" oninput="signupCheck()" required readonly>
@@ -399,7 +399,7 @@ button[type=submit]:hover {
             $idInput.keyup(function(){
           	 
           	  //console.log($idInput.val());
-  			  if($idInput.val().length >= 5){ // 적어도 아이디가 5글자 이상되었을 때 본격적으로 중복체크
+  			  if($idInput.val().length >= 13){ // 적어도 아이디가 글자 이상되었을 때 본격적으로 중복체크
   				  
   				  $.ajax({
   					  url:"idCheck.me",

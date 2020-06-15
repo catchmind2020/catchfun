@@ -330,17 +330,17 @@ a:hover { text-decoration:none !important; color:black; }
 					              <td style="font-size:20px;"><b>${loginUser.userName}님</b></td>
 					              <td rowspan="2"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/home2.png" style="width:30px; height:30px;"><br>마이홈</a></td>
 					          </tr>
-					          <tr>
-					            <td><button class="button button4" onclick="location.href='mypageModify.me'">정보변경</button></td>
-					            <td></td>
-					        </tr>
+					        <tr>
+					             <td><!-- <button class="button button4" onclick="location.href='mypageModify.me'">정보변경</button> --></td>
+					            <td></td> 
+					        </tr> 
 					        <tr style=border:0.05px solid grey;>
 					            <td rowspan="1" style="width: 100px;"><a href="bookingList.me"><img src="<%=request.getContextPath() %>/resources/images/ss2.png" style="width:30px; height:30px;"><br>참여펀딩</a></td>
 					            <td rowspan="1" style="width: 100px;"><a href="#"><img src="<%=request.getContextPath() %>/resources/images/bulb1.png" style="width:30px; height:30px;"><br>찜한펀딩</a></td>
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="projectList.pa"><img src="<%=request.getContextPath() %>/resources/images/ss3.png" style="width:30px; height:30px;"><br>개설펀딩</a></td>
-					            <td rowspan="1" style="width: 100px;"><a href="pointList.me"><img src="<%=request.getContextPath() %>/resources/images/point.png" style="width:40px; height:40px;"><br>포인트조회</a></td>
+					            <td rowspan="1" style="width: 100px;"><a href="mypageModify.me"><img src="<%=request.getContextPath() %>/resources/images/info.png" style="width:40px; height:40px;"><br>정보변경</a></td>
 					        </tr>
 					        <tr>
 					            <td rowspan="1" style="width: 100px;"><a href="messageRest.me?userNo=${ loginUser.userNo }&currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td><!-- <a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1"> <img src="<%=request.getContextPath() %>/resources/images/message2.png" style="width:30px; height:30px;"><br>메세지</a></td>-->

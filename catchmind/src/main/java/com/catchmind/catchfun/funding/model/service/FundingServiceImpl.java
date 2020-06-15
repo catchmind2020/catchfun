@@ -17,6 +17,7 @@ import com.catchmind.catchfun.funding.model.vo.Reply;
 import com.catchmind.catchfun.funding.model.vo.Report;
 import com.catchmind.catchfun.funding.model.vo.Reward;
 import com.catchmind.catchfun.funding.model.vo.Wishlist;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 
 @Service("fService")
 public class FundingServiceImpl implements FundingService{
@@ -189,6 +190,12 @@ public class FundingServiceImpl implements FundingService{
 	public ArrayList<MyFunding> selectBookingList(String userNo) {
 		
 		return fDao.selectBookingList(sqlSession, userNo);
+	}
+
+
+	@Override
+	public ArrayList<MyWish> myWishList(String userNo) {
+		return fDao.myWishList(sqlSession, userNo);
 	}
 
 

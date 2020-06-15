@@ -15,6 +15,7 @@ import com.catchmind.catchfun.funding.model.vo.Reply;
 import com.catchmind.catchfun.funding.model.vo.Report;
 import com.catchmind.catchfun.funding.model.vo.Reward;
 import com.catchmind.catchfun.funding.model.vo.Wishlist;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 
 @Repository("fDao")
 public class FundingDao {
@@ -172,4 +173,9 @@ public class FundingDao {
 		ArrayList<MyFunding> list = (ArrayList)sqlSession.selectList("projectMapper.selectBookingList", userNo);
 		return list;
 	}
+	
+	public ArrayList<MyWish> myWishList(SqlSessionTemplate sqlSession, String userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.myWishList", userNo);
+	}
+	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String contextPath = request.getContextPath();
 %>
@@ -45,7 +46,7 @@
 				<i class="fas fa-laugh-wink"></i>
 			</div>
 			<div class="sidebar-brand-text mx-3">
-				프로젝트관리자 : ${  projectUser.projectName }<sup></sup>
+				프로젝트이름 : ${  projectUser.projectName }<sup></sup>
 			</div>
 		</a>
 
@@ -66,7 +67,7 @@
             </svg>
 				</div>
 				<div align="center" style="font-size: small;">
-					<br> ${  projectUser.projectName }님<br> 환영합니다.
+					<br> ${  loginUser.userName }님<br> 환영합니다.
 
 				</div>
 		</a></li>
@@ -88,6 +89,11 @@
 				<c:when test="${ project.projectStatus eq 'E' }">
 					<a class="nav-link collapsed" href="<%=contextPath%>/home.pa">
 						<i class="fas fa-fw fa-user"></i> <span>펀딩준비(제출)</span>
+					</a>
+				</c:when>
+				<c:when test="${ project.projectStatus eq 'Y' }">
+					<a class="nav-link collapsed" href="<%=contextPath%>/home.pa">
+						<i class="fas fa-fw fa-user"></i> <span>펀딩준비(제출완료)</span>
 					</a>
 				</c:when>
 				<c:otherwise>

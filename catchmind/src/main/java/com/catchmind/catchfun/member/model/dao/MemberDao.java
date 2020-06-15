@@ -34,6 +34,11 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.idCheck", userId);
 	}
 	
+	public int selectId(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.selectId", m);
+	}
+	
+	
 	public int sellerMessageRestListCount(SqlSessionTemplate sqlSession, String counseling) {
 		return sqlSession.selectOne("memberMapper.sellerMessageRestListCount", counseling);
 	}
@@ -114,6 +119,11 @@ public class MemberDao {
 
 
 
+
+
+
+	
+	
 
 	// 이메일 !!
 	/*
