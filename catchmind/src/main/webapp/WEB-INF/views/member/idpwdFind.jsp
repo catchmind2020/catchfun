@@ -5,10 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
@@ -119,16 +124,58 @@ input[type=submit]:hover {
 	height: 25%;
 }
 
-    .wrap{width:1000px; height:1000px; margin:auto; 
-        text-align: center; font-size: 30px; color: black;}
-    .wrap>#header{width:100%; height:5%; margin-bottom:60px;}
-    .wrap>#content{width:100%; height:70%;}
-    .wrap>#content>#content_1{width:100%; height:25%;}
-    .wrap>#content>#content_2{width:100%; height:75%; font-size:15px; background-color: rgb(243, 242, 242);}
-    .wrap>#content>#content_1>table{width:40%; height:100%; padding:20px; font-size:15px;}
-    .wrap>#footer{width:100%; height:20%;}
-    </style>
-     <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
+.wrap {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
+	text-align: center;
+	font-size: 30px;
+	color: black;
+}
+
+.wrap>#header {
+	width: 100%;
+	height: 5%;
+	margin-bottom: 60px;
+}
+
+.wrap>#content {
+	width: 100%;
+	height: 70%;
+}
+
+.wrap>#content>#content_1 {
+	width: 100%;
+	height: 25%;
+}
+
+.wrap>#content>#content_2 {
+	width: 100%;
+	height: 75%;
+	font-size: 15px;
+	background-color: rgb(243, 242, 242);
+}
+
+.wrap>#content>#content_1>table {
+	width: 40%;
+	height: 100%;
+	padding: 20px;
+	font-size: 15px;
+}
+
+.wrap>#footer {
+	width: 100%;
+	height: 20%;
+}
+
+<!--
+wrap>#content>#content_2>.w3-row2 {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+}
+
+-->
 .wrap>#content>#content_2 {
 	width: 100%;
 	height: 75%;
@@ -154,6 +201,31 @@ input[type=submit]:hover {
 	<jsp:include page="../common/menubar.jsp" />
 	<div class="wrap">
 
+            <div id="content_2">
+              <div class="w3-container">
+               
+              
+                <div class="w3-row">
+                  <a href="javascript:void(0)" onclick="openCity(event, 'idfind');">
+                    <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">아이디찾기</div>
+                  </a>
+                  <a href="javascript:void(0)" onclick="openCity(event, 'passwordfind');">
+                    <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">비밀번호찾기</div>
+                  </a>
+                  
+                </div>
+              
+                <div id="idfind" class="w3-container city" style="display:none">
+                   <center>
+                    <table id="id_table">
+                    <tr>
+                        <td>
+                            <form action="selectId.me">
+                            	<div id="idfind1" style="width:300px;">
+		                            <label for="email">
+		                                <p style="text-align:left;">
+			                                	<h4>가입정보로 확인</h4><br>
+													* 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
 		<script>
 			function expand() {
 				$(".search").toggleClass("close");
@@ -171,8 +243,7 @@ input[type=submit]:hover {
 			<div id="content_1">
 				<table id="table1">
 					<tr>
-						<td style="font-size: 30px; text-align: left;"><strong>아이디∙비밀번호
-								찾기</strong></td>
+						<td style="font-size: 30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -183,16 +254,13 @@ input[type=submit]:hover {
 
 			<div id="content_2">
 				<div class="w3-container">
-
-
 					<div class="w3-row">
 						<a href="javascript:void(0)" onclick="openCity(event, 'idfind');">
 							<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">아이디찾기</div>
-						</a> 
+						</a>
 						<a href="javascript:void(0)" onclick="openCity(event, 'passwordfind');">
 							<div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">비밀번호찾기</div>
 						</a>
-
 					</div>
 
 					<div id="idfind" class="w3-container city" style="display: none">
@@ -202,52 +270,51 @@ input[type=submit]:hover {
 									<td>
 										<form action="idFind.me">
 											<div id="idfind1" style="width: 300px;">
+											<label for="email">
+											<p style="text-align: left;">
+											<h4>가입정보로 확인</h4> <br> * 기존 가입 회원정보에 휴대전화번호가 등록 되어있지
+											않았을 경우, <br> 아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
+											</p>
+											</label> <input type="text" id="userName1" name="userName" placeholder="이름">
+											<input type="text" id="phone1" name="phone" placeholder="휴대폰번호'-'없이 입력">
+											<input type="submit" value="완료">
+											</div>
+										</form>
+									</td>
+								</tr>
+							</table>
+								</center>
+					</div>
+
+					<div id="passwordfind" class="w3-container city"
+						style="display: none">
+						<center>
+							<table id="id_table">
+								<tr>
+									<td>
+										<form action="pwdFind2.me">
+											<div id="passwordfind1" style="width: 300px;">
+												<input type="text" id="userId2" name="userId" placeholder="아이디">
+												<input type="text" id="userName2" name="userName" placeholder="이름">
+												<input type="text" id="phone2" name="phone" placeholder="전화번호 '-'포함 입력" required>
+												<input id="pwdBtn1" type="button" value="발송">
 												<label for="email">
-													<p style="text-align: left;">
-													<h4>가입정보로 확인</h4>
-													<br> * 기존 가입 회원정보에 휴대전화번호가 등록 되어있지 않았을 경우, <br>
-													아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
-		                                </p></label>
-		                              <input type="text" id="userName1" name="userName" placeholder="이름">
-		                              <input type="text" id="phone1" name="phone" placeholder="휴대폰번호'-'없이 입력">
-	                            	  <input type="submit" value="완료">
-	                        	</td>
-                        	</div>
-                    	</tr>
-                    </center>
-                   </table>
-                </div>
-              
-                <div id="passwordfind" class="w3-container city" style="display:none">
-                  <center>
-                    <table id="id_table">
-                    <tr>
-                        <td>
-                            <form action="pwdFind2.me">
-                            	<div id="passwordfind1" style="width:300px;">
-                            		<input type="text" id="userId2" name="userId" placeholder="아이디">
-		                            <input type="text" id="userName2" name="userName" placeholder="이름">
-		                            <input type="text" id="phone2" name="phone" placeholder="전화번호 '-'포함 입력" required>
-		                            <input id="pwdBtn1" type="button" value="발송">
-		                            <label for="email">
-		                                <p style="text-align:left;">
-							                                    회원가입한 아이디를 입력하시면. <br>
-							                                    이메일로 인증번호를 발송해드립니다. <br>
-		                                </p></label>
-		                            <input type="text" id="certi" name="certi" placeholder="인증번호입력">
-		                            <input id="pwdBtn2" type="submit" value="인증확인">
-	                           </div>
-	                           </form>
-                        </td>
-                        
-                        <td>
-                        </td>
-                    </tr>
-                    </center>
-                   </table>
-                </div>
-              </div>
-                <script>
+												<p style="text-align: left;">
+													회원가입한 아이디를 입력하시면. <br> 이메일로 인증번호를 발송해드립니다. <br>
+												</p>
+												</label>
+												<input type="text" id="certi" name="certi" placeholder="인증번호입력"> <input id="pwdBtn2" type="submit" value="인증확인">
+											</div>
+										</form>
+									</td>
+
+									<td></td>
+								</tr>
+								</table>
+							</center>
+					</div>
+				</div>
+				<script>
                   function openCity(evt, cityName) {
                     var i, x, tablinks;
                     x = document.getElementsByClassName("city");
@@ -261,8 +328,8 @@ input[type=submit]:hover {
                     document.getElementById(cityName).style.display = "block";
                     evt.currentTarget.firstElementChild.className += " w3-border-cyan";
                   }
-                  </script>         
-                  <script>
+                  </script>
+				<script>
                  	$(function(){  // 이벤트 걸고자 하는 input 요소 변수에 기록해놓기
                         
                        // var $idInput = $("#enrollForm input[name=userId]");
@@ -340,56 +407,51 @@ input[type=submit]:hover {
         		});
         	</script>
 
-                  
-                  
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <div id="footer"></div>
+		<div id="footer"></div>
 
-    </div>
-													</p>
-												</label> <input type="text" id="userName" name="userName"
-													placeholder="이름"> <input type="text" id="phone"
-													name="phone" placeholder="휴대폰번호'-'없이 입력"> <input
-													type="submit" value="완료">
-											</div>
-									</td>
-									<td>
-																			
-									</td>
-								</tr>
-								</center>
-							</table>
-					</div>
+	</div>
+	</p>
+	</label>
+	<input type="text" id="userName" name="userName" placeholder="이름">
+	<input type="text" id="phone" name="phone" placeholder="휴대폰번호'-'없이 입력">
+	<input type="submit" value="완료">
+	</div>
+	</td>
+	<td></td>
+	</tr>
+	</center>
+	</table>
+	</div>
 
-					<div id="passwordfind" class="w3-container city"
-						style="display: none">
-						<center>
-							<table id="id_table">
-								<tr>
-									<td>
-										<form action="pwdFind.me">
-											<div id="passwordfind1" style="width: 300px;">
-												<input type="text" id="userId" name="userId"
-													placeholder="아이디"> <input type="text" id="userName"
-													name="userName" placeholder="이름"> <input
-													type="text" id="phone" name="phone"
-													placeholder="휴대폰번호'-'없이 입력"> <label for="email">
-													<p style="text-align: left;">
-														회원가입한 이메일을 입력하시면. <br> 이메일로 비밀번호를 발송해드립니다. <br>
-													</p>
-												</label> <input type="submit" value="완료">
-											</div>
-									</td>
-									<td></td>
-								</tr>
-								</center>
-							</table>
-					</div>
-				</div>
+	<div id="passwordfind" class="w3-container city" style="display: none">
+		<center>
+			<table id="id_table">
+				<tr>
+					<td>
+						<form action="pwdFind.me">
+							<div id="passwordfind1" style="width: 300px;">
+								<input type="text" id="userId" name="userId" placeholder="아이디">
+								<input type="text" id="userName" name="userName"
+									placeholder="이름"> <input type="text" id="phone"
+									name="phone" placeholder="휴대폰번호'-'없이 입력"> <label
+									for="email">
+									<p style="text-align: left;">
+										회원가입한 이메일을 입력하시면. <br> 이메일로 비밀번호를 발송해드립니다. <br>
+									</p>
+								</label> <input type="submit" value="완료">
+							</div>
+					</td>
+					<td></td>
+				</tr>
+				</center>
+			</table>
+	</div>
+	</div>
 
-				<script>
+	<script>
 					function openCity(evt, cityName) {
 						var i, x, tablinks;
 						x = document.getElementsByClassName("city");
@@ -405,13 +467,13 @@ input[type=submit]:hover {
 						evt.currentTarget.firstElementChild.className += " w3-border-cyan";
 					}
 				</script>
-			</div>
-		</div>
+	</div>
+	</div>
 
-		<div id="footer"></div>
+	<div id="footer"></div>
 
 	</div>
-	
+
 	<script>
 		$(".enrollBtn").click(function(){
 			

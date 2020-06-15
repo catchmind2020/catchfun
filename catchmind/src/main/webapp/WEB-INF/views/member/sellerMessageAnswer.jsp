@@ -77,19 +77,17 @@
      .innerOuter{
         border:1px solid lightgray;
         width:90%;
+        min-width:1200px;
         margin:auto;
-        padding:5% 15%;
+        padding:5% 12%;
         background:white;
        }
-
 
         table *{margin:5px;}
         table{width:100%;}
     </style>
 </head>
 <body>
-    
-    
      <jsp:include page="../common/menubar.jsp" />
 
     <div class="content">
@@ -239,7 +237,7 @@
 		        					var value = "<tr>" +
 		        								"<td>" + list.ansNo +"<td>" +
 		        								"<td>" + list.ansContent +"<td>" +
-		        								"<td>" + list.ansDate +"<td>" +
+		        								'<td style="width:300px;">' + list.ansDate +"<td>" +
 		        							"<tr>";
 		        							
 		        					$("#replyArea tbody").html(value);

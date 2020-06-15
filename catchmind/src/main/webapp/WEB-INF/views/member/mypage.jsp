@@ -210,14 +210,10 @@
 						evt.currentTarget.firstElementChild.className += " w3-border-cyan";
 					} */
 				</script>
-				
-
 			</div>
 		</div>
-
 	</div>
 	<jsp:include page="../common/footer.jsp" />
-	
 	
 	<script>
 		$("#myFunding tbody tr").click(function(){
@@ -229,11 +225,37 @@
 		
 		$("#wishBtn").click(function(){
 			console.log("gggg");
-			location.href="myWish.me?userNo=${loginUser.userNo}";
+			/* location.href="myWish.me?userNo=${loginUser.userNo}"; */
 			//$(".disWish").prop("style", "display:block");
 			
 			$(".disWish").css("display", "block");
-			 $(".funBtn").css("display", "none");  
+			 $(".funBtn").css("display", "none");
+			 
+			 /* 에지작스 시작 */
+			 /*  */
+			 /*  */
+			 
+			 $.ajax({
+	    			url:"myWish.me",
+	    			/* data:{userNo:"${loginUser.userNo}"}, */
+	    			dataType: "json",
+	    			success:function(list){
+	    				
+	    				var value="";
+	    				for(var i in list){
+	    					value += '<div style="display: inline-block; margin-right: 20px;">'+
+	    							  '<img src="${pageContext.servletContext.contextPath}/resources/uploadFiles/${ list[i].changeName }"><br>' +
+				                       list[i].projectName + "<br>" +
+				                       list[i].projectCategoryName + " | " + list[i].makerName + "<br>" +
+				                     "</div>";
+	    				}
+	    				
+	    				$("#wishList").html(value);
+	    				
+	    			},error:function(){
+	    				console.log("댓글 리스트 조회용 ajax 통신실패!!");	
+	    			}
+	    		});
 		});
 		
 		$(".disWish").click(function(){

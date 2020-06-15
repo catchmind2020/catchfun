@@ -137,14 +137,20 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteAnswer(sqlSession, qno);
 	}
 
-	@Override
-	public int pwdFind(Member m) {
-		return mDao.pwdFind(sqlSession, m);
-	}
+	/*
+	 * @Override public int pwdFind(Member m) { return mDao.pwdFind(sqlSession, m);
+	 * }
+	 */
 
 	@Override
 	public int updatePwd(Member m) {
 		return mDao.updatePwd(sqlSession, m);
+	}
+
+	@Override
+	public Member selectId(Member m) {
+		// TODO Auto-generated method stub
+		return mDao.selectId(sqlSession, m);
 	}
 	public ArrayList<Member> idFindMember(Member m) {
 		return mDao.idFindMember(sqlSession, m);

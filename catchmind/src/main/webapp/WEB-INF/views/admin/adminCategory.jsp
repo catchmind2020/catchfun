@@ -182,7 +182,7 @@ textarea{
 								<th width="100px" style="height: 50px;">번호</th>
 								<th width="100px" style="height: 50px;">카테고리명</th>
 								<th width="200px">이미지</th>
-								<th width="150px"><button type="button" class="categoryEnroll">등록</button></th>
+								<th width="150px"><button type="button" class="categoryEnroll j-btn">등록</button></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -191,7 +191,7 @@ textarea{
 			                        <td width="100px" style="height: 50px;">${ c.refNo }</td>
 			                        <td width="100px" style="height: 50px;">${ c.projectName }</td>
 			                        <td width="200px"><img class="category-imgs" src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${c.changeName}" style="width: 80px; height: 80px"></td>
-			                        <td width="150px"><button type="button" class="categoryUpdate">수정</button>&nbsp;&nbsp;<button type="button" class="trigger categoryDelete">삭제</button></td>
+			                        <td width="230px"><button type="button" class="categoryUpdate j-btn">수정</button>&nbsp;&nbsp;<button type="button" class="trigger categoryDelete j-btn">삭제</button></td>
 			                    </tr>
 							</c:forEach>
 						</tbody>

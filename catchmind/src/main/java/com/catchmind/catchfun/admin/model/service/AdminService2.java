@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.catchmind.catchfun.admin.model.vo.Member;
 import com.catchmind.catchfun.admin.model.vo.Project;
+import com.catchmind.catchfun.admin.model.vo.ProjectDetail;
 import com.catchmind.catchfun.admin.model.vo.ProjectReturn;
 import com.catchmind.catchfun.admin.model.vo.Reply;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
@@ -121,7 +122,7 @@ public interface AdminService2 {
 	ArrayList<Project> projectSearch(PageInfo pi, String proCategory);
 
 	// 프로젝트 정보 조회
-	Project selectProject(String pno);
+	ProjectDetail selectProject(String pno);
 	
 	// 메이커 정보 조회
 	Maker selectMaker(String pno);

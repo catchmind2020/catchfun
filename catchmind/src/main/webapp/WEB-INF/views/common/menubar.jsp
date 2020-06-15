@@ -60,7 +60,7 @@
 /* margin-left: 1050px; 1920 1080 */
 /* margin-left: 1700px; qhd */
 #header_searchbar {
-	margin-left:440px;
+	margin-left:450px;
 	margin-top: 51px; /* 위치설정 이거*/
 	position: absolute;
 	height: 50px;
@@ -321,6 +321,8 @@ a:hover { text-decoration:none !important; color:black; }
 					<div class="dropdown" style="z-index: 1000">
   						<button onclick="myFunction()" class="dropbtn">
   							<img class="dropbtn1" src="<%=request.getContextPath() %>/resources/images/usericon32.png">
+  						</button>
+  						<button class="dropbtn">
   						</button>
   							<div id="myDropdown" class="dropdown-content">
 					      	<table style="text-align: center;">

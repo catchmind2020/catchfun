@@ -244,6 +244,39 @@
 	
 	/* 페이징바 */
 	#pagingArea{width:fit-content;margin:auto;}
+	
+	/* content */
+	
+	.conArea2{
+	    width: 800px;
+	    height: 106px;
+	    padding-right: 2px;
+	    border-right-width: 2px;
+	    border-top-width: 2px;
+	    border-left-width: 2px;
+	    border-bottom-width: 2px;
+	    padding-bottom: 1px;
+	    padding-top: 1px;
+	    padding-left: 2px;
+	}
+	
+	/* /* 버튼 */
+	.btn {
+    background-color: white;
+    border: 1px solid #28d7d7;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 35px;
+    }
+
+    .btn:hover {background-color: #28d7d7;} */
 
 </style>
 </head>
@@ -252,58 +285,42 @@
 	<div class="outer">
 		<center>
 		<div class="t-align">
-			<div class="t-inner-l">
+			
 				<h2>상담구분</h2><br>
 				<label>1:1문의를 관리합니다.</label>
-			</div>
-
-			<div class="t-inner-r">
-				<div class="t-inner-all">
-					<div class="t-inner-r-1">
-
-					</div>
-					1
-					<div class="t-inner-r-2">
-						<input type="checkbox" name="" value=""> 주문/결제
-						<input type="checkbox" name="" value=""> 반품/교환
-						<br>
-						<input type="checkbox" name="" value=""> 배송 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="checkbox" name="" value=""> 기타 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					</div>
-					
-					<div class="t-inner-r-3">
-						<button type="button" style="width: 100px; height: 50px;">조회</button>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	
-		<br><br>
 		
 			<table class="tb" border="1">
 				<thead>
 					<tr>
 						<th width="100px">번호</th>
 						<th width="100px">회원아이디</th>
-						<th width="100px">보낸유형</th>
-						<th width="100px">상담유형</th>
+						<!-- <th width="100px">보낸유형</th> -->
 						<th width="300px">제목</th>
 						<th width="150px">상담신청일</th>
 						<th width="150px">답변여부</th>
-						<th width="150px">답변하기</th>
+						<th width="230px">답변하기</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${ qlist }" var="q">
 	                    <tr>
 							<td>${ q.questionNo }</td>
-							<td>${ q.userNo }</td>
-							<td>${ q.questionType }</td>
-							<td>${ q.counseling }</td>
+							<td>${ q.userId }</td>
+							<%-- <td>${ q.questionType }</td> --%>
 							<td>${ q.questionTitle }</td>
 							<td>${ q.questionDate }</td>
 							<td>${ q.questionYn }</td>
-							<td><button class="updateQuestion" type="button">수정</button>&nbsp;&nbsp;<button type="button" class="trigger deleteQuestion">삭제</button></td>
+							<c:choose>
+								<c:when test="${ q.questionYn eq 'N'}">
+									<td><button class="updateQuestion j-btn" type="button">답변</button><button type="button" class="trigger deleteQuestion j-btn">삭제</button></td>
+								</c:when>
+								<c:otherwise>
+									<td><button class="updateQuestion j-btn" type="button" disabled="disabled">답변</button><button type="button" class="trigger deleteQuestion j-btn">삭제</button></td>
+								</c:otherwise>
+							</c:choose>
 	                    </tr>
                     </c:forEach>
 				</tbody>
@@ -325,20 +342,21 @@
 					<br>
 						<table>
 							<tr class="font-all">
-								<td style="width: 250px;" id="counseling"></td>
+								<!-- <td style="width: 250px;" id="counseling"></td> -->
 								<td style="width: 300px;" id="qName"></td>
 								<td style="width: 420px;" id="qDate"></td>
 							</tr>
 						</table>
+						<br>
 					<!-- 제목 -->
 						<div class="faq_input_title relative mtop20">
 						
-							<label class="font-all">제목 : </label><input type="text" id="qTitle" name="title_temp" class="text_con_title" maxlength="50" value="배송문의입니다." readonly><br>
+							<label class="font-all">제목 : &nbsp;&nbsp;</label><input type="text" id="qTitle" name="title_temp" class="text_con_title" maxlength="50" value="" readonly><br>
 						</div>
 					<br>
 					<!-- 내용 -->
 						<div class="faq_input relative mtop20">
-							<label class="font-all">내용 : </label><textarea name="contents" placeholder="내용" class="width100 p10 f_666" id="qContent" maxlength="4000" readonly>배송문의 드려요 ~~~~~~ㅎㅎ</textarea>
+							<label class="font-all">내용 : &nbsp;&nbsp;</label><textarea name="contents" placeholder="내용" class="width100 p10 f_666 conArea2" id="qContent" maxlength="4000" readonly></textarea>
 						</div>
 					</div>
 				</div>
@@ -350,14 +368,14 @@
 				<!-- 제목 -->
 					<div class="faq_input_title relative mtop20">
 
-						<label class="font-all">제목 : </label><input type="text" id="ansTitle" name="ansTitle" placeholder="제목을 적어주세요." class="text_con_title" maxlength="50" required><br>
+						<label class="font-all">제목 : &nbsp;</label><input type="text" id="ansTitle" name="ansTitle" placeholder="제목을 적어주세요." class="text_con_title" maxlength="50" required><br>
 						<!-- <span id="text_counter_title" style="text-align:right">###</span> -->
 
 					</div><br>
 
 				<!-- 내용 -->
 					<div class="faq_input relative mtop20">
-						<label class="font-all">내용 : </label><textarea id="ansContent" name="ansContent" placeholder="내용" class="width100 p10 f_666" id="text_con" maxlength="4000"></textarea><br>
+						<label class="font-all">내용 : &nbsp;</label><textarea id="ansContent" name="ansContent" placeholder="내용" class="width100 p10 f_666 conArea2" id="text_con" maxlength="4000"></textarea><br>
 						<!-- <div style="width:800px; text-align:right" required><span id="text_counter">0</span> / 4000</div> -->
 						<br>
 
@@ -365,7 +383,7 @@
 
 					<div class="text-center">
 						<!-- <a class="ready-btn right-btn page-scroll" href="insert.cs" onclick="submit();">등록하기</a> -->           
-						<button class="ansBtn" type="button">등록하기</button>
+						<button class="ansBtn j-btn" type="button">등록하기</button>
 						<!-- <a class="cancelBtn" href="javascript:history.back();">취소</a> -->
 					</div>
 				</form>
@@ -373,7 +391,7 @@
 		</center>
 		<br>
 		<div id="pagingArea">
-	        <ul class="pagination">
+	        <ul class="pagination" style="padding-left: 0px;">
 	        	
         	 	<c:choose>
 	        		<c:when test="${ qpi.currentPage eq 1 }">
@@ -427,8 +445,8 @@
 	    			url:"qnaDetail.ad",
 	    			data:{qno:qno},
 	    			success:function(qnaList){
-	    				$("#counseling").text("상담유형 : " + qnaList.counseling);
-	    				$("#qName").text("작성자 : " + qnaList.userNo);
+	    				/* $("#counseling").text("상담유형 : " + qnaList.counseling); */
+	    				$("#qName").text("작성자 : " + qnaList.userId);
 	    				$("#qDate").text("문의날짜 : " + qnaList.questionDate);
 	    				$("#qTitle").val(qnaList.questionTitle);
 	    				$("#qContent").val(qnaList.questionContent);

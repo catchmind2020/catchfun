@@ -64,8 +64,8 @@
         <br><br><br>
         <div class="innerOuter">
             <h3>메세지함</h3><br>
-            <c:if test="${ loginUser.userType eq 2 }" >
-            	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button>
+            <c:if test="${ loginUser.userType eq 3 }" >
+            	<button><a href="sellerMessageRest.me?counseling=${ loginUser.userNo }&currentPage=1">프로젝트개설자 메세지함</a></button><br><br>
             </c:if>
             <table id="questionList" class="table table-hover" align="center">
                 <thead>
@@ -98,7 +98,7 @@
              </script>
             
              <div id="pagingArea">
-		        <ul class="pagination">
+		        <ul class="pagination"  style="width:300px; height:70px;">
 		        	
 		        	 <c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">
