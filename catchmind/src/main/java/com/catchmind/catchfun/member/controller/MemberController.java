@@ -381,7 +381,7 @@ public class MemberController {
 	
 	@RequestMapping("loginGo.me")
 	public String login() {
-		return "member/login";
+		return "member/login2";
 	}
 	
 	@RequestMapping("login.me")

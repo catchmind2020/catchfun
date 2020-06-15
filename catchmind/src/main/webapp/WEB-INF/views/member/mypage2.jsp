@@ -256,7 +256,7 @@ input:checked + label {
 	
 	</script>
 
-	<jsp:include page="../common/footer.jsp" />
+	<center><jsp:include page="../common/footer.jsp" /></center>
 	
 </body>
 
