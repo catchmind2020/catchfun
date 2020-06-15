@@ -165,7 +165,7 @@ input:checked + label {
 					</tr>
 					<tr>
 						<td>
-							<button class="w3-btn w3-white w3-border w3-round-large">프로필변경</button>
+							<button class="w3-btn w3-white w3-border w3-round-large" onclick="location.href='mypageModify.me'">프로필변경</button>
 						</td>
 						<td></td>
 						<td></td>

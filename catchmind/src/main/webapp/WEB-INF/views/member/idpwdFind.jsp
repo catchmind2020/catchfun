@@ -124,7 +124,7 @@ height: 40px;
     .wrap>#content>#content_2>table{width:100%; height:80%; font-size:15px; background-color: rgb(243, 242, 242);}
     .wrap>#footer{width:100%; height:20%;}
 
-    </style>
+    <style>
 #id_table{margin-top: 100px;}
 
     .wrap{width:1000px; height:1000px; margin:auto; 

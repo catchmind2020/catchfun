@@ -486,10 +486,12 @@ public class MemberController {
 		
 	}
 	
+	
+	
 	@RequestMapping("updatePwd.me")
 	public String updatePwd(String pass1, Model model, HttpSession session) {
 		
-		
+		System.out.println(pass1);
 		
 		
 		
@@ -501,9 +503,9 @@ public class MemberController {
 		// loginUser에 userPwd : 암호문
 		// 		m 에 userPwd : 로그인 시 입력한 비밀번호(평문)
 		//System.out.println(loginUser);
-		if(loginUser != null && bcryptPasswordEncoder.matches(pass1, member.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 
+			System.out.println(loginUser);
 			//System.out.println("성공성공");
 		
 		
@@ -512,25 +514,21 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(pass1);
 	
 		
-		loginUser.setChangePwd(encPwd);
+		member.setChangePwd(encPwd);
 		
 		
-		int result = mService.updatePwd(loginUser);
+		mService.updatePwd(member);
 		
 		
 		return "member/login"; //myPage.me
 		
-		}else { // 회원정보 수정 실패 --> 에러페이지로 포워딩
-			
-			model.addAttribute("msg", "현재비밀번호를 잘못 입력하셨습니다.");
-			return "member/passwordChange";
-		}
+	
 		
 		
 	}
 	
 	
-	
+
 	@RequestMapping("idpwdFind.me")
 	public String idpwdFind() {
 		return "member/idpwdFind";
