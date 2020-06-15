@@ -334,10 +334,10 @@
 
 							<a href="<%=contextPath%>/enrollProject.pa">
 								<button type="button"  style="width: 200px;" class="btn btn-primary">제출완료</button>
-							</a> 
+							</a> &nbsp;
 								<a href="<%=contextPath%>">
 								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
-							</a>
+							</a>&nbsp;
 							<a href="<%=contextPath%>/enrollProject.pa">
 								<button type="button" style="width: 200px;" class="btn btn-primary">수정요청</button>
 							</a>
@@ -355,11 +355,12 @@
 
 							<a href="<%=contextPath%>/enrollProject.pa">
 								<button type="button" style="width: 200px;" class="btn btn-primary">제출하기</button>
-							</a> 
-						</div>
-							<a href="<%=contextPath%>">
+							</a> &nbsp;
+								<a href="<%=contextPath%>">
 								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
 							</a>
+						</div>
+						
 						
 					</c:when>
 

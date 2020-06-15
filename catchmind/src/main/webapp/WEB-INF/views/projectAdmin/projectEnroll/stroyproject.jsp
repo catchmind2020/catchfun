@@ -118,7 +118,7 @@
 
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
 								<input id="question3" name="projectName" class="questioninput"
-									value="${  projectUser.projectName }"  disabled></input> <br> <br>
+									value="${  projectUser.projectName }" readonly></input> <br> <br>
 
 								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
 								<input id="question4" name="projectTargetAmount"
@@ -263,7 +263,7 @@
 
 								<h6 class="m-0 font-weight-bold text-primary">프로젝트제목</h6>
 								<input id="question3" name="projectName" class="questioninput"
-									value="${  projectUser.projectName }"  disabled></input> <br> <br>
+									value="${  projectUser.projectName }" readonly></input> <br> <br>
 
 								<h6 class="m-0 font-weight-bold text-primary">목표금액</h6>
 								<input id="question4" name="projectTargetAmount"
