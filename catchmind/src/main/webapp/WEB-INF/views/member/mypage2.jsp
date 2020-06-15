@@ -36,7 +36,7 @@ section {
     border-top: 1px solid #ddd;}
 
 /*라디오버튼 숨김*/
-  input {
+input {
       display: none;}
 
 label {
@@ -113,14 +113,14 @@ input:checked + label {
 }
 
 #myFunding{
-	border: 1px solid black;
+	border: 1px solid darkgray;
 	text-align: center;
 	margin: auto;
 	padding: 20px;
 }
 #myFunding thead{ border-collapse: collapse; }
 #myFunding th{
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid darkgray;
 	padding-bottom: 10px;
 }
 #myFunding td{padding: 10px;}
@@ -224,7 +224,7 @@ input:checked + label {
 	        <div id="wishList" style="display: inline-block;">
 	        
 				<c:forEach items="${ myWish }" var="w">
-					<div style="display: inline-block; margin-right: 20px;">
+					<div style="display: inline-block; border: 1px solid darkgray; padding: 15px; border-radius: 8px; margin-right: 20px;">
 						<img src="${pageContext.servletContext.contextPath}/resources/uploadFiles/${ w.changeName }"><br>
 						${ w.projectName }<br>
 						${ w.projectCategoryName } | ${ w.makerName }<br>
