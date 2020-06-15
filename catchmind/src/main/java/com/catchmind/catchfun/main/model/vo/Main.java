@@ -34,4 +34,5 @@ public class Main {
 	private int wishlist;				// 프로젝트위시리스트
 
 	private String comingsoonDate;		// 오픈예정일자
+	private String hashtags;
 }
