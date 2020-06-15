@@ -32,6 +32,20 @@ table {
     margin-top: 18px;
 }
 
+    <style>
+
+
+/* 아이디발송요청 Buttom*/
+.userid_request{
+    width:600px;
+    height:60px;
+    margin-top: 25px;
+    margin-bottom: 150px;
+    background-color:rgb(224, 224, 224);
+    color:rgb(63, 62, 62);
+    font-size: 18px;
+}
+
 /* 임시비밀번호 재발급 Button*/
 .password2{
     width:600px;
@@ -43,7 +57,8 @@ table {
     margin-top: 25px;
     margin-bottom: 10px;
 } 
-input[type=text],input[type=password],input[type=email], select {
+/* input[type=text],input[type=password],input[type=email], select { */
+#email, select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -51,6 +66,26 @@ input[type=text],input[type=password],input[type=email], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #28d7d7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #188080;
+}
+
+#email_btn{
+width: 400px;
+height: 40px;
 }
 
 input[type=submit] {
@@ -90,6 +125,18 @@ height: 40px;
     .wrap>#footer{width:100%; height:20%;}
 
     </style>
+#id_table{margin-top: 100px;}
+
+    .wrap{width:1000px; height:1000px; margin:auto; 
+        text-align: center; font-size: 30px; color: black;}
+    .wrap>#header{width:100%; height:5%; margin-bottom:60px;}
+    .wrap>#content{width:100%; height:70%;}
+    .wrap>#content>#content_1{width:100%; height:25%;}
+    .wrap>#content>#content_2{width:100%; height:75%; font-size:15px; background-color: rgb(243, 242, 242);}
+    .wrap>#content>#content_1>table{width:40%; height:100%; padding:20px; font-size:15px;}
+    .wrap>#footer{width:100%; height:20%;}
+    </style>
+     <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
@@ -113,6 +160,7 @@ height: 40px;
                 <table id="table1">
                     <tr>
                        <!--  <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td> -->
+                        <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -139,6 +187,7 @@ height: 40px;
                     <tr>
                         <td>
                             <form action="#">
+                            <form action="pwdFind.me">
                             	<div id="idfind1" style="width:300px;">
 		                            <label for="email">
 		                                <p style="text-align:left;">
@@ -154,6 +203,9 @@ height: 40px;
                     	 </tr>
                     	</table>
                     </center>
+                    	</tr>
+                    </center>
+                   </table>
                 </div>
               
                 <div id="passwordfind" class="w3-container city" style="display:none">
@@ -178,6 +230,9 @@ height: 40px;
 	                           </form>
                         	</td>
                          <td>
+                        </td>
+                        
+                        <td>
                         </td>
                     </tr>
                     </center>

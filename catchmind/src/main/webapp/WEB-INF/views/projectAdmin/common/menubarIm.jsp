@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String contextPath = request.getContextPath();
 %>
@@ -88,6 +89,11 @@
 				<c:when test="${ project.projectStatus eq 'E' }">
 					<a class="nav-link collapsed" href="<%=contextPath%>/home.pa">
 						<i class="fas fa-fw fa-user"></i> <span>펀딩준비(제출)</span>
+					</a>
+				</c:when>
+				<c:when test="${ project.projectStatus eq 'Y' }">
+					<a class="nav-link collapsed" href="<%=contextPath%>/home.pa">
+						<i class="fas fa-fw fa-user"></i> <span>펀딩준비(제출완료)</span>
 					</a>
 				</c:when>
 				<c:otherwise>

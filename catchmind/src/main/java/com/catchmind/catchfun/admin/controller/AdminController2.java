@@ -573,13 +573,6 @@ public class AdminController2 {
 		mv.addObject("pno", pno);
 		// mv.addObject("rCountlist", rCountlist);
 		mv.addObject("nlist", nlist);
-		System.out.println(p);
-		System.out.println(m);
-		System.out.println(fl);
-		System.out.println(rlist);
-		System.out.println(nlist);
-		System.out.println(pno);
-		
 		mv.setViewName("admin/adminProjectDetail");
 
 		return mv;

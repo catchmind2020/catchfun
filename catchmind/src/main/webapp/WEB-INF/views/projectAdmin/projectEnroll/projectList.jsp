@@ -26,7 +26,80 @@
 	rel="stylesheet">
 
 <style>
+#content1, #content2, #content3 {
+	width: 550px;
+	height: auto;
+}
 
+.scrollDown {
+	position: fixed;
+	top: 0px;
+	/* transform: translateY(0px); */
+}
+
+/* 리워드 리스트 */
+.rewardArea {
+	padding-left: 10px;
+	width: 200px;
+	text-align: left;
+	/* margin: 50px; */
+	/* padding-top: 5px; */
+	vertical-align: top;
+}
+/* 리워드 박스 */
+#rewardTable div {
+	border: 1px solid darkgray;
+	width: 200px;
+	height: 130px;
+	margin-bottom: 10px;
+	padding: 20px;
+	color: gray;
+	font-size: 12px;
+}
+
+#rewardTable div:hover {
+	border: 1px solid darkgray;
+	width: 200px;
+	height: 130px;
+	margin-bottom: 10px;
+	padding: 20px;
+	color: gray;
+	font-size: 12px;
+	font-color: darkgray;
+	background: rgb(31, 205, 211, 0.2);
+}
+
+/* #info_text{
+        width: 540px;
+        height: 500px;
+        border: 1px solid white;
+        resize: none;
+        
+    } */
+.reward_money {
+	font-size: 18px;
+	color: black;
+}
+
+.reward_name {
+	font-size: 15px;
+}
+
+.reward_sum {
+	border: 1px solid rgb(31, 205, 211);
+	background-color: rgb(31, 205, 211);
+	width: 50px;
+	height: 25px;
+	padding: 2px;
+	text-align: center;
+	border-radius: 3px;
+	color: white;
+	font-size: 12px;
+}
+
+text {
+	width: 600px;
+}
 
 .wrap {
 	width: 1000px;
@@ -80,12 +153,12 @@
 	<jsp:include page="../../common/menubar.jsp" />
 	<div class="wrap">
 		<div id="header">
-<br><br>
-			<h1 style="font-size:25px;">
+			<br> <br>
+			<h1 style="font-size: 25px;">
 				<strong>프로젝트 리스트</strong>
 			</h1>
-	
-<br>
+
+			<br>
 
 			<c:choose>
 				<c:when test="${ empty projectList }">
@@ -97,23 +170,54 @@
 
 					<div class="row" style="width: 100%;">
 						<c:forEach items="${ projectList }" var="p">
-							<div class="card mb-5" style="width: 320px; margin-left: 1%;">
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">${ p.projectName }</h6>
+							<div class="card mb-5"
+								style="width: 320px; margin-left: 1%; text-align: left; border: 2px solid darkgray;">
+								<div class=" card-header bg-success-600 py-3">
+									<h6 class="m-0 font-weight-bold">${ p.projectName }</h6>
 								</div>
-								<div class="card-body py-1">
+								<div class="card-body ">
 									<h6 class="black">
 										<br> 등록일 : ${ p.projectDate }
 									</h6>
 
 									<form action="<%=contextPath%>/ptest.pa" method="post">
-									
-						
-									<input type="hidden" name="projectName" value="${ p.projectName }">
-										<input type="hidden" name="projectNo" value="${ p.projectNo }">
-											프로젝트상태 : ${ p.projectStatus }
-										<div class="col-auto text-right" id="addReply">
-											<button type="submit" class="btn btn-success ">작성</button>
+
+
+										<input type="hidden" name="projectName"
+											value="${ p.projectName }"> <input type="hidden"
+											name="projectNo" value="${ p.projectNo }">
+
+
+										<c:choose>
+
+
+											<c:when test="${ p.projectStatus eq 'S' }">
+												
+													
+												<h6>진행상황: <div class="badge badge-warning badge-warning">작성중</div></h6>
+											
+											</c:when>
+											<c:when test="${ p.projectStatus eq 'E' }">
+											
+												<h6>진행상황: <div class="badge badge-info badge-info">제출완료</div> </h6>
+											</c:when>
+											<c:when test="${ p.projectStatus eq 'Y' }">
+												<h6>진행상황: <div class="badge badge-success badge-success">진행중</div></h6>
+											</c:when>
+											<c:otherwise>
+												<h6>진행상황: 오류</h6>
+											</c:otherwise>
+										</c:choose>
+										<div class="row">
+
+
+
+
+
+											<div class="col-auto text-right" id="addReply">
+												<button type="submit" class="btn btn-success ">프로젝트
+													바로가기</button>
+											</div>
 										</div>
 									</form>
 								</div>
@@ -125,11 +229,20 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
+
+
+
+
+
+
 			<a href="<%=contextPath%>/projectEnroll.pa">
 				<button type="button" class="btn btn-primary">등록하기</button>
 			</a>
 
 		</div>
+
+
+
 
 
 
