@@ -110,7 +110,7 @@ span.uname {
 		<form id="loginForm" action="login.me" method="post">
 
 			<div id="content">
-				<div class="container">
+				<div class="container" style="display: block">
 					<label for="uname"><b>아이디</b></label> <input type="text"
 						placeholder="Enter Username" id="userId" name="userId" required>
 

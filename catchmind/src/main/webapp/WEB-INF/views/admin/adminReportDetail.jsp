@@ -80,10 +80,6 @@
           <th>댓글 내용</th>
           <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ rp.replyContent}</textarea></td> 
        </tr>
-       <tr>
-          <th>신고자 내용</th>
-          <td colspan="5"><textarea rows="4" cols="60" style="resize: none;" readonly>${ rp.reportContent }</textarea></td>
-       </tr>
        <tr align="center">
          <th colspan="6">
            <form action="reportBlack.ad" method="POST">

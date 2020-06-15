@@ -68,6 +68,9 @@
 	font-size: 15px;
 	color: black;
 }
+.note-children-container{
+display: none;
+}
 </style>
 
 <!--써머노트  -->
@@ -188,7 +191,7 @@
 
 								<h6 class="m-0 font-weight-bold text-primary">검색용태그</h6>
 								<input id="tag" name="hhsh" class="questioninput"
-									value="${project.hhsh}" required placeholder="ex: 오징어,나무,바람"></input>
+									value="${project.hhsh}" required placeholder="ex: 사과,딸기,바나나"></input>
 								<br> <br>
 
 								<!-- <div class="btn btn-info btn-icon-split">

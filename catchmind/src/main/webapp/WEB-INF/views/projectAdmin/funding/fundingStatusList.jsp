@@ -162,18 +162,18 @@
 		 <br>
 		 <h1 class="h3 text-gray-900 mb-4">펀딩내역</h1>
 		 
-		 <table class="table-bordered table-hover table-sm listArea" style="width:1000px;">
+		 <table class="table-bordered table-hover table-sm listArea" style="width:1000px; text-align:center;">
             <thead>
               <tr>
                
-                <th width="150px">이름</th>
-                <th width="400px">선택 리워드</th>
+                <th width="200px">이름</th>
+                <th width="300px">선택 리워드</th>
                 <th width="200px">금액</th>
                 <th width="100px">갯수</th>
                 <th width="150px">펀딩일</th>
                 <th width="150px">펀딩상태</th>
                 <th width="150px">펀딩총액</th>
-                <th width="100px">환불현황</th>
+                <th width="130px">환불현황</th>
               </tr>
             </thead>
             <tbody>
@@ -203,20 +203,29 @@
 	                      	<td>${ b.fundingStatus }</td>
 	                      	<td><fmt:formatNumber value="${ b.fundingQuantity * b.fundingCost }" pattern="#,###" /></td>
 	                      	<td>
+	                      	
 	                      	<c:choose>
 	                      	<c:when test="${b.fundingStatus eq 'E' }">
 	                      	
 	                      	
-	                      	<form action="<%=contextPath%>/deleteItem.pa" method="post">
-								<input type="hidden" name="itemNo" value="${ b.fundingNo }">
-									<div class="col-auto text-right">
-			                     <button type="submit"  class="btn btn-danger ">환불수락</button>
+	                      	<form action="<%=contextPath%>/updateFund.pa" method="post">
+	                      	
+	                      	
+	                      	<input type="hidden" name="currentPage" value="${ pi.currentPage}">
+								<input type="hidden" name="fundingNo" value="${ b.fundingNo }">
+								<div class="col-auto text-right" style="width:130px;">
+			                     <button type="submit"  class="btn btn-success" >환불요청</button>
 			                    </div>
 							</form>	
-	                      	
+	                      	</c:when>
+	                      	   	<c:when test="${b.fundingStatus eq 'C' }">
+	                      	   	<div class="col-auto text-right" style="width:130px;">
+			                     <button type="button"  class="btn btn-danger" >환불완료</button>
+			                    </div>
 	                      	</c:when>
 	                      	<c:otherwise>
-	                      	<td>${ b.fundingStatus }</td>
+	                   			
+	                      
 	                      	</c:otherwise>
 	                      	</c:choose>
 	                      	</td>

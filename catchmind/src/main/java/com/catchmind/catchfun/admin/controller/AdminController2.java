@@ -348,7 +348,7 @@ public class AdminController2 {
 		  int listCount = aService2.memberListCount();
 		 
 		
-		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		 
 		  ArrayList<Member> mlist = aService2.memberList(pi);
 		  
@@ -363,7 +363,7 @@ public class AdminController2 {
 		
 		int listCount = aService2.memberSearchCount(keyword);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Member> mlist = aService2.memberSearch(pi, keyword);
 		
@@ -389,7 +389,7 @@ public class AdminController2 {
 		  int listCount = aService2.blackListCount();
 		 
 		
-		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		  PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		 
 		  ArrayList<Member> blist = aService2.blackList(pi);
 		  
@@ -405,7 +405,7 @@ public class AdminController2 {
 		
 		int listCount = aService2.blackSearchCount(keyword);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Member> blist = aService2.blackSearch(pi, keyword);
 		
@@ -434,7 +434,7 @@ public class AdminController2 {
 	public String adminReportList(int currentPage, Model model) {
 		int listCount = aService2.reportListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Reply> rlist = aService2.reportList(pi);
 		
@@ -449,7 +449,7 @@ public class AdminController2 {
 		
 		int listCount = aService2.reportSearchCount(keyword);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Reply> rlist = aService2.reportSearch(pi, keyword);
 		
@@ -463,7 +463,7 @@ public class AdminController2 {
 	public String adminpProReportList(int currentPage, Model model) {
 		int listCount = aService2.proReportListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Project> prlist = aService2.proReportList(pi);
 		
@@ -479,7 +479,7 @@ public class AdminController2 {
 		
 		int listCount = aService2.proReportSearchCount(keyword);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Project> prlist = aService2.proReportSearch(pi, keyword);
 		
@@ -530,7 +530,7 @@ public class AdminController2 {
 	public String projectList(int currentPage, Model model) {
 		int listCount = aService2.projectListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Project> plist = aService2.projectList(pi);
 		
@@ -545,7 +545,7 @@ public class AdminController2 {
 	public String projectSearch(int currentPage, Model model, String proCategory) {
 		int listCount = aService2.projectSearchCount(proCategory);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Project> plist = aService2.projectSearch(pi, proCategory);
 		
@@ -586,6 +586,7 @@ public class AdminController2 {
 		aService2.updateFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 		aService2.updateReward(pno); // 리워드 정보
 		aService2.updateNews(pno); // 새소식 정보
+		aService2.updateMember(pno);
 		
 		return "redirect:projectList.ad?currentPage=1";
 		

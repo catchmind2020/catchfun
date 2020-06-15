@@ -304,7 +304,7 @@
     </select>
     
     <update id="pjDelete" parameterType="string">
-    	update project set PROJECT_STATUS ='F' where PROJECT_NUMBER=#{projectNumber} 
+    	update project set PROJECT_STATUS ='D' where PROJECT_NUMBER=#{projectNumber} 
     </update>
     
     <select id="projectListCount" resultType="_int">
@@ -397,6 +397,18 @@
    
    <update id="updateNews" parameterType="string" >
 		update news set news_status='Y' where project_number=#{pno}   
+   </update>
+   
+   <update id="updateMember" parameterType="string">
+   		update MEMBER
+			set user_type=3
+			where user_no=
+			(
+			select user_no
+			from PROJECT
+			join MEMBER using(user_NO)
+			where PROJECT_NUMBER=#{pno}
+			)
    </update>
     
     <select id="sales1" parameterType="string"  resultType="_int">

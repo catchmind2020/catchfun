@@ -560,7 +560,7 @@ public class FundingController {
 	
 	// Member 부분
 	@RequestMapping("bookingList.me")
-	public ModelAndView selectBookingList(ModelAndView mv, HttpSession session) {
+	public ModelAndView selectBookingList(ModelAndView mv, HttpSession session, String chc) {
 	
 		Member m = (Member)session.getAttribute("loginUser");
 		String userNo = m.getUserNo();
@@ -570,6 +570,7 @@ public class FundingController {
 		
 		mv.addObject("myWish", list);		
 		mv.addObject("fl", fl);
+		mv.addObject("chc", chc);
 		
 		mv.setViewName("member/mypage2");
 		

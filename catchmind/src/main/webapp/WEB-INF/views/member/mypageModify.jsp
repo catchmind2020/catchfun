@@ -74,7 +74,7 @@
 	font-size: 20px;
 }
 
- table {
+#table {
 	border-top: 0.3px solid black;
 	border-bottom: 0.3px solid black;
 	height: 500px;
@@ -335,7 +335,7 @@ tbody {
 					<div id="modify">
 						<form action="update.me" method="post" onsubmit="">
 						<P style="text-align: left;">회원정보변경</P>
-						<table>
+						<table id="table">
 							<thead>
 								<ul class=im1>
 									<tr>

@@ -17,6 +17,7 @@ public class Category {
 	//	Category
 	private String projectCategory;
 	private String projectCategoryName;
+	private Date categoryDate;
 	
 	//	Attachment
 	private String fileNo;

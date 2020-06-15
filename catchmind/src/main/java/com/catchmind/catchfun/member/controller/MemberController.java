@@ -430,7 +430,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberEnrollForm.me")
-	public ModelAndView memberEnrollForm() {
+	public ModelAndView memberEnrollForm(HttpSession ss) {
 		
 		ModelAndView mv = new ModelAndView();
 		int ran = new Random().nextInt(900000) + 100000;
@@ -443,8 +443,9 @@ public class MemberController {
 		//return "member/memberEnrollForm";
 	}
 	
+	
 	@RequestMapping("insert.me")
-	public String insertMember(Member m, Model model, HttpSession session) {
+	public String insertMember(Member m, Model model, HttpSession session ) {
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
@@ -455,7 +456,7 @@ public class MemberController {
 			
 			session.setAttribute("msg", "회원가입 성공!");
 			return "redirect:/";
-			
+			//
 		}else {	// 회원가입실패
 			
 			model.addAttribute("msg", "회원가입 실패");
@@ -485,10 +486,12 @@ public class MemberController {
 		
 	}
 	
+	
+	
 	@RequestMapping("updatePwd.me")
 	public String updatePwd(String pass1, Model model, HttpSession session) {
 		
-		
+		System.out.println(pass1);
 		
 		
 		
@@ -500,9 +503,9 @@ public class MemberController {
 		// loginUser에 userPwd : 암호문
 		// 		m 에 userPwd : 로그인 시 입력한 비밀번호(평문)
 		//System.out.println(loginUser);
-		if(loginUser != null && bcryptPasswordEncoder.matches(pass1, member.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 
+			System.out.println(loginUser);
 			//System.out.println("성공성공");
 		
 		
@@ -511,25 +514,21 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(pass1);
 	
 		
-		loginUser.setChangePwd(encPwd);
+		member.setChangePwd(encPwd);
 		
 		
-		int result = mService.updatePwd(loginUser);
+		mService.updatePwd(member);
 		
 		
 		return "member/login"; //myPage.me
 		
-		}else { // 회원정보 수정 실패 --> 에러페이지로 포워딩
-			
-			model.addAttribute("msg", "현재비밀번호를 잘못 입력하셨습니다.");
-			return "member/passwordChange";
-		}
+	
 		
 		
 	}
 	
 	
-	
+
 	@RequestMapping("idpwdFind.me")
 	public String idpwdFind() {
 		return "member/idpwdFind";
@@ -965,22 +964,40 @@ public class MemberController {
 		
 	}
 	
-	@ResponseBody
+	//@ResponseBody
 	@RequestMapping("idFind.me")
-	public String idFindMember(Member m, Model model) {
-		
+	public ModelAndView idFindMember(Member m, ModelAndView mv) {
+		System.out.println("ddd" + m);
 		ArrayList<Member> findId = mService.idFindMember(m);
+		System.out.println(findId);
 		
-		model.addAttribute("findId", findId);
+		mv.addObject("findId", findId);
 		
-		if(findId != null) {
-			return "success";
-		}else {
-			return "fail";
-		}
+		return mv;
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "idFind.me2", produces = "application/json; charset=utf-8")
+	public String idFindMember2(Member m) {
+		
+		//System.out.println("ddd" + m);
+		
+		ArrayList<Member> list = mService.idFindMember(m); //findId
+		
+		//System.out.println(list);
+		
+		//mv.addObject("findId", findId);
+		
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(list);
 		
 	}
 
+	
+	
+	
+	
 	/*
 	@RequestMapping(value="myWish.me")
 	public ModelAndView noticeDetail(HttpSession session, ModelAndView mv) {

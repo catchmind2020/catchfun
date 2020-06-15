@@ -405,7 +405,7 @@
 	<insert id="insertProject" parameterType="Project2">
 		insert into PROJECT
 		values('PR'||SEQ_PRNO.nextval, 'C1', #{userNo},
-		#{projectName},default,default,default,default,default,default,default,'S',default,default)
+		#{projectName},default,default,default,default,default,default,default,'S',default,'N')
 	</insert>
 
 	<insert id="insertFile" parameterType="Project2">
