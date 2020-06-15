@@ -159,9 +159,9 @@
 	                	<div class="card mb-5" style="width: 320px;  margin-left: 1%;">
 							<div class="card-header py-3">
 						
-							<h6 class="m-0 font-weight-bold text-primary" style="font-size: 22px;">${ r.rewardCost }원</h6>
+							<h6 class="m-0 font-weight-bold text-primary" style="font-size: 22px;"><fmt:formatNumber value="${ r.rewardCost }" pattern="#,###" />원</h6>
 							<h1 class="black text-right">
-							남은수량 :${ r.rewardRemainingQuantity }개
+							남은수량 :<fmt:formatNumber value="${ r.rewardRemainingQuantity }" pattern="#,###" />개
 							</h1>
 							</div>
 							
@@ -171,7 +171,7 @@
 							</h1>
 							<h1 class="black" style="line-height:150%">
 							${ r.rewardContent }<br>
-							배송비:${ r.rewarDeliveryCost }
+							배송비:<fmt:formatNumber value="${ r.rewarDeliveryCost }" pattern="#,###" />원
 							</h1>
 							
 							<c:forEach items="${ optionlist }" var="op">
