@@ -586,6 +586,7 @@ public class AdminController2 {
 		aService2.updateFunding(pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 		aService2.updateReward(pno); // 리워드 정보
 		aService2.updateNews(pno); // 새소식 정보
+		aService2.updateMember(pno);
 		
 		return "redirect:projectList.ad?currentPage=1";
 		

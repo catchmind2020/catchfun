@@ -304,6 +304,10 @@ public class AdminDao2 {
 		return sqlSession.update("adminMapper2.updateNews", pno);
 	}
 	
+	public int updateMember(SqlSessionTemplate sqlSession, String pno) {
+		return sqlSession.update("adminMapper2.updateMember", pno);
+	}
+	
 	public int sales1(SqlSessionTemplate sqlSession, String sDate) {
 		return sqlSession.selectOne("adminMapper2.sales1", sDate);
 	
