@@ -147,6 +147,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.updatePwd(sqlSession, m);
 	}
 
+	/*
+	 * @Override public Member selectId(Member m) { // TODO Auto-generated method
+	 * stub return mDao.selectId(sqlSession, m);
+	 * 
+	 * }
+	 */
 	@Override
 	public Member selectId(Member m) {
 		// TODO Auto-generated method stub
