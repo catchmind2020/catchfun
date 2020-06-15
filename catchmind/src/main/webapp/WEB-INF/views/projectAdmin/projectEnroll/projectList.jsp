@@ -111,6 +111,7 @@
 						
 									<input type="hidden" name="projectName" value="${ p.projectName }">
 										<input type="hidden" name="projectNo" value="${ p.projectNo }">
+											프로젝트상태 : ${ p.projectStatus }
 										<div class="col-auto text-right" id="addReply">
 											<button type="submit" class="btn btn-success ">작성</button>
 										</div>

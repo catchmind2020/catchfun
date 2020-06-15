@@ -333,12 +333,16 @@
 						<div class="col-auto">
 
 							<a href="<%=contextPath%>/enrollProject.pa">
-								<button type="button" class="btn btn-primary">제출완료</button>
+								<button type="button"  style="width: 200px;" class="btn btn-primary">제출완료</button>
 							</a> 
-							
-							<a href="<%=contextPath%>/enrollProject.pa">
-								<button type="button" class="btn btn-primary">수정요청</button>
+								<a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
 							</a>
+							<a href="<%=contextPath%>/enrollProject.pa">
+								<button type="button" style="width: 200px;" class="btn btn-primary">수정요청</button>
+							</a>
+							
+							
 						</div>
 					</c:when>
 
@@ -353,6 +357,10 @@
 								<button type="button" style="width: 200px;" class="btn btn-primary">제출하기</button>
 							</a> 
 						</div>
+							<a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
+							</a>
+						
 					</c:when>
 
 					<c:otherwise>
@@ -363,6 +371,9 @@
 								<button type="submit" class="btn btn-primary btn-user btn-block"
 									style="width: 200px;" disabled>제출하기</button>
 							</div>
+								<a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
+							</a>
 
 						
 						</div>

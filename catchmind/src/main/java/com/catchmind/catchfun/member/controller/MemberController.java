@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.catchmind.catchfun.admin.model.vo.Category;
-import com.catchmind.catchfun.admin.model.vo.Notice;
 import com.catchmind.catchfun.admin.model.vo.Question;
 import com.catchmind.catchfun.common.model.vo.PageInfo;
 import com.catchmind.catchfun.common.template.Pagination;
@@ -742,40 +737,33 @@ public class MemberController {
 		
 		System.out.println("객체 테스트1(객체) : " + m);
 		
-		int pwdFind = mService.pwdFind(m);
-		System.out.println("객체 테스트2(1) : " + pwdFind);
-		
-		
-		if(pwdFind > 0) {
-			
-			//이메일 인증
-			int ran = new Random().nextInt(900000) + 100000;
-			
-			HttpSession session = req.getSession(true);
-			String authCode = String.valueOf(ran);
-			String subject = "캐치펀 회원가입 인증 코드 발급 안내 입니다.";
-			StringBuilder sb = new StringBuilder();
-			sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
-			
-			session.setAttribute("pw", authCode);
-			
-			System.out.println(authCode);
-			
-			if(ms.send(subject, sb.toString(), "캐치마인드", userId, null)) {
-				// 메일 발송 성공
-				
-//				int updatePwd = mService.updatePwd(authCode);
-				
-				return "success";
-			}else {
-				// 메일 발송 실패
-				return "fail";
-			}
-			
-		}else {
-			return "fail";
-		}
-			
+		/* int pwdFind = mService.pwdFind(m); */
+		/*
+		 * System.out.println("객체 테스트2(1) : " + pwdFind);
+		 * 
+		 * 
+		 * if(pwdFind > 0) {
+		 * 
+		 * //이메일 인증 int ran = new Random().nextInt(900000) + 100000;
+		 * 
+		 * HttpSession session = req.getSession(true); String authCode =
+		 * String.valueOf(ran); String subject = "캐치펀 회원가입 인증 코드 발급 안내 입니다.";
+		 * StringBuilder sb = new StringBuilder(); sb.append("귀하의 인증 코드는 " + authCode +
+		 * "입니다.");
+		 * 
+		 * session.setAttribute("pw", authCode);
+		 * 
+		 * System.out.println(authCode);
+		 * 
+		 * if(ms.send(subject, sb.toString(), "캐치마인드", userId, null)) { // 메일 발송 성공
+		 * 
+		 * // int updatePwd = mService.updatePwd(authCode);
+		 * 
+		 * return "success"; }else { // 메일 발송 실패 return "fail"; }
+		 * 
+		 * }else { return "fail"; }
+		 */
+		return "success"; // 빨간줄 없애기용 그냥 써둠
 	}
 	
 	
@@ -1013,7 +1001,8 @@ public class MemberController {
 		}
 		
 	}
-	
+
+	/*
 	@RequestMapping(value="myWish.me")
 	public ModelAndView noticeDetail(String userNo, ModelAndView mv) {
 		
@@ -1028,7 +1017,22 @@ public class MemberController {
 		
 		return mv;
 	}
+	*/
 	
+	@ResponseBody
+	@RequestMapping(value="myWish.me", produces="application/json; charset=utf-8")
+	public String myWishList(String userNo) {
+		
+		System.out.println("GSON 테스트 : " +userNo);
+		
+		ArrayList<MyWish> list3 = mService.myWishList(userNo);
+		
+		System.out.println("리스트3 : " + list3);
+		System.out.println("실행완료 ? GSON");
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list3);
+		
+	}
 	
 // 아이유 끝
 	
