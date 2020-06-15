@@ -141,6 +141,7 @@ public interface AdminService2 {
 	int updateFunding(String pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 	int updateReward(String pno); // 리워드 정보
 	int updateNews(String pno); // 새소식 정보
+	int updateMember(String pno);// 맴버 type변경
 	
 	int sales1(String sDate);
 	int sales2(String sDate);
@@ -159,6 +160,7 @@ public interface AdminService2 {
 	int returnFunding(String pno); // 펀딩 내역 정보 (현재 펀딩금액, 수량 파악)
 	int returnReward(String pno); // 리워드 정보
 	int returnNews(String pno); // 새소식 정보
+	
 	
 	int insertReturn(ProjectReturn p);
 	

@@ -202,16 +202,16 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 	  $(document).ready(function(){
 	    
 	    $('.prev').click(function(){
-	        $('.list').stop().animate({'margin-left':'0px'},function(){
+	        $('.list').stop().animate({'margin-left':'-1200px'},function(){
 	            $('.list>li').eq(0).appendTo('.list');
-	            $('.list').css({'margin-left':'-1200px'});
+	            $('.list').css({'margin-left':'0px'});
 	        });
 	    });
 	    
 	    $('.next').click(function(){
 	        $('.list').stop().animate({'margin-left':'0px'},function(){
-	            $('.list>li').eq(2).prependTo('.list');
-	            $('.list').css({'margin-left':'0px'});
+	            $('.list>li').eq(1).prependTo('.list');
+	            $('.list').css({'margin-left':'-1200px'});
 	        });
 	    });
 	    

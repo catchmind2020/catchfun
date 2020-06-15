@@ -10,6 +10,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+/* 폰트 초기화*/
+body, input, textarea, select, button, table {
+    font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
+    color: #222; font-size: 18px; line-height: 1.5;} 
+   
+
+.tabcontent{
+    margin-right: 305px;
+    margin-left: 305px;
+}
+
+table {
+    width: 600px;
+    height: 340px;
+    padding-top:60px;
+    padding-left:300px;
+    padding-right:300px; 
+    margin:0 auto;
+    margin-top: 18px;
+}
+
     <style>
 
 
@@ -35,6 +57,7 @@
     margin-top: 25px;
     margin-bottom: 10px;
 } 
+/* input[type=text],input[type=password],input[type=email], select { */
 #email, select {
   width: 100%;
   padding: 12px 20px;
@@ -58,6 +81,11 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: #188080;
+}
+
+#email_btn{
+width: 400px;
+height: 40px;
 }
 
 input[type=submit] {
@@ -88,6 +116,15 @@ height: 40px;
 
 #email_btn:hover {background-color:white; }
 
+    .wrap{width:1000px; height:1000px; margin:auto; 
+        text-align: center; font-size: 30px; color: black;}
+    .wrap>#header{width:100%; height:5%; margin-bottom:60px;}
+    .wrap>#content{width:100%; height:70%;}
+    .wrap>#content>#content_1{width:100%; height:10%;margin-bottom:10px;}
+    .wrap>#content>#content_2>table{width:100%; height:80%; font-size:15px; background-color: rgb(243, 242, 242);}
+    .wrap>#footer{width:100%; height:20%;}
+
+    </style>
 #id_table{margin-top: 100px;}
 
     .wrap{width:1000px; height:1000px; margin:auto; 
@@ -122,6 +159,7 @@ height: 40px;
             <div id="content_1">
                 <table id="table1">
                     <tr>
+                       <!--  <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td> -->
                         <td style="font-size:30px; text-align: left;"><strong>아이디∙비밀번호 찾기</strong></td>
                         <td></td>
                     </tr>
@@ -135,8 +173,6 @@ height: 40px;
 
             <div id="content_2">
               <div class="w3-container">
-               
-              
                 <div class="w3-row">
                   <a href="javascript:void(0)" onclick="openCity(event, 'idfind');">
                     <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">아이디찾기</div>
@@ -144,14 +180,13 @@ height: 40px;
                   <a href="javascript:void(0)" onclick="openCity(event, 'passwordfind');">
                     <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">비밀번호찾기</div>
                   </a>
-                  
                 </div>
-              
                 <div id="idfind" class="w3-container city" style="display:none">
                    <center>
                     <table id="id_table">
                     <tr>
                         <td>
+                            <form action="#">
                             <form action="pwdFind.me">
                             	<div id="idfind1" style="width:300px;">
 		                            <label for="email">
@@ -168,6 +203,9 @@ height: 40px;
 	                            	  <input type="button" id="idFind1" value="완료">
 	                        	</td>
                         	</div>
+                    	 </tr>
+                    	</table>
+                    </center>
                     	</tr>
                     </center>
                    </table>
@@ -281,9 +319,7 @@ height: 40px;
         						}else {					// DB에 조회되지않는 정보
         							alert("회원 정보가 존재하지 않습니다."); 
         						}
-        					
         						},error:function(){
-        							
         							
         							console.log("ajax통신 실패!!");
         						}

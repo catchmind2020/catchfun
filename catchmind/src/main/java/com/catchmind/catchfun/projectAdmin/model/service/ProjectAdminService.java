@@ -78,7 +78,8 @@ public interface ProjectAdminService {
 	int updateFile(Project project);
 	int updateNews(News news);
 	int updateBasic(String projectNo);
-
+	int updateFund(String fundingNo);
+	
 	int updateMaker(String projectNo);
 
 	int updateStory(String projectNo);

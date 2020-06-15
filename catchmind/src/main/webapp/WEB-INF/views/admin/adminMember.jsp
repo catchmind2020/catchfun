@@ -54,6 +54,7 @@
 		width:800px;
 		padding-left:400px;
 	}
+
 	</style>
 </head>
 <body>

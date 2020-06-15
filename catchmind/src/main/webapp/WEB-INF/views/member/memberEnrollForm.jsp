@@ -72,7 +72,19 @@ button[type=submit] {
 button[type=submit]:hover {
 	background-color: #188080;
 }
-
+#disbuttom{
+	width: 300px;
+	height: 60px;
+	width: 100%;
+	background-color: #28d7d7;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	
+}
 #del_postcode{
 	width: 73%;
 	padding: 12px 20px;
@@ -175,31 +187,32 @@ button[type=submit]:hover {
 							<td>
 								<div class="form-group" style="text-align: left;">
 									<!-- <form action="auth.do" method="post"> -->
-										<input type="email" id="userId" name="userId" placeholder="이메일" required style="width: 300px;">
+										<input type="email" id="userId" name="userId" placeholder="이메일" value="${userId}" required style="width: 300px;">
 										<button type="button" class="btn btn-info" id="email_btn1">발송</button>
 										 <div id="checkResult" style="display:none; font-size:0.8em"></div>
 										<label for="email"><p style="text-align: left;">위 이메일로 인증번호가 발송됩니다.</p></label>
 									
 									<%-- <form action="join_injeung.do${dice}" method="post"> --%>
-										<input type="text" id="certified" name="certified" placeholder="인증번호입력" style="width: 300px;"> 
-										<button type="button" class="btn btn-info" id="email_btn">인증</button>
+										<input type="text" id="certified" name="certified" placeholder="인증번호입력" value="${certified}" style="width: 300px;"> 
+										<button type="button" class="btn btn-info" id="email_btn" >인증</button>
 									</div>
-									<input type="hidden" path="random" id="random" value="${random}" />
+									
+								<%-- 	<input type="hidden" path="random" id="random" value="${random}" /> --%>
 								</td>
 						<%-- 			<form action="join_injeung.do${dice}" method="post">
 										<input type="text" id="certified" name="certified" placeholder="인증번호입력" required style="width: 300px;"> 
 										<button id="email_btn">인증</button>
 									</form> --%>
-							</td>
+							
 							<td></td>
 						</tr>
 						
 						<tr>
-							<td><input type="text" id="userName" name="userName" placeholder="이름" required>
+							<td><input type="text" id="userName" name="userName" placeholder="이름" value="" required>
 							</td>
 						</tr>
 						<tr>
-							<td><input type="password" placeholder="Enter Password" name="userPwd" class="pass" id="repwd1" oninput="checkPwd()" required></td>
+							<td><input type="password" placeholder="Enter Password" name="userPwd" class="pass" id="repwd1" value="" oninput="checkPwd()" required></td>
 						</tr>
 						<tr>
 							<td><input type="password"  placeholder="Repeat Password" name="psw-repeat" class="pass" id="repwd" oninput="checkPwd()" required>
@@ -219,14 +232,28 @@ button[type=submit]:hover {
 	                   </tr>
 	                   <tr>
 	                     <td style="width:200px; padding-top:0">
-	                     <input type="text" id="del_detailAddress"  name="addressDetail" placeholder="상세주소" style="width:540px;"> <!-- 사용자가 직접 입력하는 칸  -->
+	                     <input type="text" id="del_detailAddress"  name="addressDetail" placeholder="상세주소" style="width:540px;">
+	                   
 	                     </td>
 	                  </tr>
 					  <tr>
-						<td><button type="submit" id="enrollBtn" class="enrollBtn" onclick="return next();" >완료</button></td>
+					  
+					  
+					 
+					  
+					  	 <c:choose>
+							<c:when test="${ estatus eq 'Y' }">
+							<td><button type="submit" id="enrollBtn" class="enrollBtn" onclick="return next();" >완료</button></td>
+					
+							</c:when>
+							<c:otherwise>
+							<td><button id="disbuttom" disabled>완료</button></td>
+							</c:otherwise>
+						</c:choose> 
 					</tr>
 					</table>
 					</form>
+					 
 				</div>
 			</div>
 		</div>
@@ -264,7 +291,7 @@ button[type=submit]:hover {
                     // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
-                    }
+                    }W
                     // 조합된 참고항목을 해당 필드에 넣는다.
                     document.getElementById("del_extraAddress").value = extraAddr;
                 
@@ -310,9 +337,30 @@ button[type=submit]:hover {
             var rpwd = document.getElementById("repwd");
             var name = document.getElementById("userName");
             var veri = document.getElementById("phone"); // 전화번호
-
+            var estatus = document.getElementById("estatus");
             // 1) 이름 검사
             //    한글로만 2글자 이상
+            
+            if(estatus.value !="Y"){
+                alert("이메일 인증 해주세요");
+                name.value = "";
+                name.focus();
+                return false;               
+            }
+            
+            
+            
+            regExp = /^[가-힣]{2,}$/; 
+            if(!regExp.test(name.value)){
+                alert("유효한 이름을 입력하세요");
+                name.value = "";
+                name.focus();
+                return false;               
+            }
+            
+           
+          
+            
             regExp = /^[가-힣]{2,}$/; 
             if(!regExp.test(name.value)){
                 alert("유효한 이름을 입력하세요");
@@ -490,19 +538,21 @@ button[type=submit]:hover {
     	$(document).on("click", "#email_btn", function(){
     		
     		//var certifi = document.getElementById("certified");
-    		console.log(${random});
+    	
     		$.ajax({
     			
     			type:"post",
     			url:"emailAuth.do",
-    			data:{authCode:$("#certified").val(), random:${random}},
+    			data:{certified:$("#certified").val(),userId:$("#userId").val()},
     			success:function(data){
     				
     				console.log(data);
     				
 	    			if(data=="complete"){
 	    				alert("인증이 완료되었습니다.");
-	    			}else if(data == "false"){
+	    				
+	    				location.href = "memberEnrollForm.me"
+	    			}else{
 	    				alert("인증번호를 잘못 입력하셨습니다.")
 	    			}
     			},

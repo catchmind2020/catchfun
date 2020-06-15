@@ -34,8 +34,6 @@ table {
     margin-top: 18px;
 }
 
-
-
 /* 임시비밀번호 재발급 Button*/
 .password2{
     width:600px;
@@ -102,9 +100,6 @@ height: 40px;
 
         <div id="content">
             <div id="content_2">
-                
-                
-                
                 <table>
               	<form id="enrollForm" action="updatePwd.me" method="post" onsubmit="">
                     <tr>
