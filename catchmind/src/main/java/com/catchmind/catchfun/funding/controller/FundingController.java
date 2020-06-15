@@ -22,6 +22,7 @@ import com.catchmind.catchfun.funding.model.vo.Report;
 import com.catchmind.catchfun.funding.model.vo.Reward;
 import com.catchmind.catchfun.funding.model.vo.Wishlist;
 import com.catchmind.catchfun.member.model.vo.Member;
+import com.catchmind.catchfun.member.model.vo.MyWish;
 import com.google.gson.GsonBuilder;
 
 @Controller
@@ -459,9 +460,9 @@ public class FundingController {
 	@RequestMapping("selectPayDetail.pro")
 	public ModelAndView selectPayDetail(String pno, ModelAndView mv, HttpSession session) {
 		
-		System.out.println(pno);
+		//System.out.println(pno);
 		Project p = fService.selectProject(pno); // 프로젝트 정보
-		System.out.println(p);
+		//System.out.println(p);
 		Maker m = fService.selectMaker(pno); 	 // 메이커 정보
 		
 		mv.addObject("p", p);
@@ -565,9 +566,12 @@ public class FundingController {
 		String userNo = m.getUserNo();
 		
 		ArrayList<MyFunding> fl = fService.selectBookingList(userNo); // 펀딩 리스트
+		ArrayList<MyWish> list = fService.myWishList(userNo); // 마이찜 리스트
 		
+		mv.addObject("myWish", list);		
 		mv.addObject("fl", fl);
-		mv.setViewName("member/mypage");
+		
+		mv.setViewName("member/mypage2");
 		
 		return mv;
 	}

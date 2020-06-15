@@ -288,16 +288,16 @@
 		    <input type="hidden" id="spon" value=${ spon }>
 		    <input type="hidden" name="currentPoint" id="point" value=${ loginUser.point }> 
 		    
-		    
+		    <br><br>
 	        <!-- <button type="submit" id="next_btn">결제하기</button> -->
 	        <button type="button" id="next_btn">결제하기</button>
-	        <button type="reset" id="cancel_btn">취소</button>
+	        <button type="button" id="cancel_btn" onclick="javascript:history.go(-1);">취소</button>
         </form>
         
         <!-- </form> -->
     </div>
-    <br><br><br><br><br><br>
-   
+    <br><br><br>
+  <%--  <jsp:include page="../common/footer.jsp"/> --%>
 
 
 <script>
