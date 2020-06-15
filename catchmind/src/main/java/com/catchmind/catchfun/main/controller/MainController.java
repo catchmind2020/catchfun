@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,11 +30,11 @@ public class MainController {
 	 * 메인페이지
 	 */
 	@RequestMapping("main.mu")
-	public String projectMain(Model model) {
+	public String projectMain(Model model ) {
 		
 		ArrayList<Main> list = maService.mainSpotlightList();
 		
-	
+		
 		model.addAttribute("list", list);
 		return "main";
 	}

@@ -191,9 +191,7 @@ text {
 										<c:choose>
 
 
-											<c:when test="${ p.projectStatus eq 'S' }">
-												
-													
+											<c:when test="${ p.projectStatus eq 'S' }">					
 												<h6>진행상황: <div class="badge badge-warning badge-warning">작성중</div></h6>
 											
 											</c:when>
@@ -205,7 +203,7 @@ text {
 												<h6>진행상황: <div class="badge badge-success badge-success">진행중</div></h6>
 											</c:when>
 											<c:otherwise>
-												<h6>진행상황: 오류</h6>
+												<h6>진행상황: <div class="badge badge-success badge-danger">반려</div></h6>
 											</c:otherwise>
 										</c:choose>
 										<div class="row">
@@ -213,11 +211,22 @@ text {
 
 
 
+										<c:choose>
 
+
+											<c:when test="${ p.projectStatus eq 'N' }">		
 											<div class="col-auto text-right" id="addReply">
+												<button type="submit" class="btn btn-success " disabled>프로젝트
+													바로가기</button>
+											</div>
+											</c:when>
+												<c:otherwise>
+												<div class="col-auto text-right" id="addReply">
 												<button type="submit" class="btn btn-success ">프로젝트
 													바로가기</button>
 											</div>
+											</c:otherwise>
+											</c:choose>
 										</div>
 									</form>
 								</div>

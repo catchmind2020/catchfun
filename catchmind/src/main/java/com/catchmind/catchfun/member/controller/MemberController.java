@@ -430,7 +430,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberEnrollForm.me")
-	public ModelAndView memberEnrollForm() {
+	public ModelAndView memberEnrollForm(HttpSession ss) {
 		
 		ModelAndView mv = new ModelAndView();
 		int ran = new Random().nextInt(900000) + 100000;
@@ -443,8 +443,9 @@ public class MemberController {
 		//return "member/memberEnrollForm";
 	}
 	
+	
 	@RequestMapping("insert.me")
-	public String insertMember(Member m, Model model, HttpSession session) {
+	public String insertMember(Member m, Model model, HttpSession session ) {
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd); // 암호문으로 받아서 insert 요청
@@ -455,7 +456,7 @@ public class MemberController {
 			
 			session.setAttribute("msg", "회원가입 성공!");
 			return "redirect:/";
-			
+			//
 		}else {	// 회원가입실패
 			
 			model.addAttribute("msg", "회원가입 실패");
