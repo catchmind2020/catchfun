@@ -111,14 +111,22 @@
 
 
 
-
+							
 							<c:choose>
+							<c:when test="${ project.projectStatus eq 'Y' }">
+								승인완료&nbsp;&nbsp;&nbsp;
+									<div class="col-auto">
+
+									<button type="button" class="btn btn-success">승인완료</button>
+
+								</div>
+							</c:when>
 								<c:when test="${ project.projectStatus eq 'E' }">
 								제출완료&nbsp;&nbsp;&nbsp;
 									<div class="col-auto">
-										
-											<button type="button" class="btn btn-info">제출완료</button>
-										
+
+										<button type="button" class="btn btn-info">제출완료</button>
+
 									</div>
 								</c:when>
 								<c:when test="${ !empty projectBasic }">
@@ -155,12 +163,20 @@
 							</div>
 
 							<c:choose>
-							<c:when test="${ project.projectStatus eq 'E' }">
+							<c:when test="${ project.projectStatus eq 'Y' }">
+								승인완료&nbsp;&nbsp;&nbsp;
+									<div class="col-auto">
+
+									<button type="button" class="btn btn-success">승인완료</button>
+
+								</div>
+							</c:when>
+								<c:when test="${ project.projectStatus eq 'E' }">
 								제출완료&nbsp;&nbsp;&nbsp;
 									<div class="col-auto">
-										
-											<button type="button" class="btn btn-info">제출완료</button>
-										
+
+										<button type="button" class="btn btn-info">제출완료</button>
+
 									</div>
 								</c:when>
 								<c:when test="${ !empty project.projectContent }">
@@ -198,12 +214,20 @@
 							</div>
 
 							<c:choose>
-							<c:when test="${ project.projectStatus eq 'E' }">
+								<c:when test="${ project.projectStatus eq 'Y' }">
+								승인완료&nbsp;&nbsp;&nbsp;
+									<div class="col-auto">
+
+										<button type="button" class="btn btn-success">승인완료</button>
+
+									</div>
+								</c:when>
+								<c:when test="${ project.projectStatus eq 'E' }">
 								제출완료&nbsp;&nbsp;&nbsp;
 									<div class="col-auto">
-										
-											<button type="button" class="btn btn-info">제출완료</button>
-										
+
+										<button type="button" class="btn btn-info">제출완료</button>
+
 									</div>
 								</c:when>
 								<c:when test="${ !empty ilist }">
@@ -243,12 +267,20 @@
 							</div>
 
 							<c:choose>
-							<c:when test="${ project.projectStatus eq 'E' }">
+								<c:when test="${ project.projectStatus eq 'Y' }">
+								승인완료&nbsp;&nbsp;&nbsp;
+									<div class="col-auto">
+
+										<button type="button" class="btn btn-success">승인완료</button>
+
+									</div>
+								</c:when>
+								<c:when test="${ project.projectStatus eq 'E' }">
 								제출완료&nbsp;&nbsp;&nbsp;
 									<div class="col-auto">
-										
-											<button type="button" class="btn btn-info">제출완료</button>
-										
+
+										<button type="button" class="btn btn-info">제출완료</button>
+
 									</div>
 								</c:when>
 								<c:when test="${ !empty rlist }">
@@ -287,12 +319,20 @@
 								<div class="h5 mb-0 font-weight-bold text-gray-800">메이커정보</div>
 							</div>
 							<c:choose>
-							<c:when test="${ project.projectStatus eq 'E' }">
+								<c:when test="${ project.projectStatus eq 'Y' }">
+								승인완료&nbsp;&nbsp;&nbsp;
+									<div class="col-auto">
+
+										<button type="button" class="btn btn-success">승인완료</button>
+
+									</div>
+								</c:when>
+								<c:when test="${ project.projectStatus eq 'E' }">
 								제출완료&nbsp;&nbsp;&nbsp;
 									<div class="col-auto">
-										
-											<button type="button" class="btn btn-info">제출완료</button>
-										
+
+										<button type="button" class="btn btn-info">제출완료</button>
+
 									</div>
 								</c:when>
 								<c:when test="${ !empty projectMaker }">
@@ -329,23 +369,38 @@
 
 
 					<c:when test="${ project.projectStatus eq 'E' }">
-						
+
 						<div class="col-auto">
 
 							<a href="<%=contextPath%>/enrollProject.pa">
-								<button type="button"  style="width: 200px;" class="btn btn-primary">제출완료</button>
-							</a> &nbsp;
-								<a href="<%=contextPath%>">
-								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
-							</a>&nbsp;
-							<a href="<%=contextPath%>/enrollProject.pa">
-								<button type="button" style="width: 200px;" class="btn btn-primary">수정요청</button>
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">제출완료</button>
+							</a> &nbsp; <a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">메인페이지</button>
+							</a>&nbsp; <a href="<%=contextPath%>/enrollProject.pa">
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">수정요청</button>
 							</a>
-							
-							
+
+
 						</div>
 					</c:when>
+					<c:when test="${ project.projectStatus eq 'Y' }">
 
+						<div class="col-auto">
+
+							<a href="<%=contextPath%>/enrollProject.pa">
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary" disabled>승인완료</button>
+							</a> &nbsp; <a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">메인페이지</button>
+							</a>
+
+
+						</div>
+					</c:when>
 					<c:when
 						test="${ !empty condition1 and !empty condition2
 					and !empty condition3 and !empty condition4
@@ -354,14 +409,15 @@
 						<div class="col-auto">
 
 							<a href="<%=contextPath%>/enrollProject.pa">
-								<button type="button" style="width: 200px;" class="btn btn-primary">제출하기</button>
-							</a> &nbsp;
-								<a href="<%=contextPath%>">
-								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">제출하기</button>
+							</a> &nbsp; <a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">메인페이지</button>
 							</a>
 						</div>
-						
-						
+
+
 					</c:when>
 
 					<c:otherwise>
@@ -372,11 +428,12 @@
 								<button type="submit" class="btn btn-primary btn-user btn-block"
 									style="width: 200px;" disabled>제출하기</button>
 							</div>
-								<a href="<%=contextPath%>">
-								<button type="button" style="width: 200px;" class="btn btn-primary">메인페이지</button>
+							&nbsp; <a href="<%=contextPath%>">
+								<button type="button" style="width: 200px;"
+									class="btn btn-primary">메인페이지</button>
 							</a>
 
-						
+
 						</div>
 
 					</c:otherwise>

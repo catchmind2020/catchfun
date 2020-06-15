@@ -173,7 +173,7 @@ text {
 							<div class="card mb-5"
 								style="width: 320px; margin-left: 1%; text-align: left; border: 2px solid darkgray;">
 								<div class=" card-header bg-success-600 py-3">
-									<h6 class="m-0 font-weight-bold text-primary">${ p.projectName }</h6>
+									<h6 class="m-0 font-weight-bold">${ p.projectName }</h6>
 								</div>
 								<div class="card-body ">
 									<h6 class="black">
