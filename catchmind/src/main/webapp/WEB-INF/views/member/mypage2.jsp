@@ -36,7 +36,7 @@ section {
     border-top: 1px solid #ddd;}
 
 /*라디오버튼 숨김*/
-  input {
+#tab1,#tab2 {
       display: none;}
 
 label {
