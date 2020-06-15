@@ -378,9 +378,6 @@
 							</a> &nbsp; <a href="<%=contextPath%>">
 								<button type="button" style="width: 200px;"
 									class="btn btn-primary">메인페이지</button>
-							</a>&nbsp; <a href="<%=contextPath%>/enrollProject.pa">
-								<button type="button" style="width: 200px;"
-									class="btn btn-primary">수정요청</button>
 							</a>
 
 
