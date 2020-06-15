@@ -399,7 +399,7 @@ button[type=submit]:hover {
             $idInput.keyup(function(){
           	 
           	  //console.log($idInput.val());
-  			  if($idInput.val().length >= 5){ // 적어도 아이디가 5글자 이상되었을 때 본격적으로 중복체크
+  			  if($idInput.val().length >= 13){ // 적어도 아이디가 글자 이상되었을 때 본격적으로 중복체크
   				  
   				  $.ajax({
   					  url:"idCheck.me",

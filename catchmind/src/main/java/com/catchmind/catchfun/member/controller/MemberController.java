@@ -632,14 +632,14 @@ public class MemberController {
 	}
 	// 메세지(질문) 삭제하기
 	@RequestMapping("delete.qu")
-	public String deleteMessage(String qno, Question q, Model model) { 
+	public String deleteMessage(String qno, String userNo, Question q, Model model) { 
 		
 		int result = mService.deleteMessage(qno);
 		
 		
 		if(result > 0) {// 게시글 삭제 성공 
 
-			return "redirect:messageRest.me?userNo=" + q.getUserNo()
+			return "redirect:messageRest.me?currentPage=1&userNo=" + userNo
 			;//"redirect:messageRest.me?userNo=M3&currentPage=1";
 			
 		}else {	// 게시글 삭제 실패
@@ -788,31 +788,28 @@ public class MemberController {
 
 	
 	
-	@RequestMapping(value="	selectId.me")
-	public String selectId(Member m, Model model, HttpSession session) {
-		
-		System.out.println(m);
-		
-		Member member = mService.selectId(m);
-		
-		
-		
-		session.setAttribute("loginUser", m);
-		
-	
-		
-		if(pw.equals(m.getCerti())) {
-//			int updatePwd = mService.updatePwd(certi);
-			
-			model.addAttribute(m);
-			return "member/messageUpdateForm";
-			
-		}else {
-			return "fail";
-		}
-			
-	}
-			
+	/*
+	 * @RequestMapping(value="	selectId.me") public String selectId(Member m, Model
+	 * model, HttpSession session) {
+	 * 
+	 * System.out.println(m);
+	 * 
+	 * Member member = mService.selectId(m);
+	 * 
+	 * 
+	 * 
+	 * session.setAttribute("loginUser", m);
+	 * 
+	 * 
+	 * 
+	 * if(pw.equals(m.getCerti())) { // int updatePwd = mService.updatePwd(certi);
+	 * 
+	 * model.addAttribute(m); return "member/messageUpdateForm";
+	 * 
+	 * }else { return "fail"; }
+	 * 
+	 * }
+	 */
 
 	
 	

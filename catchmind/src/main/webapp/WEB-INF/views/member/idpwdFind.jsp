@@ -129,24 +129,6 @@ input[type=submit]:hover {
     .wrap>#footer{width:100%; height:20%;}
     </style>
      <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
-.wrap>#content>#content_2 {
-	width: 100%;
-	height: 75%;
-	font-size: 15px;
-	background-color: rgb(243, 242, 242);
-}
-
-.wrap>#content>#content_1>table {
-	width: 40%;
-	height: 100%;
-	padding: 20px;
-	font-size: 15px;
-}
-
-.wrap>#footer {
-	width: 100%;
-	height: 20%;
-}
 </style>
 <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
 </head>
