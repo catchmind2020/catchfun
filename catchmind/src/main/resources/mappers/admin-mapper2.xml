@@ -304,7 +304,7 @@
     </select>
     
     <update id="pjDelete" parameterType="string">
-    	update project set PROJECT_STATUS ='F' where PROJECT_NUMBER=#{projectNumber} 
+    	update project set PROJECT_STATUS ='D' where PROJECT_NUMBER=#{projectNumber} 
     </update>
     
     <select id="projectListCount" resultType="_int">
