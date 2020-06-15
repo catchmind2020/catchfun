@@ -162,7 +162,10 @@ height: 40px;
 		                                </p></label>
 		                              <input type="text" id="userName1" name="userName" placeholder="이름">
 		                              <input type="text" id="phone1" name="phone" placeholder="휴대폰번호'-'없이 입력">
-	                            	  <input type="submit" value="완료">
+		                              <div id="idFindDiv">
+		                              
+		                              </div>
+	                            	  <input type="button" id="idFind1" value="완료">
 	                        	</td>
                         	</div>
                     	</tr>
@@ -175,8 +178,8 @@ height: 40px;
                     <table id="id_table">
                     <tr>
                         <td>
-                            <form action="pwdFind2.me">
-                            	<div id="passwordfind1" style="width:300px;">
+<!--                             <form action="pwdFind2.me">
+ -->                            	<div id="passwordfind1" style="width:300px;">
                             		<input type="text" id="userId2" name="userId" placeholder="아이디">
 		                            <input type="text" id="userName2" name="userName" placeholder="이름">
 		                            <input type="text" id="phone2" name="phone" placeholder="전화번호 '-'포함 입력" required>
@@ -187,9 +190,9 @@ height: 40px;
 							                                    이메일로 인증번호를 발송해드립니다. <br>
 		                                </p></label>
 		                            <input type="text" id="certi" name="certi" placeholder="인증번호입력">
-		                            <input id="pwdBtn2" type="submit" value="인증확인">
+		                            <input id="pwdBtn2" type="button" value="인증확인">
 	                           </div>
-	                           </form>
+	                         <!--   </form> -->
                         </td>
                         
                         <td>
@@ -290,6 +293,32 @@ height: 40px;
         			});
         			
         		});
+                 	
+                 	
+                $("#idFind1").click(function(){
+                	
+                	$.ajax({
+    					url:"idFind.me2",
+    					data:{userName:$("#userName1").val(), 
+    						  phone:$("#phone1").val()},
+    					type:"post", 
+    					
+    					success:function(list){
+    						
+    						var value = "조회된 아이디는 다음과 같습니다.<br>";
+    						
+    	   					for(var i in list){
+    	   						
+    	   						value += list[i].userId + "<br>";
+    	   					}
+
+							$("#idFindDiv").html(value);
+    	   					
+   						},error:function(){
+   							console.log("통신실패!")
+   						}
+    				});
+                });
         	</script>
 
                   

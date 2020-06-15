@@ -162,6 +162,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.myWishList(sqlSession, userNo);
 	}
 
+	@Override
+	public Member selectId(Member m) {
+		
+		return null;
+	}
+
 	// 이메일 !!
 
 	/*
