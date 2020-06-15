@@ -45,7 +45,7 @@
 				<i class="fas fa-laugh-wink"></i>
 			</div>
 			<div class="sidebar-brand-text mx-3">
-				프로젝트관리자 : ${  projectUser.projectName }<sup></sup>
+				프로젝트이름 : ${  projectUser.projectName }<sup></sup>
 			</div>
 		</a>
 
@@ -66,7 +66,7 @@
             </svg>
 				</div>
 				<div align="center" style="font-size: small;">
-					<br> ${  projectUser.projectName }님<br> 환영합니다.
+					<br> ${  loginUser.userName }님<br> 환영합니다.
 
 				</div>
 		</a></li>
