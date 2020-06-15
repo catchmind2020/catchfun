@@ -738,8 +738,8 @@ public class MemberController {
 		//System.out.println("객체 테스트1(객체) : " + m);
 		
 		int pwdFind = mService.pwdFind(m);
-		//System.out.println("객체 테스트2(1) : " + pwdFind);
-		
+
+		System.out.println("객체 테스트2(1) : " + pwdFind);
 		
 		if(pwdFind > 0) {
 			
@@ -754,7 +754,7 @@ public class MemberController {
 			
 			session.setAttribute("pw", authCode);
 			
-			//System.out.println(authCode);
+			System.out.println(authCode);
 			
 			if(ms.send(subject, sb.toString(), "캐치마인드", userId, null)) {
 				// 메일 발송 성공
@@ -779,41 +779,15 @@ public class MemberController {
 	
 	
 	
-	
-
-	
-	
-	/*
-	 * @RequestMapping(value="	selectId.me") public String selectId(Member m, Model
-	 * model, HttpSession session) {
-	 * 
-	 * System.out.println(m);
-	 * 
-	 * Member member = mService.selectId(m);
-	 * 
-	 * 
-	 * 
-	 * session.setAttribute("loginUser", m);
-	 * 
-	 * 
-	 * 
-	 * if(pw.equals(m.getCerti())) { // int updatePwd = mService.updatePwd(certi);
-	 * 
-	 * model.addAttribute(m); return "member/messageUpdateForm";
-	 * 
-	 * }else { return "fail"; }
-	 * 
-	 * }
-	 */
-
-	
-	
 	@RequestMapping(value="pwdFind2.me")
 	public String pwdFind(Member m, Model model, HttpSession session) {
 		
 		//System.out.println("인증번호 테스트 : " + m.getCerti());
 		
 		String pw = (String)session.getAttribute("pw");
+		
+		
+		System.out.println("인증요청번호"+pw+"내가쓴번호"+ m.getCerti());
 		
 		session.setAttribute("loginUser", m);
 		
