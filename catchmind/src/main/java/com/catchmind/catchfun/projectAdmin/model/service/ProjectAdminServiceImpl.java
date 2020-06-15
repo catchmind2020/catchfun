@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catchmind.catchfun.common.model.vo.PageInfo;
+import com.catchmind.catchfun.funding.model.vo.FundingList;
 import com.catchmind.catchfun.projectAdmin.model.vo.News;
 import com.catchmind.catchfun.projectAdmin.model.dao.ProjectAdminDao;
 import com.catchmind.catchfun.projectAdmin.model.vo.Category;
@@ -258,6 +259,18 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 	public ArrayList<Project> selectProjectList(String projectNo) {
 		// TODO Auto-generated method stub
 		return paDao.selectProjectList(sqlSession,projectNo);
+	}
+
+	@Override
+	public int updateFund(String fundingNo) {
+		// TODO Auto-generated method stub
+		return paDao.updateFund(sqlSession, fundingNo);
+	}
+
+	@Override
+	public ArrayList<FundingList> selectBookingList(String userNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

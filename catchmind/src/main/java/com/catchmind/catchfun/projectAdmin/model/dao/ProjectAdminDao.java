@@ -186,6 +186,12 @@ public class ProjectAdminDao {
 		
 		return sqlSession.update("projectAdminMapper.updateProject", project);
 	}
+	public int updateFund(SqlSessionTemplate sqlSession, String fundingNo) {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.update("projectAdminMapper.updateFund", fundingNo);
+	}
+	
 	
 	public int updateNews(SqlSessionTemplate sqlSession, News news) {
 		// TODO Auto-generated method stub

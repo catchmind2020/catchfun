@@ -472,6 +472,19 @@ public class ProjectAdminController {
 	}
 	
 	
+	@RequestMapping("updateFund.pa")
+	public String updateNews(String fundingNo,String currentPage, Model model, HttpSession session) {
+
+
+		
+		
+		paService.updateFund(fundingNo); // 등록대기상태변환
+
+		return "redirect:fund.pa?currentPage="+currentPage;
+
+	}
+	
+	
 	
 
 	@RequestMapping("updateMaker2.pa")
