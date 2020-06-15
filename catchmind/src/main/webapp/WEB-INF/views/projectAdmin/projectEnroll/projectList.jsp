@@ -211,11 +211,22 @@ text {
 
 
 
+										<c:choose>
 
+
+											<c:when test="${ p.projectStatus eq 'N' }">		
 											<div class="col-auto text-right" id="addReply">
+												<button type="submit" class="btn btn-success " disabled>프로젝트
+													바로가기</button>
+											</div>
+											</c:when>
+												<c:otherwise>
+												<div class="col-auto text-right" id="addReply">
 												<button type="submit" class="btn btn-success ">프로젝트
 													바로가기</button>
 											</div>
+											</c:otherwise>
+											</c:choose>
 										</div>
 									</form>
 								</div>

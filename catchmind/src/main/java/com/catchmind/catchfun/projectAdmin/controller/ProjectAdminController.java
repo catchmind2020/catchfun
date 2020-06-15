@@ -593,11 +593,6 @@ public class ProjectAdminController {
 
 		ArrayList<Reward> rlist = paService.selectRewardList(project.getProjectNo());
 
-//		for(Item dd : list) {
-//
-//		    System.out.println(dd);
-//
-//		}
 
 		session.setAttribute("rlist", rlist);
 
