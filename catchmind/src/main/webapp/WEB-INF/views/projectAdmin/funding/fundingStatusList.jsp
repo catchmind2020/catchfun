@@ -124,7 +124,7 @@
                     <div class="col mr-2">
                       <div class="h5 font-weight-bold text-primary text-uppercase mb-1">총펀딩 달성률</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${fundSum.fundSum / project.projectTargetAmount *100}" pattern="0.0" />%</div>
-                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 <fmt:formatNumber value="${todayfundSum.fundSum /project.projectTargetAmount *100}" pattern="0.0" /></div>
+                      <div class="h6 mb-0 font-weight-grey text-gray-800">오늘 <fmt:formatNumber value="${todayfundSum.fundSum /project.projectTargetAmount *100}" pattern="0.0" />%</div>
                     </div>
                   
                   </div>

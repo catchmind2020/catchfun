@@ -296,7 +296,7 @@
         text-align: center;
         color:black;
     }
-    #noTable P{ /* 날짜 */
+    #date{ /* 날짜 */
         text-align: right;
         font-size: 13px;
         color:rgb(156, 156, 156);
@@ -684,7 +684,7 @@
 	                                        <th colspan="2">
 	                                        	<span>#${status.count}</span>
 	                                            <h1>${ n.newsTitle }</h1>
-	                                            <p>${ n.newsDate }</p>
+	                                            <p id="date">${ n.newsDate }</p>
 	                                        </th>
 	                                    </tr>                                    
 	                                    <tr>

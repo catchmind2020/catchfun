@@ -13,24 +13,12 @@
     <style>
 
 
-/* 폰트 초기화*/
-body, input, textarea, select, button, table {
-    font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
-    color: #222; font-size: 18px; line-height: 1.5;} 
+.content{ width:800px; margin:auto;}
+.innerOuter{
+    width:800px;
+    margin:auto;
+    background:white; }
 
-        .content{
-           
-            width:80%;
-            margin:auto;
-        }
-        
-        .innerOuter{
-            border:1px solid lightgray;
-            width:90%;
-            margin:auto;
-            padding:5% 15%;
-            background:white;
-        }
 
         #boardList{text-align: center;}
         #boardList>tbody>tr:hover{cursor:pointer;}
@@ -88,9 +76,9 @@ body, input, textarea, select, button, table {
 <body>
     <jsp:include page="../common/menubar.jsp" />
     <div class="content">
-        <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
-            <h2>프로젝트 개설자의 메세지함</h2>
+        <br><br><br>
+        <div class="innerOuter">
+            <h3>프로젝트 개설자의 메세지함</h3><br>
             <table id="questionList" class="table table-hover" align="center">
                 <thead>
                   <tr>

@@ -454,6 +454,7 @@ public class MemberController {
 		
 		if(result > 0) { // 회원가입성공
 			
+			session.setAttribute("estatus", "N");
 			session.setAttribute("msg", "회원가입 성공!");
 			return "redirect:/";
 			//
@@ -518,7 +519,7 @@ public class MemberController {
 		
 		
 		mService.updatePwd(member);
-		
+		model.addAttribute("msg", "비밀번호 변경 성공!");
 		
 		return "member/login"; //myPage.me
 		

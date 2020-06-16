@@ -155,7 +155,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 											</div>
 											<div>
 												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />% &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
-												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
+												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">&nbsp;${p.projectDday }일 남음</span>
 											</div>
 										</div>
 									</li>
@@ -182,7 +182,7 @@ progress::-webkit-progress-value { background-color: #2ed5d5; }
 											</div>
 											<div>
 												<span><fmt:formatNumber value="${p.fundingTotalCost / p.projectTargetAmount * 100 }" pattern="0" />% &nbsp;&nbsp; <fmt:formatNumber value="${ p.fundingTotalCost}"/>원</span><span class="dday">
-												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">${p.projectDday }일 남음</span>
+												<img src="${pageContext.servletContext.contextPath}/resources/images/time.png">&nbsp;${p.projectDday }일 남음</span>
 													
 											</div>
 										</div>

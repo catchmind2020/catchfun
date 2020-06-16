@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -340,7 +341,7 @@ a:hover { text-decoration:none !important; color:black; }
 					            <td rowspan="1" style="width: 100px;"><a href="list.cq?currentPage=1"><img src="<%=request.getContextPath() %>/resources/images/sp1.png" style="width:30px; height:30px;"><br>1:1문의</a></td>
 					        </tr>
 					        <tr>
-					            <td colspan="2" style="padding:15px;">포인트 ${ loginUser.point }</td>
+					            <td colspan="2" style="padding:15px;">포인트 <fmt:formatNumber value="${ loginUser.point }" pattern="#,###"/>원</td>
 					        </tr>
 					        <tr>
 					            <td colspan="2"><button class="button button4" style="width:200px; height:30px;" onclick="location.href='logout.me'">로그아웃</button></td>

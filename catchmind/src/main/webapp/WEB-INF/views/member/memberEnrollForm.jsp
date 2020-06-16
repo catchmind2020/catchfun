@@ -157,6 +157,11 @@ button[type=submit]:hover {
 
 </style>
 <!-- wrap>#content>#content_2>.w3-row2{width:100%; height:100%; overflow: scroll;} -->
+<%
+   if(session.getAttribute("estatus") != "Y"){
+      session.invalidate();
+   }
+%>
 </head>
 <body>
 

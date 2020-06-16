@@ -415,7 +415,7 @@ tbody {
 							<a href="membershipDelete.me"><u>회원탈퇴</u></a>
 						</p>
 						<!-- 2_1. (정보입력)본인인증 및 회원가입 버튼-->
-						<button type="submit" class="btn_1" id="btn_1" value="완료">수정완료</button>
+						<center><button type="submit" class="btn_1" id="btn_1" value="완료">수정완료</button><center>
 				
 					</div>
 				</div>

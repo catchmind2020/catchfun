@@ -56,6 +56,8 @@
 		<result column="STATUS_STORY" property="statusStory" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
+		<result column="TOTAL_STATUS" property="totalStatus" />
+		
 	</resultMap>
 
 

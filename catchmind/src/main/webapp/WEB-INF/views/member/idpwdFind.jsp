@@ -11,11 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-/* 폰트 초기화*/
-body, input, textarea, select, button, table {
-    font-family: 'Nanum Gothic',  'Noto Sans KR', 'Malgun Gothic','맑은 고딕', 'dotum','돋움',sans-serif; 
-    color: #222; font-size: 18px; line-height: 1.5;} 
-   
 
 .tabcontent{
     margin-right: 305px;
@@ -53,7 +48,7 @@ table {
     margin-top: 25px;
     margin-bottom: 10px;
 } 
-input[type=text],input[type=password],input[type=email], select {
+#userName1, #phone1, #userId2,#userName2, #phone2, #certi, select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -128,7 +123,7 @@ height: 40px;
     .wrap>#header{width:100%; height:5%; margin-bottom:60px;}
     .wrap>#content{width:100%; height:70%;}
     .wrap>#content>#content_1{width:100%; height:25%;}
-    .wrap>#content>#content_2{width:100%; height:75%; font-size:15px; background-color: rgb(243, 242, 242);}
+    .wrap>#content>#content_2{width:100%; height:80%; font-size:15px; background-color: rgb(243, 242, 242);}
     .wrap>#content>#content_1>table{width:40%; height:100%; padding:20px; font-size:15px;}
     .wrap>#footer{width:100%; height:20%;}
     </style>
@@ -137,18 +132,7 @@ height: 40px;
 <body>
 <jsp:include page="../common/menubar.jsp" />
     <div class="wrap">
-            <script>
-		         function expand() {
-		              $(".search").toggleClass("close");
-		              $(".input").toggleClass("square");
-		              if ($('.search').hasClass('close')) {
-		                $('input').focus();
-		              } else {
-		                $('input').blur();
-		              }
-	            }
-	            $('button').on('click', expand);
-         </script>
+
 
         <div id="content">
             <div id="content_1">
@@ -176,7 +160,7 @@ height: 40px;
                     <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">비밀번호찾기</div>
                   </a>
                 </div>
-                <div id="idfind" class="w3-container city" style="display:none">
+                <div id="idfind" class="w3-container city" style="display:block">
                    <center>
                     <table id="id_table">
                     <tr>
@@ -190,7 +174,7 @@ height: 40px;
 													아이디 찾기 서비스에 제한이 있을 수 있습니다. <br>
 		                                </p></label>
 		                              <input type="text" id="userName1" name="userName" placeholder="이름">
-		                              <input type="text" id="phone1" name="phone" placeholder="휴대폰번호'-'없이 입력">
+		                              <input type="text" id="phone1" name="phone" placeholder="전화번호'-'없이 입력">
 		                              <div id="idFindDiv">
 		                              
 		                              </div>
@@ -212,7 +196,7 @@ height: 40px;
  -->                            	<div id="passwordfind1" style="width:300px;">
                             		<input type="text" id="userId2" name="userId" placeholder="아이디">
 		                            <input type="text" id="userName2" name="userName" placeholder="이름">
-		                            <input type="text" id="phone2" name="phone" placeholder="전화번호 '-'포함 입력" required>
+		                            <input type="text" id="phone2" name="phone" placeholder="전화번호 '-'없이 입력" required>
 		                            <input id="pwdBtn1" type="submit" value="발송">
 		                            <label for="email">
 		                                <p style="text-align:left;">

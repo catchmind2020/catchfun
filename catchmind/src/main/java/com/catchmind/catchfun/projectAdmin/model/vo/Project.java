@@ -27,5 +27,6 @@ public class Project {
 	private String statusStory;
 	private String originName;
 	private String changeName;
+	private String totalStatus;
 	
 }

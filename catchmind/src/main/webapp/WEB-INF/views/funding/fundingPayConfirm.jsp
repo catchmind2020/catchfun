@@ -326,7 +326,7 @@
 
 
         <br><br><br>
-        <button type="button" id="next_btn" onclick="location.href='bookingList.me'" >나의 펀딩 목록으로</button>
+        <button type="button" id="next_btn" onclick="location.href='bookingList.me?chc=li'" >나의 펀딩 목록으로</button>
         <button type="button" id="cancel_btn" onclick="location.href='${ pageContext.servletContext.contextPath }';">홈으로</button>
     </div>
     <br><br><br>

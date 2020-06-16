@@ -190,7 +190,9 @@ text {
 
 										<c:choose>
 
-
+											<c:when test="${ p.totalStatus eq 'Y' }">
+												<h6>진행상황: <div class="badge badge-success badge-danger">펀딩종료</div></h6>
+											</c:when>
 											<c:when test="${ p.projectStatus eq 'S' }">					
 												<h6>진행상황: <div class="badge badge-warning badge-warning">작성중</div></h6>
 											
@@ -202,9 +204,10 @@ text {
 											<c:when test="${ p.projectStatus eq 'Y' }">
 												<h6>진행상황: <div class="badge badge-success badge-success">진행중</div></h6>
 											</c:when>
-											<c:otherwise>
+											<c:when test="${ p.projectStatus eq 'N' }">
 												<h6>진행상황: <div class="badge badge-success badge-danger">반려</div></h6>
-											</c:otherwise>
+											</c:when>
+											
 										</c:choose>
 										<div class="row">
 
